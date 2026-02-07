@@ -39,6 +39,7 @@ git commit -m "SQLD Day1 퀴즈 20문항 앱"
 git branch -M main
 
 # GitHub 저장소 연결 (본인 저장소 URL로 변경)
+# 예: earningss793 계정 → https://github.com/earningss793/SQLD_QUIZ.git
 git remote add origin https://github.com/<사용자명>/<저장소명>.git
 
 # 푸시
