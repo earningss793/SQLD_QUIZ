@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
 import { CheckCircle2, XCircle, Info, ChevronRight, ChevronLeft, Table as TableIcon, RefreshCcw, Award } from 'lucide-react';
 import { quizzesByDay } from './data/quizzesByDay';
@@ -8,9 +8,12 @@ const DAY_MAX = 20;
 
 const QuizPage = () => {
   const { dayNum } = useParams();
-  const day = dayNum == null
+
+  // "day2" -> "2", "2" -> "2"
+  const parsedDayNum = dayNum ? dayNum.replace(/^day/, '') : null;
+  const day = parsedDayNum == null
     ? 1
-    : Math.max(DAY_MIN, Math.min(DAY_MAX, parseInt(dayNum, 10) || 1));
+    : Math.max(DAY_MIN, Math.min(DAY_MAX, parseInt(parsedDayNum, 10) || 1));
   const quizList = quizzesByDay[day] ?? [];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -18,6 +21,11 @@ const QuizPage = () => {
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
+
+  // 일차가 바뀌면 퀴즈 상태 초기화
+  useEffect(() => {
+    resetQuiz();
+  }, [day]);
 
   if (dayNum != null && (day < DAY_MIN || day > DAY_MAX)) {
     return <Navigate to="/day1" replace />;
@@ -208,8 +216,8 @@ const QuizPage = () => {
           {showResult && (
             <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
               <div className={`p-5 rounded-2xl mb-6 ${currentQuiz.options.find(o => o.id === selectedOption).isCorrect
-                  ? 'bg-green-100 text-green-800'
-                  : 'bg-red-50 text-red-800'
+                ? 'bg-green-100 text-green-800'
+                : 'bg-red-50 text-red-800'
                 }`}>
                 <div className="flex gap-3">
                   <Info size={18} className="mt-1 shrink-0" />
