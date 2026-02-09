@@ -13,6 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/day1" element={<App />} />
+        <Route path="/day:dayNum" element={<App />} />
         <Route path="/day/:dayNum" element={<App />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

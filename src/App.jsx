@@ -207,11 +207,10 @@ const QuizPage = () => {
 
           {showResult && (
             <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-              <div className={`p-5 rounded-2xl mb-6 ${
-                currentQuiz.options.find(o => o.id === selectedOption).isCorrect
+              <div className={`p-5 rounded-2xl mb-6 ${currentQuiz.options.find(o => o.id === selectedOption).isCorrect
                   ? 'bg-green-100 text-green-800'
                   : 'bg-red-50 text-red-800'
-              }`}>
+                }`}>
                 <div className="flex gap-3">
                   <Info size={18} className="mt-1 shrink-0" />
                   <div>
