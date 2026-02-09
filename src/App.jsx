@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
 import { CheckCircle2, XCircle, Info, ChevronRight, ChevronLeft, Table as TableIcon, RefreshCcw, Award } from 'lucide-react';
-import { quizzesByDay } from './data/quizzesByDay';
+import { quizzesByDay, dayInfo } from './data/quizzesByDay';
 
 const DAY_MIN = 1;
 const DAY_MAX = 20;
@@ -120,7 +120,7 @@ const QuizPage = () => {
         <div className="bg-white px-6 py-6 border-b border-slate-100">
           <div className="flex justify-between items-center mb-1">
             <span className="text-blue-600 text-xs font-black uppercase tracking-[0.2em]">
-              SQLD Day {dayLabel}: SELECT 기초
+              SQLD Day {dayLabel}: {dayInfo[day]?.title || 'SELECT 기초'}
             </span>
             <span className="text-slate-400 text-sm font-bold">
               {currentIndex + 1} / {quizList.length}

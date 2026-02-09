@@ -2,6 +2,12 @@
  * 일차별 퀴즈 데이터. Day1.md 문항·보기·정답·해설·힌트와 동일하게 맞춤.
  * Day1.md에는 쿼리 예시 블록이 없으므로 sql/tableName은 넣지 않음.
  */
+// 각 일차별 메타 정보 (제목 등)
+export const dayInfo = {
+  1: { title: "SELECT 기초" },
+  2: { title: "WHERE 절 완전 정복" },
+};
+
 export const quizzesByDay = {
   1: [
     { id: 1, category: "데이터베이스 구조", question: "데이터베이스의 '테이블(Table)'을 엑셀에 비유했을 때 가장 적절한 것은?", options: [{ id: 1, text: "데이터가 저장되는 '시트(Sheet)'", isCorrect: true }, { id: 2, text: "데이터의 속성을 나타내는 '열(Column)'", isCorrect: false }, { id: 3, text: "실제 데이터 한 줄인 '행(Row)'", isCorrect: false }, { id: 4, text: "계산을 수행하는 '함수(Function)'", isCorrect: false }], rationale: "테이블은 데이터가 격자 형태로 저장되는 가장 기본적인 공간으로, 엑셀의 시트와 대응됩니다.", hint: "전체 데이터가 담긴 '그릇'을 생각해보세요." },
