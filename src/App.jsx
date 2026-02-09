@@ -22,13 +22,10 @@ const QuizPage = () => {
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
 
-  // 일차가 바뀌면 퀴즈 상태 초기화 및 타이틀 변경
+  // 일차가 바뀌면 퀴즈 상태 초기화
   useEffect(() => {
     resetQuiz();
-    const dayTitle = dayInfo[day]?.title || 'SELECT 기초';
-    document.title = `[그로스플래닛] SQLD Day ${String(day).padStart(2, '0')} - ${dayTitle}`;
   }, [day]);
-  Linda
 
   if (dayNum != null && (day < DAY_MIN || day > DAY_MAX)) {
     return <Navigate to="/day1" replace />;
