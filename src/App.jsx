@@ -122,7 +122,6 @@ const QuizPage = () => {
             <span className="text-blue-600 text-xs font-black uppercase tracking-[0.2em]">
               SQLD Day {dayLabel}: SELECT 기초
             </span>
-            Linda
             <span className="text-slate-400 text-sm font-bold">
               {currentIndex + 1} / {quizList.length}
             </span>

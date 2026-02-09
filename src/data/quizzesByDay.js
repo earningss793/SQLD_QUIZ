@@ -4,7 +4,6 @@
  */
 
 export const quizzesByDay = {
-  Linda
   1: [
     { id: 1, category: "데이터베이스 구조", question: "데이터베이스의 '테이블(Table)'을 엑셀에 비유했을 때 가장 적절한 것은?", options: [{ id: 1, text: "데이터가 저장되는 '시트(Sheet)'", isCorrect: true }, { id: 2, text: "데이터의 속성을 나타내는 '열(Column)'", isCorrect: false }, { id: 3, text: "실제 데이터 한 줄인 '행(Row)'", isCorrect: false }, { id: 4, text: "계산을 수행하는 '함수(Function)'", isCorrect: false }], rationale: "테이블은 데이터가 격자 형태로 저장되는 가장 기본적인 공간으로, 엑셀의 시트와 대응됩니다.", hint: "전체 데이터가 담긴 '그릇'을 생각해보세요." },
     { id: 2, category: "기초 문법", question: "SQL 문법에서 \"어디로부터 가져올 것인가\"를 지정하는 키워드는?", options: [{ id: 1, text: "SELECT", isCorrect: false }, { id: 2, text: "FROM", isCorrect: true }, { id: 3, text: "WHERE", isCorrect: false }, { id: 4, text: "INTO", isCorrect: false }], rationale: "SELECT는 가져올 항목을, FROM은 그 데이터가 들어있는 테이블을 지정합니다.", hint: "\"가져와(SELECT) ~로부터(FROM)\" 순서를 기억하세요." },
