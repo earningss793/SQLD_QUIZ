@@ -25,7 +25,268 @@ export const quizzesByDay = {
     { id: 19, category: "심화 및 필수 테크닉", question: "다음 중 SQL 문법에 대한 설명으로 옳은 것은?", options: [{ id: 1, text: "SELECT * FROM USER (세미콜론 없음)은 완벽한 문장이다.", isCorrect: false }, { id: 2, text: "SELECT DISTINCT NAME, AGE는 NAME만 중복 제거한다.", isCorrect: false }, { id: 3, text: "SELECT 10 / 0 FROM DUAL은 결과로 NULL을 낸다.", isCorrect: false }, { id: 4, text: "SELECT NAME AS \"회원 이름\"은 정상적인 문법이다.", isCorrect: true }], rationale: "별명에 공백이 있을 때 큰따옴표를 쓴 ④번이 정석입니다. ①은 세미콜론 누락, ②는 나열된 컬럼 조합 전체를 중복 제거함, ③은 0으로 나누기 에러가 발생합니다.", hint: "오늘 배운 '큰따옴표'의 용도를 다시 확인하세요." },
     { id: 20, category: "심화 및 필수 테크닉", question: "SELECT (POINT + 100) * 2 AS \"최종 점수\" FROM USER; 쿼리의 해석으로 옳은 것은?", options: [{ id: 1, text: "점수에 100을 더한 뒤 2를 곱하고, 그 컬럼 이름을 \"최종 점수\"라고 표시한다.", isCorrect: true }, { id: 2, text: "점수에 2를 곱한 뒤 100을 더하고, \"최종 점수\"라는 테이블에서 가져온다.", isCorrect: false }, { id: 3, text: "모든 유저의 POINT를 2로 바꾼다.", isCorrect: false }, { id: 4, text: "POINT가 100인 사람만 찾아서 2를 곱한다.", isCorrect: false }], rationale: "괄호 안의 덧셈이 먼저 수행되고 그다음 곱셈이 진행되며, AS 뒤의 별명이 결과창에 나타납니다.", hint: "산술 연산의 순서와 별명의 위치를 복합적으로 생각해보세요." },
   ],
-  2: [],
+  2: [
+    {
+      id: 1,
+      category: "실행 순서",
+      question: "SQL 문장의 논리적 실행 순서로 올바른 것은?",
+      options: [
+        { id: 1, text: "SELECT → FROM → WHERE", isCorrect: false },
+        { id: 2, text: "FROM → SELECT → WHERE", isCorrect: false },
+        { id: 3, text: "FROM → WHERE → SELECT", isCorrect: true },
+        { id: 4, text: "WHERE → FROM → SELECT", isCorrect: false }
+      ],
+      rationale: "작성 순서와 달리 컴퓨터는 데이터를 먼저 찾고(FROM), 필터링한 뒤(WHERE), 최종적으로 보여줄 컬럼을 정합니다(SELECT).",
+      hint: "재료를 먼저 가져오고(FROM), 손질한 뒤(WHERE), 접시에 담습니다(SELECT)."
+    },
+    {
+      id: 2,
+      category: "WHERE 절 기초",
+      question: "다음 중 WHERE 절에서 사용할 수 없는 것은?",
+      options: [
+        { id: 1, text: "비교 연산자 (=, <>)", isCorrect: false },
+        { id: 2, text: "SELECT 절에서 정의한 컬럼의 별칭(Alias)", isCorrect: true },
+        { id: 3, text: "컬럼명", isCorrect: false },
+        { id: 4, text: "리터럴 값 (숫자, 문자 등)", isCorrect: false }
+      ],
+      rationale: "WHERE 절 실행 시점에는 SELECT 절의 별칭을 아직 인식하지 못하기 때문에 에러가 발생합니다.",
+      hint: "별칭은 SELECT 단계에서 부여되는데, WHERE는 그보다 먼저 실행됩니다."
+    },
+    {
+      id: 3,
+      category: "비교 연산자",
+      question: "'급여가 3000이 아닌 사원'을 찾기 위해 WHERE 절에 쓸 수 있는 비교 연산자로 옳지 않은 것은?",
+      options: [
+        { id: 1, text: "SAL <> 3000", isCorrect: false },
+        { id: 2, text: "SAL != 3000", isCorrect: false },
+        { id: 3, text: "SAL ^= 3000", isCorrect: false },
+        { id: 4, text: "SAL ~= 3000", isCorrect: true }
+      ],
+      rationale: "SQL에서 다르다는 표현은 <>, !=, ^=가 표준 혹은 널리 쓰이는 방식입니다.",
+      hint: "SQL에서 '같지 않다'는 표기법은 여러 개가 있지만, 물결 모양은 사용하지 않습니다."
+    },
+    {
+      id: 4,
+      category: "기초 문법",
+      question: "WHERE 1 = 1 이라는 조건의 의미로 가장 적절한 것은?",
+      options: [
+        { id: 1, text: "첫 번째 컬럼의 값이 1인 데이터를 찾는다.", isCorrect: false },
+        { id: 2, text: "항상 참(True)이 되어 모든 행을 출력한다.", isCorrect: true },
+        { id: 3, text: "데이터 중 숫자 1이 포함된 행만 필터링한다.", isCorrect: false },
+        { id: 4, text: "문법 오류가 발생한다.", isCorrect: false }
+      ],
+      rationale: "조건이 항상 참이므로 필터링 없이 전체 데이터를 보여주며, 실무에서 쿼리 수정을 편하게 하기 위해 자주 씁니다.",
+      hint: "1과 1은 항상 같습니다."
+    },
+    {
+      id: 5,
+      category: "데이터 값의 규칙",
+      question: "데이터에 직업이 'MANAGER'라고 저장되어 있을 때, 다음 중 결과가 출력되는 쿼리는?",
+      options: [
+        { id: 1, text: "WHERE JOB = 'manager'", isCorrect: false },
+        { id: 2, text: "WHERE JOB = 'Manager'", isCorrect: false },
+        { id: 3, text: "WHERE JOB = 'MANAGER'", isCorrect: true },
+        { id: 4, text: "WHERE JOB = ' MAN AGER '", isCorrect: false }
+      ],
+      rationale: "문자열 데이터는 대소문자와 공백까지 정확히 일치해야 검색됩니다.",
+      hint: "SQL 명령어는 대소문자를 안 가리지만, '데이터 값'은 매우 엄격합니다."
+    },
+    {
+      id: 6,
+      category: "범위 연산자",
+      question: "WHERE SAL BETWEEN 2000 AND 3000의 결과와 동일한 조건은?",
+      options: [
+        { id: 1, text: "WHERE SAL > 2000 AND SAL < 3000", isCorrect: false },
+        { id: 2, text: "WHERE SAL >= 2000 AND SAL <= 3000", isCorrect: true },
+        { id: 3, text: "WHERE SAL >= 2000 OR SAL <= 3000", isCorrect: false },
+        { id: 4, text: "WHERE SAL > 2000 OR SAL < 3000", isCorrect: false }
+      ],
+      rationale: "BETWEEN A AND B는 '이상, 이하'의 개념으로 양쪽 끝 값을 모두 포함합니다.",
+      hint: "BETWEEN은 경계값(2000, 3000)을 포함할까요, 안 할까요?"
+    },
+    {
+      id: 7,
+      category: "리스트 연산자",
+      question: "WHERE JOB IN ('SALESMAN', 'ANALYST')의 의미로 옳은 것은?",
+      options: [
+        { id: 1, text: "직업이 SALESMAN이면서 동시에 ANALYST인 사람", isCorrect: false },
+        { id: 2, text: "직업이 SALESMAN이거나 ANALYST인 사람", isCorrect: true },
+        { id: 3, text: "직업이 SALESMAN도 아니고 ANALYST도 아닌 사람", isCorrect: false },
+        { id: 4, text: "직업이 SALESMAN에서 ANALYST 사이의 범위에 있는 사람", isCorrect: false }
+      ],
+      rationale: "IN 연산자는 리스트에 나열된 값 중 하나라도 일치하면 데이터를 추출합니다.",
+      hint: "IN은 여러 조건 중 하나라도 맞으면 OK인 'OR'의 집합입니다."
+    },
+    {
+      id: 8,
+      category: "패턴 매칭",
+      question: "이름이 'K'로 시작하는 모든 사원을 찾기 위한 조건은?",
+      options: [
+        { id: 1, text: "WHERE ENAME LIKE 'K_'", isCorrect: false },
+        { id: 2, text: "WHERE ENAME LIKE '%K'", isCorrect: false },
+        { id: 3, text: "WHERE ENAME LIKE 'K%'", isCorrect: true },
+        { id: 4, text: "WHERE ENAME LIKE '_K%'", isCorrect: false }
+      ],
+      rationale: "%는 0개 이상의 모든 문자를 의미하므로 'K%'는 K로 시작하는 모든 문자열을 찾습니다.",
+      hint: "뒤에 글자 수가 몇 개든 상관없을 때 쓰는 와일드카드는 무엇일까요?"
+    },
+    {
+      id: 9,
+      category: "패턴 매칭",
+      question: "WHERE ENAME LIKE '_A%' 조건이 의미하는 것은?",
+      options: [
+        { id: 1, text: "이름의 첫 글자가 A인 사람", isCorrect: false },
+        { id: 2, text: "이름의 두 번째 글자가 A인 사람", isCorrect: true },
+        { id: 3, text: "이름에 A가 포함된 모든 사람", isCorrect: false },
+        { id: 4, text: "이름이 두 글자이면서 A로 끝나는 사람", isCorrect: false }
+      ],
+      rationale: "첫 번째 자리는 무엇이든 상관없고(_), 두 번째 자리가 A이며, 그 뒤는 상관없는(%) 데이터를 찾습니다.",
+      hint: "_(언더바)는 딱 한 글자 자리를 차지합니다."
+    },
+    {
+      id: 10,
+      category: "NULL 연산자",
+      question: "커미션(COMM) 컬럼의 값이 비어 있는 데이터를 찾기 위한 올바른 문법은?",
+      options: [
+        { id: 1, text: "WHERE COMM = NULL", isCorrect: false },
+        { id: 2, text: "WHERE COMM IS NULL", isCorrect: true },
+        { id: 3, text: "WHERE COMM = ''", isCorrect: false },
+        { id: 4, text: "WHERE COMM IS EMPTY", isCorrect: false }
+      ],
+      rationale: "NULL 여부를 확인할 때는 반드시 IS NULL 또는 IS NOT NULL을 사용해야 합니다.",
+      hint: "NULL은 '값'이 아니라 '상태'이므로 비교 연산자 =를 쓸 수 없습니다."
+    },
+    {
+      id: 11,
+      category: "논리 연산자",
+      question: "논리 연산자의 우선순위가 높은 순서대로 나열된 것은?",
+      options: [
+        { id: 1, text: "AND > OR > NOT", isCorrect: false },
+        { id: 2, text: "OR > AND > NOT", isCorrect: false },
+        { id: 3, text: "NOT > AND > OR", isCorrect: true },
+        { id: 4, text: "NOT > OR > AND", isCorrect: false }
+      ],
+      rationale: "연산자 우선순위를 모르면 괄호 없는 복합 조건문에서 엉뚱한 결과를 얻을 수 있습니다.",
+      hint: "부정(NOT)이 가장 강하고, 그 다음이 교집합(AND)입니다."
+    },
+    {
+      id: 12,
+      category: "논리 연산자",
+      question: "WHERE DEPTNO = 10 OR DEPTNO = 20 AND SAL > 2000 조건의 해석으로 옳은 것은?",
+      options: [
+        { id: 1, text: "10번 부서이거나 20번 부서인 사람 중 급여가 2000 초과인 사람", isCorrect: false },
+        { id: 2, text: "10번 부서인 사람 전체 + (20번 부서이면서 급여가 2000 초과인 사람)", isCorrect: true },
+        { id: 3, text: "10번 또는 20번 부서이면서 급여가 2000 이하인 사람", isCorrect: false },
+        { id: 4, text: "모든 부서원 중 급여가 2000 초과인 사람", isCorrect: false }
+      ],
+      rationale: "우선순위에 따라 (DEPTNO = 20 AND SAL > 2000)이 먼저 묶이고, 여기에 10번 부서 조건이 OR로 결합됩니다.",
+      hint: "AND가 OR보다 먼저 계산된다는 점에 주의하세요!"
+    },
+    {
+      id: 13,
+      category: "논리 연산자",
+      question: "위 12번 문제에서 '10번 또는 20번 부서원 중에서 급여가 2000 초과인 사람'을 뽑으려면 어떻게 수정해야 할까?",
+      options: [
+        { id: 1, text: "WHERE DEPTNO IN (10, 20) OR SAL > 2000", isCorrect: false },
+        { id: 2, text: "WHERE DEPTNO = 10 AND DEPTNO = 20 OR SAL > 2000", isCorrect: false },
+        { id: 3, text: "WHERE (DEPTNO = 10 OR DEPTNO = 20) AND SAL > 2000", isCorrect: true },
+        { id: 4, text: "수정할 필요 없다.", isCorrect: false }
+      ],
+      rationale: "괄호를 사용하면 우선순위를 강제로 지정하여 의도한 로직을 구현할 수 있습니다.",
+      hint: "먼저 처리하고 싶은 조건은 수학처럼 '이것'으로 묶어줍니다."
+    },
+    {
+      id: 14,
+      category: "WHERE 절 기초",
+      question: "다음 중 WHERE 절의 역할에 대한 설명으로 틀린 것은?",
+      options: [
+        { id: 1, text: "테이블의 가로줄(행)을 필터링한다.", isCorrect: false },
+        { id: 2, text: "불필요한 데이터를 제거하여 시스템 부하를 줄인다.", isCorrect: false },
+        { id: 3, text: "SELECT 절보다 늦게 실행되어 별칭 사용이 자유롭다.", isCorrect: true },
+        { id: 4, text: "비교, 논리, SQL 특수 연산자를 활용할 수 있다.", isCorrect: false }
+      ],
+      rationale: "WHERE는 SELECT보다 먼저 실행되므로 별칭을 사용할 수 없습니다.",
+      hint: "실행 순서 문제를 다시 떠올려 보세요."
+    },
+    {
+      id: 15,
+      category: "부정 연산자",
+      question: "WHERE SAL NOT BETWEEN 1000 AND 2000의 의미는?",
+      options: [
+        { id: 1, text: "급여가 1000 미만이거나 2000 초과인 경우", isCorrect: true },
+        { id: 2, text: "급여가 1000 이상 2000 이하인 경우", isCorrect: false },
+        { id: 3, text: "급여가 딱 1000이거나 2000인 경우", isCorrect: false },
+        { id: 4, text: "급여가 1500인 경우만 제외", isCorrect: false }
+      ],
+      rationale: "NOT은 조건의 결과를 반대로 바꾸므로, 해당 범위에 포함되지 않는 데이터를 찾습니다.",
+      hint: "BETWEEN 결과(1000~2000)를 NOT으로 뒤집어 보세요."
+    },
+    {
+      id: 16,
+      category: "부정 연산자",
+      question: "이름에 'A'가 들어가지 않는 사람을 찾는 조건은?",
+      options: [
+        { id: 1, text: "WHERE ENAME LIKE '%A%'", isCorrect: false },
+        { id: 2, text: "WHERE ENAME NOT LIKE '%A%'", isCorrect: true },
+        { id: 3, text: "WHERE ENAME <> '%A%'", isCorrect: false },
+        { id: 4, text: "WHERE ENAME IS NOT 'A'", isCorrect: false }
+      ],
+      rationale: "LIKE 앞에 NOT을 붙여 패턴에 해당하지 않는 행을 필터링합니다.",
+      hint: "패턴 검색의 부정은 NOT LIKE를 씁니다."
+    },
+    {
+      id: 17,
+      category: "NULL 연산자",
+      question: "WHERE MGR IS NOT NULL의 의미는?",
+      options: [
+        { id: 1, text: "관리자(MGR)가 없는 사원을 찾는다.", isCorrect: false },
+        { id: 2, text: "관리자(MGR)가 있는 사원(값이 비어있지 않은 사원)을 찾는다.", isCorrect: true },
+        { id: 3, text: "관리자 이름이 NULL인 사원을 찾는다.", isCorrect: false },
+        { id: 4, text: "오류가 발생하는 문장이다.", isCorrect: false }
+      ],
+      rationale: "IS NOT NULL은 해당 컬럼에 어떤 값이든 채워져 있는 경우를 의미합니다.",
+      hint: "NULL이 아닌 상태를 찾는 조건입니다."
+    },
+    {
+      id: 18,
+      category: "연산자 특성",
+      question: "다음 중 결과가 다른 하나는?",
+      options: [
+        { id: 1, text: "WHERE DEPTNO = 10 OR DEPTNO = 20", isCorrect: false },
+        { id: 2, text: "WHERE DEPTNO IN (10, 20)", isCorrect: false },
+        { id: 3, text: "WHERE DEPTNO ANY (10, 20)", isCorrect: false },
+        { id: 4, text: "WHERE DEPTNO BETWEEN 10 AND 20", isCorrect: true }
+      ],
+      rationale: "BETWEEN은 10과 20 사이의 모든 값을 포함하지만, 1, 2번은 딱 10 또는 20인 경우만 찾습니다.",
+      hint: "10과 20 사이에는 11, 12... 등의 숫자가 있을 수 있다는 점을 생각하세요."
+    },
+    {
+      id: 19,
+      category: "실행 순서",
+      question: "SELECT 절에서 SAL * 12 AS 연봉이라고 했을 때, WHERE 절에서 연봉이 5000 이상인 데이터를 찾는 올바른 방법은?",
+      options: [
+        { id: 1, text: "WHERE 연봉 >= 5000", isCorrect: false },
+        { id: 2, text: "WHERE SAL * 12 >= 5000", isCorrect: true },
+        { id: 3, text: "WHERE AS 연봉 >= 5000", isCorrect: false },
+        { id: 4, text: "방법이 없다.", isCorrect: false }
+      ],
+      rationale: "WHERE 절에서는 별칭 인식이 안 되므로 계산식이나 원래 컬럼명을 직접 써야 합니다.",
+      hint: "별칭을 못 쓴다면 원래의 '식'을 그대로 가져와야 합니다."
+    },
+    {
+      id: 20,
+      category: "패턴 매칭",
+      question: "WHERE ENAME LIKE 'S_T%' 조건으로 검색될 수 있는 이름은?",
+      options: [
+        { id: 1, text: "ST", isCorrect: false },
+        { id: 2, text: "SCOTT", isCorrect: false },
+        { id: 3, text: "SET", isCorrect: true },
+        { id: 4, text: "SATURN", isCorrect: true }
+      ],
+      rationale: "SET은 S+E+T이고 뒤에 %가 0개이므로 가능, SATURN은 S+A+T+URN이므로 가능합니다. SCOTT은 세 번째 글자가 O라서 안 됩니다.",
+      hint: "S(첫글자) + 아무거나 한 글자(_) + T(세번째) + 그 뒤는 자유(%)"
+    }
+  ],
   3: [],
   4: [],
   5: [],
