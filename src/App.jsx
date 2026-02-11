@@ -167,9 +167,9 @@ const QuizPage = () => {
             <h2 className="text-lg font-bold mb-4 text-slate-800 leading-snug">
               {currentQuiz.question}
             </h2>
-            {currentQuiz.sql && (
+            {currentQuiz.code && (
               <div className="bg-slate-900 rounded-xl p-5 font-mono text-sm leading-relaxed text-blue-300 overflow-x-auto shadow-inner border-l-4 border-blue-500">
-                <pre>{currentQuiz.sql}</pre>
+                <pre>{currentQuiz.code}</pre>
               </div>
             )}
           </div>
