@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
 import { CheckCircle2, XCircle, Info, ChevronRight, ChevronLeft, Table as TableIcon, RefreshCcw, Award } from 'lucide-react';
-import { quizzesByDay } from './data/quizzesByDay';
+import { quizzesByDay, dayInfo } from './data/quizzesByDay';
 
 const DAY_MIN = 1;
 const DAY_MAX = 20;
@@ -120,7 +120,7 @@ const QuizPage = () => {
         <div className="bg-white px-6 py-6 border-b border-slate-100">
           <div className="flex justify-between items-center mb-1">
             <span className="text-blue-600 text-xs font-black uppercase tracking-[0.2em]">
-              SQLD Day {dayLabel}: 오늘의 퀴즈
+              SQLD Day {String(day).padStart(2, '0')}: {dayInfo[day]?.title || "퀴즈"}
             </span>
             <span className="text-slate-400 text-sm font-bold">
               {currentIndex + 1} / {quizList.length}
@@ -130,7 +130,8 @@ const QuizPage = () => {
         </div>
 
         <div className="p-6 md:p-8">
-          {currentQuiz.tableName && (
+          {/* 단일 테이블 레거시 지원 */}
+          {currentQuiz.tableName && !currentQuiz.tables && (
             <div className="mb-8">
               <div className="flex items-center gap-2 mb-3 text-slate-500 font-bold uppercase text-xs tracking-wider">
                 <TableIcon size={14} />
@@ -160,6 +161,44 @@ const QuizPage = () => {
                   </tbody>
                 </table>
               </div>
+            </div>
+          )}
+
+          {/* 다중 테이블 지원 */}
+          {currentQuiz.tables && (
+            <div className="mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {currentQuiz.tables.map((table, tIndex) => (
+                <div key={tIndex}>
+                  <div className="flex items-center gap-2 mb-3 text-slate-500 font-bold uppercase text-xs tracking-wider">
+                    <TableIcon size={14} />
+                    <span>{table.name}</span>
+                  </div>
+                  <div className="overflow-hidden rounded-xl border border-slate-200">
+                    <table className="w-full text-left border-collapse">
+                      <thead>
+                        <tr className="bg-slate-50">
+                          {table.headers.map((header) => (
+                            <th key={header} className="px-4 py-2 text-[11px] font-black text-slate-400 border-b border-slate-200 uppercase">
+                              {header}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {table.rows.map((row, i) => (
+                          <tr key={i}>
+                            {row.map((cell, j) => (
+                              <td key={j} className="px-4 py-2 text-sm border-b border-slate-50 text-slate-600 font-medium">
+                                {cell}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
 
