@@ -230,11 +230,24 @@ const QuizPage = () => {
                   key={option.id}
                   onClick={() => handleOptionClick(option)}
                   disabled={showResult}
-                  className={buttonClass}
+                  className={`${buttonClass} h-auto min-h-[3.5rem]`}
                 >
-                  <span className={`font-semibold ${!showResult && 'group-hover:text-blue-600'}`}>{option.text}</span>
-                  {showResult && isCorrect && <CheckCircle2 className="text-green-500" size={22} />}
-                  {showResult && isSelected && !isCorrect && <XCircle className="text-red-500" size={22} />}
+                  <span className={`font-semibold text-sm md:text-base break-words whitespace-pre-wrap flex-1 pr-3 text-left ${!showResult && 'group-hover:text-blue-600'} ${/^(SELECT|INSERT|UPDATE|DELETE)\s/i.test(option.text)
+                      ? "font-mono bg-slate-50 text-slate-700 p-3 rounded-lg block w-full my-1 border-l-4 border-blue-500 shadow-sm border border-slate-200"
+                      : ""
+                    }`}>
+                    {(() => {
+                      const text = option.text;
+                      if (/^(SELECT|INSERT|UPDATE|DELETE)\s/i.test(text)) {
+                        return text
+                          .replace(/\s+(FROM|JOIN|LEFT|RIGHT|INNER|OUTER|WHERE|GROUP BY|HAVING|ORDER BY|UNION|INTERSECT|EXCEPT)/gi, '\n$1')
+                          .replace(/\s+(AND|OR)\s/gi, '\n  $1 ');
+                      }
+                      return text;
+                    })()}
+                  </span>
+                  {showResult && isCorrect && <CheckCircle2 className="text-green-500 shrink-0" size={22} />}
+                  {showResult && isSelected && !isCorrect && <XCircle className="text-red-500 shrink-0" size={22} />}
                 </button>
               );
             })}
