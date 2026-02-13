@@ -233,8 +233,8 @@ const QuizPage = () => {
                   className={`${buttonClass} h-auto min-h-[3.5rem]`}
                 >
                   <span className={`font-semibold text-sm md:text-base break-words whitespace-pre-wrap flex-1 pr-3 text-left ${!showResult && 'group-hover:text-blue-600'} ${/^(SELECT|INSERT|UPDATE|DELETE)\s/i.test(option.text)
-                      ? "font-mono bg-slate-50 text-slate-700 p-3 rounded-lg block w-full my-1 border-l-4 border-blue-500 shadow-sm border border-slate-200"
-                      : ""
+                    ? "font-mono bg-slate-50 text-slate-700 p-3 rounded-lg block w-full my-1 border-l-4 border-blue-500 shadow-sm border border-slate-200"
+                    : ""
                     }`}>
                     {(() => {
                       const text = option.text;
@@ -283,26 +283,27 @@ const QuizPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex gap-3">
-                <button
-                  type="button"
-                  onClick={handlePrev}
-                  disabled={currentIndex === 0}
-                  className="flex items-center justify-center gap-2 py-4 px-6 rounded-xl font-bold border-2 border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent transition-colors shrink-0"
-                >
-                  <ChevronLeft size={18} />
-                  이전
-                </button>
-                <button
-                  onClick={handleNext}
-                  className="flex-1 flex items-center justify-center gap-2 py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-100"
-                >
-                  {currentIndex === quizList.length - 1 ? "결과 확인하기" : "다음 문제 풀기"}
-                  <ChevronRight size={18} />
-                </button>
-              </div>
             </div>
           )}
+
+          <div className="flex gap-3 mt-6">
+            <button
+              type="button"
+              onClick={handlePrev}
+              disabled={currentIndex === 0}
+              className="flex items-center justify-center gap-2 py-4 px-6 rounded-xl font-bold border-2 border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent transition-colors shrink-0"
+            >
+              <ChevronLeft size={18} />
+              이전
+            </button>
+            <button
+              onClick={handleNext}
+              className="flex-1 flex items-center justify-center gap-2 py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-100"
+            >
+              {currentIndex === quizList.length - 1 ? "결과 확인하기" : "다음 문제 풀기"}
+              <ChevronRight size={18} />
+            </button>
+          </div>
         </div>
       </div>
     </div>

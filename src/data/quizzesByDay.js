@@ -9,6 +9,8 @@ export const dayInfo = {
   3: { title: "단일행 함수와 정렬 (ORDER BY)" },
   4: { title: "GROUP BY & HAVING 완전 정복" },
   5: { title: "JOIN 완전 정복" },
+  6: { title: "SQLD 실전 모의고사 (1~5강)" },
+  7: { title: "SQLD 실전 모의고사 2 (1~5강)" },
 };
 
 export const quizzesByDay = {
@@ -363,8 +365,177 @@ export const quizzesByDay = {
     }
   ],
 
-  6: [],
-  7: [],
+  6: [
+    { id: 1, category: "1~2강: SELECT와 WHERE 절", question: "다음 중 SQL 문법의 특징으로 가장 적절하지 않은 것은?", options: [{ id: 1, text: "SQL 문장은 세미콜론(;)으로 끝내야 실행된다.", isCorrect: false }, { id: 2, text: "SQL 명령어(SELECT, FROM 등)는 대소문자를 구별하지 않는다.", isCorrect: false }, { id: 3, text: "데이터 값('Kim', 'MANAGER')은 대소문자를 엄격히 구별한다.", isCorrect: false }, { id: 4, text: "산술 연산에서 NULL과 숫자를 더하면 0이 된다.", isCorrect: true }], rationale: "NULL은 '알 수 없는 값'이므로, 어떤 숫자와 연산해도 결과는 무조건 NULL입니다. (100 + NULL = NULL)", hint: "NULL은 0이 아닙니다." },
+    { id: 2, category: "1~2강: SELECT와 WHERE 절", question: "별칭(Alias) 사용 규칙 중 옳은 것은?", options: [{ id: 1, text: "AS 키워드는 반드시 사용해야 한다.", isCorrect: false }, { id: 2, text: "별칭에 공백이 포함된 경우 작은따옴표(' ')로 감싸야 한다.", isCorrect: false }, { id: 3, text: "별칭에 공백이나 특수문자가 있으면 큰따옴표(\" \")를 사용해야 한다.", isCorrect: true }, { id: 4, text: "WHERE 절에서 SELECT 절의 별칭을 사용하여 필터링할 수 있다.", isCorrect: false }], rationale: "별칭에 공백이 있을 때는 반드시 큰따옴표(\")를 써야 합니다. WHERE 절은 SELECT 절보다 먼저 실행되므로 SELECT에서 만든 별칭을 인식하지 못합니다.", hint: "이름표(Alias)는 크게(\") 붙인다고 생각하세요." },
+    { id: 3, category: "1~2강: SELECT와 WHERE 절", question: "다음 중 이름이 'K'로 시작하고 세 번째 글자가 'M'인 데이터를 찾는 조건으로 옳은 것은?", options: [{ id: 1, text: "WHERE NAME LIKE 'K%M'", isCorrect: false }, { id: 2, text: "WHERE NAME LIKE 'K_M%'", isCorrect: true }, { id: 3, text: "WHERE NAME LIKE 'K%M%'", isCorrect: false }, { id: 4, text: "WHERE NAME LIKE 'K_M_'", isCorrect: false }], rationale: "'K'로 시작(K), 두 번째 글자 상관없음(_), 세 번째 글자(M), 그 뒤는 상관없음(%)의 조합입니다.", hint: "'_'는 딱 한 글자, '%'는 글자 수 제한이 없습니다." },
+    { id: 4, category: "1~2강: SELECT와 WHERE 절", question: "다음 중 보너스(COMM)가 NULL인 사원을 조회하는 올바른 쿼리는?", options: [{ id: 1, text: "SELECT * FROM EMP WHERE COMM = NULL;", isCorrect: false }, { id: 2, text: "SELECT * FROM EMP WHERE COMM != NULL;", isCorrect: false }, { id: 3, text: "SELECT * FROM EMP WHERE COMM IS NULL;", isCorrect: true }, { id: 4, text: "SELECT * FROM EMP WHERE COMM IS NOT NULL;", isCorrect: false }], rationale: "NULL은 값이 아니므로 '=' 연산자를 쓸 수 없고, 반드시 IS NULL 연산자를 사용해야 합니다.", hint: "비어있는 상태를 묻는 전용 연산자가 있습니다." },
+    { id: 5, category: "1~2강: SELECT와 WHERE 절", question: "연산자 우선순위에 따라 다음 조건의 결과로 옳은 것은?", code: "WHERE DEPTNO = 10 OR DEPTNO = 20 AND SAL > 2500", options: [{ id: 1, text: "10번 부서이거나 20번 부서인 사람 중 급여가 2500 초과인 사원", isCorrect: false }, { id: 2, text: "10번 부서인 사람 전체와, 20번 부서이면서 급여가 2500 초과인 사원", isCorrect: true }, { id: 3, text: "부서와 상관없이 급여가 2500 초과인 사원", isCorrect: false }, { id: 4, text: "10번과 20번 부서 사원 중 급여가 2500 이하인 사원", isCorrect: false }], rationale: "논리 연산자 순위는 NOT > AND > OR입니다. 따라서 AND 조건이 먼저 계산됩니다.", hint: "AND가 OR보다 힘이 더 셉니다." },
+    { id: 6, category: "3강: ORDER BY와 함수", question: "다음 중 SQL 실행 순서로 올바른 것은?", options: [{ id: 1, text: "SELECT → FROM → WHERE → ORDER BY", isCorrect: false }, { id: 2, text: "FROM → SELECT → WHERE → ORDER BY", isCorrect: false }, { id: 3, text: "FROM → WHERE → SELECT → ORDER BY", isCorrect: true }, { id: 4, text: "WHERE → FROM → SELECT → ORDER BY", isCorrect: false }], rationale: "재료 창고(FROM)에서 재료를 손질(WHERE)한 뒤, 플레이팅(SELECT)하고, 마지막에 줄을 세웁니다(ORDER BY).", hint: "'프-웨-셀-오'를 기억하세요. (중간에 그룹핑이 빠진 기초 순서)" },
+    { id: 7, category: "3강: ORDER BY와 함수", question: "Oracle 환경에서 ORDER BY SAL ASC를 실행했을 때, SAL이 NULL인 데이터는 어디에 위치하는가?", options: [{ id: 1, text: "가장 처음에 출력된다.", isCorrect: false }, { id: 2, text: "가장 마지막에 출력된다.", isCorrect: true }, { id: 3, text: "무작위로 출력된다.", isCorrect: false }, { id: 4, text: "출력에서 제외된다.", isCorrect: false }], rationale: "Oracle은 NULL을 가장 큰 값으로 취급하므로 오름차순(ASC) 시 맨 뒤에 옵니다. (SQL Server는 반대)", hint: "Oracle에서 NULL은 끝판왕(가장 큰 값)입니다." },
+    { id: 8, category: "3강: ORDER BY와 함수", question: "SELECT SUBSTR('SQLD_PASS', 6, 2) FROM DUAL;의 결과값은?", options: [{ id: 1, text: "'PA'", isCorrect: true }, { id: 2, text: "'AS'", isCorrect: false }, { id: 3, text: "'SS'", isCorrect: false }, { id: 4, text: "'D_'", isCorrect: false }], rationale: "6번째 글자인 'P'부터 시작하여 2글자를 가져오므로 'PA'가 됩니다.", hint: "시작 위치와 가져올 개수를 확인하세요." },
+    { id: 9, category: "3강: ORDER BY와 함수", question: "다음 중 NULL 처리 함수에 대한 설명으로 틀린 것은?", options: [{ id: 1, text: "NVL(A, B): A가 NULL이면 B를 반환한다.", isCorrect: false }, { id: 2, text: "NULLIF(A, B): A와 B가 같으면 NULL을 반환한다.", isCorrect: false }, { id: 3, text: "COALESCE(A, B, C): 리스트 중 NULL이 아닌 최초의 값을 반환한다.", isCorrect: false }, { id: 4, text: "NVL2(A, B, C): A가 NULL이면 B를, 아니면 C를 반환한다.", isCorrect: true }], rationale: "NVL2(A, B, C)는 A가 NULL이 아니면 B를, NULL이면 C를 반환합니다.", hint: "NVL2는 'NULL이 아닐 때'가 먼저 옵니다." },
+    { id: 10, category: "3강: ORDER BY와 함수", question: "CASE 문의 두 가지 방식 중 'Searched Case Expression'의 특징은?", options: [{ id: 1, text: "CASE 뒤에 바로 컬럼명을 쓴다.", isCorrect: false }, { id: 2, text: "WHEN 뒤에 비교 연산자나 복합 조건을 자유롭게 쓸 수 있다.", isCorrect: true }, { id: 3, text: "등호(=) 비교만 가능하다.", isCorrect: false }, { id: 4, text: "Oracle의 DECODE 함수와 완전히 동일한 문법이다.", isCorrect: false }], rationale: "Searched Case는 CASE WHEN 조건 THEN ... 형태이며 다양한 조건을 걸 수 있습니다.", hint: "CASE WHEN SAL >= 3000과 같은 형태입니다." },
+    { id: 11, category: "4강: GROUP BY와 HAVING", question: "다음 중 집계 함수와 NULL의 관계에 대한 설명으로 틀린 것은?", options: [{ id: 1, text: "COUNT(*)은 NULL을 포함하여 전체 행 수를 샌다.", isCorrect: false }, { id: 2, text: "COUNT(컬럼명)은 NULL을 제외한 행 수를 샌다.", isCorrect: false }, { id: 3, text: "SUM(컬럼명)은 NULL을 0으로 치환하여 합산한다.", isCorrect: true }, { id: 4, text: "AVG(컬럼명)은 NULL인 행을 분모에서 제외하고 평균을 구한다.", isCorrect: false }], rationale: "집계 함수(SUM, AVG 등)는 NULL 값을 무시(제외)하고 연산합니다. 0으로 치환하는 것이 아닙니다.", hint: "대부분의 집계 함수는 NULL을 투명인간 취급합니다." },
+    { id: 12, category: "4강: GROUP BY와 HAVING", question: "다음 쿼리에서 에러가 발생하는 이유는?", code: "SELECT DEPTNO, ENAME, AVG(SAL) FROM EMP GROUP BY DEPTNO;", options: [{ id: 1, text: "집계 함수를 SELECT 절에 썼기 때문에", isCorrect: false }, { id: 2, text: "GROUP BY 절에 ENAME 컬럼이 없기 때문에", isCorrect: true }, { id: 3, text: "WHERE 절이 없기 때문에", isCorrect: false }, { id: 4, text: "AVG 함수에 별칭을 주지 않았기 때문에", isCorrect: false }], rationale: "GROUP BY를 사용할 경우, SELECT 절에는 GROUP BY에 명시된 컬럼이나 집계 함수만 올 수 있습니다.", hint: "그룹으로 묶었는데, 묶이지 않은 개별 데이터(이름)를 부르라고 하면 컴퓨터는 혼란에 빠집니다." },
+    { id: 13, category: "4강: GROUP BY와 HAVING", question: "WHERE 절과 HAVING 절의 차이점으로 옳은 것은?", options: [{ id: 1, text: "WHERE 절에서도 집계 함수를 사용할 수 있다.", isCorrect: false }, { id: 2, text: "HAVING 절은 반드시 GROUP BY 절보다 먼저 실행된다.", isCorrect: false }, { id: 3, text: "WHERE 절은 개별 행을, HAVING 절은 그룹화된 결과를 필터링한다.", isCorrect: true }, { id: 4, text: "HAVING 절에는 일반 컬럼 조건만 올 수 있다.", isCorrect: false }], rationale: "WHERE는 그룹화 전 필터링, HAVING은 그룹화 후 집계 결과 필터링입니다.", hint: "\"박스에 담기 전(WHERE) vs 담은 후 무게 측정(HAVING)\" 비유를 떠올리세요." },
+    { id: 14, category: "4강: GROUP BY와 HAVING", question: "SQL 전체 실행 순서(Logical Execution Order)를 올바르게 나열한 것은?", options: [{ id: 1, text: "FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY", isCorrect: true }, { id: 2, text: "SELECT - FROM - WHERE - GROUP BY - HAVING - ORDER BY", isCorrect: false }, { id: 3, text: "FROM - GROUP BY - WHERE - HAVING - SELECT - ORDER BY", isCorrect: false }, { id: 4, text: "FROM - WHERE - SELECT - GROUP BY - HAVING - ORDER BY", isCorrect: false }], rationale: "프-웨-그-하-셀-오(FWGHSO) 순서입니다.", hint: "이 순서는 SQLD 시험의 핵심 암기 사항입니다." },
+    { id: 15, category: "5강: JOIN", question: "다음 중 INNER JOIN에 대한 설명으로 옳은 것은?", options: [{ id: 1, text: "한쪽 테이블에만 데이터가 있어도 모두 출력한다.", isCorrect: false }, { id: 2, text: "조인 조건에 맞는 교집합 데이터만 출력한다.", isCorrect: true }, { id: 3, text: "조건 없이 두 테이블의 모든 행을 곱하여 출력한다.", isCorrect: false }, { id: 4, text: "ANSI 표준에서는 WHERE 절에 조인 조건을 쓴다.", isCorrect: false }], rationale: "INNER JOIN은 양쪽 테이블에 모두 데이터가 존재하는 '커플' 데이터만 가져옵니다.", hint: "벤다이어그램의 교집합 영역입니다." },
+    { id: 16, category: "5강: JOIN", question: "LEFT OUTER JOIN의 결과에 대한 설명으로 옳은 것은?", options: [{ id: 1, text: "오른쪽 테이블의 모든 데이터가 출력된다.", isCorrect: false }, { id: 2, text: "조인 조건에 맞는 데이터가 없으면 왼쪽 테이블 데이터도 출력되지 않는다.", isCorrect: false }, { id: 3, text: "왼쪽 테이블의 모든 데이터가 출력되며, 오른쪽 테이블에 짝이 없으면 NULL로 표시된다.", isCorrect: true }, { id: 4, text: "양쪽 테이블의 모든 데이터가 합쳐져서 출력된다.", isCorrect: false }], rationale: "LEFT 테이블은 무조건 다 나오고, 매칭되는 오른쪽 데이터가 없으면 NULL 처리됩니다.", hint: "마케팅 타겟팅(전체 회원 중 구매 안 한 사람 찾기)에 자주 씁니다." },
+    { id: 17, category: "5강: JOIN", question: "Oracle 전용 조인 문법에서 WHERE D.DEPTNO = E.DEPTNO(+)의 의미는?", options: [{ id: 1, text: "EMP(E) 테이블 기준 LEFT OUTER JOIN", isCorrect: false }, { id: 2, text: "DEPT(D) 테이블 기준 LEFT OUTER JOIN", isCorrect: true }, { id: 3, text: "FULL OUTER JOIN", isCorrect: false }, { id: 4, text: "INNER JOIN", isCorrect: false }], rationale: "(+) 기호는 데이터가 부족한 쪽에 붙입니다. DEPT는 그대로 다 나오고 EMP가 부족하므로 DEPT 기준 조인입니다.", hint: "(+)가 붙은 반대쪽 테이블이 주인(기준)입니다." },
+    { id: 18, category: "5강: JOIN", question: "NATURAL JOIN 사용 시 주의사항으로 옳은 것은?", options: [{ id: 1, text: "ON 절을 사용하여 조인 조건을 명시해야 한다.", isCorrect: false }, { id: 2, text: "조인 컬럼에 테이블 별칭(Alias)을 붙일 수 없다.", isCorrect: true }, { id: 3, text: "동일한 이름의 컬럼이 없어도 자동으로 조인된다.", isCorrect: false }, { id: 4, text: "WHERE 절에서 조인 컬럼을 쓸 때 반드시 테이블 별칭을 써야 한다.", isCorrect: false }], rationale: "NATURAL JOIN은 컬럼명을 자동으로 매칭하므로, 해당 컬럼에 별칭(E.DEPTNO 등)을 붙이면 에러가 납니다.", hint: "자동으로 합쳐졌으니 주인(별칭)을 따지지 말라는 뜻입니다." },
+    { id: 19, category: "5강: JOIN", question: "사원 테이블(14행)과 부서 테이블(4행)을 CROSS JOIN 했을 때 결과 행의 개수는?", options: [{ id: 1, text: "14개", isCorrect: false }, { id: 2, text: "4개", isCorrect: false }, { id: 3, text: "18개", isCorrect: false }, { id: 4, text: "56개", isCorrect: true }], rationale: "CROSS JOIN(카티션 곱)은 모든 조합을 구하므로 14 * 4 = 56이 됩니다.", hint: "두 테이블의 행 수를 곱하면 됩니다." },
+    { id: 20, category: "5강: JOIN", question: "다음 중 비등가 조인(Non-EQUI JOIN)이 필요한 상황은?", options: [{ id: 1, text: "사원번호와 부서번호가 일치하는 데이터를 찾을 때", isCorrect: false }, { id: 2, text: "사원의 급여가 급여 등급 테이블의 최소~최대 범위에 있는지 확인할 때", isCorrect: true }, { id: 3, text: "두 테이블의 컬럼 이름이 완전히 같을 때", isCorrect: false }, { id: 4, text: "한쪽 테이블에만 데이터가 있는 경우를 찾을 때", isCorrect: false }], rationale: "등호(=)가 아닌 BETWEEN, >, < 등의 연산자로 범위를 조인하는 것이 비등가 조인입니다.", hint: "딱 맞아떨어지는 값 대신 범위를 비교할 때 씁니다." },
+  ],
+  7: [
+    // Part 1: SELECT, WHERE, 연산자 (1~10번)
+    { id: 1, category: "Part 1: SELECT, WHERE, 연산자", question: "다음 중 SQL 문장의 실행 순서로 올바른 것은?", options: [{ id: 1, text: "SELECT - FROM - WHERE - ORDER BY", isCorrect: false }, { id: 2, text: "FROM - WHERE - SELECT - ORDER BY", isCorrect: true }, { id: 3, text: "FROM - SELECT - WHERE - ORDER BY", isCorrect: false }, { id: 4, text: "WHERE - FROM - SELECT - ORDER BY", isCorrect: false }], rationale: "데이터베이스는 먼저 테이블을 찾고(FROM), 조건에 맞는 행을 걸러낸 뒤(WHERE), 보여줄 컬럼을 선택하고(SELECT), 마지막으로 정렬(ORDER BY)합니다.", hint: "\"어디서(FROM) 가져와서, 어떻게 거르고(WHERE), 뭘 보여줄지(SELECT)\" 순서입니다." },
+    { id: 2, category: "Part 1: SELECT, WHERE, 연산자", question: "다음 중 별칭(Alias) 사용 시 오류가 발생하는 경우는?", options: [{ id: 1, text: "SELECT NAME AS 이름 FROM USER;", isCorrect: false }, { id: 2, text: "SELECT NAME 이름 FROM USER;", isCorrect: false }, { id: 3, text: "SELECT NAME \"내 이름\" FROM USER;", isCorrect: false }, { id: 4, text: "SELECT NAME '이름' FROM USER;", isCorrect: true }], rationale: "별칭에 공백이 있거나 특수문자가 있을 때는 반드시 큰따옴표(\" \")를 써야 합니다. 작은따옴표(' ')는 문자열 값을 의미할 때 씁니다.", hint: "이름표(Alias)는 크게(\") 붙이세요!" },
+    { id: 3, category: "Part 1: SELECT, WHERE, 연산자", question: "[테이블: TB1]에 데이터 (100, NULL, 50)이 있을 때 다음 쿼리의 결과는?", code: "SELECT SUM(COL1 + 10) FROM TB1;", options: [{ id: 1, text: "180", isCorrect: false }, { id: 2, text: "160", isCorrect: false }, { id: 3, text: "170", isCorrect: true }, { id: 4, text: "NULL", isCorrect: false }], rationale: "행 단위 연산 (100+10), (NULL+10), (50+10)의 결과는 110, NULL, 60입니다. SUM은 NULL을 제외하고 계산하므로 110 + 60 = 170이 됩니다.", hint: "NULL과 숫자를 더하면 무조건 NULL입니다." },
+    { id: 4, category: "Part 1: SELECT, WHERE, 연산자", question: "WHERE NAME LIKE '_A%' 조건에 맞는 데이터는?", options: [{ id: 1, text: "APPLE", isCorrect: false }, { id: 2, text: "BANANA", isCorrect: true }, { id: 3, text: "CAT", isCorrect: false }, { id: 4, text: "ALARM", isCorrect: false }], rationale: "_는 딱 한 글자를 의미하고 그 다음이 A여야 하므로, 두 번째 글자가 'A'인 단어를 찾습니다.", hint: "밑줄 하나당 한 글자입니다." },
+    { id: 5, category: "Part 1: SELECT, WHERE, 연산자", question: "다음 중 NULL인 값을 조회하고자 할 때 올바른 조건식은?", options: [{ id: 1, text: "WHERE COMM = NULL", isCorrect: false }, { id: 2, text: "WHERE COMM IS NULL", isCorrect: true }, { id: 3, text: "WHERE COMM == NULL", isCorrect: false }, { id: 4, text: "WHERE COMM IS NOT NULL", isCorrect: false }], rationale: "NULL은 값이 아니므로 = 연산자로 비교할 수 없으며 반드시 IS NULL을 사용해야 합니다.", hint: "비어있는지 물어볼 때는 전용 단어를 씁니다." },
+    { id: 6, category: "Part 1: SELECT, WHERE, 연산자", question: "BETWEEN 10 AND 20 조건과 동일한 의미를 가진 조건식은?", options: [{ id: 1, text: "COL > 10 AND COL < 20", isCorrect: false }, { id: 2, text: "COL >= 10 OR COL <= 20", isCorrect: false }, { id: 3, text: "COL >= 10 AND COL <= 20", isCorrect: true }, { id: 4, text: "COL > 10 OR COL < 20", isCorrect: false }], rationale: "BETWEEN은 경계값 10과 20을 모두 포함하는 이상/이하 조건입니다.", hint: "양 끝값을 포함한다는 점이 핵심입니다." },
+    { id: 7, category: "Part 1: SELECT, WHERE, 연산자", question: "IN (10, 20, 30) 연산자와 동일한 결과를 내는 조건식은?", options: [{ id: 1, text: "COL = 10 OR COL = 20 OR COL = 30", isCorrect: true }, { id: 2, text: "COL = 10 AND COL = 20 AND COL = 30", isCorrect: false }, { id: 3, text: "COL >= 10 AND COL <= 30", isCorrect: false }, { id: 4, text: "COL = 10 OR 20 OR 30", isCorrect: false }], rationale: "IN은 나열된 값 중 하나라도 일치하면 되는 합집합(OR) 연산입니다.", hint: "\"이 중에 하나라도 있으면 가져와\"라는 뜻입니다." },
+    { id: 8, category: "Part 1: SELECT, WHERE, 연산자", question: "WHERE 1=1과 같은 조건이 실무에서 자주 사용되는 주된 이유는?", options: [{ id: 1, text: "무조건 참이 되어 모든 행을 출력하기 위해", isCorrect: false }, { id: 2, text: "성능을 최적화하기 위해", isCorrect: false }, { id: 3, text: "쿼리 문법 오류를 방지하고 조건을 동적으로 추가하기 편하기 위해", isCorrect: true }, { id: 4, text: "인덱스를 태우기 위해", isCorrect: false }], rationale: "기본 조건을 깔아두면 이후에 AND로 조건을 덧붙이기 매우 편리하여 실무(마케팅 타겟팅 추출 등)에서 자주 씁니다.", hint: "코드의 유연성을 위해 사용합니다." },
+    { id: 9, category: "Part 1: SELECT, WHERE, 연산자", question: "다음 중 연산자 우선순위가 가장 높은 것은?", options: [{ id: 1, text: "OR", isCorrect: false }, { id: 2, text: "AND", isCorrect: false }, { id: 3, text: "NOT", isCorrect: false }, { id: 4, text: "괄호 ()", isCorrect: true }], rationale: "수학과 마찬가지로 괄호 안의 조건이 가장 먼저 처리됩니다. 논리 연산자 중에서는 NOT > AND > OR 순입니다.", hint: "가장 먼저 계산하고 싶은 건 괄호로 묶으세요." },
+    { id: 10, category: "Part 1: SELECT, WHERE, 연산자", question: "[테이블: TB]에 행이 10개 있을 때 다음 쿼리의 결과는?", code: "SELECT COUNT(*) FROM TB WHERE 1=2;", options: [{ id: 1, text: "0", isCorrect: true }, { id: 2, text: "10", isCorrect: false }, { id: 3, text: "NULL", isCorrect: false }, { id: 4, text: "에러 발생", isCorrect: false }], rationale: "1=2는 항상 거짓이므로 필터링되는 행이 하나도 없습니다. 행이 없으므로 COUNT의 결과는 0입니다.", hint: "조건이 거짓이면 아무것도 남지 않습니다." },
+
+    // Part 2: 단일행 함수 및 CASE (11~20번)
+    { id: 11, category: "Part 2: 단일행 함수 및 CASE", question: "SELECT ROUND(123.456, 1) FROM DUAL;의 결과는?", options: [{ id: 1, text: "123", isCorrect: false }, { id: 2, text: "123.5", isCorrect: true }, { id: 3, text: "123.4", isCorrect: false }, { id: 4, text: "123.46", isCorrect: false }], rationale: "소수점 첫째 자리까지 표시하라는 의미이므로, 둘째 자리(5)에서 반올림하여 123.5가 됩니다.", hint: "지정된 자릿수까지 남긴다고 생각하세요." },
+    { id: 12, category: "Part 2: 단일행 함수 및 CASE", question: "다음 SQL의 결과로 올바른 것은? (우선순위 주의)", tables: [{ name: "PROD", headers: ["NAME", "PRICE"], rows: [["A", 2500]] }], code: "SELECT CASE WHEN PRICE > 1000 THEN '고가' WHEN PRICE > 2000 THEN '초고가' ELSE '일반' END FROM PROD;", options: [{ id: 1, text: "고가", isCorrect: true }, { id: 2, text: "초고가", isCorrect: false }, { id: 3, text: "일반", isCorrect: false }, { id: 4, text: "NULL", isCorrect: false }], rationale: "CASE문은 위에서부터 순차적으로 조건을 검사하며, 첫 번째 만족하는 조건에서 멈춥니다. 2500은 1000보다 크므로 바로 '고가'를 반환합니다.", hint: "첨부이미지 12번의 핵심 함정입니다!" },
+    { id: 13, category: "Part 2: 단일행 함수 및 CASE", question: "NVL2(COMM, '수당있음', '수당없음')의 동작 방식으로 옳은 것은?", options: [{ id: 1, text: "COMM이 NULL이면 '수당있음', 아니면 '수당없음'", isCorrect: false }, { id: 2, text: "COMM이 NULL이 아니면 '수당있음', NULL이면 '수당없음'", isCorrect: true }, { id: 3, text: "COMM과 '수당있음'이 같으면 '수당없음' 반환", isCorrect: false }, { id: 4, text: "COMM이 NULL인 경우만 '수당있음' 반환", isCorrect: false }], rationale: "NVL2(대상, NOT_NULL일때, NULL일때) 순서로 작동합니다.", hint: "2번 인자가 긍정(Not Null)입니다." },
+    { id: 14, category: "Part 2: 단일행 함수 및 CASE", question: "SELECT LOWER('SQLD Pass') FROM DUAL;의 결과는?", options: [{ id: 1, text: "SQLD PASS", isCorrect: false }, { id: 2, text: "sqld pass", isCorrect: true }, { id: 3, text: "Sqld Pass", isCorrect: false }, { id: 4, text: "sqld Pass", isCorrect: false }], rationale: "LOWER 함수는 모든 대문자를 소문자로 변환합니다.", hint: "영어 그대로 '낮춘다'는 뜻입니다." },
+    { id: 15, category: "Part 2: 단일행 함수 및 CASE", question: "다음 중 날짜 함수에 대한 설명으로 틀린 것은? (Oracle 기준)", options: [{ id: 1, text: "SYSDATE는 현재 날짜와 시간을 반환한다.", isCorrect: false }, { id: 2, text: "날짜 + 1은 해당 날짜에 1시간을 더한 결과를 반환한다.", isCorrect: true }, { id: 3, text: "EXTRACT(YEAR FROM SYSDATE)는 현재 연도를 숫자로 추출한다.", isCorrect: false }, { id: 4, text: "날짜 - 날짜의 결과는 두 날짜 사이의 일수 차이다.", isCorrect: false }], rationale: "날짜에 숫자를 더하면 '일(Day)' 단위로 계산됩니다. + 1은 1일(24시간)을 더하는 것입니다.", hint: "기본 단위는 '하루'입니다." },
+    { id: 16, category: "Part 2: 단일행 함수 및 CASE", question: "SELECT NULLIF(100, 100) FROM DUAL;의 결과는?", options: [{ id: 1, text: "100", isCorrect: false }, { id: 2, text: "0", isCorrect: false }, { id: 3, text: "NULL", isCorrect: true }, { id: 4, text: "에러 발생", isCorrect: false }], rationale: "NULLIF(A, B)는 두 값이 같으면 NULL을, 다르면 A를 반환합니다.", hint: "\"같으면 NULL로 처리해라\"는 뜻입니다." },
+    { id: 17, category: "Part 2: 단일행 함수 및 CASE", question: "SELECT COALESCE(NULL, NULL, 'C', 'D') FROM DUAL;의 결과는?", options: [{ id: 1, text: "NULL", isCorrect: false }, { id: 2, text: "'C'", isCorrect: true }, { id: 3, text: "'D'", isCorrect: false }, { id: 4, text: "'C, D'", isCorrect: false }], rationale: "COALESCE는 인자 리스트 중 NULL이 아닌 첫 번째 값을 반환합니다.", hint: "비어있지 않은 첫 번째 데이터를 찾을 때 유용합니다." },
+    { id: 18, category: "Part 2: 단일행 함수 및 CASE", question: "SELECT CEIL(12.1), FLOOR(12.9) FROM DUAL;의 결과로 올바른 조합은?", options: [{ id: 1, text: "12, 12", isCorrect: false }, { id: 2, text: "13, 13", isCorrect: false }, { id: 3, text: "12, 13", isCorrect: false }, { id: 4, text: "13, 12", isCorrect: true }], rationale: "CEIL(천장)은 올림하여 13, FLOOR(바닥)은 내림하여 12가 됩니다.", hint: "위(천장)를 볼지, 아래(바닥)를 볼지 생각하세요." },
+    { id: 19, category: "Part 2: 단일행 함수 및 CASE", question: "SELECT SUBSTR('MARKETER', 2, 3) FROM DUAL;의 결과는?", options: [{ id: 1, text: "MAR", isCorrect: false }, { id: 2, text: "ARK", isCorrect: true }, { id: 3, text: "RKE", isCorrect: false }, { id: 4, text: "KET", isCorrect: false }], rationale: "2번째 글자('A')부터 시작하여 3글자를 가져오므로 'ARK'가 됩니다.", hint: "시작 위치와 길이를 정확히 세어보세요." },
+    { id: 20, category: "Part 2: 단일행 함수 및 CASE", question: "SELECT LTRIM('  SQL  ') FROM DUAL;의 결과는? (공백 표시 주의)", options: [{ id: 1, text: "'SQL  '", isCorrect: true }, { id: 2, text: "'  SQL'", isCorrect: false }, { id: 3, text: "'SQL'", isCorrect: false }, { id: 4, text: "' SQL '", isCorrect: false }], rationale: "LTRIM은 왼쪽(Left)의 공백만 제거합니다. 오른쪽 공백은 남아있습니다.", hint: "어느 쪽(L/R)을 깎아낼지 결정합니다." },
+
+    // Part 3: GROUP BY 및 HAVING (21~30번)
+    { id: 21, category: "Part 3: GROUP BY 및 HAVING", question: "다음 ORDERS 테이블에 대해 SQL 실행 결과로 올바른 고객 ID는?", tables: [{ name: "ORDER", headers: ["ID", "AMT"], rows: [["C01", 500], ["C02", 50], ["C01", 100]] }], code: "SELECT ID FROM ORDERS GROUP BY ID HAVING COUNT(*) >= 2 AND SUM(AMT) > 500;", options: [{ id: 1, text: "C01", isCorrect: true }, { id: 2, text: "C02", isCorrect: false }, { id: 3, text: "C01, C02 모두", isCorrect: false }, { id: 4, text: "결과 없음", isCorrect: false }], rationale: "C01은 2건이며 합계가 600이므로 두 조건을 모두 만족합니다. C02는 1건이므로 탈락입니다.", hint: "첨부이미지 13번의 다중 조건 판별 문제입니다." },
+    { id: 22, category: "Part 3: GROUP BY 및 HAVING", question: "SELECT DEPTNO, SUM(SAL) FROM EMP GROUP BY DEPTNO; 쿼리에서 GROUP BY의 역할은?", options: [{ id: 1, text: "급여 순으로 정렬한다.", isCorrect: false }, { id: 2, text: "부서별로 행을 묶어 합계를 낼 기준을 정한다.", isCorrect: true }, { id: 3, text: "중복된 부서 번호를 제거하고 조회한다.", isCorrect: false }, { id: 4, text: "부서 번호가 있는 행만 거른다.", isCorrect: false }], rationale: "동일한 컬럼 값을 가진 데이터들을 소그룹으로 묶어 집계 함수를 적용하게 합니다.", hint: "엑셀의 피벗 테이블과 같습니다." },
+    { id: 23, category: "Part 3: GROUP BY 및 HAVING", question: "다음 중 HAVING 절에 대한 설명으로 올바른 것은?", options: [{ id: 1, text: "WHERE 절보다 먼저 실행된다.", isCorrect: false }, { id: 2, text: "집계 함수를 사용한 조건 필터링이 가능하다.", isCorrect: true }, { id: 3, text: "모든 SQL 문장에 반드시 포함되어야 한다.", isCorrect: false }, { id: 4, text: "그룹화하기 전의 개별 행을 필터링한다.", isCorrect: false }], rationale: "HAVING은 그룹화된 이후의 집계 결과(SUM, AVG 등)를 필터링할 때 씁니다.", hint: "\"그룹의 조건\"은 HAVING입니다." },
+    { id: 24, category: "Part 3: GROUP BY 및 HAVING", question: "COUNT(*)와 COUNT(COMM)의 차이점으로 옳은 것은?", options: [{ id: 1, text: "차이가 없다.", isCorrect: false }, { id: 2, text: "COUNT(*)은 NULL을 포함하고, COUNT(COMM)은 NULL을 제외한다.", isCorrect: true }, { id: 3, text: "COUNT(*)은 NULL을 제외하고, COUNT(COMM)은 NULL을 포함한다.", isCorrect: false }, { id: 4, text: "COUNT(COMM)은 중복된 값은 하나만 샌다.", isCorrect: false }], rationale: "아스테리스크(*)는 행 자체의 개수를 세므로 NULL을 포함하지만, 컬럼명을 지정하면 해당 컬럼이 NULL인 행은 뺍니다.", hint: "컬럼을 콕 집으면 \"그 안에 값이 들어있는지\" 따지게 됩니다." },
+    { id: 25, category: "Part 3: GROUP BY 및 HAVING", question: "다음 쿼리 중 문법 오류가 발생하는 것은?", options: [{ id: 1, text: "SELECT DEPTNO FROM EMP GROUP BY DEPTNO;", isCorrect: false }, { id: 2, text: "SELECT DEPTNO, COUNT(*) FROM EMP GROUP BY DEPTNO;", isCorrect: false }, { id: 3, text: "SELECT DEPTNO, SAL FROM EMP GROUP BY DEPTNO;", isCorrect: true }, { id: 4, text: "SELECT MAX(SAL) FROM EMP GROUP BY DEPTNO;", isCorrect: false }], rationale: "GROUP BY 절에 없는 일반 컬럼(SAL)을 SELECT 절에 단독으로 적을 수 없습니다.", hint: "그룹으로 묶었으면 \"그 그룹의 대표값(집계)\"만 보여줘야 합니다." },
+    { id: 26, category: "Part 3: GROUP BY 및 HAVING", question: "SELECT DEPTNO 부서, SUM(SAL) 합계 FROM EMP GROUP BY 부서; 가 오류인 이유는?", options: [{ id: 1, text: "별칭에 한글을 썼기 때문에", isCorrect: false }, { id: 2, text: "GROUP BY 절에는 SELECT에서 정한 별칭을 쓸 수 없기 때문에", isCorrect: true }, { id: 3, text: "SUM 함수에는 별칭을 줄 수 없기 때문에", isCorrect: false }, { id: 4, text: "FROM 절이 마지막에 와야 하기 때문에", isCorrect: false }], rationale: "실행 순서상 GROUP BY가 SELECT보다 먼저이므로, 아직 태어나지 않은 별칭을 GROUP BY가 인식할 수 없습니다.", hint: "실행 순서 \"프-웨-그-하-셀-오\"를 다시 떠올리세요." },
+    { id: 27, category: "Part 3: GROUP BY 및 HAVING", question: "다음 중 성격이 다른 집계 함수는?", options: [{ id: 1, text: "SUM", isCorrect: false }, { id: 2, text: "AVG", isCorrect: false }, { id: 3, text: "COUNT", isCorrect: false }, { id: 4, text: "SUBSTR", isCorrect: true }], rationale: "앞의 세 개는 여러 행을 묶어 하나로 만드는 집계 함수이고, SUBSTR은 각 행마다 실행되는 단일행 함수입니다.", hint: "\"뭉치느냐, 따로 노느냐\"의 차이입니다." },
+    { id: 28, category: "Part 3: GROUP BY 및 HAVING", question: "부서별 평균 급여가 3000 이상인 부서만 조회하고 싶을 때 적절한 구문은?", options: [{ id: 1, text: "WHERE AVG(SAL) >= 3000", isCorrect: false }, { id: 2, text: "HAVING AVG(SAL) >= 3000", isCorrect: true }, { id: 3, text: "GROUP BY AVG(SAL) >= 3000", isCorrect: false }, { id: 4, text: "ORDER BY AVG(SAL) >= 3000", isCorrect: false }], rationale: "집계 결과에 대한 조건은 반드시 HAVING 절을 사용해야 합니다.", hint: "WHERE 절에서는 집계 함수를 쓸 수 없습니다." },
+    { id: 29, category: "Part 3: GROUP BY 및 HAVING", question: "[TB1]에 데이터 (10, 20, NULL)이 있을 때 AVG(COL1)의 결과는?", options: [{ id: 1, text: "10", isCorrect: false }, { id: 2, text: "15", isCorrect: true }, { id: 3, text: "20", isCorrect: false }, { id: 4, text: "NULL", isCorrect: false }], rationale: "AVG는 NULL을 제외하므로 30 / 2 = 15가 됩니다. (분모에서도 제외됨)", hint: "NULL은 없는 셈 치고 남은 숫자들의 평균을 냅니다." },
+    { id: 30, category: "Part 3: GROUP BY 및 HAVING", question: "집계 함수 MAX, MIN이 처리할 수 있는 데이터 타입은?", options: [{ id: 1, text: "숫자형만 가능", isCorrect: false }, { id: 2, text: "숫자형과 날짜형만 가능", isCorrect: false }, { id: 3, text: "숫자형, 날짜형, 문자형 모두 가능", isCorrect: true }, { id: 4, text: "날짜형만 가능", isCorrect: false }], rationale: "최대/최소는 숫자뿐만 아니라 가나다순(문자), 과거/미래(날짜) 모두 비교 가능합니다.", hint: "\"가장 큰 것과 작은 것\"은 글자나 날짜에서도 정할 수 있습니다." },
+
+    // Part 4: JOIN 및 복합 응용 (31~40번)
+    { id: 31, category: "Part 4: JOIN 및 복합 응용", question: "3개 테이블 조인 시 오류가 발생하는 주된 원인은?", options: [{ id: 1, text: "조인 조건을 WHERE 절에 써서", isCorrect: false }, { id: 2, text: "별칭(Alias)을 부여하지 않아서", isCorrect: false }, { id: 3, text: "존재하지 않는 테이블의 컬럼을 조인 조건으로 사용해서 (부적합한 식별자)", isCorrect: true }, { id: 4, text: "컬럼 이름이 서로 달라서", isCorrect: false }], rationale: "EMP.DEPT_ID = DEPT.DEPT_ID와 같이 실제 테이블에 있는 컬럼끼리 매칭해야 합니다. 엉뚱한 테이블 별칭을 가져다 쓰면 '부적합한 식별자' 에러가 납니다.", hint: "별칭(e, d, l)이 어떤 테이블을 가리키는지, 그 테이블에 그 컬럼이 진짜 있는지 확인하세요." },
+    { id: 32, category: "Part 4: JOIN 및 복합 응용", question: "INNER JOIN에 대한 설명으로 틀린 것은?", options: [{ id: 1, text: "두 테이블 모두에 조인 컬럼 값이 있는 행만 조회된다.", isCorrect: false }, { id: 2, text: "조인 조건에 =(등호)를 사용하면 등가 조인(EQUI JOIN)이라 한다.", isCorrect: false }, { id: 3, text: "어느 한쪽에만 데이터가 있는 경우도 출력한다.", isCorrect: true }, { id: 4, text: "교집합과 같은 개념이다.", isCorrect: false }], rationale: "한쪽에만 있는 데이터를 출력하는 것은 OUTER JOIN입니다. INNER JOIN은 공통된 것만 보여줍니다.", hint: "\"서로 마음이 맞아야만(매칭) 나온다\"고 생각하세요." },
+    { id: 33, category: "Part 4: JOIN 및 복합 응용", question: "LEFT OUTER JOIN에서 오른쪽 테이블에 매칭되는 데이터가 없을 때 결과는?", options: [{ id: 1, text: "결과에서 제외된다.", isCorrect: false }, { id: 2, text: "에러가 발생한다.", isCorrect: false }, { id: 3, text: "왼쪽 데이터만 나오고 오른쪽 데이터 자리는 NULL로 채워진다.", isCorrect: true }, { id: 4, text: "왼쪽 데이터도 NULL로 나온다.", isCorrect: false }], rationale: "기준이 되는 왼쪽 테이블은 무조건 다 보여주고, 짝이 없는 오른쪽은 빈칸(NULL)으로 둡니다.", hint: "마케팅 타겟(왼쪽)에게 구매 이력(오른쪽)을 붙일 때, 안 산 사람은 NULL로 뜨겠죠?" },
+    { id: 34, category: "Part 4: JOIN 및 복합 응용", question: "다음 중 NATURAL JOIN의 특징이 아닌 것은?", options: [{ id: 1, text: "두 테이블에서 이름이 같은 모든 컬럼을 자동으로 조인한다.", isCorrect: false }, { id: 2, text: "ON 절을 명시적으로 사용할 수 없다.", isCorrect: false }, { id: 3, text: "조인 컬럼에 테이블 별칭을 붙여서 사용해야 한다.", isCorrect: true }, { id: 4, text: "USING 절과 같이 사용할 수 없다.", isCorrect: false }], rationale: "NATURAL JOIN의 가장 큰 특징은 조인 컬럼에 별칭을 붙이면 오류가 난다는 점입니다.", hint: "자동으로 합쳐졌으므로 누구의 것인지 따지지 않습니다." },
+    { id: 35, category: "Part 4: JOIN 및 복합 응용", question: "테이블 A(행 3개)와 테이블 B(행 5개)를 CROSS JOIN 했을 때 결과 행의 개수는?", options: [{ id: 1, text: "3개", isCorrect: false }, { id: 2, text: "5개", isCorrect: false }, { id: 3, text: "8개", isCorrect: false }, { id: 4, text: "15개", isCorrect: true }], rationale: "모든 조합을 다 만드는 카티션 곱이므로 3 * 5 = 15가 됩니다.", hint: "연결 고리가 없을 때 발생하는 '폭발적인' 결과입니다." },
+    { id: 36, category: "Part 4: JOIN 및 복합 응용", question: "3개의 테이블을 조인할 때 필요한 최소 조인 조건의 개수는?", options: [{ id: 1, text: "1개", isCorrect: false }, { id: 2, text: "2개", isCorrect: true }, { id: 3, text: "3개", isCorrect: false }, { id: 4, text: "제한 없음", isCorrect: false }], rationale: "N개의 테이블을 조인하려면 최소 N-1개의 연결 고리가 필요합니다.", hint: "다리를 몇 개 놓아야 세 섬을 이을 수 있는지 생각해보세요." },
+    { id: 37, category: "Part 4: JOIN 및 복합 응용", question: "다음 중 Non-EQUI JOIN(비등가 조인)이 사용되는 사례는?", options: [{ id: 1, text: "사원번호가 일치하는 부서명 찾기", isCorrect: false }, { id: 2, text: "고객 등급 테이블에서 점수가 특정 범위(BETWEEN)에 있는 등급 가져오기", isCorrect: true }, { id: 3, text: "이름이 같은 사원 목록 조회", isCorrect: false }, { id: 4, text: "부서번호가 10번인 사원 조회", isCorrect: false }], rationale: "등호(=)가 아닌 범위 연산자나 비교 연산자로 조인하는 방식입니다.", hint: "\"딱 맞는 값\"이 아니라 \"이 범위 안\"인지 따질 때 씁니다." },
+    { id: 38, category: "Part 4: JOIN 및 복합 응용", question: "USING 절을 사용한 조인에서 주의할 점은?", options: [{ id: 1, text: "조인 컬럼의 데이터 타입이 달라도 된다.", isCorrect: false }, { id: 2, text: "조인 컬럼에 별칭을 붙이면 오류가 발생한다.", isCorrect: true }, { id: 3, text: "ON 절을 반드시 함께 써야 한다.", isCorrect: false }, { id: 4, text: "서로 다른 이름의 컬럼을 묶을 때 쓴다.", isCorrect: false }], rationale: "USING (DEPTNO)와 같이 쓰며, 이 컬럼에는 테이블 별칭을 붙일 수 없습니다.", hint: "NATURAL JOIN과 마찬가지로 \"공통 컬럼\"에 대한 매너입니다." },
+    { id: 39, category: "Part 4: JOIN 및 복합 응용", question: "EMP(사원), DEPT(부서), LOC(위치) 3개 테이블 조인 시 올바른 순서는?", options: [{ id: 1, text: "EMP와 DEPT를 먼저 조인한 결과와 LOC를 조인한다.", isCorrect: true }, { id: 2, text: "3개를 동시에 한 번에 섞는다.", isCorrect: false }, { id: 3, text: "LOC와 EMP를 먼저 직접 조인한다. (관계가 없어도)", isCorrect: false }, { id: 4, text: "상관없으나 보통 1번처럼 순차적으로 처리된다.", isCorrect: false }], rationale: "논리적으로 두 테이블을 먼저 조인하여 가상의 테이블을 만들고, 그 결과를 다음 테이블과 연결합니다.", hint: "사원은 부서에 속해 있고, 부서는 특정 위치에 있다는 연결 고리를 따라갑니다." },
+    { id: 40, category: "Part 4: JOIN 및 복합 응용", question: "SELECT * FROM A, B; (WHERE 절 없음) 쿼리의 결과는 무엇인가?", options: [{ id: 1, text: "에러가 발생한다.", isCorrect: false }, { id: 2, text: "두 테이블의 합집합이 나온다.", isCorrect: false }, { id: 3, text: "CROSS JOIN 결과가 나온다.", isCorrect: true }, { id: 4, text: "조인 조건이 없으므로 아무것도 출력되지 않는다.", isCorrect: false }], rationale: "WHERE 절에 조인 조건을 명시하지 않으면 시스템은 자동으로 모든 행을 곱하는 CROSS JOIN을 수행합니다.", hint: "실수로 조건을 빼먹었을 때 마주하게 되는 데이터 폭탄입니다." },
+
+    // 실전 추론 10문항 (41~50번)
+    {
+      id: 41,
+      category: "실전 추론",
+      question: "[CASE문 우선순위] 다음 PRODUCT 테이블을 대상으로 쿼리를 실행했을 때, 'C' 상품의 PRICE_LEVEL은 무엇인가?",
+      tables: [{ name: "PRODUCT", headers: ["PRODUCT_ID", "NAME", "PRICE"], rows: [[101, "A", 500], [102, "B", 1500], [103, "C", 3000]] }],
+      code: "SELECT NAME,\n       CASE WHEN PRICE >= 1000 THEN 'Gold'\n            WHEN PRICE >= 2000 THEN 'VIP'\n            ELSE 'Normal'\n       END AS PRICE_LEVEL\nFROM PRODUCT;",
+      options: [{ id: 1, text: "Gold", isCorrect: true }, { id: 2, text: "VIP", isCorrect: false }, { id: 3, text: "Normal", isCorrect: false }, { id: 4, text: "NULL", isCorrect: false }],
+      rationale: "CASE문은 만족하는 첫 번째 조건을 만나면 즉시 종료됩니다. 3000은 첫 번째 조건인 PRICE >= 1000을 이미 만족하므로 'Gold'를 반환하고 끝납니다. 'VIP'를 원했다면 큰 숫자 조건부터 먼저 써야 합니다.",
+      hint: "\"먼저 만나는 놈이 임자\"입니다."
+    },
+    {
+      id: 42,
+      category: "실전 추론",
+      question: "[HAVING절 복합 필터링] 다음 SALES 테이블에서 쿼리 실행 결과로 출력되는 CATEGORY는?",
+      tables: [{ name: "SALES", headers: ["CATEGORY", "AMOUNT", "COUNT"], rows: [["Food", 500, 1], ["Food", 600, 1], ["App", 1200, 1], ["App", 100, 1]] }],
+      code: "SELECT CATEGORY\nFROM SALES\nGROUP BY CATEGORY\nHAVING COUNT(*) >= 2 AND SUM(AMOUNT) > 1500;",
+      options: [{ id: 1, text: "Food", isCorrect: false }, { id: 2, text: "App", isCorrect: false }, { id: 3, text: "Food, App 모두", isCorrect: false }, { id: 4, text: "결과 없음", isCorrect: true }],
+      rationale: "Food는 합계가 1100이라 탈락, App은 합계가 1300이라 탈락입니다. 두 조건을 동시에 만족하는 그룹이 없습니다.",
+      hint: "그룹화한 후 '합계'와 '개수'를 각각 계산해보세요."
+    },
+    {
+      id: 43,
+      category: "실전 추론",
+      question: "[NULL과 집계 함수] 다음 MEMBER 테이블에서 AVG(POINT)의 결과값은?",
+      tables: [{ name: "MEMBER", headers: ["NAME", "POINT"], rows: [["KIM", 100], ["LEE", 200], ["PARK", "NULL"]] }],
+      code: "SELECT AVG(POINT) FROM MEMBER;",
+      options: [{ id: 1, text: "100", isCorrect: false }, { id: 2, text: "150", isCorrect: true }, { id: 3, text: "0", isCorrect: false }, { id: 4, text: "NULL", isCorrect: false }],
+      rationale: "AVG 함수는 NULL을 제외하고 계산합니다. 따라서 300 / 2 = 150이 됩니다. 분모에서도 NULL인 행은 빠집니다.",
+      hint: "집계 함수에게 NULL은 투명인간입니다."
+    },
+    {
+      id: 44,
+      category: "실전 추론",
+      question: "[3개 테이블 조인 결과] 다음 테이블 관계에서 쿼리 결과로 출력되는 행(Row)의 수는?",
+      tables: [
+        { name: "EMP", headers: ["NAME", "DEPTNO"], rows: [["(5명)", 10], ["(5명)", 20]] },
+        { name: "DEPT", headers: ["DEPTNO"], rows: [[10], [20], [30]] },
+        { name: "LOC", headers: ["DEPTNO", "CITY"], rows: [[10, "서울"], [20, "부산"]] }
+      ],
+      code: "SELECT E.NAME, L.CITY\nFROM EMP E, DEPT D, LOC L\nWHERE E.DEPTNO = D.DEPTNO\n  AND D.DEPTNO = L.DEPTNO;",
+      options: [{ id: 1, text: "3개", isCorrect: false }, { id: 2, text: "5개", isCorrect: false }, { id: 3, text: "10개", isCorrect: true }, { id: 4, text: "15개", isCorrect: false }],
+      rationale: "10번 부서 5명은 서울로, 20번 부서 5명은 부산으로 매칭됩니다. 총 10명의 사원이 모두 매칭되므로 10행이 출력됩니다.",
+      hint: "사원 한 명당 최종적으로 어떤 도시가 붙는지 따라가 보세요."
+    },
+    {
+      id: 45,
+      category: "실전 추론",
+      question: "[실행 순서와 별칭 오류] 다음 중 실행 시 오류가 발생하는 쿼리는?",
+      options: [{ id: 1, text: "SELECT NAME AS 이름 FROM USER ORDER BY 이름;", isCorrect: false }, { id: 2, text: "SELECT NAME AS 이름 FROM USER WHERE NAME = 'KIM';", isCorrect: false }, { id: 3, text: "SELECT NAME AS 이름 FROM USER WHERE 이름 = 'KIM';", isCorrect: true }, { id: 4, text: "SELECT NAME FROM USER WHERE NAME LIKE 'K%';", isCorrect: false }],
+      rationale: "WHERE 절은 SELECT 절보다 먼저 실행됩니다. 따라서 WHERE 절은 아직 생성되지 않은 별칭인 '이름'을 알 수 없습니다.",
+      hint: "프-웨-셀-오! (FROM-WHERE-SELECT-ORDER BY)"
+    },
+    {
+      id: 46,
+      category: "실전 추론",
+      question: "[LEFT JOIN과 NULL] 다음 두 테이블을 LEFT OUTER JOIN 했을 때, 결과에서 ORDER_ID가 NULL인 사원의 이름은?\n\n* EMP: KIM, LEE (2명)\n* ORDERS: KIM만 1건 주문",
+      code: "SELECT E.NAME, O.ORDER_ID\nFROM EMP E LEFT OUTER JOIN ORDERS O\nON E.NAME = O.NAME;",
+      options: [{ id: 1, text: "KIM", isCorrect: false }, { id: 2, text: "LEE", isCorrect: true }, { id: 3, text: "KIM, LEE", isCorrect: false }, { id: 4, text: "없음", isCorrect: false }],
+      rationale: "LEFT JOIN은 왼쪽(EMP)을 다 보여줍니다. KIM은 주문이 있어 ID가 붙지만, LEE는 주문이 없으므로 ID 자리에 NULL이 채워집니다.",
+      hint: "\"주문 안 한 사람 찾기\"의 전형적인 문제입니다."
+    },
+    {
+      id: 47,
+      category: "실전 추론",
+      question: "[산술 연산과 NULL] 다음 쿼리의 결과값으로 올바른 것은?",
+      code: "SELECT NVL(100 + NULL, 50) FROM DUAL;",
+      options: [{ id: 1, text: "150", isCorrect: false }, { id: 2, text: "100", isCorrect: false }, { id: 3, text: "50", isCorrect: true }, { id: 4, text: "NULL", isCorrect: false }],
+      rationale: "100 + NULL의 결과는 NULL입니다. NVL(NULL, 50)이 되므로 최종 결과는 50입니다.",
+      hint: "괄호 안의 연산부터 천천히 해결하세요."
+    },
+    {
+      id: 48,
+      category: "실전 추론",
+      question: "[DISTINCT의 범위] 다음 테이블에서 쿼리 실행 시 출력되는 행의 수는?",
+      tables: [{ name: "TABLE", headers: ["DEPT", "JOB"], rows: [[10, "CLERK"], [10, "CLERK"], [10, "MANAGER"], [20, "CLERK"]] }],
+      code: "SELECT DISTINCT DEPT, JOB FROM TABLE;",
+      options: [{ id: 1, text: "1개", isCorrect: false }, { id: 2, text: "2개", isCorrect: false }, { id: 3, text: "3개", isCorrect: true }, { id: 4, text: "4개", isCorrect: false }],
+      rationale: "DISTINCT는 나열된 모든 컬럼의 조합을 하나로 봅니다. (10, CLERK) 조합이 2개이므로 하나로 합쳐져 총 3쌍이 남습니다.",
+      hint: "(부서+직업) 세트가 중복되는지 보세요."
+    },
+    {
+      id: 49,
+      category: "실전 추론",
+      question: "[비등가 조인 추론] 사원 'KIM'의 급여가 2500일 때, 다음 쿼리에서 KIM에게 부여될 GRADE는?",
+      tables: [{ name: "SAL_GRADE", headers: ["GRADE", "MIN_SAL", "MAX_SAL"], rows: [["A", 1000, 2000], ["B", 2001, 3000]] }],
+      code: "SELECT S.GRADE\nFROM EMP E, SAL_GRADE S\nWHERE E.NAME = 'KIM'\n  AND E.SAL BETWEEN S.MIN_SAL AND S.MAX_SAL;",
+      options: [{ id: 1, text: "A등급", isCorrect: false }, { id: 2, text: "B등급", isCorrect: true }, { id: 3, text: "NULL", isCorrect: false }, { id: 4, text: "에러 발생", isCorrect: false }],
+      rationale: "2500은 2001과 3000 사이(BETWEEN)에 해당하므로 B등급과 매칭됩니다.",
+      hint: "숫자가 어느 범위 바구니에 들어가는지 찾으세요."
+    },
+    {
+      id: 50,
+      category: "실전 추론",
+      question: "[문자 함수와 인덱스] SELECT SUBSTR('20260214', 5, 2) FROM DUAL;의 결과로 올바른 것은?",
+      options: [{ id: 1, text: "2026", isCorrect: false }, { id: 2, text: "0214", isCorrect: false }, { id: 3, text: "02", isCorrect: true }, { id: 4, text: "14", isCorrect: false }],
+      rationale: "5번째 글자인 '0'부터 시작하여 2글자를 추출하므로 '02'가 나옵니다.",
+      hint: "마케팅 데이터에서 '월'만 뽑아낼 때 아주 많이 쓰는 방식입니다."
+    }
+  ],
   8: [],
   9: [],
   10: [],
