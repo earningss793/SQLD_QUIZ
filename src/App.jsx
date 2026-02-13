@@ -21,6 +21,7 @@ const QuizPage = () => {
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
+  const [userAnswers, setUserAnswers] = useState({}); // { [questionId]: selectedOptionId }
 
   // 일차가 바뀌면 퀴즈 상태 초기화
   useEffect(() => {
@@ -51,6 +52,13 @@ const QuizPage = () => {
     if (showResult) return;
     setSelectedOption(option.id);
     setShowResult(true);
+
+    // 정답 여부와 상관없이 사용자 선택 기록
+    setUserAnswers(prev => ({
+      ...prev,
+      [currentQuiz.id]: option.id
+    }));
+
     if (option.isCorrect) setScore(score + 1);
   };
 
@@ -78,13 +86,22 @@ const QuizPage = () => {
     setShowResult(false);
     setScore(0);
     setIsFinished(false);
+    setUserAnswers({});
   };
 
   const dayLabel = String(day).padStart(2, '0');
 
   if (isFinished) {
+    const incorrectQuestions = quizList.filter(q => {
+      const userAnswerId = userAnswers[q.id];
+      // 답을 안 고른 경우(건너뛰기)도 오답 처리하거나, 틀린 답을 고른 경우
+      if (!userAnswerId) return true; // 건너뛴 문제
+      const selectedOpt = q.options.find(o => o.id === userAnswerId);
+      return !selectedOpt?.isCorrect;
+    });
+
     return (
-      <div className="min-h-screen bg-slate-50 p-4 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 p-4 flex flex-col items-center justify-center">
         <div className="max-w-md w-full bg-white rounded-3xl shadow-xl p-8 text-center border border-slate-100">
           <div className="w-20 h-20 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center mx-auto mb-6">
             <Award size={40} />
@@ -96,12 +113,59 @@ const QuizPage = () => {
             <div className="text-5xl font-black text-blue-600">{Math.round((score / quizList.length) * 100)}점</div>
             <div className="mt-2 text-slate-600 font-medium">{quizList.length}문항 중 {score}문항 정답</div>
           </div>
+
           <button
             onClick={resetQuiz}
-            className="w-full flex items-center justify-center gap-2 py-4 bg-slate-800 text-white rounded-xl font-bold hover:bg-slate-700 transition-all"
+            className="w-full flex items-center justify-center gap-2 py-4 bg-slate-800 text-white rounded-xl font-bold hover:bg-slate-700 transition-all mb-6"
           >
             <RefreshCcw size={18} /> 처음부터 다시 풀기
           </button>
+
+          {incorrectQuestions.length > 0 && (
+            <details className="text-left border-t border-slate-100 pt-6">
+              <summary className="cursor-pointer text-slate-600 font-bold hover:text-blue-600 flex items-center gap-2 select-none group">
+                <ChevronRight className="w-4 h-4 transition-transform group-open:rotate-90" />
+                틀린 문제 다시보기 ({incorrectQuestions.length})
+              </summary>
+              <div className="mt-4 space-y-6 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+                {incorrectQuestions.map((q, idx) => {
+                  const userAnswerId = userAnswers[q.id];
+                  const userOption = q.options.find(o => o.id === userAnswerId);
+                  const correctOption = q.options.find(o => o.isCorrect);
+
+                  return (
+                    <div key={q.id} className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                      <div className="text-xs font-bold text-slate-400 mb-1">문제 {q.id} ({q.category})</div>
+                      <p className="text-slate-800 font-semibold mb-3 text-sm line-clamp-2">{q.question}</p>
+
+                      <div className="space-y-2 text-sm">
+                        <div className="flex items-start gap-2 text-red-600 bg-red-50 p-2 rounded-lg">
+                          <XCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                          <div>
+                            <span className="font-bold text-xs block mb-0.5">선택한 답</span>
+                            {userOption ? userOption.text : "(선택 안함)"}
+                          </div>
+                        </div>
+
+                        <div className="flex items-start gap-2 text-green-700 bg-green-50 p-2 rounded-lg">
+                          <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
+                          <div>
+                            <span className="font-bold text-xs block mb-0.5">정답</span>
+                            {correctOption.text}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="mt-3 text-xs text-slate-500 bg-white p-3 rounded-lg border border-slate-100">
+                        <span className="font-bold text-slate-600 block mb-1">해설</span>
+                        {q.rationale}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </details>
+          )}
         </div>
       </div>
     );
