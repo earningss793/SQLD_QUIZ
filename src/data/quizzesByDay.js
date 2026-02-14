@@ -11,6 +11,9 @@ export const dayInfo = {
   5: { title: "JOIN 완전 정복" },
   6: { title: "SQLD 실전 모의고사 (1~5강)" },
   7: { title: "SQLD 실전 모의고사 2 (1~5강)" },
+  8: { title: "서브쿼리와 뷰" },
+  9: { title: "집합 연산자와 그룹 함수" },
+  10: { title: "윈도우 함수(Window Function)" },
 };
 
 export const quizzesByDay = {
@@ -536,9 +539,801 @@ export const quizzesByDay = {
       hint: "마케팅 데이터에서 '월'만 뽑아낼 때 아주 많이 쓰는 방식입니다."
     }
   ],
-  8: [],
-  9: [],
-  10: [],
+  8: [
+    {
+      id: 1,
+      category: "서브쿼리/뷰 기초",
+      question: "다음 중 서브쿼리에 대한 설명으로 가장 적절하지 않은 것은?",
+      options: [
+        { id: 1, text: "서브쿼리는 항상 괄호 ()로 감싸야 한다.", isCorrect: false },
+        { id: 2, text: "서브쿼리는 메인 쿼리의 컬럼을 참조할 수 있다.", isCorrect: false },
+        { id: 3, text: "메인 쿼리는 서브쿼리의 컬럼을 자유롭게 참조할 수 있다.", isCorrect: true },
+        { id: 4, text: "서브쿼리 내에서는 원칙적으로 ORDER BY 절을 사용할 수 없다.", isCorrect: false }
+      ],
+      rationale: "서브쿼리는 메인 쿼리의 컬럼을 사용할 수 있는 '상속' 구조를 가지지만, 반대로 메인 쿼리가 서브쿼리의 컬럼을 사용하는 것은 불가능합니다.",
+      hint: "'마트료시카' 인형을 떠올려 보세요. 안쪽 인형은 바깥쪽을 알 수 있지만, 바깥쪽은 안쪽의 세부 내용을 바로 꺼내 쓸 수 없습니다."
+    },
+    {
+      id: 2,
+      category: "서브쿼리/뷰 기초",
+      question: "다음 중 뷰(VIEW)의 특징으로 보기 어려운 것은?",
+      options: [
+        { id: 1, text: "독립성: 테이블 구조가 바뀌어도 뷰 정의만 수정하면 응용 프로그램에 영향이 적다.", isCorrect: false },
+        { id: 2, text: "보안성: 사용자에게 숨기고 싶은 특정 컬럼을 제외하고 노출할 수 있다.", isCorrect: false },
+        { id: 3, text: "영속성: 뷰를 생성하면 실제 데이터가 별도의 저장 공간에 물리적으로 복사된다.", isCorrect: true },
+        { id: 4, text: "편리성: 복잡한 JOIN 쿼리를 뷰로 만들어 간단하게 조회할 수 있다.", isCorrect: false }
+      ],
+      rationale: "뷰는 '가상 테이블'로, 실제 데이터를 저장하지 않고 쿼리 정의(TEXT)만 저장합니다.",
+      hint: "뷰는 거울과 같습니다. 물체(데이터)는 테이블에 있고, 뷰는 그 모습을 비춰줄 뿐입니다."
+    },
+    {
+      id: 3,
+      category: "서브쿼리/뷰 기초",
+      question: "SELECT 절에 사용되어 마치 하나의 컬럼처럼 동작하는 서브쿼리의 명칭은?",
+      options: [
+        { id: 1, text: "인라인 뷰(Inline View)", isCorrect: false },
+        { id: 2, text: "스칼라 서브쿼리(Scalar Subquery)", isCorrect: true },
+        { id: 3, text: "중첩 서브쿼리(Nested Subquery)", isCorrect: false },
+        { id: 4, text: "연관 서브쿼리(Correlated Subquery)", isCorrect: false }
+      ],
+      rationale: "SELECT 절에 위치하여 단일 행, 단일 컬럼 값을 반환하는 서브쿼리를 '스칼라 서브쿼리'라고 부릅니다.",
+      hint: "'스칼라'는 수학에서 단일 값을 의미하는 용어입니다."
+    },
+    {
+      id: 4,
+      category: "서브쿼리/뷰 기초",
+      question: "다음 중 뷰를 생성(또는 수정)할 때 사용하는 SQL 명령어로 옳은 것은?",
+      options: [
+        { id: 1, text: "UPDATE VIEW", isCorrect: false },
+        { id: 2, text: "ALTER VIEW", isCorrect: false },
+        { id: 3, text: "CREATE OR REPLACE VIEW", isCorrect: true },
+        { id: 4, text: "MODIFY VIEW", isCorrect: false }
+      ],
+      rationale: "뷰의 정의를 변경할 때는 ALTER 대신 DROP 후 CREATE 하거나, CREATE OR REPLACE VIEW를 사용하여 덮어쓰기 합니다.",
+      hint: "뷰는 구조를 수정하는 게 아니라 '다시 정의'하는 개념입니다."
+    },
+    {
+      id: 5,
+      category: "서브쿼리/뷰 기초",
+      question: "단일 행 서브쿼리 연산자가 아닌 것은?",
+      options: [
+        { id: 1, text: "=", isCorrect: false },
+        { id: 2, text: "<>", isCorrect: false },
+        { id: 3, text: ">=", isCorrect: false },
+        { id: 4, text: "ANY", isCorrect: true }
+      ],
+      rationale: "ANY, IN, ALL 등은 서브쿼리 결과가 여러 개일 때 사용하는 '다중 행 연산자'입니다.",
+      hint: "= 뒤에 결과가 2개 나오면 에러가 난다는 사실을 기억하세요!"
+    },
+    {
+      id: 6,
+      category: "서브쿼리 연산자/위치",
+      question: "다음 SQL 문에서 사용된 서브쿼리의 종류는?",
+      code: "SELECT E.ENAME, E.SAL\nFROM EMP E, (SELECT DEPTNO, AVG(SAL) AS AVGSAL FROM EMP GROUP BY DEPTNO) D\nWHERE E.DEPTNO = D.DEPTNO AND E.SAL > D.AVGSAL;",
+      options: [
+        { id: 1, text: "스칼라 서브쿼리", isCorrect: false },
+        { id: 2, text: "인라인 뷰", isCorrect: true },
+        { id: 3, text: "중첩 서브쿼리", isCorrect: false },
+        { id: 4, text: "상호연관 서브쿼리", isCorrect: false }
+      ],
+      rationale: "FROM 절에 위치하여 가상의 테이블 역할을 하는 서브쿼리를 '인라인 뷰'라고 합니다.",
+      hint: "\"FROM 절에 있는 쿼리는 테이블 대타!\""
+    },
+    {
+      id: 7,
+      category: "서브쿼리 연산자/위치",
+      question: "다음 중 다중 행 연산자와 그 의미가 바르게 연결되지 않은 것은?",
+      options: [
+        { id: 1, text: "IN : 서브쿼리 결과 중 하나라도 일치하면 참", isCorrect: false },
+        { id: 2, text: "> ALL : 서브쿼리 결과의 모든 값보다 커야 함 (최대값보다 큼)", isCorrect: false },
+        { id: 3, text: "< ANY : 서브쿼리 결과의 모든 값보다 작아야 함 (최대값보다 작음)", isCorrect: true },
+        { id: 4, text: "EXISTS : 서브쿼리 결과가 1건이라도 존재하면 참", isCorrect: false }
+      ],
+      rationale: "< ANY는 결과값 중 최소한 하나보다만 작으면 되므로, 결과의 '최대값'보다 작으면 참이 됩니다. (모든 값보다 작으려면 < ALL 사용)",
+      hint: "ANY는 '어느 하나라도', ALL은 '모조리 다'라고 해석하세요."
+    },
+    {
+      id: 8,
+      category: "서브쿼리 연산자/위치",
+      question: "다음 SQL의 실행 결과로 적절한 것은? (EMP 테이블의 최고 급여는 5000이다)",
+      code: "SELECT ENAME FROM EMP \nWHERE SAL >= (SELECT MAX(SAL) FROM EMP);",
+      options: [
+        { id: 1, text: "급여가 5000인 사원들만 조회된다.", isCorrect: true },
+        { id: 2, text: "모든 사원이 조회된다.", isCorrect: false },
+        { id: 3, text: "문법 오류가 발생한다.", isCorrect: false },
+        { id: 4, text: "아무도 조회되지 않는다.", isCorrect: false }
+      ],
+      rationale: "서브쿼리에서 MAX(SAL)은 단일 값을 반환하므로 = 또는 >= 연산자와 함께 사용 가능한 단일 행 서브쿼리입니다.",
+      hint: "집계 함수(MAX, MIN, AVG)가 사용된 서브쿼리는 보통 1개의 값만 뱉어냅니다."
+    },
+    {
+      id: 9,
+      category: "서브쿼리 연산자/위치",
+      question: "다음 중 뷰(VIEW)를 통해 DML(INSERT, UPDATE 등)을 수행할 수 없는 경우는?",
+      options: [
+        { id: 1, text: "뷰 정의에 단일 테이블만 사용된 경우", isCorrect: false },
+        { id: 2, text: "뷰 정의에 GROUP BY 절이 포함된 경우", isCorrect: true },
+        { id: 3, text: "뷰 정의에 WHERE 절 조건이 포함된 경우", isCorrect: false },
+        { id: 4, text: "뷰 정의 시 모든 컬럼에 별칭을 사용한 경우", isCorrect: false }
+      ],
+      rationale: "GROUP BY, DISTINCT, 집계 함수 등이 포함된 뷰는 데이터의 원천이 불분명해지므로 DML 작업이 불가능합니다.",
+      hint: "\"뭉쳐진 데이터를 어떻게 낱개로 수정하겠어?\"라고 생각하면 쉽습니다."
+    },
+    {
+      id: 10,
+      category: "서브쿼리 연산자/위치",
+      question: "서브쿼리가 메인 쿼리의 컬럼을 포함하고 있어, 메인 쿼리의 각 행마다 서브쿼리가 반복 실행되는 형태는?",
+      options: [
+        { id: 1, text: "비연관 서브쿼리", isCorrect: false },
+        { id: 2, text: "인라인 뷰", isCorrect: false },
+        { id: 3, text: "연관 서브쿼리", isCorrect: true },
+        { id: 4, text: "스칼라 서브쿼리", isCorrect: false }
+      ],
+      rationale: "메인 쿼리의 값을 서브쿼리에 전달하여 조건에 맞는지 확인하는 방식을 '연관(Correlated) 서브쿼리'라고 합니다.",
+      hint: "서브쿼리 안에 메인 테이블의 별칭(Alias)이 들어가 있는지 확인하세요."
+    },
+    {
+      id: 11,
+      category: "서브쿼리 함정/주의사항",
+      question: "다음 SQL의 결과로 조회되는 행의 개수는? (EMP 테이블의 MGR 컬럼에 NULL이 하나 존재한다고 가정한다)",
+      code: "SELECT COUNT(*) FROM EMP\nWHERE EMPNO NOT IN (SELECT MGR FROM EMP);",
+      options: [
+        { id: 1, text: "MGR에 없는 사원 수만큼 출력", isCorrect: false },
+        { id: 2, text: "전체 사원 수 출력", isCorrect: false },
+        { id: 3, text: "0건 출력", isCorrect: true },
+        { id: 4, text: "에러 발생", isCorrect: false }
+      ],
+      rationale: "NOT IN 연산 시 서브쿼리 결과에 NULL이 포함되어 있으면, 비교 결과가 모두 UNKNOWN이 되어 최종적으로 아무것도 조회되지 않습니다. (매우 빈출!)",
+      hint: "NOT IN과 NULL이 만나면 '폭탄'이 터져서 결과가 다 사라진다고 외우세요."
+    },
+    {
+      id: 12,
+      category: "서브쿼리 함정/주의사항",
+      question: "다음 중 스칼라 서브쿼리에 대한 설명으로 옳은 것은?",
+      options: [
+        { id: 1, text: "서브쿼리의 결과가 2건 이상이어도 첫 번째 행을 사용한다.", isCorrect: false },
+        { id: 2, text: "서브쿼리의 결과가 0건(데이터 없음)이면 에러가 발생한다.", isCorrect: false },
+        { id: 3, text: "서브쿼리의 결과가 0건이면 NULL을 반환한다.", isCorrect: true },
+        { id: 4, text: "가독성을 위해 주로 FROM 절에 사용한다.", isCorrect: false }
+      ],
+      rationale: "스칼라 서브쿼리는 결과가 없으면 에러 대신 NULL을 반환하며, 2건 이상이면 에러가 발생합니다.",
+      hint: "SELECT 절에 넣었는데 값이 없으면 그냥 빈칸(NULL)이 나온다고 생각하세요."
+    },
+    {
+      id: 13,
+      category: "서브쿼리 함정/주의사항",
+      question: "다음 중 서브쿼리를 사용할 수 없는 절은?",
+      options: [
+        { id: 1, text: "SELECT 절", isCorrect: false },
+        { id: 2, text: "WHERE 절", isCorrect: false },
+        { id: 3, text: "HAVING 절", isCorrect: false },
+        { id: 4, text: "GROUP BY 절", isCorrect: true }
+      ],
+      rationale: "SQL 표준상 GROUP BY 절에는 서브쿼리를 사용할 수 없습니다.",
+      hint: "그룹을 묶는 기준 자체를 쿼리로 동적으로 만들 수는 없습니다."
+    },
+    {
+      id: 14,
+      category: "서브쿼리 함정/주의사항",
+      question: "다음 SQL 문장의 빈칸에 들어갈 연산자로 부서번호 30번 사원들 중 급여가 가장 적은 사람보다 더 적게 받는 사원을 조회하고자 할 때 적절한 것은?",
+      code: "SELECT ENAME, SAL FROM EMP\nWHERE SAL < (빈칸) (SELECT SAL FROM EMP WHERE DEPTNO = 30);",
+      options: [
+        { id: 1, text: "IN", isCorrect: false },
+        { id: 2, text: "ANY", isCorrect: false },
+        { id: 3, text: "ALL", isCorrect: true },
+        { id: 4, text: "EXISTS", isCorrect: false }
+      ],
+      rationale: "\"가장 적은 사람보다 더 적다\"는 것은 \"모든 사람보다 적다\"는 뜻이므로 < ALL을 사용해야 합니다.",
+      hint: "< ALL은 최소값보다 작음, > ALL은 최대값보다 큼!"
+    },
+    {
+      id: 15,
+      category: "서브쿼리 함정/주의사항",
+      question: "뷰(VIEW)를 삭제할 때 발생하는 현상으로 옳은 것은?",
+      options: [
+        { id: 1, text: "뷰를 참조하고 있는 다른 뷰들은 자동으로 삭제된다.", isCorrect: false },
+        { id: 2, text: "뷰가 참조하고 있는 원본 테이블의 데이터도 함께 삭제된다.", isCorrect: false },
+        { id: 3, text: "뷰의 정의(TEXT)만 삭제되고 원본 테이블에는 영향이 없다.", isCorrect: true },
+        { id: 4, text: "뷰를 삭제하려면 반드시 원본 테이블을 먼저 삭제해야 한다.", isCorrect: false }
+      ],
+      rationale: "뷰는 가상 테이블이므로 정의만 삭제될 뿐 실제 데이터(테이블)에는 영향을 주지 않습니다.",
+      hint: "거울을 깬다고 해서 실물이 사라지지는 않습니다."
+    },
+    {
+      id: 16,
+      category: "서브쿼리/뷰 심화",
+      question: "다음 중 뷰(VIEW)에 대한 설명으로 가장 부적절한 것은?",
+      options: [
+        { id: 1, text: "뷰는 자신만의 인덱스를 생성하여 조회 성능을 높일 수 있다.", isCorrect: true },
+        { id: 2, text: "뷰는 복잡한 질의를 단순화하여 가독성을 높여준다.", isCorrect: false },
+        { id: 3, text: "뷰를 정의할 때 ORDER BY 절을 사용할 수 있다.", isCorrect: false },
+        { id: 4, text: "테이블 구조가 변경되어도 뷰의 정의를 통해 데이터 독립성을 확보할 수 있다.", isCorrect: false }
+      ],
+      rationale: "뷰는 실제 데이터를 가지지 않으므로 자신만의 물리적 인덱스를 가질 수 없습니다. (원본 테이블의 인덱스를 활용할 뿐입니다.)",
+      hint: "인덱스는 '데이터 위치'를 저장하는 것인데, 뷰는 데이터가 없으니 위치를 저장할 수 없겠죠?"
+    },
+    {
+      id: 17,
+      category: "서브쿼리/뷰 심화",
+      question: "아래 SQL의 실행 결과와 동일한 결과를 내는 구문은?",
+      code: "SELECT ENAME FROM EMP E\nWHERE EXISTS (SELECT 1 FROM DEPT D WHERE E.DEPTNO = D.DEPTNO AND D.LOC = 'SEOUL');",
+      options: [
+        { id: 1, text: "SELECT ENAME FROM EMP WHERE DEPTNO IN (SELECT DEPTNO FROM DEPT WHERE LOC = 'SEOUL')", isCorrect: true },
+        { id: 2, text: "SELECT ENAME FROM EMP WHERE DEPTNO = (SELECT DEPTNO FROM DEPT WHERE LOC = 'SEOUL')", isCorrect: false },
+        { id: 3, text: "SELECT ENAME FROM EMP WHERE DEPTNO ANY (SELECT DEPTNO FROM DEPT WHERE LOC = 'SEOUL')", isCorrect: false },
+        { id: 4, text: "SELECT ENAME FROM EMP WHERE DEPTNO ALL (SELECT DEPTNO FROM DEPT WHERE LOC = 'SEOUL')", isCorrect: false }
+      ],
+      rationale: "EXISTS는 존재 여부만 확인하며, 이는 보통 IN 연산자를 사용한 비연관 서브쿼리와 동일한 결과를 냅니다. (단, 서울에 해당하는 부서가 여러 개일 수 있으므로 =은 위험합니다.)",
+      hint: "EXISTS는 IN과 친구라고 생각하면 편합니다."
+    },
+    {
+      id: 18,
+      category: "서브쿼리/뷰 심화",
+      question: "다음 중 연관 서브쿼리(Correlated Subquery)의 특징이 아닌 것은?",
+      options: [
+        { id: 1, text: "서브쿼리 내에 메인 쿼리의 컬럼이 존재한다.", isCorrect: false },
+        { id: 2, text: "메인 쿼리의 결과가 서브쿼리로 전달되고, 다시 그 결과가 메인 쿼리에 영향을 준다.", isCorrect: false },
+        { id: 3, text: "서브쿼리가 먼저 실행되어 단 한 번만 결과를 메인 쿼리에 전달한다.", isCorrect: true },
+        { id: 4, text: "성능상 비연관 서브쿼리보다 불리할 수 있다.", isCorrect: false }
+      ],
+      rationale: "연관 서브쿼리는 메인 쿼리의 각 행을 읽을 때마다 서브쿼리가 반복해서 실행됩니다. 한 번만 실행되는 것은 비연관 서브쿼리의 특징입니다.",
+      hint: "'연관'되어 있으니 계속 서로 주고받아야 해서 바쁘다고 생각하세요."
+    },
+    {
+      id: 19,
+      category: "서브쿼리/뷰 심화",
+      question: "SQL Server(MSSQL) 환경에서 다음 중 오류가 발생하는 쿼리는?",
+      options: [
+        { id: 1, text: "SELECT 절의 스칼라 서브쿼리", isCorrect: false },
+        { id: 2, text: "FROM 절의 인라인 뷰", isCorrect: false },
+        { id: 3, text: "다중 컬럼 서브쿼리 (예: WHERE (A, B) IN (SELECT A, B FROM ... ))", isCorrect: true },
+        { id: 4, text: "WHERE 절의 다중 행 서브쿼리", isCorrect: false }
+      ],
+      rationale: "다중 컬럼 서브쿼리(여러 컬럼을 한꺼번에 비교)는 오라클에서는 지원하지만 SQL Server에서는 지원하지 않는 문법입니다. (시험 단골 포인트!)",
+      hint: "\"가로로 여러 개 묶어서 비교하는 건 오라클 전용!\""
+    },
+    {
+      id: 20,
+      category: "서브쿼리/뷰 심화",
+      question: "다음은 TOP-N 쿼리를 작성하는 SQL이다. 빈칸에 들어갈 내용으로 적절한 것은?",
+      code: "SELECT ENAME, SAL\nFROM (SELECT ENAME, SAL FROM EMP (  빈칸  ))\nWHERE ROWNUM <= 5;",
+      options: [
+        { id: 1, text: "GROUP BY SAL", isCorrect: false },
+        { id: 2, text: "ORDER BY SAL DESC", isCorrect: true },
+        { id: 3, text: "HAVING SAL > 3000", isCorrect: false },
+        { id: 4, text: "WHERE SAL IS NOT NULL", isCorrect: false }
+      ],
+      rationale: "오라클에서 상위 N개를 뽑으려면 인라인 뷰 안에서 먼저 ORDER BY로 정렬을 한 뒤, 바깥에서 ROWNUM으로 잘라야 합니다.",
+      hint: "\"서브쿼리에서 예외적으로 정렬이 허용되는 유일한 케이스\"가 바로 이것입니다!"
+    }
+  ],
+  9: [
+    {
+      id: 1,
+      category: "집합 연산자 기초",
+      question: "집합 연산자를 사용하여 두 개의 SELECT 문을 결합할 때, 반드시 지켜야 할 규칙으로 옳지 않은 것은?",
+      options: [
+        { id: 1, text: "두 쿼리의 컬럼 개수가 동일해야 한다.", isCorrect: false },
+        { id: 2, text: "각 컬럼의 데이터 타입이 상호 호환 가능해야 한다.", isCorrect: false },
+        { id: 3, text: "두 쿼리의 컬럼 명칭이 반드시 동일해야 한다.", isCorrect: true },
+        { id: 4, text: "SELECT 절의 컬럼 순서가 일치해야 한다.", isCorrect: false }
+      ],
+      rationale: "컬럼 명칭이 달라도 데이터 타입과 개수만 맞으면 결합이 가능합니다. 결과의 컬럼명은 첫 번째 SELECT 문을 따릅니다.",
+      hint: "'틀(구조)'은 맞춰야 하지만, '이름표'는 첫 번째 사람 것을 빌려 쓴다고 생각하세요."
+    },
+    {
+      id: 2,
+      category: "집합 연산자 기초",
+      question: "다음 중 두 집합의 중복된 행을 제거하고 합집합 결과를 반환하는 연산자는?",
+      options: [
+        { id: 1, text: "UNION", isCorrect: true },
+        { id: 2, text: "UNION ALL", isCorrect: false },
+        { id: 3, text: "INTERSECT", isCorrect: false },
+        { id: 4, text: "MINUS", isCorrect: false }
+      ],
+      rationale: "UNION은 합집합을 구하면서 중복을 제거하고 정렬을 수행합니다. UNION ALL은 중복을 포함합니다.",
+      hint: "UNION은 '유니크(Unique)'하게 합친다고 기억하세요."
+    },
+    {
+      id: 3,
+      category: "집합 연산자 기초",
+      question: "다음 중 두 테이블에서 공통으로 존재하는 행만 추출하고 싶을 때 사용하는 집합 연산자는?",
+      options: [
+        { id: 1, text: "UNION", isCorrect: false },
+        { id: 2, text: "MINUS", isCorrect: false },
+        { id: 3, text: "INTERSECT", isCorrect: true },
+        { id: 4, text: "EXCEPT", isCorrect: false }
+      ],
+      rationale: "INTERSECT는 교집합을 의미하며 양쪽에 모두 존재하는 데이터만 결과로 냅니다.",
+      hint: "벤다이어그램의 겹치는 부분을 떠올려 보세요."
+    },
+    {
+      id: 4,
+      category: "집합 연산자 기초",
+      question: "SQL Server 환경에서 차집합을 구하기 위해 사용하는 연산자는?",
+      options: [
+        { id: 1, text: "MINUS", isCorrect: false },
+        { id: 2, text: "EXCEPT", isCorrect: true },
+        { id: 3, text: "DIFFERENCE", isCorrect: false },
+        { id: 4, text: "SUBTRACT", isCorrect: false }
+      ],
+      rationale: "Oracle은 MINUS를 사용하지만, SQL Server(T-SQL)는 EXCEPT를 사용합니다.",
+      hint: "\"Oracle은 마이너스(-), MS는 익셉트(Except)!\""
+    },
+    {
+      id: 5,
+      category: "그룹 함수 기초",
+      question: "GROUP BY ROLLUP(DEPTNO) 쿼리를 실행했을 때 나오는 결과의 구성으로 옳은 것은?",
+      options: [
+        { id: 1, text: "부서별 합계만 출력된다.", isCorrect: false },
+        { id: 2, text: "전체 총계만 출력된다.", isCorrect: false },
+        { id: 3, text: "부서별 합계와 전체 총계가 함께 출력된다.", isCorrect: true },
+        { id: 4, text: "부서별 합계와 직업별 합계가 함께 출력된다.", isCorrect: false }
+      ],
+      rationale: "ROLLUP은 나열된 컬럼에 대해 계층적인 소계와 전체 총계를 생성합니다.",
+      hint: "\"롤(ROLL)업은 아래에서 위로 말아 올리듯 총계까지 낸다!\""
+    },
+    {
+      id: 6,
+      category: "집합 연산자 중급",
+      question: "집합 연산자를 사용한 SQL 문에서 ORDER BY 절의 위치로 가장 적절한 것은?",
+      options: [
+        { id: 1, text: "첫 번째 SELECT 문 바로 뒤", isCorrect: false },
+        { id: 2, text: "각 SELECT 문 마다 각각 사용", isCorrect: false },
+        { id: 3, text: "마지막 SELECT 문의 맨 마지막에 딱 한 번 사용", isCorrect: true },
+        { id: 4, text: "집합 연산자 바로 앞에 사용", isCorrect: false }
+      ],
+      rationale: "ORDER BY는 집합 연산으로 합쳐진 전체 결과에 대해 적용되므로 맨 마지막에 위치해야 합니다.",
+      hint: "모든 데이터가 다 모인 다음에 정렬(줄 세우기)을 해야 의미가 있겠죠?"
+    },
+    {
+      id: 7,
+      category: "집합 연산자 중급",
+      question: "UNION과 UNION ALL의 성능 차이에 대한 설명으로 가장 적절한 것은?",
+      options: [
+        { id: 1, text: "UNION은 중복 제거를 위해 내부적으로 정렬을 수행하므로 UNION ALL보다 느리다.", isCorrect: true },
+        { id: 2, text: "UNION ALL은 중복을 확인해야 하므로 UNION보다 느리다.", isCorrect: false },
+        { id: 3, text: "두 연산자의 성능 차이는 없다.", isCorrect: false },
+        { id: 4, text: "UNION ALL은 인덱스를 사용할 수 없어 UNION보다 느리다.", isCorrect: false }
+      ],
+      rationale: "UNION은 중복 제거(Distinct)를 위해 데이터 정렬(Sort) 과정을 거치므로 시스템 부하가 더 큽니다.",
+      hint: "\"중복 검사 안 하고 그냥 붙이는 UNION ALL이 광속이다!\""
+    },
+    {
+      id: 8,
+      category: "그룹 함수 중급",
+      question: "GROUP BY ROLLUP(A, B)의 집계 조합으로 옳은 것은?",
+      options: [
+        { id: 1, text: "(A, B), (A), ()", isCorrect: true },
+        { id: 2, text: "(A, B), (B), ()", isCorrect: false },
+        { id: 3, text: "(A, B), (A), (B)", isCorrect: false },
+        { id: 4, text: "(A), (B), ()", isCorrect: false }
+      ],
+      rationale: "ROLLUP은 오른쪽 인수를 하나씩 제거하며 집계합니다. (A, B) -> (A) -> () 순서입니다.",
+      hint: "오른쪽 끝에서부터 하나씩 지우개로 지워나간다고 생각하세요."
+    },
+    {
+      id: 9,
+      category: "그룹 함수 중급",
+      question: "다음 중 모든 가능한 조합에 대해 다차원적인 집계를 생성하는 함수는?",
+      options: [
+        { id: 1, text: "ROLLUP", isCorrect: false },
+        { id: 2, text: "CUBE", isCorrect: true },
+        { id: 3, text: "GROUPING SETS", isCorrect: false },
+        { id: 4, text: "RANK", isCorrect: false }
+      ],
+      rationale: "CUBE는 결합 가능한 모든 조합(2^N)에 대해 소계와 총계를 구합니다.",
+      hint: "정육면체(Cube)처럼 모든 면을 다 집계한다고 이해하세요."
+    },
+    {
+      id: 10,
+      category: "집합 연산자 중급",
+      question: "집합 연산자 사용 시 데이터 타입에 대한 설명 중 옳은 것은?",
+      options: [
+        { id: 1, text: "문자와 숫자를 결합하면 자동으로 문자로 변환되어 결합된다.", isCorrect: false },
+        { id: 2, text: "데이터 타입이 달라도 컬럼 순서만 맞으면 오류가 발생하지 않는다.", isCorrect: false },
+        { id: 3, text: "데이터 타입은 반드시 일치하거나 상호 호환 가능한 유형이어야 한다.", isCorrect: true },
+        { id: 4, text: "날짜형과 숫자형은 집합 연산이 불가능하다.", isCorrect: false }
+      ],
+      rationale: "집합 연산자는 암시적 형변환을 일부 지원하지만, 원칙적으로 데이터 타입이 호환되어야 하며 다를 경우 오류가 발생할 확률이 높습니다.",
+      hint: "\"사과는 사과끼리, 배는 배끼리 쌓아야 안 무너집니다.\""
+    },
+    {
+      id: 11,
+      category: "그룹 함수 상급",
+      question: "GROUP BY CUBE(A, B, C)를 수행했을 때 생성되는 집계 조합의 총 개수는? (전체 총계 포함)",
+      options: [
+        { id: 1, text: "3개", isCorrect: false },
+        { id: 2, text: "4개", isCorrect: false },
+        { id: 3, text: "7개", isCorrect: false },
+        { id: 4, text: "8개", isCorrect: true }
+      ],
+      rationale: "CUBE의 집계 조합은 2^N개입니다. 인수가 3개이므로 2^3 = 8개입니다.",
+      hint: "조합(Combination)의 모든 경우의 수입니다."
+    },
+    {
+      id: 12,
+      category: "집합 연산자 상급",
+      question: "INTERSECT 연산자에 대한 설명으로 적절하지 않은 것은?",
+      options: [
+        { id: 1, text: "두 집합의 공통된 행을 반환한다.", isCorrect: false },
+        { id: 2, text: "중복된 행은 하나로 표시된다.", isCorrect: false },
+        { id: 3, text: "내부적으로 정렬 작업을 수행한다.", isCorrect: false },
+        { id: 4, text: "첫 번째 집합에만 존재하는 행을 반환한다.", isCorrect: true }
+      ],
+      rationale: "④번 설명은 MINUS(또는 EXCEPT)에 대한 설명입니다.",
+      hint: "INTERSECT는 '교집합'입니다."
+    },
+    {
+      id: 13,
+      category: "그룹 함수 상급",
+      question: "GROUP BY ROLLUP(A, B)와 GROUP BY ROLLUP(B, A)의 결과에 대한 설명으로 옳은 것은?",
+      options: [
+        { id: 1, text: "두 결과는 항상 동일하다.", isCorrect: false },
+        { id: 2, text: "계층 구조가 다르므로 소계의 구성과 행의 수가 달라질 수 있다.", isCorrect: true },
+        { id: 3, text: "전체 총계 행의 값이 서로 다르게 계산된다.", isCorrect: false },
+        { id: 4, text: "두 함수 모두 모든 조합의 소계를 출력한다.", isCorrect: false }
+      ],
+      rationale: "ROLLUP은 인수의 순서에 따라 계층(Hierarchy)이 결정되므로 순서가 중요합니다.",
+      hint: "\"부서별 직업합계\"와 \"직업별 부서합계\"는 소계의 의미가 다릅니다."
+    },
+    {
+      id: 14,
+      category: "그룹 함수 상급",
+      question: "다음 중 원하는 집계 대상 컬럼을 자유롭게 나열하여 특정 소계만 구하고 싶을 때 가장 효율적인 함수는?",
+      options: [
+        { id: 1, text: "ROLLUP", isCorrect: false },
+        { id: 2, text: "CUBE", isCorrect: false },
+        { id: 3, text: "GROUPING SETS", isCorrect: true },
+        { id: 4, text: "CASE WHEN", isCorrect: false }
+      ],
+      rationale: "GROUPING SETS는 지정한 조합만 집계하므로 불필요한 연산을 줄이고 유연하게 사용 가능합니다.",
+      hint: "\"원하는 것만 쏙쏙 골라 담는 그룹핑 세츠!\""
+    },
+    {
+      id: 15,
+      category: "그룹 함수 상급",
+      question: "GROUPING 함수가 반환하는 값의 의미로 옳은 것은?",
+      options: [
+        { id: 1, text: "해당 행이 실제 데이터 행이면 1, 집계 행이면 0을 반환한다.", isCorrect: false },
+        { id: 2, text: "해당 행이 소계/총계를 위해 생성된 행이면 1, 아니면 0을 반환한다.", isCorrect: true },
+        { id: 3, text: "해당 컬럼의 NULL 값을 0으로 변환한다.", isCorrect: false },
+        { id: 4, text: "그룹화된 행의 개수를 반환한다.", isCorrect: false }
+      ],
+      rationale: "GROUPING 함수는 집계용으로 생성된 NULL을 판별하기 위해 사용하며, 집계 행일 때 1을 반환합니다.",
+      hint: "\"집계 행이 맞나요? (1: Yes / 0: No)\""
+    },
+    {
+      id: 16,
+      category: "그룹 함수 심화",
+      question: "다음 중 GROUP BY ROLLUP(A, B)와 동일한 결과를 반환하는 것은?",
+      options: [
+        { id: 1, text: "GROUP BY GROUPING SETS((A, B), (A), ())", isCorrect: true },
+        { id: 2, text: "GROUP BY GROUPING SETS((A, B), (B), ())", isCorrect: false },
+        { id: 3, text: "GROUP BY CUBE(A, B)", isCorrect: false },
+        { id: 4, text: "GROUP BY A, B UNION ALL GROUP BY A", isCorrect: false }
+      ],
+      rationale: "ROLLUP의 계층 구조를 GROUPING SETS로 풀어서 표현하면 (A,B), (A), ()와 같습니다. ()는 전체 총계를 의미합니다.",
+      hint: "시험에 정말 자주 나옵니다! ROLLUP을 수동으로 구현하는 법을 익히세요."
+    },
+    {
+      id: 17,
+      category: "집합 연산자 심화",
+      question: "집합 연산자 사용 시 NULL 값의 처리에 대한 설명으로 옳은 것은?",
+      options: [
+        { id: 1, text: "집합 연산자는 NULL을 값으로 인식하지 못해 무시한다.", isCorrect: false },
+        { id: 2, text: "두 행의 컬럼 값이 모두 NULL이면 서로 다른 값으로 간주하여 중복 제거가 안 된다.", isCorrect: false },
+        { id: 3, text: "집합 연산자는 NULL을 서로 동일한 값으로 인식하여 중복을 제거한다.", isCorrect: true },
+        { id: 4, text: "UNION ALL에서만 NULL이 표시된다.", isCorrect: false }
+      ],
+      rationale: "WHERE 절 비교와 달리, 집합 연산자(UNION, INTERSECT 등)는 NULL을 같은 값으로 취급하여 중복을 제거합니다.",
+      hint: "\"집합 연산자 세계에서는 NULL끼리 친구(동일함)입니다.\""
+    },
+    {
+      id: 18,
+      category: "그룹 함수 심화",
+      question: "다음 SQL의 결과로 가장 적절한 것은?",
+      code: "SELECT JOB, SUM(SAL) FROM EMP\nGROUP BY GROUPING SETS((JOB), ());",
+      options: [
+        { id: 1, text: "직업별 합계만 출력된다.", isCorrect: false },
+        { id: 2, text: "전체 총계만 출력된다.", isCorrect: false },
+        { id: 3, text: "직업별 합계와 전체 총계가 출력된다.", isCorrect: true },
+        { id: 4, text: "오류가 발생한다.", isCorrect: false }
+      ],
+      rationale: "(JOB)은 직업별 합계를, ()는 빈 괄호로 전체 총계를 의미합니다.",
+      hint: "GROUPING SETS 안의 빈 괄호는 GRAND TOTAL의 마법 주문입니다."
+    },
+    {
+      id: 19,
+      category: "집합 연산자 심화",
+      question: "성능 최적화 관점에서 UNION ALL이 가능한 상황임에도 UNION을 사용하는 것이 부적절한 이유는?",
+      options: [
+        { id: 1, text: "UNION은 결과가 항상 더 적게 나오기 때문이다.", isCorrect: false },
+        { id: 2, text: "불필요한 정렬(Sort) 부하가 발생하여 응답 속도가 느려지기 때문이다.", isCorrect: true },
+        { id: 3, text: "UNION은 인덱스 스캔을 강제하기 때문이다.", isCorrect: false },
+        { id: 4, text: "UNION은 서브쿼리 내에서 사용이 불가능하기 때문이다.", isCorrect: false }
+      ],
+      rationale: "데이터의 중복이 없다는 것을 이미 알고 있다면, 정렬 부하가 있는 UNION보다는 UNION ALL이 훨씬 효율적입니다.",
+      hint: "\"DB에게 힘든 정렬 시키지 마세요!\""
+    },
+    {
+      id: 20,
+      category: "그룹 함수 심화",
+      question: "아래 SQL의 빈칸에 들어갈 코드로 '부서 합계'라는 명칭을 부여하고 싶을 때 가장 적절한 것은?",
+      code: "SELECT \n    CASE WHEN (  빈칸  ) = 1 THEN '부서 합계' ELSE JOB END AS 명칭,\n    SUM(SAL)\nFROM EMP\nGROUP BY ROLLUP(JOB);",
+      options: [
+        { id: 1, text: "COUNT(JOB)", isCorrect: false },
+        { id: 2, text: "GROUPING(JOB)", isCorrect: true },
+        { id: 3, text: "NVL(JOB)", isCorrect: false },
+        { id: 4, text: "ISNULL(JOB)", isCorrect: false }
+      ],
+      rationale: "ROLLUP으로 인해 생성된 소계 행은 GROUPING(컬럼)의 결과가 1이 됩니다. 이를 CASE나 DECODE로 처리해 이름을 바꿉니다.",
+      hint: "GROUPING은 보고서의 예쁜 이름을 만들어주는 일등공신입니다."
+    }
+  ],
+  10: [
+    {
+      id: 1,
+      category: "윈도우 함수 기초",
+      question: "다음 중 윈도우 함수와 GROUP BY 절의 차이점에 대한 설명으로 가장 적절한 것은?",
+      options: [
+        { id: 1, text: "윈도우 함수는 행의 수를 줄이지만, GROUP BY는 행의 수를 유지한다.", isCorrect: false },
+        { id: 2, text: "윈도우 함수는 행의 수를 유지하지만, GROUP BY는 행의 수를 줄인다.", isCorrect: true },
+        { id: 3, text: "두 기능 모두 행의 수를 줄여서 집계 결과를 보여준다.", isCorrect: false },
+        { id: 4, text: "윈도우 함수는 SELECT 절에서 사용할 수 없다.", isCorrect: false }
+      ],
+      rationale: "GROUP BY는 데이터를 그룹별로 압축(집계)하여 행 수가 줄어들지만, 윈도우 함수는 개별 행의 상세 정보를 유지하면서 분석 결과를 옆에 추가합니다.",
+      hint: "내 성적표 옆에 '반 평균'이 찍히는지, 아니면 '반 평균'만 덜렁 나오는지 생각해보세요."
+    },
+    {
+      id: 2,
+      category: "윈도우 함수 기초",
+      question: "윈도우 함수 사용 시 반드시 함께 작성해야 하는 필수 키워드는?",
+      options: [
+        { id: 1, text: "WHERE", isCorrect: false },
+        { id: 2, text: "GROUP BY", isCorrect: false },
+        { id: 3, text: "OVER", isCorrect: true },
+        { id: 4, text: "HAVING", isCorrect: false }
+      ],
+      rationale: "윈도우 함수는 항상 '함수() OVER ( ... )' 형식을 갖춰야 합니다.",
+      hint: "창문(Window)을 넘어서(OVER) 본다고 외우세요!"
+    },
+    {
+      id: 3,
+      category: "윈도우 함수 기초",
+      question: "다음 중 동점자가 있을 때 동일 순위를 부여하고, 그 다음 순위는 건너뛰는(예: 1등, 1등, 3등) 함수는?",
+      options: [
+        { id: 1, text: "RANK", isCorrect: true },
+        { id: 2, text: "DENSE_RANK", isCorrect: false },
+        { id: 3, text: "ROW_NUMBER", isCorrect: false },
+        { id: 4, text: "NTILE", isCorrect: false }
+      ],
+      rationale: "RANK는 올림픽 방식처럼 공동 순위만큼 다음 숫자를 건너뜁니다.",
+      hint: "1등이 두 명이면 2등 없이 바로 3등으로 가는 냉정한 함수입니다."
+    },
+    {
+      id: 4,
+      category: "윈도우 함수 기초",
+      question: "값이 동일하더라도 무조건 고유한 일련번호를 부여하는(예: 1, 2, 3, 4) 순위 함수는?",
+      options: [
+        { id: 1, text: "RANK", isCorrect: false },
+        { id: 2, text: "DENSE_RANK", isCorrect: false },
+        { id: 3, text: "ROW_NUMBER", isCorrect: true },
+        { id: 4, text: "CUME_DIST", isCorrect: false }
+      ],
+      rationale: "ROW_NUMBER는 동일한 값에 대해서도 순차적인 고유 번호를 부여합니다.",
+      hint: "출석 번호처럼 무조건 겹치지 않게 매기는 번호입니다."
+    },
+    {
+      id: 5,
+      category: "윈도우 함수 기초",
+      question: "윈도우 함수 내부에서 '전체를 어떤 기준으로 나눌 것인가'를 지정하는 구문은?",
+      options: [
+        { id: 1, text: "ORDER BY", isCorrect: false },
+        { id: 2, text: "PARTITION BY", isCorrect: true },
+        { id: 3, text: "GROUP BY", isCorrect: false },
+        { id: 4, text: "ROWS BETWEEN", isCorrect: false }
+      ],
+      rationale: "PARTITION BY는 전체 집합을 특정 기준(예: 부서, 성별)으로 나누는 역할을 합니다.",
+      hint: "\"부서별\"로 등수를 매기고 싶다면 'PARTITION BY 부서'입니다."
+    },
+    {
+      id: 6,
+      category: "윈도우 함수 중급",
+      question: "다음 데이터를 보고 DENSE_RANK() OVER (ORDER BY 점수 DESC)를 적용했을 때, 90점인 학생의 순위는? (데이터: 100점, 100점, 90점, 80점)",
+      options: [
+        { id: 1, text: "1", isCorrect: false },
+        { id: 2, text: "2", isCorrect: true },
+        { id: 3, text: "3", isCorrect: false },
+        { id: 4, text: "4", isCorrect: false }
+      ],
+      rationale: "DENSE_RANK는 공동 순위가 있어도 다음 숫자를 이어서 매깁니다. (1, 1, 2, 3)",
+      hint: "빽빽하다는 뜻의 'Dense'답게 순위 사이에 빈틈이 없습니다."
+    },
+    {
+      id: 7,
+      category: "윈도우 함수 중급",
+      question: "PARTITION BY DEPTNO를 사용하여 순위를 매길 때 발생하는 현상으로 옳은 것은?",
+      options: [
+        { id: 1, text: "부서 번호가 바뀌어도 순위는 계속 누적된다.", isCorrect: false },
+        { id: 2, text: "부서 번호가 바뀔 때마다 순위가 1등부터 다시 시작된다.", isCorrect: true },
+        { id: 3, text: "부서별로 한 명의 사원만 조회된다.", isCorrect: false },
+        { id: 4, text: "전체 사원의 평균 급여가 출력된다.", isCorrect: false }
+      ],
+      rationale: "PARTITION BY로 나뉜 그룹이 변경되면 윈도우 함수의 계산은 다시 초기화(Reset)됩니다.",
+      hint: "각 부서마다 '과탑'을 따로 뽑는다고 생각하세요."
+    },
+    {
+      id: 8,
+      category: "윈도우 함수 중급",
+      question: "10명의 사원을 NTILE(3)으로 나누었을 때, 각 조의 인원 배분으로 옳은 것은?",
+      options: [
+        { id: 1, text: "4명, 3명, 3명", isCorrect: true },
+        { id: 2, text: "3명, 3명, 4명", isCorrect: false },
+        { id: 3, text: "3명, 3명, 3명, 1명", isCorrect: false },
+        { id: 4, text: "5명, 5명, 0명", isCorrect: false }
+      ],
+      rationale: "NTILE(N)은 최대한 균등하게 나누되, 나머지가 생기면 앞의 조부터 한 명씩 더 배정합니다.",
+      hint: "앞에서부터 한 명씩 더 챙겨주는 조 편성입니다."
+    },
+    {
+      id: 9,
+      category: "윈도우 함수 중급",
+      question: "다음 중 윈도우 함수를 사용할 수 있는 위치로 옳은 것은?",
+      options: [
+        { id: 1, text: "SELECT 절", isCorrect: true },
+        { id: 2, text: "WHERE 절", isCorrect: false },
+        { id: 3, text: "GROUP BY 절", isCorrect: false },
+        { id: 4, text: "HAVING 절", isCorrect: false }
+      ],
+      rationale: "윈도우 함수는 결과 집합이 결정된 후 적용되므로 SELECT 절에서만 사용할 수 있습니다. (정렬을 위해 ORDER BY 절에도 사용 가능)",
+      hint: "필터링(WHERE)은 윈도우 함수보다 먼저 일어납니다."
+    },
+    {
+      id: 10,
+      category: "윈도우 함수 중급",
+      question: "OVER 절 안에 ORDER BY가 없을 때 SUM(SAL) OVER()의 결과는?",
+      options: [
+        { id: 1, text: "급여순으로 누적된 합계", isCorrect: false },
+        { id: 2, text: "해당 그룹(또는 전체)의 총 합계", isCorrect: true },
+        { id: 3, text: "모든 행에 0이 출력됨", isCorrect: false },
+        { id: 4, text: "오류 발생", isCorrect: false }
+      ],
+      rationale: "순서(ORDER BY)가 없으면 누적 계산을 할 수 없으므로 전체 합계를 모든 행에 동일하게 보여줍니다.",
+      hint: "누적하려면 줄을 세워야 합니다. 줄이 없으면 그냥 통째로 더합니다."
+    },
+    {
+      id: 11,
+      category: "윈도우 함수 상급",
+      question: "바로 이전 행의 특정 컬럼 값을 가져오는 함수는?",
+      options: [
+        { id: 1, text: "LEAD", isCorrect: false },
+        { id: 2, text: "LAG", isCorrect: true },
+        { id: 3, text: "FIRST_VALUE", isCorrect: false },
+        { id: 4, text: "LAST_VALUE", isCorrect: false }
+      ],
+      rationale: "LAG는 현재 행을 기준으로 이전 행의 데이터를 가져옵니다.",
+      hint: "게임에서 렉(Lag) 걸리면 뒤처지는 것을 떠올리세요."
+    },
+    {
+      id: 12,
+      category: "윈도우 함수 상급",
+      question: "다음 SQL의 결과로 가장 적절한 것은?",
+      code: "SELECT 월, 매출, LAG(매출, 1, 0) OVER (ORDER BY 월) AS 전월매출\nFROM 월별매출표;",
+      options: [
+        { id: 1, text: "1월의 '전월매출'은 NULL로 나온다.", isCorrect: false },
+        { id: 2, text: "1월의 '전월매출'은 0으로 나온다.", isCorrect: true },
+        { id: 3, text: "이전 달 매출이 없으면 오류가 발생한다.", isCorrect: false },
+        { id: 4, text: "12월의 다음 달 매출을 가져온다.", isCorrect: false }
+      ],
+      rationale: "LAG의 세 번째 인자는 값이 없을 때(NULL일 때) 보여줄 기본값을 지정합니다.",
+      hint: "NULL 대신 0을 넣어서 계산하기 편하게 만든 쿼리입니다."
+    },
+    {
+      id: 13,
+      category: "윈도우 함수 상급",
+      question: "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING의 의미는?",
+      options: [
+        { id: 1, text: "맨 처음부터 현재 행까지", isCorrect: false },
+        { id: 2, text: "현재 행부터 맨 마지막까지", isCorrect: false },
+        { id: 3, text: "바로 앞 행, 현재 행, 바로 다음 행 (총 3줄)", isCorrect: true },
+        { id: 4, text: "전체 행", isCorrect: false }
+      ],
+      rationale: "현재 행을 기준으로 앞(PRECEDING) 1줄과 뒤(FOLLOWING) 1줄을 포함한 범위를 의미합니다.",
+      hint: "나를 중심으로 앞뒤 동료 한 명씩만 챙기는 범위입니다."
+    },
+    {
+      id: 14,
+      category: "윈도우 함수 상급",
+      question: "다음 중 누적 분포를 구하는 함수로, 나보다 순위가 높거나 같은 사람의 비율을 0~1 사이로 반환하는 함수는?",
+      options: [
+        { id: 1, text: "PERCENT_RANK", isCorrect: false },
+        { id: 2, text: "CUME_DIST", isCorrect: true },
+        { id: 3, text: "RATIO_TO_REPORT", isCorrect: false },
+        { id: 4, text: "NTILE", isCorrect: false }
+      ],
+      rationale: "CUME_DIST는 누적 분포를 계산하며, (나보다 작거나 같은 값의 수 / 전체 건수)를 반환합니다.",
+      hint: "4명 중 1등이면 1/4 = 0.25가 나옵니다."
+    },
+    {
+      id: 15,
+      category: "윈도우 함수 상급",
+      question: "윈도우 함수에서 UNBOUNDED PRECEDING의 의미는?",
+      options: [
+        { id: 1, text: "현재 행의 값", isCorrect: false },
+        { id: 2, text: "파티션의 맨 마지막 행", isCorrect: false },
+        { id: 3, text: "파티션의 맨 첫 번째 행 (끝없는 이전)", isCorrect: true },
+        { id: 4, text: "값이 NULL인 행", isCorrect: false }
+      ],
+      rationale: "윈도우 범위의 시작점을 파티션의 첫 번째 행으로 고정할 때 사용합니다.",
+      hint: "누적 합계를 구할 때 '맨 처음부터'를 의미하는 필수 키워드입니다."
+    },
+    {
+      id: 16,
+      category: "윈도우 함수 심화",
+      question: "다음 중 ROWS와 RANGE의 차이점에 대한 설명으로 옳은 것은?",
+      options: [
+        { id: 1, text: "ROWS는 값의 크기를 기준으로, RANGE는 행의 개수를 기준으로 계산한다.", isCorrect: false },
+        { id: 2, text: "ROWS는 물리적인 행의 위치를, RANGE는 논리적인 값의 크기를 기준으로 한다.", isCorrect: true },
+        { id: 3, text: "두 키워드 모두 결과가 항상 동일하다.", isCorrect: false },
+        { id: 4, text: "RANGE는 동점자가 있어도 무조건 한 행씩 누적한다.", isCorrect: false }
+      ],
+      rationale: "ROWS는 행 번호로 범위를 잡고, RANGE는 컬럼의 값을 기준으로 범위를 잡습니다.",
+      hint: "값이 같은 데이터가 여러 개 있을 때 RANGE는 한꺼번에 묶어서 처리합니다."
+    },
+    {
+      id: 17,
+      category: "윈도우 함수 심화",
+      question: "아래 데이터를 보고 SUM(금액) OVER (ORDER BY 금액 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)를 실행했을 때, 두 번째 100원 행의 결과값은? (데이터: 100원(A), 100원(B), 300원(C))",
+      options: [
+        { id: 1, text: "100", isCorrect: false },
+        { id: 2, text: "200", isCorrect: true },
+        { id: 3, text: "500", isCorrect: false },
+        { id: 4, text: "0", isCorrect: false }
+      ],
+      rationale: "RANGE는 값이 같은(100원) 행들을 하나의 논리적 그룹으로 보기 때문에 A, B행 모두 합산된 200을 출력합니다.",
+      hint: "값이 같으면 '동지'로 보고 한방에 계산하는 것이 RANGE의 특징입니다."
+    },
+    {
+      id: 18,
+      category: "윈도우 함수 심화",
+      question: "LAST_VALUE 함수를 사용할 때 ORDER BY만 적고 범위를 지정하지 않으면 현재 행의 값이 나오는 이유는 무엇인가?",
+      options: [
+        { id: 1, text: "함수가 고장 났기 때문이다.", isCorrect: false },
+        { id: 2, text: "윈도우 함수의 기본 범위(Default)가 UNBOUNDED PRECEDING AND CURRENT ROW이기 때문이다.", isCorrect: true },
+        { id: 3, text: "LAST_VALUE는 원래 현재 행까지만 읽는다.", isCorrect: false },
+        { id: 4, text: "ORDER BY를 쓰면 자동으로 ROWS 모드가 되기 때문이다.", isCorrect: false }
+      ],
+      rationale: "기본 범위가 '처음부터 현재 행'까지이므로, 현재 행이 그 윈도우 안에서는 항상 '마지막'이 됩니다.",
+      hint: "진짜 마지막을 보려면 창문을 UNBOUNDED FOLLOWING(끝까지) 열어줘야 합니다."
+    },
+    {
+      id: 19,
+      category: "윈도우 함수 심화",
+      question: "전체 합계 대비 현재 행의 값이 차지하는 비율을 구하는 함수는?",
+      options: [
+        { id: 1, text: "RATIO_TO_REPORT", isCorrect: true },
+        { id: 2, text: "PERCENT_RANK", isCorrect: false },
+        { id: 3, text: "CUME_DIST", isCorrect: false },
+        { id: 4, text: "ROW_NUMBER", isCorrect: false }
+      ],
+      rationale: "RATIO_TO_REPORT는 파티션 내 전체 합계에 대한 개별 행의 비중을 계산합니다.",
+      hint: "\"내 월급 / 우리 부서 전체 월급 합계\"를 구할 때 딱입니다."
+    },
+    {
+      id: 20,
+      category: "윈도우 함수 심화",
+      question: "SQL의 논리적 실행 순서상 윈도우 함수가 실행되는 시점은?",
+      options: [
+        { id: 1, text: "WHERE 절 실행 직후", isCorrect: false },
+        { id: 2, text: "SELECT 절에서 컬럼이 선택될 때", isCorrect: true },
+        { id: 3, text: "ORDER BY 절 실행 직후", isCorrect: false },
+        { id: 4, text: "FROM 절에서 데이터를 읽을 때", isCorrect: false }
+      ],
+      rationale: "윈도우 함수는 WHERE, GROUP BY, HAVING 절까지 모두 완료된 후 SELECT 단계에서 계산됩니다.",
+      hint: "모든 필터링과 그룹화가 끝난 '최종 명단' 위에서 계산이 시작됩니다."
+    }
+  ],
   11: [],
   12: [],
   13: [],
