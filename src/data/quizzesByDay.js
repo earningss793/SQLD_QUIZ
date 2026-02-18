@@ -1546,7 +1546,20 @@ export const quizzesByDay = {
     {
       id: 16,
       category: "Level 4: 최고난도",
-      question: "다음 쿼리의 실행 결과로 알맞은 순서는? (데이터는 3.1절 조직도 참조)",
+      question: "다음 쿼리의 실행 결과로 알맞은 순서는?",
+      tables: [
+        {
+          name: "조직도",
+          headers: ["사원번호(EMPNO)", "이름(ENAME)", "관리자번호(MGR)", "직급"],
+          rows: [
+            ["101", "김사장 (CEO)", "NULL", "사장"],
+            ["201", "이부장", "101", "부장"],
+            ["202", "박부장", "101", "부장"],
+            ["301", "최대리", "201", "대리"],
+            ["302", "정사원", "301", "사원"]
+          ]
+        }
+      ],
       code: "SELECT ENAME FROM EMP\nSTART WITH ENAME = '이부장'\nCONNECT BY PRIOR EMPNO = MGR\nORDER SIBLINGS BY ENAME;",
       options: [
         { id: 1, text: "이부장 - 박부장 - 최대리 - 정사원", isCorrect: false },

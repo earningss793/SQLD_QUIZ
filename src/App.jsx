@@ -230,7 +230,7 @@ const QuizPage = () => {
 
           {/* 다중 테이블 지원 */}
           {currentQuiz.tables && (
-            <div className="mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className={`mb-8 grid grid-cols-1 ${currentQuiz.tables.length > 1 ? 'md:grid-cols-2' : ''} gap-4`}>
               {currentQuiz.tables.map((table, tIndex) => (
                 <div key={tIndex}>
                   <div className="flex items-center gap-2 mb-3 text-slate-500 font-bold uppercase text-xs tracking-wider">
