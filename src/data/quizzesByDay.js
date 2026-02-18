@@ -14,6 +14,7 @@ export const dayInfo = {
   8: { title: "서브쿼리와 뷰" },
   9: { title: "집합 연산자와 그룹 함수" },
   10: { title: "윈도우 함수(Window Function)" },
+  11: { title: "Top N/셀프 조인/계층형 질의" },
 };
 
 export const quizzesByDay = {
@@ -1334,7 +1335,296 @@ export const quizzesByDay = {
       hint: "모든 필터링과 그룹화가 끝난 '최종 명단' 위에서 계산이 시작됩니다."
     }
   ],
-  11: [],
+  11: [
+    {
+      id: 1,
+      category: "Level 1: 기초 다지기",
+      question: "Oracle에서 급여(SAL)가 높은 상위 5명을 뽑기 위해 ROWNUM을 사용할 때, 올바른 쿼리 구조는?",
+      options: [
+        { id: 1, text: "SELECT * FROM EMP WHERE ROWNUM <= 5 ORDER BY SAL DESC;", isCorrect: false },
+        { id: 2, text: "SELECT * FROM EMP ORDER BY SAL DESC WHERE ROWNUM <= 5;", isCorrect: false },
+        { id: 3, text: "SELECT * FROM (SELECT * FROM EMP ORDER BY SAL DESC) WHERE ROWNUM <= 5;", isCorrect: true },
+        { id: 4, text: "SELECT * FROM EMP WHERE ROWNUM < 6;", isCorrect: false }
+      ],
+      rationale: "Oracle의 ROWNUM은 ORDER BY보다 먼저 실행되므로, 서브쿼리(인라인 뷰)로 정렬을 먼저 수행한 뒤 추출해야 합니다.",
+      hint: "번호표는 줄을 다 선 다음에 나눠줘야 공평하겠죠?"
+    },
+    {
+      id: 2,
+      category: "Level 1: 기초 다지기",
+      question: "SQL Server에서 TOP (5) WITH TIES를 사용했을 때 나타날 수 있는 현상은?",
+      options: [
+        { id: 1, text: "무조건 5개의 행만 출력된다.", isCorrect: false },
+        { id: 2, text: "급여가 동일한 공동 5등이 있다면 5행을 초과하여 출력될 수 있다.", isCorrect: true },
+        { id: 3, text: "5등까지만 출력하고 나머지 동점자는 버린다.", isCorrect: false },
+        { id: 4, text: "상위 5%의 데이터를 출력한다.", isCorrect: false }
+      ],
+      rationale: "WITH TIES 옵션은 마지막 순위와 동일한 값을 가진 행들을 모두 포함시켜 출력합니다.",
+      hint: "'의리 있는 5등'을 떠올려 보세요."
+    },
+    {
+      id: 3,
+      category: "Level 1: 기초 다지기",
+      question: "셀프 조인(Self Join)을 수행할 때 반드시 지켜야 하는 규칙은?",
+      options: [
+        { id: 1, text: "반드시 LEFT OUTER JOIN을 사용해야 한다.", isCorrect: false },
+        { id: 2, text: "두 테이블의 컬럼명이 완전히 달라야 한다.", isCorrect: false },
+        { id: 3, text: "동일 테이블을 사용하므로 테이블 별칭(Alias)을 다르게 지정해야 한다.", isCorrect: true },
+        { id: 4, text: "WHERE 절에 반드시 ROWNUM 조건을 넣어야 한다.", isCorrect: false }
+      ],
+      rationale: "컴ピュー터가 같은 테이블을 서로 다른 개체로 인식하게 하려면 별칭(E, M 등)이 필수입니다.",
+      hint: "도플갱어에게 서로 다른 이름표를 붙여준다고 생각하세요."
+    },
+    {
+      id: 4,
+      category: "Level 1: 기초 다지기",
+      question: "계층형 질의에서 최상위 노드(Root)부터 전개를 시작하도록 지정하는 구문은?",
+      options: [
+        { id: 1, text: "CONNECT BY", isCorrect: false },
+        { id: 2, text: "ORDER SIBLINGS BY", isCorrect: false },
+        { id: 3, text: "START WITH", isCorrect: true },
+        { id: 4, text: "PRIOR", isCorrect: false }
+      ],
+      rationale: "START WITH는 계층 구조의 시작점(뿌리)을 지정하는 조건절입니다.",
+      hint: "\"누구부터 시작할까?\"라는 질문에 대한 답입니다."
+    },
+    {
+      id: 5,
+      category: "Level 1: 기초 다지기",
+      question: "계층형 질의의 가상 컬럼 중, 현재 노드의 깊이(Root=1, 자식=2...)를 나타내는 것은?",
+      options: [
+        { id: 1, text: "LEVEL", isCorrect: true },
+        { id: 2, text: "CONNECT_BY_ISLEAF", isCorrect: false },
+        { id: 3, text: "ROWNUM", isCorrect: false },
+        { id: 4, text: "DEPTH", isCorrect: false }
+      ],
+      rationale: "LEVEL은 트리 구조에서 해당 데이터가 몇 번째 층에 있는지를 숫자로 반환합니다.",
+      hint: "아파트 층수를 세는 것과 비슷합니다."
+    },
+    {
+      id: 6,
+      category: "Level 2: 응용하기",
+      question: "다음 데이터를 기준으로 RANK() 함수를 사용하여 급여 순위를 매겼을 때, 결과값이 순서대로 옳은 것은? (데이터: 김철수(500), 이영희(400), 박민수(400), 최정윤(300))",
+      options: [
+        { id: 1, text: "1, 2, 3, 4", isCorrect: false },
+        { id: 2, text: "1, 2, 2, 3", isCorrect: false },
+        { id: 3, text: "1, 2, 2, 4", isCorrect: true },
+        { id: 4, text: "1, 1, 2, 3", isCorrect: false }
+      ],
+      rationale: "RANK()는 공동 순위만큼 숫자를 건너뜁니다. 2등이 2명이므로 3등을 건너뛰고 4등이 나옵니다.",
+      hint: "올림픽이나 수능 등수 계산법을 생각해보세요."
+    },
+    {
+      id: 7,
+      category: "Level 2: 응용하기",
+      question: "셀프 조인을 활용해 '나의 상사 이름'을 조회하려고 합니다. 빈칸에 알맞은 조인 조건은?",
+      code: "SELECT E.ENAME AS 사원, M.ENAME AS 상사\nFROM EMP E JOIN EMP M ON (  빈칸  );",
+      options: [
+        { id: 1, text: "E.EMPNO = M.EMPNO", isCorrect: false },
+        { id: 2, text: "E.MGR = M.MGR", isCorrect: false },
+        { id: 3, text: "E.MGR = M.EMPNO", isCorrect: true },
+        { id: 4, text: "E.EMPNO = M.MGR", isCorrect: false }
+      ],
+      rationale: "내 줄에 적힌 관리자 번호(E.MGR)와 일치하는 사번(M.EMPNO)을 가진 사람을 관리자 테이블(M)에서 찾아야 합니다.",
+      hint: "내 수첩에 적힌 '상사 사번'을 들고 사번 명부를 뒤지러 가야죠."
+    },
+    {
+      id: 8,
+      category: "Level 2: 응용하기",
+      question: "계층형 질의에서 CONNECT BY PRIOR 사번 = 관리자사번의 전개 방향은?",
+      options: [
+        { id: 1, text: "역방향 (부하 -> 상사)", isCorrect: false },
+        { id: 2, text: "순방향 (상사 -> 부하)", isCorrect: true },
+        { id: 3, text: "수평방향 (동료 -> 동료)", isCorrect: false },
+        { id: 4, text: "무작위방향", isCorrect: false }
+      ],
+      rationale: "PRIOR가 부모 쪽에 붙어 있으면 부모에서 자식으로 내려가는 순방향 전개입니다.",
+      hint: "PRIOR 뒤에 오는 '사번'이 먼저 읽힌 데이터(상사)입니다."
+    },
+    {
+      id: 9,
+      category: "Level 2: 응용하기",
+      question: "SYS_CONNECT_BY_PATH(ENAME, '/') 함수의 결과 예시로 적절한 것은?",
+      options: [
+        { id: 1, text: "1/2/3/4", isCorrect: false },
+        { id: 2, text: "사장/부장/대리", isCorrect: false },
+        { id: 3, text: "/김사장/이부장/최대리", isCorrect: true },
+        { id: 4, text: "최대리 > 이부장 > 김사장", isCorrect: false }
+      ],
+      rationale: "루트 노드부터 현재 노드까지의 경로를 지정한 구분자와 함께 문자열로 연결해줍니다.",
+      hint: "윈도우 탐색기 주소창의 폴더 경로와 비슷합니다."
+    },
+    {
+      id: 10,
+      category: "Level 2: 응용하기",
+      question: "다음 중 최신 표준 문법인 OFFSET FETCH를 사용하여 6등부터 10등까지의 데이터를 출력하는 구문은?",
+      options: [
+        { id: 1, text: "FETCH NEXT 5 ROWS ONLY", isCorrect: false },
+        { id: 2, text: "OFFSET 6 ROWS FETCH NEXT 5 ROWS ONLY", isCorrect: false },
+        { id: 3, text: "OFFSET 5 ROWS FETCH NEXT 5 ROWS ONLY", isCorrect: true },
+        { id: 4, text: "OFFSET 5 ROWS FETCH NEXT 10 ROWS ONLY", isCorrect: false }
+      ],
+      rationale: "6등부터 보려면 앞의 5명(OFFSET 5)을 건너뛰고, 그 후 5개(FETCH NEXT 5)를 가져와야 합니다.",
+      hint: "건너뛸 개수를 먼저 정하세요."
+    },
+    {
+      id: 11,
+      category: "Level 3: 함정 탈출",
+      question: "다음 SQL의 실행 결과로 올바른 것은?",
+      code: "SELECT ENAME FROM EMP WHERE ROWNUM = 2;",
+      options: [
+        { id: 1, text: "2번째 행의 사원명이 출력된다.", isCorrect: false },
+        { id: 2, text: "에러가 발생한다.", isCorrect: false },
+        { id: 3, text: "아무 결과도 출력되지 않는다 (0건).", isCorrect: true },
+        { id: 4, text: "전체 사원이 출력된다.", isCorrect: false }
+      ],
+      rationale: "ROWNUM은 1번이 확정되어야 2번이 생성됩니다. 조건에서 1번을 배제했으므로 2번은 영원히 나타나지 않습니다.",
+      hint: "1등 없는 2등은 존재할 수 없습니다."
+    },
+    {
+      id: 12,
+      category: "Level 3: 함정 탈출",
+      question: "아래 테이블 구조에서 '사원'에서 '사장'으로 올라가는 역방향 조회를 하려고 합니다. 올바른 CONNECT BY 조건은?",
+      tables: [
+        {
+          name: "EMP 테이블 (일부)",
+          headers: ["사번(EMPNO)", "관리자(MGR)"],
+          rows: [
+            ["100(사장)", "NULL"],
+            ["200(부장)", "100"]
+          ]
+        }
+      ],
+      options: [
+        { id: 1, text: "CONNECT BY PRIOR EMPNO = MGR", isCorrect: false },
+        { id: 2, text: "CONNECT BY PRIOR MGR = EMPNO", isCorrect: true },
+        { id: 3, text: "CONNECT BY MGR = EMPNO", isCorrect: false },
+        { id: 4, text: "CONNECT BY EMPNO = MGR", isCorrect: false }
+      ],
+      rationale: "현재 데이터(부하)의 관리자 번호(MGR)를 이전 데이터(PRIOR)의 사번으로 찾아 올라가야 합니다.",
+      hint: "PRIOR는 '방금 읽은 사람'입니다."
+    },
+    {
+      id: 13,
+      category: "Level 3: 함정 탈출",
+      question: "계층형 질의에서 형제 노드들끼리의 순서를 이름순으로 정렬하면서도 트리 구조를 깨뜨리지 않는 방법은?",
+      options: [
+        { id: 1, text: "ORDER BY ENAME", isCorrect: false },
+        { id: 2, text: "GROUP BY ENAME", isCorrect: false },
+        { id: 3, text: "ORDER SIBLINGS BY ENAME", isCorrect: true },
+        { id: 4, text: "SORT BY ENAME", isCorrect: false }
+      ],
+      rationale: "일반 ORDER BY를 쓰면 계층이 무시되고 전체가 섞여버립니다. 계층 내 정렬은 SIBLINGS가 필수입니다.",
+      hint: "'형제(Siblings)'라는 단어를 기억하세요."
+    },
+    {
+      id: 14,
+      category: "Level 3: 함정 탈출",
+      question: "셀프 조인을 수행한 결과, 상사가 없는 '사장' 데이터가 결과에서 누락되었습니다. 이를 방지하기 위한 조인 방법은?",
+      options: [
+        { id: 1, text: "INNER JOIN", isCorrect: false },
+        { id: 2, text: "FULL OUTER JOIN", isCorrect: false },
+        { id: 3, text: "LEFT OUTER JOIN", isCorrect: true },
+        { id: 4, text: "CROSS JOIN", isCorrect: false }
+      ],
+      rationale: "사원(E) 테이블에는 있지만 상사(M) 테이블에는 대응하는 데이터가 없는 경우(MGR IS NULL)에도 출력하려면 왼쪽 외부 조인이 필요합니다.",
+      hint: "상사가 없어도 '사원'으로서의 정보는 나와야 합니다."
+    },
+    {
+      id: 15,
+      category: "Level 3: 함정 탈출",
+      question: "WHERE CONNECT_BY_ISLEAF = 1 조건을 추가했을 때의 결과는?",
+      options: [
+        { id: 1, text: "사장님만 출력된다.", isCorrect: false },
+        { id: 2, text: "부장님들만 출력된다.", isCorrect: false },
+        { id: 3, text: "부하 직원이 없는 최하위 팀원들만 출력된다.", isCorrect: true },
+        { id: 4, text: "모든 데이터가 출력된다.", isCorrect: false }
+      ],
+      rationale: "ISLEAF는 자식이 없는 말단 노드일 때 1을 반환합니다.",
+      hint: "나뭇잎(Leaf)은 나무의 가장 끝부분에 달려 있죠."
+    },
+    {
+      id: 16,
+      category: "Level 4: 최고난도",
+      question: "다음 쿼리의 실행 결과로 알맞은 순서는? (데이터는 3.1절 조직도 참조)",
+      code: "SELECT ENAME FROM EMP\nSTART WITH ENAME = '이부장'\nCONNECT BY PRIOR EMPNO = MGR\nORDER SIBLINGS BY ENAME;",
+      options: [
+        { id: 1, text: "이부장 - 박부장 - 최대리 - 정사원", isCorrect: false },
+        { id: 2, text: "이부장 - 최대리 - 정사원", isCorrect: true },
+        { id: 3, text: "김사장 - 이부장 - 최대리 - 정사원", isCorrect: false },
+        { id: 4, text: "이부장 - 최대리", isCorrect: false }
+      ],
+      rationale: "시작점이 '이부장'이므로 김사장과 박부장은 제외됩니다. 이부장 아래의 계층인 최대리, 정사원만 출력됩니다.",
+      hint: "START WITH가 필터링 역할을 한다는 점에 주의하세요."
+    },
+    {
+      id: 17,
+      category: "Level 4: 최고난도",
+      question: "아래 쿼리의 결과에서 RK가 3인 사람은 몇 명인가? (SAL 데이터: A(100), B(100), C(90), D(80), E(80))",
+      code: "SELECT ENAME, DENSE_RANK() OVER (ORDER BY SAL DESC) AS RK FROM EMP;",
+      options: [
+        { id: 1, text: "0명", isCorrect: false },
+        { id: 2, text: "1명", isCorrect: false },
+        { id: 3, text: "2명", isCorrect: true },
+        { id: 4, text: "3명", isCorrect: false }
+      ],
+      rationale: "100(A, B)은 공동 1등, 그다음 점수인 90(C)은 2등, 그다음 점수인 80(D, E)은 3등이 됩니다. DENSE_RANK는 순위를 건너뛰지 않습니다.",
+      hint: "DENSE는 '빽빽하게' 순위를 채웁니다."
+    },
+    {
+      id: 18,
+      category: "Level 4: 최고난도",
+      question: "계층형 질의에서 PRIOR 키워드를 다음과 같이 사용했을 때 발생하는 현상은?",
+      code: "SELECT ... FROM EMP\nSTART WITH ENAME = '정사원'\nCONNECT BY EMPNO = PRIOR MGR;",
+      options: [
+        { id: 1, text: "정사원부터 시작하여 사장까지 거슬러 올라간다.", isCorrect: true },
+        { id: 2, text: "정사원부터 시작하여 그 아래 부하들을 조회한다.", isCorrect: false },
+        { id: 3, text: "에러가 발생한다.", isCorrect: false },
+        { id: 4, text: "정사원 한 명만 출력되고 종료된다.", isCorrect: false }
+      ],
+      rationale: "PRIOR가 부모(MGR) 쪽에 붙어 있으면 부모(MGR)를 찾아 올라가는 역방향 전개입니다.",
+      hint: "내 관리자 번호를 사번으로 가진 사람을 '직전 데이터'로 삼겠다는 뜻입니다."
+    },
+    {
+      id: 19,
+      category: "Level 4: 최고난도",
+      question: "다음 SQL 결과로 출력되는 행의 수는?",
+      tables: [
+        {
+          name: "EMP 테이블 (일부)",
+          headers: ["사번", "이름", "급여"],
+          rows: [
+            ["1", "김", "500"],
+            ["2", "이", "500"],
+            ["3", "박", "400"],
+            ["4", "최", "300"],
+          ]
+        }
+      ],
+      code: "SELECT TOP (2) WITH TIES 이름 FROM EMP ORDER BY 급여 DESC;",
+      options: [
+        { id: 1, text: "1개", isCorrect: false },
+        { id: 2, text: "2개", isCorrect: true },
+        { id: 3, text: "3개", isCorrect: false },
+        { id: 4, text: "4개", isCorrect: false }
+      ],
+      rationale: "급여가 500인 김과 이가 공동 1등입니다. 2개를 뽑으라고 했으므로 1등 두 명이 출력되고 끝납니다. (만약 박도 500이었다면 3개가 나왔을 것입니다.)",
+      hint: "'마지막 순위'의 동점자가 있는지를 확인하세요."
+    },
+    {
+      id: 20,
+      category: "Level 4: 최고난도",
+      question: "계층형 쿼리와 셀프 조인에 대한 설명 중 틀린 것은?",
+      options: [
+        { id: 1, text: "계층형 쿼리는 한 번의 작성으로 무제한 깊이의 트리를 탐색할 수 있다.", isCorrect: false },
+        { id: 2, text: "셀프 조인은 계층의 깊이가 깊어질수록 JOIN 문을 계속 추가해야 하므로 불리하다.", isCorrect: false },
+        { id: 3, text: "CONNECT BY 절에서 PRIOR는 반드시 컬럼명 왼쪽에만 올 수 있다.", isCorrect: true },
+        { id: 4, text: "셀프 조인은 서로 다른 별칭을 사용해 논리적으로 두 개의 테이블로 분리한다.", isCorrect: false }
+      ],
+      rationale: "PRIOR는 '=' 연산자의 어느 쪽에 와도 상관없습니다. 어느 컬럼에 붙느냐가 중요할 뿐입니다. (예: MGR = PRIOR EMPNO 가능)",
+      hint: "문법적 위치보다는 '누구의 데이터인가'라는 논리가 중요합니다."
+    }
+  ],
   12: [],
   13: [],
   14: [],
