@@ -15,6 +15,7 @@ export const dayInfo = {
   9: { title: "집합 연산자와 그룹 함수" },
   10: { title: "윈도우 함수(Window Function)" },
   11: { title: "Top N/셀프 조인/계층형 질의" },
+  12: { title: "PIVOT & 정규표현식" },
 };
 
 export const quizzesByDay = {
@@ -1638,7 +1639,296 @@ export const quizzesByDay = {
       hint: "문법적 위치보다는 '누구의 데이터인가'라는 논리가 중요합니다."
     }
   ],
-  12: [],
+  12: [
+    {
+      id: 1,
+      category: "PIVOT & UNPIVOT",
+      question: "다음 중 데이터의 행(Row)을 열(Column)로 변환하여 집계 보고서(Wide Data)를 만들 때 사용하는 SQL 구문은 무엇인가?",
+      options: [
+        { id: 1, text: "UNPIVOT", isCorrect: false },
+        { id: 2, text: "PIVOT", isCorrect: true },
+        { id: 3, text: "GROUP BY", isCorrect: false },
+        { id: 4, text: "CROSS JOIN", isCorrect: false }
+      ],
+      rationale: "행 단위로 길게 나열된 데이터(Long Data)를 열 단위로 회전시켜 가로로 넓은(Wide Data) 요약 보고서를 만드는 기능은 PIVOT입니다.",
+      hint: "엑셀의 '피벗 테이블'을 떠올려보세요! 가로로 펼쳐줍니다."
+    },
+    {
+      id: 2,
+      category: "PIVOT & UNPIVOT",
+      question: "PIVOT 절을 구성할 때 반드시 포함되어야 하는 요소는 무엇인가?",
+      options: [
+        { id: 1, text: "WHERE 조건절", isCorrect: false },
+        { id: 2, text: "ORDER BY 절", isCorrect: false },
+        { id: 3, text: "집계 함수(SUM, MAX 등)", isCorrect: true },
+        { id: 4, text: "HAVING 절", isCorrect: false }
+      ],
+      rationale: "PIVOT은 데이터를 열로 펼치면서 교차하는 지점의 값을 요약해야 하므로 집계 함수(SUM, COUNT, MAX 등)가 필수적으로 요구됩니다.",
+      hint: "가로세로가 만나는 칸에 '무슨 값'을 넣을지 컴퓨터에게 알려줘야 합니다."
+    },
+    {
+      id: 3,
+      category: "PIVOT & UNPIVOT",
+      question: "다음 [원본 테이블]을 보고 아래 PIVOT 쿼리를 실행했을 때의 결과를 유추하시오.",
+      tables: [
+        {
+          name: "원본 테이블: 실적",
+          headers: ["부서", "월", "매출"],
+          rows: [
+            ["영업1팀", "1월", "100"],
+            ["영업1팀", "2월", "150"],
+            ["영업2팀", "1월", "200"],
+          ]
+        }
+      ],
+      code: "SELECT *\nFROM 실적\nPIVOT (\n    SUM(매출) \n    FOR 월 IN ('1월' AS \"1월매출\", '2월' AS \"2월매출\")\n);",
+      options: [
+        { id: 1, text: "행은 '영업1팀', '영업2팀' 2줄로 나오고, 열은 '1월매출', '2월매출'이 된다.", isCorrect: true },
+        { id: 2, text: "행은 3줄 그대로 유지되고, 열만 추가된다.", isCorrect: false },
+        { id: 3, text: "에러가 발생한다.", isCorrect: false },
+        { id: 4, text: "열이 '영업1팀', '영업2팀'으로 변경된다.", isCorrect: false }
+      ],
+      rationale: "`FOR 월 IN (...)` 구문에 의해 '월' 데이터가 열(Column)로 변환되며, 부서별로 그룹화되어 영업1팀과 영업2팀 총 2개의 행으로 요약됩니다.",
+      hint: "PIVOT의 결과는 기준이 되는 컬럼(부서)당 1줄씩 나옵니다."
+    },
+    {
+      id: 4,
+      category: "PIVOT & UNPIVOT",
+      question: "위 3번 문제의 쿼리 결과에서, '영업2팀'의 '2월매출' 칸에 들어갈 값은 무엇인가?",
+      options: [
+        { id: 1, text: "0", isCorrect: false },
+        { id: 2, text: "NULL", isCorrect: true },
+        { id: 3, text: "200", isCorrect: false },
+        { id: 4, text: "에러", isCorrect: false }
+      ],
+      rationale: "원본 데이터에 영업2팀의 2월 매출 데이터가 존재하지 않으므로, PIVOT 후 해당 교차 지점의 값은 빈 공간인 NULL로 채워집니다.",
+      hint: "없는 데이터는 0이 아니라 '비어있음'으로 처리됩니다."
+    },
+    {
+      id: 5,
+      category: "PIVOT & UNPIVOT",
+      question: "다음 중 UNPIVOT에 대한 설명으로 올바른 것은?",
+      options: [
+        { id: 1, text: "여러 행에 퍼져있는 데이터를 하나의 행으로 합친다.", isCorrect: false },
+        { id: 2, text: "열(Column)로 넓게 퍼져있는 데이터를 행(Row)으로 길게 내린다.", isCorrect: true },
+        { id: 3, text: "집계 함수를 반드시 사용해야 한다.", isCorrect: false },
+        { id: 4, text: "데이터를 암호화하는 기능이다.", isCorrect: false }
+      ],
+      rationale: "UNPIVOT은 PIVOT의 반대로, 열(Column) 단위로 나열된 데이터를 행(Row) 단위로 회전시켜 정규화(Long Data)하는 데 사용합니다.",
+      hint: "넓은(Wide) 데이터를 길게(Long) 풀어헤칩니다."
+    },
+    {
+      id: 6,
+      category: "PIVOT & UNPIVOT",
+      question: "다음 [피벗 테이블]을 보고 쿼리를 실행한 후의 결과 행(Row)의 개수는 총 몇 개인가?",
+      tables: [
+        {
+          name: "피벗 테이블: 성적",
+          headers: ["이름", "KOREAN", "ENGLISH"],
+          rows: [
+            ["김철수", "90", "80"],
+            ["이영희", "100", "95"],
+          ]
+        }
+      ],
+      code: "SELECT 이름, 과목, 점수\nFROM 성적\nUNPIVOT (\n    점수 FOR 과목 IN (KOREAN, ENGLISH)\n);",
+      options: [
+        { id: 1, text: "2개", isCorrect: false },
+        { id: 2, text: "3개", isCorrect: false },
+        { id: 3, text: "4개", isCorrect: true },
+        { id: 4, text: "6개", isCorrect: false }
+      ],
+      rationale: "학생 1명당 국어, 영어 2개의 열이 행으로 분리됩니다. 김철수 2행, 이영희 2행이 생성되어 총 4행이 됩니다.",
+      hint: "2명 * 2과목 = ?"
+    },
+    {
+      id: 7,
+      category: "PIVOT & UNPIVOT",
+      question: "아래 PIVOT 쿼리의 빈칸 ( A )에 들어갈 예약어로 알맞은 것은?",
+      code: "SELECT * FROM SALES\nPIVOT ( SUM(AMOUNT) (   A   ) QUARTER IN ('Q1', 'Q2') );",
+      options: [
+        { id: 1, text: "WHERE", isCorrect: false },
+        { id: 2, text: "ON", isCorrect: false },
+        { id: 3, text: "FOR", isCorrect: true },
+        { id: 4, text: "SELECT", isCorrect: false }
+      ],
+      rationale: "열로 변환할 기준 컬럼을 지정할 때는 `FOR 컬럼명 IN (값 리스트)` 문법을 사용합니다.",
+      hint: "\"~를 위해(대신에)\" 열을 만든다는 느낌으로 접근하세요."
+    },
+    {
+      id: 8,
+      category: "PIVOT & UNPIVOT",
+      question: "PIVOT을 수행할 때 `IN` 절 내부에 명시되지 않은 데이터는 어떻게 처리되는가?",
+      options: [
+        { id: 1, text: "별도의 열(기타)로 자동으로 묶여서 출력된다.", isCorrect: false },
+        { id: 2, text: "쿼리 실행 시 에러가 발생한다.", isCorrect: false },
+        { id: 3, text: "결과 테이블의 열로 변환되지 않고 결과에서 제외된다.", isCorrect: true },
+        { id: 4, text: "모두 행 데이터로 강제 변환된다.", isCorrect: false }
+      ],
+      rationale: "`IN` 절 안에 명시한 값들만 새로운 열(Column)로 만들어지며, 명시되지 않은 값들은 피벗 결과에서 아예 제외됩니다.",
+      hint: "명령한 열만 예쁘게 만들어줍니다."
+    },
+    {
+      id: 9,
+      category: "PIVOT & UNPIVOT",
+      question: "UNPIVOT 쿼리를 작성할 때 주의사항으로 틀린 것은?",
+      options: [
+        { id: 1, text: "UNPIVOT 안에 들어가는 열(Column)들의 데이터 타입이 동일해야 한다.", isCorrect: false },
+        { id: 2, text: "`IN` 절 안에 행으로 바꿀 기존 열의 이름들을 적어준다.", isCorrect: false },
+        { id: 3, text: "UNPIVOT은 데이터를 집계(SUM 등)하는 과정을 필수로 포함한다.", isCorrect: true },
+        { id: 4, text: "피벗된 데이터를 다시 정규화할 때 유용하다.", isCorrect: false }
+      ],
+      rationale: "PIVOT은 집계 함수가 필수지만, UNPIVOT은 단순히 열을 행으로 내리는 작업이므로 집계 함수를 사용하지 않습니다.",
+      hint: "UNPIVOT은 펼쳐진 걸 다시 정리만 할 뿐, 계산하지 않아요."
+    },
+    {
+      id: 10,
+      category: "정규표현식",
+      question: "정규표현식에서 문자열의 '시작'을 의미하는 메타 문자는?",
+      options: [
+        { id: 1, text: "$", isCorrect: false },
+        { id: 2, text: "^", isCorrect: true },
+        { id: 3, text: "*", isCorrect: false },
+        { id: 4, text: "?", isCorrect: false }
+      ],
+      rationale: "`^`는 문자열의 시작을 나타냅니다. 예를 들어 `^A`는 A로 시작하는 문자열을 의미합니다.",
+      hint: "꺽쇠가 맨 앞에 있으면 \"여기서부터 시작!\"입니다."
+    },
+    {
+      id: 11,
+      category: "정규표현식",
+      question: "다음 중 임의의 한 문자(개행 제외)를 의미하는 정규식 메타 문자는?",
+      options: [
+        { id: 1, text: ". (마침표)", isCorrect: true },
+        { id: 2, text: "+ (더하기)", isCorrect: false },
+        { id: 3, text: "* (별표)", isCorrect: false },
+        { id: 4, text: "\\d", isCorrect: false }
+      ],
+      rationale: "`.`은 어떤 문자든 딱 1글자를 대신합니다. `a.b`는 a와 b 사이에 임의의 한 글자가 있는 문자열(acb, a1b 등)과 매칭됩니다.",
+      hint: "빈칸 하나를 채우는 마법의 점!"
+    },
+    {
+      id: 12,
+      category: "정규표현식",
+      question: "정규식 패턴에서 `*`와 `+`의 차이점을 올바르게 설명한 것은?",
+      options: [
+        { id: 1, text: "`*`는 0개 이상, `+`는 1개 이상을 의미한다.", isCorrect: true },
+        { id: 2, text: "`*`는 1개 이상, `+`는 0개 이상을 의미한다.", isCorrect: false },
+        { id: 3, text: "`*`는 숫자를, `+`는 문자를 의미한다.", isCorrect: false },
+        { id: 4, text: "차이가 없으며 서로 완벽히 대체 가능하다.", isCorrect: false }
+      ],
+      rationale: "`*`는 앞에 있는 문자가 아예 없어도(0개) 허용하지만, `+`는 최소한 1개는 있어야 매칭됩니다.",
+      hint: "`+`는 플러스니까 무조건 하나는 더해져 있어야 한다고 외워보세요!"
+    },
+    {
+      id: 13,
+      category: "정규표현식",
+      question: "정규표현식 `[^0-9]`가 의미하는 것은 무엇인가?",
+      options: [
+        { id: 1, text: "0부터 9까지의 숫자로 시작하는 문자열", isCorrect: false },
+        { id: 2, text: "0부터 9까지의 숫자 중 하나", isCorrect: false },
+        { id: 3, text: "0부터 9까지의 숫자가 '아닌' 임의의 한 문자", isCorrect: true },
+        { id: 4, text: "0과 9로 끝나는 문자열", isCorrect: false }
+      ],
+      rationale: "대괄호 `[ ]` 안의 맨 앞에 있는 `^`는 NOT(제외)의 의미를 가집니다. 따라서 숫자가 아닌 문자를 찾습니다.",
+      hint: "괄호 밖의 `^`는 시작, 괄호 안의 `[^ ]`는 부정(NOT)입니다. (시험 단골 함정!)"
+    },
+    {
+      id: 14,
+      category: "정규표현식",
+      question: "다음 쿼리의 실행 결과로 출력될 데이터는 무엇인가?",
+      code: "SELECT REGEXP_SUBSTR('가나다라1234마바사', '\\d+') AS RESULT\nFROM DUAL;",
+      options: [
+        { id: 1, text: "가나다라", isCorrect: false },
+        { id: 2, text: "1234", isCorrect: true },
+        { id: 3, text: "마바사", isCorrect: false },
+        { id: 4, text: "1", isCorrect: false }
+      ],
+      rationale: "`\\d`는 숫자를 의미하며, `+`는 1개 이상 연속됨을 의미합니다. `REGEXP_SUBSTR`은 매칭되는 첫 번째 덩어리를 추출하므로 연속된 숫자 '1234'가 추출됩니다.",
+      hint: "숫자(\\d) 덩어리(+)를 쏙(SUBSTR) 뽑아냅니다."
+    },
+    {
+      id: 15,
+      category: "정규표현식",
+      question: "아래 쿼리의 목적으로 가장 알맞은 것은?",
+      code: "SELECT ENAME FROM EMP \nWHERE REGEXP_LIKE(ENAME, 'A$');",
+      options: [
+        { id: 1, text: "이름이 'A'로 시작하는 사원 검색", isCorrect: false },
+        { id: 2, text: "이름에 'A'가 포함된 사원 검색", isCorrect: false },
+        { id: 3, text: "이름이 'A'로 끝나는 사원 검색", isCorrect: true },
+        { id: 4, text: "이름이 딱 한 글자 'A'인 사원 검색", isCorrect: false }
+      ],
+      rationale: "`$` 메타 문자는 문자열의 '끝'을 의미합니다. 따라서 `A$`는 맨 마지막 글자가 A인 데이터를 찾습니다.",
+      hint: "달러 기호($)는 항상 끝에 붙죠!"
+    },
+    {
+      id: 16,
+      category: "정규표현식",
+      question: "다음 중 정규표현식 메타 문자 자체(예: 마침표 `.`)를 일반 문자로 취급하여 검색하고 싶을 때 사용하는 방법은?",
+      options: [
+        { id: 1, text: "대문자로 작성한다.", isCorrect: false },
+        { id: 2, text: "앞에 역슬래시(`\\`)를 붙인다.", isCorrect: true },
+        { id: 3, text: "따옴표로 감싼다.", isCorrect: false },
+        { id: 4, text: "괄호로 감싼다.", isCorrect: false }
+      ],
+      rationale: "메타 문자의 특별한 기능을 없애고 단순 문자로 인식하게 하려면 이스케이프 문자인 `\\`를 앞에 붙여야 합니다. (예: `\\.`)",
+      hint: "마법의 힘을 빼앗는 빗자루()입니다."
+    },
+    {
+      id: 17,
+      category: "정규표현식",
+      question: "아래 쿼리에서 마스킹 처리를 위해 사용한 정규식 함수의 원리로 옳은 것은?",
+      code: "SELECT REGEXP_REPLACE('010-1234-5678', '([0-9]{3})-([0-9]{4})-([0-9]{4})', '\\1-****-\\3') \nFROM DUAL;",
+      options: [
+        { id: 1, text: "`\\1`과 `\\3`은 원본 문자열의 첫 번째 글자와 세 번째 글자를 의미한다.", isCorrect: false },
+        { id: 2, text: "괄호 `( )`로 묶은 그룹 중 첫 번째 그룹과 세 번째 그룹의 값을 그대로 가져온다는 의미이다.", isCorrect: true },
+        { id: 3, text: "`\\1`은 하이픈을 추가하는 명령이다.", isCorrect: false },
+        { id: 4, text: "숫자를 문자로 강제 형변환하는 명령이다.", isCorrect: false }
+      ],
+      rationale: "괄호 `( )`는 그룹핑을 의미하며, `\\1`, `\\2`, `\\3`은 각각 패턴에서 괄호로 묶인 첫 번째, 두 번째, 세 번째 데이터 덩어리를 기억했다가 그대로 호출하는 역할(역참조)을 합니다.",
+      hint: "첫 번째 괄호 = `\\1`, 세 번째 괄호 = `\\3`"
+    },
+    {
+      id: 18,
+      category: "정규표현식",
+      question: "다음 정규표현식 `a?b`가 매칭할 수 없는 문자열은?",
+      options: [
+        { id: 1, text: "b", isCorrect: false },
+        { id: 2, text: "ab", isCorrect: false },
+        { id: 3, text: "aab", isCorrect: true },
+        { id: 4, text: "매칭 불가능한 문자열은 없다.", isCorrect: false }
+      ],
+      rationale: "`?`는 선행 문자(a)가 0번 또는 1번만 등장해야 함을 의미합니다. 따라서 b(0번), ab(1번)는 가능하지만, a가 2번 연속된 aab는 패턴에 맞지 않습니다.",
+      hint: "물음표(?)는 \"있거나 없거나(0 or 1)\" 입니다. 여러 개는 안 돼요!"
+    },
+    {
+      id: 19,
+      category: "정규표현식",
+      question: "`REGEXP_INSTR` 함수의 주요 역할은 무엇인가?",
+      options: [
+        { id: 1, text: "일치하는 패턴의 문자열을 치환한다.", isCorrect: false },
+        { id: 2, text: "일치하는 패턴의 문자열을 추출한다.", isCorrect: false },
+        { id: 3, text: "패턴이 일치하는지 여부를 TRUE/FALSE로 반환한다.", isCorrect: false },
+        { id: 4, text: "패턴과 일치하는 부분의 '시작 위치(인덱스 번호)'를 숫자로 반환한다.", isCorrect: true }
+      ],
+      rationale: "`INSTR` 함수 자체가 문자열 내에서 특정 문자의 위치를 찾는 함수입니다. `REGEXP_INSTR`은 이를 정규식 패턴으로 확장하여, 패턴이 시작되는 위치를 반환합니다.",
+      hint: "Index of String! 숫자가 나옵니다."
+    },
+    {
+      id: 20,
+      category: "정규표현식",
+      question: "다음 조건을 만족하는 이메일 패턴을 찾고자 할 때, 가장 적절한 정규표현식은?",
+      code: "[조건] 영문자나 숫자로 1글자 이상 시작하고, 바로 뒤에 '@' 기호가 오며, 그 뒤에 영문자나 숫자가 1글자 이상 와야 함.",
+      options: [
+        { id: 1, text: "^[a-zA-Z0-9]+@[a-zA-Z0-9]+", isCorrect: true },
+        { id: 2, text: "^[a-zA-Z0-9]*@[a-zA-Z0-9]*", isCorrect: false },
+        { id: 3, text: "^[a-zA-Z0-9]?@[a-zA-Z0-9]?", isCorrect: false },
+        { id: 4, text: "^[a-zA-Z0-9]@[a-zA-Z0-9]", isCorrect: false }
+      ],
+      rationale: "'1글자 이상'이 필수이므로 `+` 기호를 사용해야 합니다. `*`는 0글자도 허용하고, `?`는 0 또는 1글자만, 기호가 없으면 딱 1글자만 의미합니다.",
+      hint: "\"최소 1개 이상\"은 무조건 플러스(+)입니다!"
+    },
+  ],
   13: [],
   14: [],
   15: [],
