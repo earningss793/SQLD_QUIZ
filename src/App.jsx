@@ -11,9 +11,14 @@ const QuizPage = () => {
 
   // "day2" -> "2", "2" -> "2"
   const parsedDayNum = dayNum ? dayNum.replace(/^day/, '') : null;
-  const day = parsedDayNum == null
-    ? 1
-    : Math.max(DAY_MIN, Math.min(DAY_MAX, parseInt(parsedDayNum, 10) || 1));
+  let day = 1;
+  if (parsedDayNum != null) {
+    if (quizzesByDay[parsedDayNum]) {
+      day = parsedDayNum; // 142처럼 명시적으로 등록된 키가 있으면 그대로 사용
+    } else {
+      day = Math.max(DAY_MIN, Math.min(DAY_MAX, parseInt(parsedDayNum, 10) || 1));
+    }
+  }
   const quizList = quizzesByDay[day] ?? [];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -28,7 +33,8 @@ const QuizPage = () => {
     resetQuiz();
   }, [day]);
 
-  if (dayNum != null && (day < DAY_MIN || day > DAY_MAX)) {
+  // 정의된 퀴즈가 없고, 유효한 DAY 범위를 벗어나면 /day1로 리다이렉트
+  if (dayNum != null && !quizzesByDay[day] && (day < DAY_MIN || day > DAY_MAX)) {
     return <Navigate to="/day1" replace />;
   }
 
