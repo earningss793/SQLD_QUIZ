@@ -17,6 +17,8 @@ export const dayInfo = {
   11: { title: "Top N/셀프 조인/계층형 질의" },
   12: { title: "PIVOT & 정규표현식" },
   13: { title: "SQL 관리 구문 실전 퀴즈 20선" },
+  14: { title: "SQLD DAY 8~13 실전 대비 40문항 퀴즈" },
+  142: { title: "SQLD 합격 대비 실전 모의고사 (50문항)" },
 };
 
 export const quizzesByDay = {
@@ -2208,5 +2210,1185 @@ export const quizzesByDay = {
       hint: "3.1 DDL 명령어 종류 중 데이터 타입 변경 부분을 확인하세요."
     }
   ],
-
+  14: [
+    {
+      id: 1,
+      category: "[DAY 8] \uc11c\ube0c\ucffc\ub9ac & \ubdf0 (Subquery & View)",
+      question: "\ub2e4\uc74c \uc911 \uc11c\ube0c\ucffc\ub9ac\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \uac00\uc7a5 \ubd80\uc801\uc808\ud55c \uac83\uc740?",
+      options: [
+        { id: 1, text: "\uc11c\ube0c\ucffc\ub9ac\ub294 \uba54\uc778\ucffc\ub9ac\uc758 \uceec\ub7fc\uc744 \uc0ac\uc6a9\ud560 \uc218 \uc788\ub2e4.", isCorrect: false },
+        { id: 2, text: "\uc11c\ube0c\ucffc\ub9ac\ub294 \ud56d\uc0c1 \uad04\ud638 `()`\ub85c \uac10\uc2f8\uc57c \ud55c\ub2e4.", isCorrect: false },
+        { id: 3, text: "\uc11c\ube0c\ucffc\ub9ac \ub0b4\uc5d0\uc11c\ub294 \uc6d0\uce59\uc801\uc73c\ub85c `ORDER BY` \uc808\uc744 \uc0ac\uc6a9\ud560 \uc218 \uc5c6\ub2e4.", isCorrect: false },
+        { id: 4, text: "\uba54\uc778\ucffc\ub9ac\ub294 \uc11c\ube0c\ucffc\ub9ac\uc758 \uceec\ub7fc\uc744 \uc790\uc720\ub86d\uac8c \uc0ac\uc6a9\ud560 \uc218 \uc788\ub2e4.", isCorrect: true }
+      ],
+      rationale: "\uc11c\ube0c\ucffc\ub9ac\ub294 \uba54\uc778\ucffc\ub9ac\uc758 \uceec\ub7fc\uc744 \uc4f8 \uc218 \uc788\uc9c0\ub9cc(\uc0c1\uc18d), \uba54\uc778\ucffc\ub9ac\ub294 \uc11c\ube0c\ucffc\ub9ac\uc758 \uceec\ub7fc\uc744 \uc9c1\uc811 \uc0ac\uc6a9\ud560 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.",
+      hint: "\ub9c8\ud2b8\ub8cc\uc2dc\uce74 \uc778\ud615\ucc98\ub7fc '\uc548'\uc5d0 \uc788\ub294 \uc778\ud615\uc740 '\ubc16'\uc744 \ubcfc \uc218 \uc788\uc9c0\ub9cc, '\ubc16'\uc5d0\uc11c\ub294 '\uc548'\uc758 \uc138\ubd80 \uceec\ub7fc\uc774 \uc548 \ubcf4\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 2,
+      category: "[DAY 8] \uc11c\ube0c\ucffc\ub9ac & \ubdf0 (Subquery & View)",
+      question: "\ub2e4\uc74c SQL\uc758 \uc2e4\ud589 \uacb0\uacfc\ub85c \ucd9c\ub825\ub418\ub294 \ud589\uc758 \uc218\ub294?",
+      code: "SELECT * FROM EMP\nWHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT WHERE LOC IN ('NEW YORK', NULL));",
+      options: [
+        { id: 1, text: "0\uac74", isCorrect: true },
+        { id: 2, text: "DEPTNO\uac00 10\uc774 \uc544\ub2cc \ubaa8\ub4e0 \ud589", isCorrect: false },
+        { id: 3, text: "NULL\uc744 \uc81c\uc678\ud55c \ubaa8\ub4e0 \ud589", isCorrect: false },
+        { id: 4, text: "\uc5d0\ub7ec \ubc1c\uc0dd", isCorrect: false }
+      ],
+      rationale: "`NOT IN` \uc5f0\uc0b0\uc790 \ub4a4 \uc11c\ube0c\ucffc\ub9ac \uacb0\uacfc\uc5d0 `NULL`\uc774 \ud3ec\ud568\ub418\uba74 \uc804\uccb4 \uba54\uc778\ucffc\ub9ac \uacb0\uacfc\ub294 \ubb34\uc870\uac74 0\uac74(Empty set)\uc785\ub2c8\ub2e4.",
+      hint: "[DAY 8]\uc758 'NOT IN + NULL' \ud568\uc815\uc744 \uae30\uc5b5\ud558\uc138\uc694!"
+    },
+    {
+      id: 3,
+      category: "[DAY 8] \uc11c\ube0c\ucffc\ub9ac & \ubdf0 (Subquery & View)",
+      question: "\ub2e4\uc74c \uc911 \uc2a4\uce7c\ub77c \uc11c\ube0c\ucffc\ub9ac(Scalar Subquery)\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \uc62c\ubc14\ub978 \uac83\uc740?",
+      options: [
+        { id: 1, text: "FROM \uc808\uc5d0 \uc0ac\uc6a9\ub418\ub294 \uc11c\ube0c\ucffc\ub9ac\uc774\ub2e4.", isCorrect: false },
+        { id: 2, text: "\ubc18\ub4dc\uc2dc 1\ud589 1\uc5f4\uc758 \ub2e8\uc77c \uac12\uc744 \ubc18\ud658\ud574\uc57c \ud55c\ub2e4.", isCorrect: true },
+        { id: 3, text: "\uacb0\uacfc\uac00 2\uac74 \uc774\uc0c1\uc774\uc5b4\ub3c4 \uc790\ub3d9\uc73c\ub85c \uccab \ubc88\uc9f8 \ud589\ub9cc \ubc18\ud658\ud55c\ub2e4.", isCorrect: false },
+        { id: 4, text: "\uc8fc\ub85c \ub370\uc774\ud130\uc758 \uc0ad\uc81c \uc131\ub2a5\uc744 \ub192\uc774\uae30 \uc704\ud574 \uc0ac\uc6a9\ud55c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "\uc2a4\uce7c\ub77c \uc11c\ube0c\ucffc\ub9ac\ub294 SELECT \uc808\uc5d0\uc11c \ub9c8\uce58 \ud558\ub098\uc758 '\uac12(Scalar)'\ucc98\ub7fc \uc0ac\uc6a9\ub418\ubbc0\ub85c \ubc18\ub4dc\uc2dc 1\ud589 1\uc5f4\ub9cc \ubc18\ud658\ud574\uc57c \ud569\ub2c8\ub2e4.",
+      hint: "1x1\uc758 \ub2e8\uc77c \uac12\uc744 \uae30\uc5b5\ud558\uc138\uc694."
+    },
+    {
+      id: 4,
+      category: "[DAY 8] \uc11c\ube0c\ucffc\ub9ac & \ubdf0 (Subquery & View)",
+      question: "\ubdf0(View)\uc758 \ud2b9\uc9d5 \uc911 '\ub3c5\ub9bd\uc131'\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "\ubdf0 \uc790\uccb4\uc5d0 \uc778\ub371\uc2a4\ub97c \uc0dd\uc131\ud558\uc5ec \uc870\ud68c \uc131\ub2a5\uc744 \ub3c5\ub9bd\uc801\uc73c\ub85c \ub192\uc77c \uc218 \uc788\ub2e4.", isCorrect: false },
+        { id: 2, text: "\ud14c\uc774\ube14 \uad6c\uc870\uac00 \ubcc0\uacbd\ub418\uc5b4\ub3c4 \ubdf0\ub97c \uc0ac\uc6a9\ud558\ub294 \uc5b4\ud50c\ub9ac\ucf00\uc774\uc158\uc740 \uc218\uc815\ud560 \ud544\uc694\uac00 \uc5c6\ub2e4.", isCorrect: true },
+        { id: 3, text: "\ubdf0\ub294 \ubb3c\ub9ac\uc801\uc778 \uc800\uc7a5 \uacf5\uac04\uc744 \ub3c5\ub9bd\uc801\uc73c\ub85c \ucc28\uc9c0\ud558\uc5ec \ub370\uc774\ud130\ub97c \ubcf4\uc874\ud55c\ub2e4.", isCorrect: false },
+        { id: 4, text: "\uc5ec\ub7ec \ud14c\uc774\ube14\uc744 \uc870\uc778\ud55c \ubdf0\ub294 \ud56d\uc0c1 DML \uc791\uc5c5\uc774 \ub3c5\ub9bd\uc801\uc73c\ub85c \uac00\ub2a5\ud558\ub2e4.", isCorrect: false }
+      ],
+      rationale: "\ub17c\ub9ac\uc801 \ub370\uc774\ud130 \ub3c5\ub9bd\uc131\uc740 \uc6d0\ubcf8 \ud14c\uc774\ube14\uc758 \uad6c\uc870 \ubcc0\ud654\ub97c \ubdf0\uc758 \uc815\uc758 \uc218\uc815\uc744 \ud1b5\ud574 \ud761\uc218\ud568\uc73c\ub85c\uc368 \uc0ac\uc6a9\uc790\uc5d0\uac8c \uc601\ud5a5\uc774 \uac00\uc9c0 \uc54a\uac8c \ud558\ub294 \uac83\uc785\ub2c8\ub2e4.",
+      hint: "'\ub3c5\u00b7\ud3b8\u00b7\ubcf4' \uc911 \uccab \ubc88\uc9f8 \ud2b9\uc9d5\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 5,
+      category: "[DAY 8] \uc11c\ube0c\ucffc\ub9ac & \ubdf0 (Subquery & View)",
+      question: "\ub2e4\uc74c \uc911 \ubdf0(View)\ub97c \uc0ad\uc81c\ud560 \ub54c \ubc1c\uc0dd\ud558\ub294 \ud604\uc0c1\uc73c\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "\uc6d0\ubcf8 \ud14c\uc774\ube14\uc758 \ub370\uc774\ud130\ub3c4 \ud568\uaed8 \uc0ad\uc81c\ub41c\ub2e4.", isCorrect: false },
+        { id: 2, text: "\ubdf0\ub97c \ucc38\uc870\ud558\uace0 \uc788\ub294 \ub2e4\ub978 \ubdf0\ub294 \uc790\ub3d9\uc73c\ub85c \uc5c5\ub370\uc774\ud2b8\ub41c\ub2e4.", isCorrect: false },
+        { id: 3, text: "\uc6d0\ubcf8 \ud14c\uc774\ube14\uc5d0\ub294 \uc601\ud5a5\uc744 \uc8fc\uc9c0 \uc54a\uace0 \ubdf0\uc758 \uc815\uc758\ub9cc \uc0ad\uc81c\ub41c\ub2e4.", isCorrect: true },
+        { id: 4, text: "\ubdf0\ub97c \uc0ad\uc81c\ud558\ub824\uba74 \ubc18\ub4dc\uc2dc `ALTER VIEW` \uba85\ub839\uc5b4\ub97c \uc368\uc57c \ud55c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "\ubdf0\ub294 \uc2e4\uccb4\uac00 \uc5c6\ub294 \uac00\uc0c1 \ud14c\uc774\ube14\uc774\ubbc0\ub85c \uc0ad\uc81c(`DROP VIEW`) \uc2dc \ud14d\uc2a4\ud2b8 \uc815\uc758\ub9cc \uc0ac\ub77c\uc9c0\uace0 \uc6d0\ubcf8 \ub370\uc774\ud130\ub294 \ubb34\uc0ac\ud569\ub2c8\ub2e4.",
+      hint: "\uc2e4\uccb4(\ub370\uc774\ud130)\ub294 \ud14c\uc774\ube14\uc5d0, \uaecd\ub370\uae30(\uc815\uc758)\ub294 \ubdf0\uc5d0 \uc788\uc2b5\ub2c8\ub2e4."
+    },
+    {
+      id: 6,
+      category: "[DAY 9] \uc9d1\ud569 \uc5f0\uc0b0\uc790 & \uadf8\ub8f9 \ud568\uc218 (Set & Group)",
+      question: "\ub2e4\uc74c \uc911 `UNION`\uacfc `UNION ALL`\uc758 \ucc28\uc774\uc810\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \ubd80\uc801\uc808\ud55c \uac83\uc740?",
+      options: [
+        { id: 1, text: "`UNION`\uc740 \uacb0\uacfc\uc5d0\uc11c \uc911\ubcf5\ub41c \ud589\uc744 \uc81c\uac70\ud55c\ub2e4.", isCorrect: false },
+        { id: 2, text: "`UNION ALL`\uc740 \uc911\ubcf5\ub41c \ud589\uc744 \ud3ec\ud568\ud558\uc5ec \ubaa8\ub4e0 \uacb0\uacfc\ub97c \ubcf4\uc5ec\uc900\ub2e4.", isCorrect: false },
+        { id: 3, text: "`UNION`\uc740 \uc911\ubcf5 \uc81c\uac70\ub97c \uc704\ud574 \ub0b4\ubd80\uc801\uc73c\ub85c \uc815\ub82c\uc744 \uc218\ud589\ud55c\ub2e4.", isCorrect: false },
+        { id: 4, text: "`UNION ALL`\uc740 \uc815\ub82c\uc744 \uc218\ud589\ud558\ubbc0\ub85c `UNION`\ubcf4\ub2e4 \uc18d\ub3c4\uac00 \ub290\ub9ac\ub2e4.", isCorrect: true }
+      ],
+      rationale: "`UNION ALL`\uc740 \uc815\ub82c\uacfc \uc911\ubcf5 \uc81c\uac70\ub97c \ud558\uc9c0 \uc54a\uae30 \ub54c\ubb38\uc5d0 `UNION`\ubcf4\ub2e4 \uc18d\ub3c4\uac00 \ud6e8\uc52c \ube60\ub985\ub2c8\ub2e4.",
+      hint: "\uc815\ub82c(Sort)\uc740 DB\uc5d0\uac8c \ud070 \ubd80\ub2f4\uc744 \uc8fc\ub294 \uc791\uc5c5\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 7,
+      category: "[DAY 9] \uc9d1\ud569 \uc5f0\uc0b0\uc790 & \uadf8\ub8f9 \ud568\uc218 (Set & Group)",
+      question: "\uc544\ub798 \ud14c\uc774\ube14 \ub370\uc774\ud130\uc5d0 \ub300\ud574 SQL\uc744 \uc2e4\ud589\ud588\uc744 \ub54c \uacb0\uacfc\ub85c \uc633\uc740 \uac83\uc740?\n[TABLE A: {1, 2, 2, 3}], [TABLE B: {2, 3, 4}]",
+      code: "SELECT ID FROM A\nINTERSECT\nSELECT ID FROM B;",
+      options: [
+        { id: 1, text: "{2, 3}", isCorrect: true },
+        { id: 2, text: "{1, 2, 3, 4}", isCorrect: false },
+        { id: 3, text: "{2, 2, 3}", isCorrect: false },
+        { id: 4, text: "{1}", isCorrect: false }
+      ],
+      rationale: "`INTERSECT`\ub294 \uad50\uc9d1\ud569\uc774\uba70, \uc9d1\ud569 \uc5f0\uc0b0\uc790\ub294 \uae30\ubcf8\uc801\uc73c\ub85c \uc911\ubcf5\uc744 \uc81c\uac70\ud55c \uacb0\uacfc\ub97c \ubc18\ud658\ud569\ub2c8\ub2e4.",
+      hint: "\uad50\uc9d1\ud569\uc744 \uad6c\ud558\uace0 \uc911\ubcf5\uc744 \uc9c0\uc6b0\uc138\uc694."
+    },
+    {
+      id: 8,
+      category: "[DAY 9] \uc9d1\ud569 \uc5f0\uc0b0\uc790 & \uadf8\ub8f9 \ud568\uc218 (Set & Group)",
+      question: "`GROUP BY ROLLUP(A, B)`\uc758 \uacb0\uacfc\uc640 \ub3d9\uc77c\ud55c \uc9d1\ud569\uc744 \uc0dd\uc131\ud558\ub294 `GROUPING SETS` \uad6c\ubb38\uc740?",
+      options: [
+        { id: 1, text: "`GROUPING SETS(A, B, ())`", isCorrect: false },
+        { id: 2, text: "`GROUPING SETS((A, B), (A), ())`", isCorrect: true },
+        { id: 3, text: "`GROUPING SETS((A, B), (B), ())`", isCorrect: false },
+        { id: 4, text: "`GROUPING SETS(A, B)`", isCorrect: false }
+      ],
+      rationale: "`ROLLUP(A, B)`\ub294 (A, B) \uc0c1\uc138, (A) \uc18c\uacc4, () \uc804\uccb4 \ucd1d\uacc4\ub97c \uad6c\ud569\ub2c8\ub2e4.",
+      hint: "\uacc4\uce35\uc801 \uc9d1\uacc4\uc758 \uc21c\uc11c\ub97c \uc0dd\uac01\ud558\uc138\uc694 (A+B -> A -> All)."
+    },
+    {
+      id: 9,
+      category: "[DAY 9] \uc9d1\ud569 \uc5f0\uc0b0\uc790 & \uadf8\ub8f9 \ud568\uc218 (Set & Group)",
+      question: "\ub2e4\uc74c \uc911 `CUBE` \ud568\uc218\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "\uc778\uc218\uc758 \uc21c\uc11c\uac00 \ubc14\ub00c\uba74 \uacb0\uacfc\uc758 \uc9d1\ud569 \uc790\uccb4\uac00 \ub2ec\ub77c\uc9c4\ub2e4.", isCorrect: false },
+        { id: 2, text: "\uacc4\uce35\uc801\uc778 \uad6c\uc870\ub85c \uc18c\uacc4\ub9cc \uc0b0\ucd9c\ud55c\ub2e4.", isCorrect: false },
+        { id: 3, text: "\uacb0\ud569 \uac00\ub2a5\ud55c \ubaa8\ub4e0 \ud56d\ubaa9\uc5d0 \ub300\ud574 \ub2e4\ucc28\uc6d0 \uc9d1\uacc4\ub97c \uc218\ud589\ud55c\ub2e4.", isCorrect: true },
+        { id: 4, text: "`ROLLUP`\ubcf4\ub2e4 \uc2dc\uc2a4\ud15c \ubd80\ud558\uac00 \uc801\uc5b4 \uc2e4\ubb34\uc5d0\uc11c \uad8c\uc7a5\ub41c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "`CUBE`\ub294 \uac1c\uc758 \ubaa8\ub4e0 \uc870\ud569\uc744 \uc9d1\uacc4\ud558\ubbc0\ub85c \uc2dc\uc2a4\ud15c \ubd80\ud558\uac00 \ub9e4\uc6b0 \ud07d\ub2c8\ub2e4.",
+      hint: "'\ubaa8\ub4e0 \uacbd\uc6b0\uc758 \uc218'\uac00 \ud0a4\uc6cc\ub4dc\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 10,
+      category: "[DAY 9] \uc9d1\ud569 \uc5f0\uc0b0\uc790 & \uadf8\ub8f9 \ud568\uc218 (Set & Group)",
+      question: "\uc544\ub798 SQL\uc5d0\uc11c `GROUPING` \ud568\uc218\uc758 \uacb0\uacfc\uac00 1\uc778 \ud589\uc758 \uc758\ubbf8\ub294?",
+      code: "SELECT DEPTNO, GROUPING(DEPTNO), SUM(SAL)\nFROM EMP GROUP BY ROLLUP(DEPTNO);",
+      options: [
+        { id: 1, text: "\ud574\ub2f9 \ud589\uc774 \uc2e4\uc81c \ub370\uc774\ud130\uc784\uc744 \uc758\ubbf8\ud55c\ub2e4.", isCorrect: false },
+        { id: 2, text: "\ud574\ub2f9 \ud589\uc774 \uc9d1\uacc4(\uc18c\uacc4/\ucd1d\uacc4)\ub97c \uc704\ud574 \uc0dd\uc131\ub41c \ud589\uc784\uc744 \uc758\ubbf8\ud55c\ub2e4.", isCorrect: true },
+        { id: 3, text: "\ud574\ub2f9 \uceec\ub7fc\uc5d0 \uc2e4\uc81c `NULL` \uac12\uc774 \ub4e4\uc5b4\uc788\uc74c\uc744 \uc758\ubbf8\ud55c\ub2e4.", isCorrect: false },
+        { id: 4, text: "\uc5d0\ub7ec\uac00 \ubc1c\uc0dd\ud558\uc5ec \ucc98\ub9ac\ub418\uc9c0 \uc54a\uc558\uc74c\uc744 \uc758\ubbf8\ud55c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "`GROUPING` \ud568\uc218\ub294 \ud574\ub2f9 \uceec\ub7fc\uc774 \uc9d1\uacc4\uc5d0 \uc0ac\uc6a9\ub418\uc5b4 `NULL`\ub85c \ud45c\uc2dc\ub41c \uacbd\uc6b0 1\uc744 \ubc18\ud658\ud569\ub2c8\ub2e4.",
+      hint: "\uc774\ub984\ud45c\ub97c \ub2ec\uc544\uc904 '\uc9d1\uacc4 \ud589'\uc778\uc9c0 \ud655\uc778\ud558\ub294 \ud0d0\uc9c0\uae30\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 11,
+      category: "[DAY 9] \uc9d1\ud569 \uc5f0\uc0b0\uc790 & \uadf8\ub8f9 \ud568\uc218 (Set & Group)",
+      question: "\ub2e4\uc74c \uc911 \uc9d1\ud569 \uc5f0\uc0b0\uc790 \uc0ac\uc6a9 \uc2dc \uc8fc\uc758\uc0ac\ud56d\uc73c\ub85c \ud2c0\ub9b0 \uac83\uc740?",
+      options: [
+        { id: 1, text: "SELECT \uc808\uc758 \uceec\ub7fc \uc218\uac00 \ub3d9\uc77c\ud574\uc57c \ud55c\ub2e4.", isCorrect: false },
+        { id: 2, text: "\uc0c1\ucc9c/\ud558\ucc9c \uceec\ub7fc\uc758 \ub370\uc774\ud130 \ud0c0\uc785\uc774 \uc0c1\ud638 \ud638\ud658\ub418\uc5b4\uc57c \ud55c\ub2e4.", isCorrect: false },
+        { id: 3, text: "ORDER BY \uc808\uc740 \uac01 SELECT \ubb38\ub9c8\ub2e4 \uac1c\ubcc4\uc801\uc73c\ub85c \uc0ac\uc6a9\ud560 \uc218 \uc788\ub2e4.", isCorrect: true },
+        { id: 4, text: "\ucd9c\ub825\ub418\ub294 \uceec\ub7fc\uba85\uc740 \uccab \ubc88\uc9f8 SELECT \ubb38\uc758 \uceec\ub7fc\uba85\uc744 \ub530\ub978\ub2e4.", isCorrect: false }
+      ],
+      rationale: "`ORDER BY`\ub294 \uc9d1\ud569 \uc5f0\uc0b0\uc758 \ub9e8 \ub9c8\uc9c0\ub9c9\uc5d0 \ub2e8 \ud55c \ubc88\ub9cc \uc62c \uc218 \uc788\uc2b5\ub2c8\ub2e4.",
+      hint: "\uacb0\uacfc\uac00 \ub2e4 \ud569\uccd0\uc9c4 \ud6c4\uc5d0 \ub9c8\uc9c0\ub9c9\uc73c\ub85c \uc904\uc744 \uc138\uc6cc\uc57c \ud569\ub2c8\ub2e4."
+    },
+    {
+      id: 12,
+      category: "[DAY 10] \uc708\ub3c4\uc6b0 \ud568\uc218 (Window Function) - \u2605\ube48\ucd9c\u2605",
+      question: "`RANK()`, `DENSE_RANK()`, `ROW_NUMBER()` \ud568\uc218\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \ubd80\uc801\uc808\ud55c \uac83\uc740?",
+      options: [
+        { id: 1, text: "`RANK`\ub294 \ub3d9\uc77c \uc21c\uc704\uac00 \uc788\uc744 \uacbd\uc6b0 \ub2e4\uc74c \uc21c\uc704\ub97c \uac74\ub108\ub6f4\ub2e4.", isCorrect: false },
+        { id: 2, text: "`DENSE_RANK`\ub294 \ub3d9\uc77c \uc21c\uc704\uac00 \uc788\uc5b4\ub3c4 \ub2e4\uc74c \uc21c\uc704\ub97c \uc5f0\uc18d\ud574\uc11c \ubd80\uc5ec\ud55c\ub2e4.", isCorrect: false },
+        { id: 3, text: "`ROW_NUMBER`\ub294 \ub3d9\uc77c\ud55c \uac12\uc774\ub77c\ub3c4 \uc720\uc77c\ud55c \uc21c\uc704\ub97c \ubd80\uc5ec\ud55c\ub2e4.", isCorrect: false },
+        { id: 4, text: "\uc138 \ud568\uc218 \ubaa8\ub450 `PARTITION BY` \uc808\uc774 \uc5c6\uc73c\uba74 \uc5d0\ub7ec\uac00 \ubc1c\uc0dd\ud55c\ub2e4.", isCorrect: true }
+      ],
+      rationale: "`PARTITION BY`\ub294 \uc120\ud0dd \uc0ac\ud56d\uc785\ub2c8\ub2e4. \uc5c6\uc73c\uba74 \uc804\uccb4 \ub370\uc774\ud130\ub97c \ud558\ub098\uc758 \uadf8\ub8f9\uc73c\ub85c \ubcf4\uace0 \uc21c\uc704\ub97c \ub9e4\uae41\ub2c8\ub2e4.",
+      hint: "\ub4f1\uc218 \ub9e4\uae30\ub294 \ubc95\uc758 \ucc28\uc774\ub9cc \uae30\uc5b5\ud558\uc138\uc694."
+    },
+    {
+      id: 13,
+      category: "[DAY 10] \uc708\ub3c4\uc6b0 \ud568\uc218 (Window Function) - \u2605\ube48\ucd9c\u2605",
+      question: "\ub2e4\uc74c \ub370\uc774\ud130\ub97c \uae30\uc900\uc73c\ub85c `SUM(AMT) OVER(ORDER BY DATE ROWS BETWEEN 1 PRECEDING AND CURRENT ROW)`\uc758 3\ubc88\uc9f8 \ud589 \uacb0\uacfc\uac12\uc740?\n[Row1: 100], [Row2: 200], [Row3: 300]",
+      options: [
+        { id: 1, text: "600", isCorrect: false },
+        { id: 2, text: "500", isCorrect: true },
+        { id: 3, text: "300", isCorrect: false },
+        { id: 4, text: "400", isCorrect: false }
+      ],
+      rationale: "\ud604\uc7ac \ud589(300)\uacfc \uadf8 \uc55e\uc758 1\uac1c \ud589(200)\uc744 \ub354\ud558\ubbc0\ub85c 500\uc785\ub2c8\ub2e4.",
+      hint: "`ROWS 1 PRECEDING`\uc740 '\ub098\uc640 \ub0b4 \uc55e\uc0ac\ub78c'\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 14,
+      category: "[DAY 10] \uc708\ub3c4\uc6b0 \ud568\uc218 (Window Function) - \u2605\ube48\ucd9c\u2605",
+      question: "\uc708\ub3c4\uc6b0 \ud568\uc218\uc758 \uae30\ubcf8 \ubc94\uc704(Default Window Frame)\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "`ORDER BY`\uac00 \uc5c6\uc744 \ub54c: \ucc98\uc74c\ubd80\ud130 \ub05d\uae4c\uc9c0 (`ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING`)", isCorrect: false },
+        { id: 2, text: "`ORDER BY`\uac00 \uc788\uc744 \ub54c: \ucc98\uc74c\ubd80\ud130 \ud604\uc7ac \ud589\uae4c\uc9c0 (`RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`)", isCorrect: false },
+        { id: 3, text: "`ORDER BY` \uc720\ubb34\uc640 \uc0c1\uad00\uc5c6\uc774 \ud56d\uc0c1 \ud604\uc7ac \ud589\ub9cc \uacc4\uc0b0\ud55c\ub2e4.", isCorrect: false },
+        { id: 4, text: "\u2460\uacfc \u2461 \ubaa8\ub450 \ub9de\ub2e4.", isCorrect: true }
+      ],
+      rationale: "`ORDER BY`\uac00 \uc788\uc73c\uba74 \ub204\uc801\uc758 \uc758\ubbf8\uac00 \uc0dd\uaca8 '\ud604\uc7ac \ud589\uae4c\uc9c0'\uac00 \uae30\ubcf8\uac12\uc774 \ub429\ub2c8\ub2e4.",
+      hint: "[DAY 10]\uc758 \ud83d\udea8 \uc8fc\uc758\uc0ac\ud56d \ud30c\ud2b8\ub97c \ub2e4\uc2dc \ubcf4\uc138\uc694!"
+    },
+    {
+      id: 15,
+      category: "[DAY 10] \uc708\ub3c4\uc6b0 \ud568\uc218 (Window Function) - \u2605\ube48\ucd9c\u2605",
+      question: "`LAG`\uc640 `LEAD` \ud568\uc218\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "`LAG`\ub294 \uc774\ud6c4 \ud589\uc758 \uac12\uc744 \uac00\uc838\uc628\ub2e4.", isCorrect: false },
+        { id: 2, text: "`LEAD`\ub294 \uc774\uc804 \ud589\uc758 \uac12\uc744 \uac00\uc838\uc628\ub2e4.", isCorrect: false },
+        { id: 3, text: "`LAG(SAL, 1, 0)`\uc5d0\uc11c 0\uc740 \uac00\uc838\uc62c \uac12\uc774 \uc5c6\uc744 \ub54c \ucd9c\ub825\ud560 \uae30\ubcf8\uac12\uc774\ub2e4.", isCorrect: true },
+        { id: 4, text: "\ub450 \ud568\uc218\ub294 \ubc18\ub4dc\uc2dc `GROUP BY`\uc640 \ud568\uaed8 \uc0ac\uc6a9\ud574\uc57c \ud55c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "`LAG`\ub294 \uc774\uc804(\uacfc\uac70), `LEAD`\ub294 \uc774\ud6c4(\ubbf8\ub798) \uac12\uc744 \uac00\uc838\uc635\ub2c8\ub2e4. 3\ubc88\uc9f8 \uc778\uc790\ub294 `NULL` \ub300\uc751 \uac12\uc785\ub2c8\ub2e4.",
+      hint: "Lagging(\ub4a4\ucc98\uc9d0) = \uacfc\uac70, Lead(\uc120\ub3c4) = \ubbf8\ub798."
+    },
+    {
+      id: 16,
+      category: "[DAY 10] \uc708\ub3c4\uc6b0 \ud568\uc218 (Window Function) - \u2605\ube48\ucd9c\u2605",
+      question: "\ub2e4\uc74c \uc911 `RATIO_TO_REPORT` \ud568\uc218\uc758 \uc6a9\ub3c4\ub294?",
+      options: [
+        { id: 1, text: "\ud30c\ud2f0\uc158 \ub0b4\uc758 \ub204\uc801 \ubc31\ubd84\uc728\uc744 \uad6c\ud55c\ub2e4.", isCorrect: false },
+        { id: 2, text: "\uc804\uccb4 \ud569\uacc4 \ub300\ube44 \ud604\uc7ac \ud589\uc758 \uac12\uc758 \ube44\uc728\uc744 \uad6c\ud55c\ub2e4.", isCorrect: true },
+        { id: 3, text: "\ud604\uc7ac \ud589\uacfc \uc55e\ub4a4 \ud589\uc758 \ud3c9\uade0\uc744 \uad6c\ud55c\ub2e4.", isCorrect: false },
+        { id: 4, text: "\uc804\uccb4 \ub370\uc774\ud130\uc758 \uc911\uc559\uac12\uc744 \uad6c\ud55c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "\ub9ac\ud3ec\ud2b8 \ube44\uc911\uc744 \uad6c\ud560 \ub54c \uc4f0\ub294 \ud568\uc218\uc785\ub2c8\ub2e4.",
+      hint: "\ub0b4 \uae09\uc5ec / \uc804\uccb4 \uae09\uc5ec \ud569\uacc4."
+    },
+    {
+      id: 17,
+      category: "[DAY 10] \uc708\ub3c4\uc6b0 \ud568\uc218 (Window Function) - \u2605\ube48\ucd9c\u2605",
+      question: "`NTILE(4)` \ud568\uc218\ub97c 10\uac1c\uc758 \ud589\uc5d0 \uc801\uc6a9\ud588\uc744 \ub54c, \uac01 \uadf8\ub8f9\uc5d0 \ubc30\uc815\ub418\ub294 \ud589\uc758 \uc218\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "3, 3, 2, 2", isCorrect: true },
+        { id: 2, text: "2, 2, 3, 3", isCorrect: false },
+        { id: 3, text: "4, 2, 2, 2", isCorrect: false },
+        { id: 4, text: "3, 2, 2, 3", isCorrect: false }
+      ],
+      rationale: "\uc55e\uc5d0\uc11c\ubd80\ud130 \ub0a8\ub294 \ub098\uba38\uc9c0\ub97c \ud558\ub098\uc529 \ucc44\uc6c1\ub2c8\ub2e4. 10/4 = 2...2 \uc774\ubbc0\ub85c \uc55e\uc758 \ub450 \uadf8\ub8f9\uc5d0 1\uac1c\uc529 \ub354 \ucd94\uac00\ud569\ub2c8\ub2e4.",
+      hint: "\ubaab\uc740 2, \ub098\uba38\uc9c0\ub294 2. \uc55e\uc5d0\uc11c\ubd80\ud130 \ubcf4\ub108\uc2a4!"
+    },
+    {
+      id: 18,
+      category: "[DAY 10] \uc708\ub3c4\uc6b0 \ud568\uc218 (Window Function) - \u2605\ube48\ucd9c\u2605",
+      question: "\uc708\ub3c4\uc6b0 \ud568\uc218 \uc0ac\uc6a9 \uc2dc `ORDER BY` \uc808\uc774 \uc5c6\uc744 \ub54c `SUM(SAL) OVER()`\uc758 \uacb0\uacfc\ub294?",
+      options: [
+        { id: 1, text: "\ub204\uc801 \ud569\uacc4\uac00 \ucd9c\ub825\ub41c\ub2e4.", isCorrect: false },
+        { id: 2, text: "\uc804\uccb4 \ud589\uc5d0 \ub300\ud574 \ub3d9\uc77c\ud55c \uc804\uccb4 \ud569\uacc4\uac00 \ucd9c\ub825\ub41c\ub2e4.", isCorrect: true },
+        { id: 3, text: "\uc5d0\ub7ec\uac00 \ubc1c\uc0dd\ud55c\ub2e4.", isCorrect: false },
+        { id: 4, text: "\uac01 \ud589\uc758 `SAL` \uac12 \uc790\uccb4\uac00 \ucd9c\ub825\ub41c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "\uc21c\uc11c\uac00 \uc5c6\uc73c\uba74 \uc5b4\ub514\uae4c\uc9c0\uac00 \ud604\uc7ac\uc778 \uc9c0 \uc54c \uc218 \uc5c6\uc5b4 \uc804\uccb4\ub97c \ud558\ub098\uc758 \ucc3d\ubb38\uc73c\ub85c \ubd05\ub2c8\ub2e4.",
+      hint: "[DAY 10] \ud45c: ORDER BY \uc5c6\uc74c = Grand Total."
+    },
+    {
+      id: 19,
+      category: "[DAY 10] \uc708\ub3c4\uc6b0 \ud568\uc218 (Window Function) - \u2605\ube48\ucd9c\u2605",
+      question: "`CUME_DIST` \ud568\uc218\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "\uc0c1\ub300\uc801 \uc21c\uc704\ub97c 0~1 \uc0ac\uc774 \uac12\uc73c\ub85c \ubc18\ud658\ud55c\ub2e4.", isCorrect: false },
+        { id: 2, text: "\ub204\uc801 \ubd84\ud3ec\ub97c \uad6c\ud558\uba70, (\ub098\ubcf4\ub2e4 \uc791\uac70\ub098 \uac19\uc740 \ud589 \uc218 / \uc804\uccb4 \ud589 \uc218)\ub85c \uacc4\uc0b0\ud55c\ub2e4.", isCorrect: true },
+        { id: 3, text: "\ud56d\uc0c1 0.5\ub97c \uae30\uc900\uc73c\ub85c \ub300\uce6d\uc801\uc778 \uac12\uc744 \ubc18\ud658\ud55c\ub2e4.", isCorrect: false },
+        { id: 4, text: "\ub370\uc774\ud130\uac00 10\uac1c\uc77c \ub54c 1\ub4f1\uc758 \uac12\uc740 \ud56d\uc0c1 0.1\uc774\ub2e4.", isCorrect: false }
+      ],
+      rationale: "\ub204\uc801 \ubd84\ud3ec(Cumulative Distribution) \ud568\uc218\uc785\ub2c8\ub2e4.",
+      hint: "\ub098\ub97c \ud3ec\ud568\ud574\uc11c \ub098\ubcf4\ub2e4 \uc0c1\uc704\uad8c\uc774 \uba87 \uba85\uc778\uac00?"
+    },
+    {
+      id: 20,
+      category: "[DAY 10] \uc708\ub3c4\uc6b0 \ud568\uc218 (Window Function) - \u2605\ube48\ucd9c\u2605",
+      question: "`FIRST_VALUE`\uc640 `LAST_VALUE` \uc0ac\uc6a9 \uc2dc \uc8fc\uc758\uc0ac\ud56d\uc73c\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "`LAST_VALUE`\ub294 \ud56d\uc0c1 \uc804\uccb4 \ud30c\ud2f0\uc158\uc758 \ub9c8\uc9c0\ub9c9 \uac12\uc744 \uc815\ud655\ud788 \uac00\uc838\uc628\ub2e4.", isCorrect: false },
+        { id: 2, text: "`LAST_VALUE` \uc0ac\uc6a9 \uc2dc \ubc94\uc704\ub97c `UNBOUNDED FOLLOWING`\uae4c\uc9c0 \uc9c0\uc815\ud558\uc9c0 \uc54a\uc73c\uba74 \ud604\uc7ac \ud589\uc774 \ub9c8\uc9c0\ub9c9 \uac12\uc774 \ub41c\ub2e4.", isCorrect: true },
+        { id: 3, text: "`FIRST_VALUE`\ub294 `ORDER BY` \uc808\uc774 \uc5c6\uc5b4\ub3c4 \uc0ac\uc6a9 \uac00\ub2a5\ud558\ub2e4.", isCorrect: false },
+        { id: 4, text: "\ub450 \ud568\uc218\ub294 \uc218\uce58\ud615 \ub370\uc774\ud130\uc5d0\ub9cc \uc0ac\uc6a9\ud560 \uc218 \uc788\ub2e4.", isCorrect: false }
+      ],
+      rationale: "\uc708\ub3c4\uc6b0 \uae30\ubcf8 \ubc94\uc704\uac00 '\ud604\uc7ac \ud589\uae4c\uc9c0'\uc774\ubbc0\ub85c `LAST_VALUE`\ub294 \ubc94\uc704 \uc9c0\uc815\uc774 \ud544\uc218\uc785\ub2c8\ub2e4.",
+      hint: "\ud83d\udea8 [\uc2dc\ud5d8 \ube48\ucd9c] LAST_VALUE\uc758 \ubc30\uc2e0!"
+    },
+    {
+      id: 21,
+      category: "[DAY 10] \uc708\ub3c4\uc6b0 \ud568\uc218 (Window Function) - \u2605\ube48\ucd9c\u2605",
+      question: "\ub2e4\uc74c \uc911 \uc708\ub3c4\uc6b0 \ud568\uc218\ub97c \uc0ac\uc6a9\ud560 \uc218 \uc5c6\ub294 \uacf3\uc740?",
+      options: [
+        { id: 1, text: "SELECT \uc808", isCorrect: false },
+        { id: 2, text: "UPDATE \ubb38\uc758 SET \uc808 (\uc11c\ube0c\ucffc\ub9ac \ub0b4)", isCorrect: false },
+        { id: 3, text: "WHERE \uc808", isCorrect: true },
+        { id: 4, text: "ORDER BY \uc808", isCorrect: false }
+      ],
+      rationale: "\uc708\ub3c4\uc6b0 \ud568\uc218\ub294 \uacb0\uacfc\uac00 \ucd94\ucd9c\ub41c \ud6c4 \ud3ec\uc2a4\ud2b8\uc787\ucc98\ub7fc \ubd99\ub294 \uae30\ub2a5\uc774\ub77c `WHERE` \uc808\uc5d0\uc11c \ud544\ud130\ub9c1 \uc870\uac74\uc73c\ub85c \uc4f8 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.",
+      hint: "\uc21c\uc704\ub85c \uc790\ub974\ub824\uba74 \uc11c\ube0c\ucffc\ub9ac(\uc778\ub77c\uc778 \ubdf0)\ub97c \uac70\uccd0\uc57c \ud569\ub2c8\ub2e4."
+    },
+    {
+      id: 22,
+      category: "[DAY 11] \uace0\uae09 \uc9c8\uc758 (Top N, Self Join, Hierarchical) - \u2605\ube48\ucd9c\u2605",
+      question: "Oracle\uc5d0\uc11c `SELECT * FROM EMP WHERE ROWNUM = 2` \uc2e4\ud589 \uc2dc \uacb0\uacfc\ub294?",
+      options: [
+        { id: 1, text: "2\ubc88\uc9f8 \ud589\uc774 \ucd9c\ub825\ub41c\ub2e4.", isCorrect: false },
+        { id: 2, text: "\uc5d0\ub7ec\uac00 \ubc1c\uc0dd\ud55c\ub2e4.", isCorrect: false },
+        { id: 3, text: "\uc544\ubb34 \ud589\ub3c4 \ucd9c\ub825\ub418\uc9c0 \uc54a\ub294\ub2e4 (0\uac74).", isCorrect: true },
+        { id: 4, text: "\uc804\uccb4 \ud589\uc774 \ucd9c\ub825\ub41c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "`ROWNUM`\uc740 1\uc774 \uba3c\uc800 \uc120\ud0dd\ub418\uc5b4\uc57c 2\uac00 \uc874\uc7ac\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4. 1\uc774 \uc5c6\uc73c\uba74 2\ub97c \ucc3e\uc744 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.",
+      hint: "[DAY 11] ROWNUM\uc758 '1'\uc758 \ubc95\uce59."
+    },
+    {
+      id: 23,
+      category: "[DAY 11] \uace0\uae09 \uc9c8\uc758 (Top N, Self Join, Hierarchical) - \u2605\ube48\ucd9c\u2605",
+      question: "\ub2e4\uc74c \uc911 \uacc4\uce35\ud615 \uc9c8\uc758\uc5d0\uc11c `PRIOR` \ud0a4\uc6cc\ub4dc\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "`PRIOR \uc790\uc2dd = \ubd80\ubaa8` \ud615\ud0dc\ub294 \uc704\uc5d0\uc11c \uc544\ub798\ub85c \ub0b4\ub824\uac00\ub294 \uc21c\ubc29\ud5a5 \uc804\uac1c\uc774\ub2e4.", isCorrect: false },
+        { id: 2, text: "`PRIOR \ubd80\ubaa8 = \uc790\uc2dd` \ud615\ud0dc\ub294 \uc544\ub798\uc5d0\uc11c \uc704\ub85c \uc62c\ub77c\uac00\ub294 \uc5ed\ubc29\ud5a5 \uc804\uac1c\uc774\ub2e4.", isCorrect: false },
+        { id: 3, text: "`PRIOR`\ub294 '\uc9c1\uc804\uc5d0 \uc77d\uc740 \ub370\uc774\ud130'\ub97c \uc758\ubbf8\ud55c\ub2e4.", isCorrect: true },
+        { id: 4, text: "`PRIOR`\ub294 \ubc18\ub4dc\uc2dc `START WITH` \uc808\uc5d0\ub9cc \uc0ac\uc6a9\ud574\uc57c \ud55c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "`PRIOR`\ub294 \uc774\uc804 \ub2e8\uacc4\uc758 \uac12\uc744 \ucc38\uc870\ud569\ub2c8\ub2e4. `PRIOR \ubd80\ubaa8 = \uc790\uc2dd`\uc774 \uc21c\ubc29\ud5a5\uc785\ub2c8\ub2e4.",
+      hint: "\uc0ac\uc7a5\ub2d8(PRIOR)\uc758 \ubc88\ud638\uac00 \ub0b4 \uc0c1\uc0ac \ubc88\ud638\uc778 \ub140\uc11d\ub4e4 \ub098\uc640\ub77c! (\uc21c\ubc29\ud5a5)"
+    },
+    {
+      id: 24,
+      category: "[DAY 11] \uace0\uae09 \uc9c8\uc758 (Top N, Self Join, Hierarchical) - \u2605\ube48\ucd9c\u2605",
+      question: "\uacc4\uce35\ud615 \uc9c8\uc758\uc758 \uac00\uc0c1 \uceec\ub7fc \uc911 \ub9d0\ub2e8 \ub178\ub4dc(\uc790\uc2dd\uc774 \uc5c6\ub294 \ub178\ub4dc)\ub97c \ud310\ubcc4\ud558\ub294 \uac83\uc740?",
+      options: [
+        { id: 1, text: "`LEVEL`", isCorrect: false },
+        { id: 2, text: "`CONNECT_BY_ISLEAF`", isCorrect: true },
+        { id: 3, text: "`SYS_CONNECT_BY_PATH`", isCorrect: false },
+        { id: 4, text: "`CONNECT_BY_ROOT`", isCorrect: false }
+      ],
+      rationale: "\ub098\ubb47\uc78e(Leaf)\uc740 \ud2b8\ub9ac\uc758 \ub05d\uc744 \uc758\ubbf8\ud569\ub2c8\ub2e4. \ub05d\uc774\uba74 1\uc744 \ubc18\ud658\ud569\ub2c8\ub2e4.",
+      hint: "Leaf = \ub9d0\ub2e8 \uc0ac\uc6d0."
+    },
+    {
+      id: 25,
+      category: "[DAY 11] \uace0\uae09 \uc9c8\uc758 (Top N, Self Join, Hierarchical) - \u2605\ube48\ucd9c\u2605",
+      question: "\ub2e4\uc74c SQL\uc758 \uc2e4\ud589 \uacb0\uacfc\ub85c \uac00\uc7a5 \uc801\uc808\ud55c \uac83\uc740?",
+      code: "SELECT ENAME FROM EMP\nSTART WITH ENAME = 'KING'\nCONNECT BY PRIOR EMPNO = MGR\nORDER SIBLINGS BY ENAME;",
+      options: [
+        { id: 1, text: "\uc804\uccb4 \uc0ac\uc6d0\uc744 \uc774\ub984\uc21c\uc73c\ub85c \uc815\ub82c\ud55c\ub2e4.", isCorrect: false },
+        { id: 2, text: "\uacc4\uce35 \uad6c\uc870\ub97c \uc720\uc9c0\ud558\uba74\uc11c \ub3d9\uc77c \ub808\ubca8\uc758 \ud615\uc81c\ub4e4\ub07c\ub9ac\ub9cc \uc774\ub984\uc21c\uc73c\ub85c \uc815\ub82c\ud55c\ub2e4.", isCorrect: true },
+        { id: 3, text: "'KING'\uc758 \ubd80\ud558\uc9c1\uc6d0\ub4e4\ub9cc \uc774\ub984 \uc5ed\uc21c\uc73c\ub85c \uc815\ub82c\ud55c\ub2e4.", isCorrect: false },
+        { id: 4, text: "\uc5d0\ub7ec\uac00 \ubc1c\uc0dd\ud55c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "`ORDER SIBLINGS BY`\ub294 \uacc4\uce35 \ud2b8\ub9ac\ub97c \uae68\ub728\ub9ac\uc9c0 \uc54a\uace0 \ud615\uc81c \ub178\ub4dc \ub0b4\uc5d0\uc11c\ub9cc \uc815\ub82c\ud569\ub2c8\ub2e4.",
+      hint: "\uc871\ubcf4 \uc21c\uc11c\ub97c \uc9c0\ud0a4\uba74\uc11c \ud615\uc81c\ub07c\ub9ac \ud0a4\uc21c\uc73c\ub85c \uc11c\uae30."
+    },
+    {
+      id: 26,
+      category: "[DAY 11] \uace0\uae09 \uc9c8\uc758 (Top N, Self Join, Hierarchical) - \u2605\ube48\ucd9c\u2605",
+      question: "\uc140\ud504 \uc870\uc778(Self Join) \uc2dc \ubc18\ub4dc\uc2dc \ud544\uc694\ud55c \uac83\uc740?",
+      options: [
+        { id: 1, text: "\ud14c\uc774\ube14\uc758 \ubcc4\uce6d(Alias)", isCorrect: true },
+        { id: 2, text: "`UNION` \uc5f0\uc0b0\uc790", isCorrect: false },
+        { id: 3, text: "\uc678\ubd80 \uc870\uc778(Outer Join) \uad6c\ubb38", isCorrect: false },
+        { id: 4, text: "`CONNECT BY` \uc808", isCorrect: false }
+      ],
+      rationale: "\ub3d9\uc77c\ud55c \ud14c\uc774\ube14\uc744 \ub450 \ubc88 \ud638\ucd9c\ud558\ubbc0\ub85c \uad6c\ubd84\ud558\uae30 \uc704\ud55c \ubcc4\uce6d\uc774 \ud544\uc218\uc785\ub2c8\ub2e4.",
+      hint: "\ub098\uc640 \ub098\uc758 \uc0c1\uc0ac\ub97c \uad6c\ubd84\ud560 '\uac00\uba74(Alias)'\uc774 \ud544\uc694\ud569\ub2c8\ub2e4."
+    },
+    {
+      id: 27,
+      category: "[DAY 11] \uace0\uae09 \uc9c8\uc758 (Top N, Self Join, Hierarchical) - \u2605\ube48\ucd9c\u2605",
+      question: "`START WITH` \uc808\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "\uc0dd\ub7b5\ud560 \uacbd\uc6b0 \uc804\uccb4 \ud589\uc744 \ub8e8\ud2b8\ub85c \ubcf4\uace0 \uacc4\uce35\uc744 \uc804\uac1c\ud55c\ub2e4.", isCorrect: true },
+        { id: 2, text: "\ubc18\ub4dc\uc2dc `NULL` \uac12\ub9cc \uc870\uac74\uc73c\ub85c \uc904 \uc218 \uc788\ub2e4.", isCorrect: false },
+        { id: 3, text: "\uacc4\uce35 \uc804\uac1c\uc758 \uc885\ub8cc \uc870\uac74\uc744 \uae30\uc220\ud55c\ub2e4.", isCorrect: false },
+        { id: 4, text: "`CONNECT BY` \uc808\ubcf4\ub2e4 \ub4a4\uc5d0 \uc704\uce58\ud574\uc57c \ud55c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "`START WITH`\ub294 \uc2dc\uc791\uc810\uc774\uba70, \uc0dd\ub7b5 \uac00\ub2a5\ud569\ub2c8\ub2e4.",
+      hint: "\uc5b4\ub514\uc11c\ubd80\ud130 \uc871\ubcf4\ub97c \uc2dc\uc791\ud560 \uac83\uc778\uac00?"
+    },
+    {
+      id: 28,
+      category: "[DAY 11] \uace0\uae09 \uc9c8\uc758 (Top N, Self Join, Hierarchical) - \u2605\ube48\ucd9c\u2605",
+      question: "`SYS_CONNECT_BY_PATH(ENAME, '/')`\uc758 \uacb0\uacfc\uac12 \uc608\uc2dc\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "/KING/BLAKE/ALLEN", isCorrect: true },
+        { id: 2, text: "KING-BLAKE-ALLEN", isCorrect: false },
+        { id: 3, text: "ALLEN/BLAKE/KING", isCorrect: false },
+        { id: 4, text: "/ALLEN", isCorrect: false }
+      ],
+      rationale: "\ub8e8\ud2b8\ubd80\ud130 \ud604\uc7ac \ud589\uae4c\uc9c0\uc758 \uacbd\ub85c\ub97c \uad6c\ubd84\uc790\uc640 \ud568\uaed8 \ubcf4\uc5ec\uc90d\ub2c8\ub2e4.",
+      hint: "\ud30c\uc77c \ud0d0\uc0c9\uae30 \uc8fc\uc18c\ucc3d\uacfc \ube44\uc2b7\ud569\ub2c8\ub2e4."
+    },
+    {
+      id: 29,
+      category: "[DAY 11] \uace0\uae09 \uc9c8\uc758 (Top N, Self Join, Hierarchical) - \u2605\ube48\ucd9c\u2605",
+      question: "`CONNECT BY` \uc808\uc5d0\uc11c `NOCYCLE` \uc635\uc158\uc758 \uc5ed\ud560\uc740?",
+      options: [
+        { id: 1, text: "\uacc4\uce35 \uc804\uac1c \uc18d\ub3c4\ub97c \ub192\uc778\ub2e4.", isCorrect: false },
+        { id: 2, text: "\ubb34\ud55c \ub8e8\ud504(Cycle)\uac00 \ubc1c\uc0dd\ud588\uc744 \ub54c \uc5d0\ub7ec\ub97c \ub0b4\uc9c0 \uc54a\uace0 \uc911\ub2e8\ud55c\ub2e4.", isCorrect: true },
+        { id: 3, text: "\ub9ac\ud504 \ub178\ub4dc\ub9cc \ucd9c\ub825\ud55c\ub2e4.", isCorrect: false },
+        { id: 4, text: "\uc911\ubcf5\ub41c \ub370\uc774\ud130\ub97c \uc81c\uac70\ud55c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "\ubd80\ubaa8\uac00 \uc790\uc2dd\uc774 \ub418\uace0 \uc790\uc2dd\uc774 \ub2e4\uc2dc \ubd80\ubaa8\uac00 \ub418\ub294 \uc21c\ud658 \uad6c\uc870\ub97c \ubc29\uc9c0\ud569\ub2c8\ub2e4.",
+      hint: "Cycle = \ube91\ube91\uc774 \ubc29\uc9c0."
+    },
+    {
+      id: 30,
+      category: "[DAY 11] \uace0\uae09 \uc9c8\uc758 (Top N, Self Join, Hierarchical) - \u2605\ube48\ucd9c\u2605",
+      question: "SQL Server\uc5d0\uc11c \uc0c1\uc704 5\uac1c\uc758 \ud589\uc744 \ucd9c\ub825\ud558\ub294 \uc62c\ubc14\ub978 \uad6c\ubb38\uc740?",
+      options: [
+        { id: 1, text: "`SELECT * FROM EMP WHERE ROWNUM <= 5;`", isCorrect: false },
+        { id: 2, text: "`SELECT TOP(5) * FROM EMP;`", isCorrect: true },
+        { id: 3, text: "`SELECT * FROM EMP FETCH FIRST 5 ROWS ONLY;`", isCorrect: false },
+        { id: 4, text: "`SELECT * FROM EMP LIMIT 5;`", isCorrect: false }
+      ],
+      rationale: "SQL Server\ub294 `TOP` \uc808\uc744 \uc0ac\uc6a9\ud569\ub2c8\ub2e4.",
+      hint: "[DAY 11] 1.2 SQL Server: TOP \uc808."
+    },
+    {
+      id: 31,
+      category: "[DAY 11] \uace0\uae09 \uc9c8\uc758 (Top N, Self Join, Hierarchical) - \u2605\ube48\ucd9c\u2605",
+      question: "`OFFSET 5 ROWS FETCH NEXT 10 ROWS ONLY` \uad6c\ubb38\uc758 \uc758\ubbf8\ub294?",
+      options: [
+        { id: 1, text: "1\ud589\ubd80\ud130 10\ud589\uae4c\uc9c0 \ucd9c\ub825\ud55c\ub2e4.", isCorrect: false },
+        { id: 2, text: "5\ud589\uc744 \uc81c\uc678\ud55c \ub098\uba38\uc9c0 \uc804\uccb4\ub97c \ucd9c\ub825\ud55c\ub2e4.", isCorrect: false },
+        { id: 3, text: "\uc55e\uc758 5\ud589\uc744 \uac74\ub108\ub6f0\uace0 \uadf8 \ub2e4\uc74c 10\uac1c\uc758 \ud589\uc744 \ucd9c\ub825\ud55c\ub2e4 (6~15\ud589).", isCorrect: true },
+        { id: 4, text: "5\ud589\uacfc 10\ud589\ub9cc \ucd9c\ub825\ud55c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "\ud398\uc774\uc9d5 \ucc98\ub9ac\uc758 \ud45c\uc900 \ubb38\ubc95\uc785\ub2c8\ub2e4.",
+      hint: "Offset(\uac74\ub108\ub6f0\uae30), Fetch(\uac00\uc838\uc624\uae30)."
+    },
+    {
+      id: 32,
+      category: "[DAY 12] PIVOT & \uc815\uaddc\ud45c\ud604\uc2dd (PIVOT & Regex)",
+      question: "`PIVOT` \ud568\uc218 \uc0ac\uc6a9 \uc2dc \ubc18\ub4dc\uc2dc \ud3ec\ud568\ub418\uc5b4\uc57c \ud558\ub294 \uc694\uc18c\ub294?",
+      options: [
+        { id: 1, text: "`GROUP BY` \uc808", isCorrect: false },
+        { id: 2, text: "\uc9d1\uacc4 \ud568\uc218 (SUM, AVG \ub4f1)", isCorrect: true },
+        { id: 3, text: "`ORDER BY` \uc808", isCorrect: false },
+        { id: 4, text: "`CONNECT BY` \uc808", isCorrect: false }
+      ],
+      rationale: "\ud589\uacfc \uc5f4\uc774 \ub9cc\ub098\ub294 \uc9c0\uc810\uc758 \uac12\uc744 \uc694\uc57d\ud560 \uc9d1\uacc4 \ud568\uc218\uac00 \ud544\uc218\uc785\ub2c8\ub2e4.",
+      hint: "\uc5d1\uc140 \ud53c\ubc97 \ud14c\uc774\ube14\uc744 \ub9cc\ub4e4 \ub54c '\uac12' \uc601\uc5ed\uc5d0 \ubb58 \ub123\uc744\uc9c0 \uc0dd\uac01\ud558\uc138\uc694."
+    },
+    {
+      id: 33,
+      category: "[DAY 12] PIVOT & \uc815\uaddc\ud45c\ud604\uc2dd (PIVOT & Regex)",
+      question: "\uc815\uaddc\ud45c\ud604\uc2dd \uba54\ud0c0 \ubb38\uc790 \uc911 '\ubb38\uc790\uc5f4\uc758 \ub05d'\uc744 \uc758\ubbf8\ud558\ub294 \uac83\uc740?",
+      options: [
+        { id: 1, text: "`^`", isCorrect: false },
+        { id: 2, text: "`*`", isCorrect: false },
+        { id: 3, text: "`$`", isCorrect: true },
+        { id: 4, text: "`.`", isCorrect: false }
+      ],
+      rationale: "`^`\ub294 \uc2dc\uc791, `$`\ub294 \ub05d\uc785\ub2c8\ub2e4.",
+      hint: "`$money`\ub294 \ub3c8\uc758 \ub05d(\uacb0\uacfc)\uc774\ub77c\uace0 \uc678\uc6cc\ubcf4\uc138\uc694."
+    },
+    {
+      id: 34,
+      category: "[DAY 12] PIVOT & \uc815\uaddc\ud45c\ud604\uc2dd (PIVOT & Regex)",
+      question: "`REGEXP_LIKE(ENAME, '^[A-C]')`\uc758 \uacb0\uacfc\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "\uc774\ub984\uc5d0 A, B, C\uac00 \ud3ec\ud568\ub41c \ubaa8\ub4e0 \uc0ac\uc6d0", isCorrect: false },
+        { id: 2, text: "\uc774\ub984\uc774 A, B, \ub610\ub294 C\ub85c \uc2dc\uc791\ud558\ub294 \uc0ac\uc6d0", isCorrect: true },
+        { id: 3, text: "\uc774\ub984\uc774 A, B, \ub610\ub294 C\ub85c \ub05d\ub098\ub294 \uc0ac\uc6d0", isCorrect: false },
+        { id: 4, text: "\uc774\ub984\uc774 \uc815\ud655\ud788 'ABC'\uc778 \uc0ac\uc6d0", isCorrect: false }
+      ],
+      rationale: "`^`\ub294 \uc2dc\uc791, `[A-C]`\ub294 A\ubd80\ud130 C \uc0ac\uc774\uc758 \ubb38\uc790 \uc911 \ud558\ub098\ub97c \uc758\ubbf8\ud569\ub2c8\ub2e4.",
+      hint: "[DAY 12] \ud45c: ^(\uc2dc\uc791), [](https://www.google.com/search?q=%ED%83%9D1)."
+    },
+    {
+      id: 35,
+      category: "[DAY 12] PIVOT & \uc815\uaddc\ud45c\ud604\uc2dd (PIVOT & Regex)",
+      question: "`UNPIVOT`\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "\ud589\uc744 \uc5f4\ub85c \ubcc0\ud658\ud55c\ub2e4.", isCorrect: false },
+        { id: 2, text: "\uc5f4\uc744 \ud589\uc73c\ub85c \ubcc0\ud658\ud55c\ub2e4.", isCorrect: true },
+        { id: 3, text: "\uc911\ubcf5\ub41c \ub370\uc774\ud130\ub97c \uc81c\uac70\ud55c\ub2e4.", isCorrect: false },
+        { id: 4, text: "\uacc4\uce35 \uad6c\uc870\ub97c \uc2dc\uac01\ud654\ud55c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "PIVOT\uc758 \ubc18\ub300\uc774\uba70, Wide \ub370\uc774\ud130\ub97c Long \ub370\uc774\ud130\ub85c \ub9cc\ub4ed\ub2c8\ub2e4.",
+      hint: "\ud3bc\uccd0\uc9c4 \uceec\ub7fc\ub4e4\uc744 \ub2e4\uc2dc \uc544\ub798\ub85c \uc313\uae30."
+    },
+    {
+      id: 36,
+      category: "[DAY 13] \uad00\ub9ac \uad6c\ubb38 (DML, TCL, DDL, DCL)",
+      question: "\ub2e4\uc74c \uc911 DDL\uc5d0 \ud574\ub2f9\ud558\ub294 \uba85\ub839\uc5b4\ub85c\ub9cc \uc9dd\uc9c0\uc5b4\uc9c4 \uac83\uc740?",
+      options: [
+        { id: 1, text: "CREATE, ALTER, INSERT", isCorrect: false },
+        { id: 2, text: "UPDATE, DELETE, MERGE", isCorrect: false },
+        { id: 3, text: "CREATE, DROP, TRUNCATE", isCorrect: true },
+        { id: 4, text: "GRANT, REVOKE, COMMIT", isCorrect: false }
+      ],
+      rationale: "DDL\uc740 \uad6c\uc870\ub97c \uc815\uc758\ud558\ub294 CREATE, ALTER, DROP, TRUNCATE \ub4f1\uc785\ub2c8\ub2e4.",
+      hint: "[DAY 13] 3.1 DDL \uba85\ub839\uc5b4 \uc885\ub958."
+    },
+    {
+      id: 37,
+      category: "[DAY 13] \uad00\ub9ac \uad6c\ubb38 (DML, TCL, DDL, DCL)",
+      question: "`DELETE`, `TRUNCATE`, `DROP`\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \ud2c0\ub9b0 \uac83\uc740?",
+      options: [
+        { id: 1, text: "`DELETE`\ub294 `ROLLBACK`\uc774 \uac00\ub2a5\ud558\ub2e4.", isCorrect: false },
+        { id: 2, text: "`TRUNCATE`\ub294 \ud14c\uc774\ube14\uc758 \uad6c\uc870\ub294 \ub0a8\uae30\uace0 \ub370\uc774\ud130\ub9cc \uc0ad\uc81c\ud55c\ub2e4.", isCorrect: false },
+        { id: 3, text: "`DROP`\uc740 \ud14c\uc774\ube14 \uc790\uccb4\ub97c \uc0ad\uc81c\ud558\uba70 \ubcf5\uad6c\uac00 \ubd88\uac00\ub2a5\ud558\ub2e4.", isCorrect: false },
+        { id: 4, text: "`TRUNCATE`\ub294 `DELETE`\ubcf4\ub2e4 \uc18d\ub3c4\uac00 \ub290\ub9ac\uc9c0\ub9cc \uc548\uc804\ud558\ub2e4.", isCorrect: true }
+      ],
+      rationale: "`TRUNCATE`\ub294 \ub85c\uadf8\ub97c \ub0a8\uae30\uc9c0 \uc54a\uc544 `DELETE`\ubcf4\ub2e4 \uc555\ub3c4\uc801\uc73c\ub85c \ube60\ub985\ub2c8\ub2e4.",
+      hint: "\uc18d\ub3c4\ub294 TRUNCATE > DELETE."
+    },
+    {
+      id: 38,
+      category: "[DAY 13] \uad00\ub9ac \uad6c\ubb38 (DML, TCL, DDL, DCL)",
+      question: "\ud2b8\ub79c\uc7ad\uc158\uc758 \ud2b9\uc131 \uc911 'All or Nothing'\uc744 \uc758\ubbf8\ud558\ub294 \uac83\uc740?",
+      options: [
+        { id: 1, text: "\uc6d0\uc790\uc131(Atomicity)", isCorrect: true },
+        { id: 2, text: "\uc77c\uad00\uc131(Consistency)", isCorrect: false },
+        { id: 3, text: "\uace0\ub9bd\uc131(Isolation)", isCorrect: false },
+        { id: 4, text: "\uc9c0\uc18d\uc131(Durability)", isCorrect: false }
+      ],
+      rationale: "\ud2b8\ub79c\uc7ad\uc158 \ub0b4\uc758 \uc791\uc5c5\uc740 \ubaa8\ub450 \uc131\uacf5\ud558\uac70\ub098 \ubaa8\ub450 \uc2e4\ud328\ud574\uc57c \ud569\ub2c8\ub2e4.",
+      hint: "\uc6d0\uc790\ub294 \ub354 \uc774\uc0c1 \ucabc\uac24 \uc218 \uc5c6\ub294 \ucd5c\uc18c \ub2e8\uc704\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 39,
+      category: "[DAY 13] \uad00\ub9ac \uad6c\ubb38 (DML, TCL, DDL, DCL)",
+      question: "Oracle\uc5d0\uc11c DML \uc218\ud589 \ud6c4 `CREATE TABLE`\uc744 \uc2e4\ud589\ud588\uc744 \ub54c \ubc1c\uc0dd\ud558\ub294 \ud604\uc0c1\uc740?",
+      options: [
+        { id: 1, text: "\uc774\uc804 DML \ub0b4\uc5ed\uc774 `ROLLBACK` \ub41c\ub2e4.", isCorrect: false },
+        { id: 2, text: "DDL \uc2e4\ud589 \uc9c1\uc804\uc5d0 \uc790\ub3d9 `COMMIT`\uc774 \ubc1c\uc0dd\ud55c\ub2e4.", isCorrect: true },
+        { id: 3, text: "\uc5d0\ub7ec\uac00 \ubc1c\uc0dd\ud558\uc5ec DDL\uc774 \uc2e4\ud589\ub418\uc9c0 \uc54a\ub294\ub2e4.", isCorrect: false },
+        { id: 4, text: "\uc0ac\uc6a9\uc790\uac00 \uba85\uc2dc\uc801\uc73c\ub85c `COMMIT`\uc744 \ud560 \ub54c\uae4c\uc9c0 \ub300\uae30\ud55c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "Oracle\uc5d0\uc11c DDL\uc740 \uc2e4\ud589 \uc804\ud6c4\ub85c \uc790\ub3d9 \ucee4\ubc0b\uc744 \uc77c\uc73c\ud0b5\ub2c8\ub2e4.",
+      hint: "DDL\uc740 \ubb34\uc11c\uc6b4 \ub140\uc11d\uc785\ub2c8\ub2e4. \uc2e4\ud589 \uc989\uc2dc \uacfc\uac70\ub97c \ud655\uc815 \uc9d3\uc2b5\ub2c8\ub2e4."
+    },
+    {
+      id: 40,
+      category: "[DAY 13] \uad00\ub9ac \uad6c\ubb38 (DML, TCL, DDL, DCL)",
+      question: "`MERGE` \ubb38\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \ubd80\uc801\uc808\ud55c \uac83\uc740?",
+      options: [
+        { id: 1, text: "\uc870\uac74\uc5d0 \ub530\ub77c `INSERT`\uc640 `UPDATE`\ub97c \ub3d9\uc2dc\uc5d0 \ucc98\ub9ac\ud560 \uc218 \uc788\ub2e4.", isCorrect: false },
+        { id: 2, text: "`WHEN MATCHED` \uc808\uc740 \uc870\uac74\uc774 \uc77c\uce58\ud560 \ub54c \uc2e4\ud589\ub41c\ub2e4.", isCorrect: false },
+        { id: 3, text: "`WHEN NOT MATCHED` \uc808\uc740 \ubc18\ub4dc\uc2dc \uc0dd\ub7b5\ud574\uc57c \ud55c\ub2e4.", isCorrect: true },
+        { id: 4, text: "`UPDATE` \uc808 \ub0b4\uc5d0\uc11c `DELETE`\ub97c \ud568\uaed8 \uc0ac\uc6a9\ud560 \uc218\ub3c4 \uc788\ub2e4.", isCorrect: false }
+      ],
+      rationale: "`WHEN NOT MATCHED`\ub294 \uc870\uac74\uc774 \ub9de\uc9c0 \uc54a\uc744 \ub54c \uc2e0\uaddc \uc0bd\uc785\uc744 \uc704\ud574 \uc8fc\ub85c \uc0ac\uc6a9\ub418\uba70, \uc120\ud0dd \uc0ac\ud56d\uc785\ub2c8\ub2e4.",
+      hint: "\uc788\uc73c\uba74 UPDATE, \uc5c6\uc73c\uba74 INSERT."
+    }
+  ],
+  142: [
+    {
+      id: 1,
+      category: "[PART 1] SQL \uae30\ubcf8 (DAY 1 ~ 5)",
+      question: "\ub2e4\uc74c \uc911 NULL\uc5d0 \ub300\ud55c \uc0b0\uc220 \uc5f0\uc0b0 \uacb0\uacfc\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "NULL + 100 = 100", isCorrect: false },
+        { id: 2, text: "NULL * 0 = 0", isCorrect: false },
+        { id: 3, text: "NULL / 5 = NULL", isCorrect: true },
+        { id: 4, text: "NULL - NULL = 0", isCorrect: false }
+      ],
+      rationale: "NULL\uc740 '\uc54c \uc218 \uc5c6\ub294 \uac12'\uc774\ubbc0\ub85c \uc5b4\ub5a4 \uc22b\uc790\uc640 \uc5f0\uc0b0\ud574\ub3c4 \uacb0\uacfc\ub294 \ud56d\uc0c1 NULL\uc785\ub2c8\ub2e4.",
+      hint: "NULL\uacfc \ub180\uba74 \uacb0\uacfc\ub294 \ud56d\uc0c1 NULL\uc774 \ub41c\ub2e4\ub294 \uc810\uc744 \uae30\uc5b5\ud558\uc138\uc694."
+    },
+    {
+      id: 2,
+      category: "[PART 1] SQL \uae30\ubcf8 (DAY 1 ~ 5)",
+      question: "\ub2e4\uc74c SQL \ubb38\uc7a5\uc758 \uc2e4\ud589 \uc21c\uc11c\ub85c \uc62c\ubc14\ub978 \uac83\uc740?",
+      code: "SELECT ENAME, SAL FROM EMP WHERE SAL > 2000 ORDER BY ENAME;",
+      options: [
+        { id: 1, text: "SELECT -> FROM -> WHERE -> ORDER BY", isCorrect: false },
+        { id: 2, text: "FROM -> WHERE -> SELECT -> ORDER BY", isCorrect: true },
+        { id: 3, text: "FROM -> SELECT -> WHERE -> ORDER BY", isCorrect: false },
+        { id: 4, text: "WHERE -> FROM -> SELECT -> ORDER BY", isCorrect: false }
+      ],
+      rationale: "SQL\uc758 \ub17c\ub9ac\uc801 \uc2e4\ud589 \uc21c\uc11c\ub294 FROM(\uc7ac\ub8cc) -> WHERE(\ud544\ud130) -> SELECT(\ucd94\ucd9c) -> ORDER BY(\uc815\ub82c) \uc21c\uc785\ub2c8\ub2e4.",
+      hint: "\ud504-\uc6e8-\uadf8-\ud558-\uc140-\uc624(FWGHSO)\ub97c \uc554\uae30\ud558\uc138\uc694."
+    },
+    {
+      id: 3,
+      category: "[PART 1] SQL \uae30\ubcf8 (DAY 1 ~ 5)",
+      question: "\ub2e4\uc74c \uc911 \uc5d0\ub7ec\uac00 \ubc1c\uc0dd\ud558\ub294 SQL \ubb38\uc7a5\uc740?",
+      options: [
+        { id: 1, text: "`SELECT ENAME AS \uc774\ub984 FROM EMP WHERE SAL > 2000;`", isCorrect: false },
+        { id: 2, text: "`SELECT ENAME \uc774\ub984 FROM EMP ORDER BY \uc774\ub984;`", isCorrect: false },
+        { id: 3, text: "`SELECT ENAME AS \uc774\ub984 FROM EMP WHERE \uc774\ub984 = 'SMITH';`", isCorrect: true },
+        { id: 4, text: "`SELECT * FROM EMP;`", isCorrect: false }
+      ],
+      rationale: "WHERE \uc808\uc740 SELECT \uc808\ubcf4\ub2e4 \uba3c\uc800 \uc2e4\ud589\ub418\ubbc0\ub85c SELECT \uc808\uc5d0\uc11c \uc815\uc758\ud55c \ubcc4\uce6d(Alias)\uc744 WHERE \uc808\uc5d0\uc11c \uc0ac\uc6a9\ud560 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.",
+      hint: "\uc2e4\ud589 \uc21c\uc11c\uc0c1 WHERE \ub2e8\uacc4\uc5d0\uc11c\ub294 \uc544\uc9c1 '\uc774\ub984'\uc774\ub77c\ub294 \ubcc4\uba85\uc774 \ud0dc\uc5b4\ub098\uc9c0 \uc54a\uc558\uc2b5\ub2c8\ub2e4."
+    },
+    {
+      id: 4,
+      category: "[PART 1] SQL \uae30\ubcf8 (DAY 1 ~ 5)",
+      question: "\ub2e4\uc74c \uc911 \uc911\ubcf5\ub41c \ub370\uc774\ud130\ub97c \uc81c\uac70\ud558\uace0 \uc885\ub958\ubcc4\ub85c \ud558\ub098\uc529\ub9cc \ucd9c\ub825\ud558\ub294 \ud0a4\uc6cc\ub4dc\ub294?",
+      options: [
+        { id: 1, text: "ALL", isCorrect: false },
+        { id: 2, text: "DISTINCT", isCorrect: true },
+        { id: 3, text: "UNIQUE", isCorrect: false },
+        { id: 4, text: "GROUP BY", isCorrect: false }
+      ],
+      rationale: "SELECT \ubc14\ub85c \ub4a4\uc5d0 DISTINCT\ub97c \ubd99\uc774\uba74 \uc911\ubcf5 \ud589\uc744 \uc81c\uac70\ud55c \uacb0\uacfc\uac00 \ucd9c\ub825\ub429\ub2c8\ub2e4.",
+      hint: "1\uc77c\ucc28 \uac15\uc758\uc548\uc758 '\uc911\ubcf5 \uc81c\uac70' \ud30c\ud2b8\ub97c \ucc38\uace0\ud558\uc138\uc694."
+    },
+    {
+      id: 5,
+      category: "[PART 1] SQL \uae30\ubcf8 (DAY 1 ~ 5)",
+      question: "\ub2e4\uc74c \uc911 \ubb38\uc790\uc5f4 \ud568\uc218\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \ubd80\uc801\uc808\ud55c \uac83\uc740?",
+      options: [
+        { id: 1, text: "`LOWER`\ub294 \ubb38\uc790\uc5f4\uc744 \uc18c\ubb38\uc790\ub85c \ubcc0\ud658\ud55c\ub2e4.", isCorrect: false },
+        { id: 2, text: "`SUBSTR('ABCDE', 2, 2)`\uc758 \uacb0\uacfc\ub294 'BC'\uc774\ub2e4.", isCorrect: false },
+        { id: 3, text: "`LTRIM`\uc740 \ubb38\uc790\uc5f4 \uc624\ub978\ucabd\uc758 \uacf5\ubc31\uc744 \uc81c\uac70\ud55c\ub2e4.", isCorrect: true },
+        { id: 4, text: "`CONCAT`\uc740 \ub450 \ubb38\uc790\uc5f4\uc744 \ud558\ub098\ub85c \ud569\uce5c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "LTRIM\uc740 \uc67c\ucabd(Left) \uacf5\ubc31\uc744 \uc81c\uac70\ud558\uba70, \uc624\ub978\ucabd \uacf5\ubc31 \uc81c\uac70\ub294 RTRIM\uc785\ub2c8\ub2e4.",
+      hint: "L\uc740 Left, R\uc740 Right\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 6,
+      category: "[PART 1] SQL \uae30\ubcf8 (DAY 1 ~ 5)",
+      question: "\uc624\ub77c\ud074 \ud658\uacbd\uc5d0\uc11c `ROUND(123.456, 1)`\uc758 \uc2e4\ud589 \uacb0\uacfc\ub294?",
+      options: [
+        { id: 1, text: "123", isCorrect: false },
+        { id: 2, text: "123.4", isCorrect: false },
+        { id: 3, text: "123.5", isCorrect: true },
+        { id: 4, text: "120", isCorrect: false }
+      ],
+      rationale: "\uc18c\uc218\uc810 \uccab\uc9f8 \uc790\ub9ac\uae4c\uc9c0 \ud45c\uc2dc\ud558\uae30 \uc704\ud574 \ub458\uc9f8 \uc790\ub9ac\uc5d0\uc11c \ubc18\uc62c\ub9bc\ud569\ub2c8\ub2e4.",
+      hint: "\uc591\uc218 \uc778\ub371\uc2a4\ub294 \uc18c\uc218\uc810 \uc790\ub9bf\uc218\ub97c \uc758\ubbf8\ud569\ub2c8\ub2e4."
+    },
+    {
+      id: 7,
+      category: "[PART 1] SQL \uae30\ubcf8 (DAY 1 ~ 5)",
+      question: "\ub2e4\uc74c \uc911 \ub0a0\uc9dc \ud568\uc218\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "`SYSDATE`\ub294 SQL Server\uc758 \ud604\uc7ac \uc2dc\uac04\uc744 \uac00\uc838\uc628\ub2e4.", isCorrect: false },
+        { id: 2, text: "`\ub0a0\uc9dc + 1`\uc740 \ud574\ub2f9 \ub0a0\uc9dc\uc5d0 1\uc2dc\uac04\uc744 \ub354\ud55c \uacb0\uacfc\ub2e4.", isCorrect: false },
+        { id: 3, text: "`EXTRACT(YEAR FROM SYSDATE)`\ub294 \ud604\uc7ac \ub144\ub3c4\ub97c \uc22b\uc790\ub85c \ubc18\ud658\ud55c\ub2e4.", isCorrect: true },
+        { id: 4, text: "\ub0a0\uc9dc\uc640 \ub0a0\uc9dc\ub97c \ub354\ud558\uba74 \ub450 \ub0a0\uc9dc \uc0ac\uc774\uc758 \uc77c\uc218\uac00 \uacc4\uc0b0\ub41c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "EXTRACT\ub294 \ud2b9\uc815 \ub0a0\uc9dc \uc694\uc18c\ub97c \ucd94\ucd9c\ud569\ub2c8\ub2e4. 2\ubc88\uc740 1\uc77c(24\uc2dc\uac04)\uc744 \ub354\ud558\ub294 \uac83\uc774\uba70, 4\ubc88\uc740 \ub0a0\uc9dc \uac04\uc758 \ube84\uc148\uc774 \uc77c\uc218 \uacc4\uc0b0\uc785\ub2c8\ub2e4.",
+      hint: "\ub0a0\uc9dc \uc5f0\uc0b0\uc758 \uae30\ubcf8 \ub2e8\uc704\ub294 '\uc77c(Day)'\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 8,
+      category: "[PART 1] SQL \uae30\ubcf8 (DAY 1 ~ 5)",
+      question: "\ubcf4\ub108\uc2a4(COMM) \uceec\ub7fc\uc774 NULL\uc778 \uacbd\uc6b0 0\uc73c\ub85c \uce58\ud658\ud558\uc5ec \uae09\uc5ec(SAL)\uc640 \ub354\ud558\ub294 \ud568\uc218\ub85c \uc801\uc808\ud55c \uac83\uc740? (Oracle \uae30\uc900)",
+      options: [
+        { id: 1, text: "`ISNULL(COMM, 0)`", isCorrect: false },
+        { id: 2, text: "`NVL(COMM, 0)`", isCorrect: true },
+        { id: 3, text: "`NULLIF(COMM, 0)`", isCorrect: false },
+        { id: 4, text: "`COALESCE(COMM, 0)`", isCorrect: false }
+      ],
+      rationale: "NVL(\uac12, \ub300\uccb4\uac12)\uc740 \uac12\uc774 NULL\uc778 \uacbd\uc6b0 \ub300\uccb4\uac12\uc744 \ubc18\ud658\ud569\ub2c8\ub2e4. 1\ubc88\uc740 SQL Server \ud568\uc218\uc785\ub2c8\ub2e4.",
+      hint: "3\uc77c\ucc28 NULL \ucc98\ub9ac \ud568\uc218 \ud45c\ub97c \ud655\uc778\ud558\uc138\uc694."
+    },
+    {
+      id: 9,
+      category: "[PART 1] SQL \uae30\ubcf8 (DAY 1 ~ 5)",
+      question: "\ub2e4\uc74c \uc911 \uc9d1\uacc4 \ud568\uc218\uc640 NULL\uc758 \uad00\uacc4\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \ud2c0\ub9b0 \uac83\uc740?",
+      options: [
+        { id: 1, text: "`COUNT(*)`\ub294 NULL\uc744 \ud3ec\ud568\ud558\uc5ec \ud589\uc758 \uc218\ub97c \uc0cc\ub2e4.", isCorrect: false },
+        { id: 2, text: "`SUM(SAL)`\uc740 SAL\uc774 NULL\uc778 \ud589\uc744 \uc81c\uc678\ud558\uace0 \ud569\uacc4\ub97c \uad6c\ud55c\ub2e4.", isCorrect: false },
+        { id: 3, text: "`AVG(SAL)`\uc740 \uc804\uccb4 \ud589 \uc218\ub85c \ud569\uacc4\ub97c \ub098\ub204\uc5b4 \ud3c9\uade0\uc744 \uad6c\ud55c\ub2e4.", isCorrect: true },
+        { id: 4, text: "`MAX`\uc640 `MIN`\uc740 NULL\uc744 \ubb34\uc2dc\ud558\uace0 \uacc4\uc0b0\ud55c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "AVG\ub294 NULL\uc778 \ud589\uc744 '\ubd84\ubaa8'\uc5d0\uc11c\ub3c4 \uc81c\uc678\ud558\uace0 \ud3c9\uade0\uc744 \uad6c\ud569\ub2c8\ub2e4. (\ud569\uacc4 / NULL\uc774 \uc544\ub2cc \ud589\uc758 \uc218)",
+      hint: "\uc9d1\uacc4 \ud568\uc218\ub294 \uae30\ubcf8\uc801\uc73c\ub85c NULL\uc744 '\ubb34\uc2dc'\ud569\ub2c8\ub2e4."
+    },
+    {
+      id: 10,
+      category: "[PART 1] SQL \uae30\ubcf8 (DAY 1 ~ 5)",
+      question: "\uc544\ub798 SQL \ubb38\uc7a5\uc758 \uc5d0\ub7ec \uc6d0\uc778\uc73c\ub85c \uac00\uc7a5 \uc801\uc808\ud55c \uac83\uc740?",
+      code: "SELECT DEPTNO, ENAME, SUM(SAL)\nFROM EMP\nGROUP BY DEPTNO;",
+      options: [
+        { id: 1, text: "SUM \ud568\uc218\ub294 GROUP BY\uc640 \ud568\uaed8 \uc4f8 \uc218 \uc5c6\ub2e4.", isCorrect: false },
+        { id: 2, text: "ENAME \uceec\ub7fc\uc774 GROUP BY \uc808\uc5d0 \uba85\uc2dc\ub418\uc9c0 \uc54a\uc558\ub2e4.", isCorrect: true },
+        { id: 3, text: "DEPTNO\ub294 \uc22b\uc790\ud615\uc774\ub77c \uadf8\ub8f9\ud654\ud560 \uc218 \uc5c6\ub2e4.", isCorrect: false },
+        { id: 4, text: "FROM \uc808\uc5d0 \ud14c\uc774\ube14 \ubcc4\uce6d\uc774 \uc5c6\ub2e4.", isCorrect: false }
+      ],
+      rationale: "GROUP BY \uc0ac\uc6a9 \uc2dc SELECT \uc808\uc5d0 \uc788\ub294 \uc9d1\uacc4\ub418\uc9c0 \uc54a\uc740 \uc77c\ubc18 \uceec\ub7fc\uc740 \ubc18\ub4dc\uc2dc GROUP BY\uc5d0 \ud3ec\ud568\ub418\uc5b4\uc57c \ud569\ub2c8\ub2e4.",
+      hint: "4\uc77c\ucc28 \"\ud300\ubcc4 \ud68c\uc2dd\ube44 \uc815\uc0b0\" \ube44\uc720\ub97c \ub5a0\uc62c\ub824\ubcf4\uc138\uc694."
+    },
+    {
+      id: 11,
+      category: "[PART 1] SQL \uae30\ubcf8 (DAY 1 ~ 5)",
+      question: "\ub2e4\uc74c \uc911 HAVING \uc808\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "WHERE \uc808\uacfc \ub3d9\uc77c\ud55c \uae30\ub2a5\uc744 \uc218\ud589\ud55c\ub2e4.", isCorrect: false },
+        { id: 2, text: "\uc9d1\uacc4 \ud568\uc218\ub97c \uc774\uc6a9\ud55c \uc870\uac74 \ud544\ud130\ub9c1\uc774 \uac00\ub2a5\ud558\ub2e4.", isCorrect: true },
+        { id: 3, text: "GROUP BY \uc808 \uc5c6\uc774\ub3c4 \ub2e8\ub3c5\uc73c\ub85c \uc0ac\uc6a9 \uac00\ub2a5\ud558\ub2e4.", isCorrect: false },
+        { id: 4, text: "\uc2e4\ud589 \uc21c\uc11c\uc0c1 WHERE \uc808\ubcf4\ub2e4 \uba3c\uc800 \uc2e4\ud589\ub41c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "HAVING\uc740 \uadf8\ub8f9\ud654\ub41c \uacb0\uacfc(\uc9d1\uacc4 \uacb0\uacfc)\uc5d0 \uc870\uac74\uc744 \uac78 \ub54c \uc0ac\uc6a9\ud569\ub2c8\ub2e4.",
+      hint: "4\uc77c\ucc28 \uc0ac\uacfc \uc120\ubcc4 \uc791\uc5c5 \ube44\uc720\uc5d0\uc11c '\ubc15\uc2a4 \ubb34\uac8c \uc7ac\uae30' \ub2e8\uacc4\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 12,
+      category: "[PART 1] SQL \uae30\ubcf8 (DAY 1 ~ 5)",
+      question: "\ub2e4\uc74c \uc911 INNER JOIN\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \uac00\uc7a5 \ubd80\uc801\uc808\ud55c \uac83\uc740?",
+      options: [
+        { id: 1, text: "\uc870\uc778 \uc870\uac74\uc5d0 \ub9de\ub294 \ub370\uc774\ud130\uac00 \uc591\ucabd \ud14c\uc774\ube14\uc5d0 \ubaa8\ub450 \uc788\uc744 \ub54c\ub9cc \ucd9c\ub825\ub41c\ub2e4.", isCorrect: false },
+        { id: 2, text: "\uad50\uc9d1\ud569\uacfc \uc720\uc0ac\ud55c \uc131\uaca9\uc744 \uac16\ub294\ub2e4.", isCorrect: false },
+        { id: 3, text: "Oracle\uc5d0\uc11c\ub294 WHERE \uc808\uc5d0 \uc870\uc778 \uc870\uac74\uc744 \uae30\uc220\ud560 \uc218 \uc788\ub2e4.", isCorrect: false },
+        { id: 4, text: "\ud55c\ucabd \ud14c\uc774\ube14\uc5d0\ub9cc \ub370\uc774\ud130\uac00 \uc788\uc5b4\ub3c4 \ubb34\uc870\uac74 \ucd9c\ub825\ub41c\ub2e4.", isCorrect: true }
+      ],
+      rationale: "\uc591\ucabd \ubaa8\ub450 \uc874\uc7ac\ud574\uc57c \ud558\ub294 \uac83\uc774 INNER JOIN\uc774\uba70, \ud55c\ucabd\ub9cc \uc788\uc5b4\ub3c4 \ucd9c\ub825\ub418\ub294 \uac83\uc740 OUTER JOIN\uc785\ub2c8\ub2e4.",
+      hint: "\uc18c\uac1c\ud305\uc5d0\uc11c \ub9e4\uce6d\ub41c \ucee4\ud50c\ub9cc \ubcf4\uc5ec\uc8fc\ub294 \ubc29\uc2dd\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 13,
+      category: "[PART 1] SQL \uae30\ubcf8 (DAY 1 ~ 5)",
+      question: "\ub2e4\uc74c \uc911 NATURAL JOIN\uc758 \ud2b9\uc9d5\uc73c\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "\uc870\uc778 \uceec\ub7fc\uc5d0 \ud14c\uc774\ube14 \ubcc4\uce6d(Alias)\uc744 \uc0ac\uc6a9\ud560 \uc218 \uc5c6\ub2e4.", isCorrect: true },
+        { id: 2, text: "ON \uc808\uc744 \uc0ac\uc6a9\ud558\uc5ec \uc870\uc778 \uc870\uac74\uc744 \uba85\uc2dc\ud574\uc57c \ud55c\ub2e4.", isCorrect: false },
+        { id: 3, text: "\uc774\ub984\uc740 \ub2e4\ub974\uc9c0\ub9cc \ud0c0\uc785\uc774 \uac19\uc740 \uceec\ub7fc\uc744 \ucc3e\uc544 \uc870\uc778\ud55c\ub2e4.", isCorrect: false },
+        { id: 4, text: "INNER JOIN\ubcf4\ub2e4 \uc131\ub2a5\uc774 \ud56d\uc0c1 \uc6b0\uc218\ud558\ub2e4.", isCorrect: false }
+      ],
+      rationale: "NATURAL JOIN\uc740 \uc790\ub3d9\uc73c\ub85c \uceec\ub7fc\uc744 \ucc3e\uc73c\ubbc0\ub85c \uc870\uc778 \uceec\ub7fc\uc5d0 \uc2dd\ubcc4\uc790(E.DEPTNO \ub4f1)\ub97c \ubd99\uc774\uba74 \uc5d0\ub7ec\uac00 \ub0a9\ub2c8\ub2e4.",
+      hint: "5\uc77c\ucc28 '\uacf5\ud1b5 \uceec\ub7fc\uc740 \ucfe8\ud558\uac8c \ud63c\uc790' \ud30c\ud2b8\ub97c \ud655\uc778\ud558\uc138\uc694."
+    },
+    {
+      id: 14,
+      category: "[PART 1] SQL \uae30\ubcf8 (DAY 1 ~ 5)",
+      question: "LEFT OUTER JOIN\uc5d0\uc11c \uc67c\ucabd \ud14c\uc774\ube14\uc5d0\ub294 \ub370\uc774\ud130\uac00 \uc788\uace0 \uc624\ub978\ucabd \ud14c\uc774\ube14\uc5d0\ub294 \ub9e4\uce6d\ub418\ub294 \ub370\uc774\ud130\uac00 \uc5c6\uc744 \ub54c \ucd9c\ub825\uac12\uc740?",
+      options: [
+        { id: 1, text: "\ud574\ub2f9 \ud589\uc740 \ucd9c\ub825\ub418\uc9c0 \uc54a\ub294\ub2e4.", isCorrect: false },
+        { id: 2, text: "\uc5d0\ub7ec\uac00 \ubc1c\uc0dd\ud55c\ub2e4.", isCorrect: false },
+        { id: 3, text: "\uc624\ub978\ucabd \ud14c\uc774\ube14\uc758 \uceec\ub7fc\uac12\ub4e4\uc774 NULL\ub85c \ucc44\uc6cc\uc838 \ucd9c\ub825\ub41c\ub2e4.", isCorrect: true },
+        { id: 4, text: "\uc67c\ucabd \ud14c\uc774\ube14\uc758 \ub370\uc774\ud130\ub3c4 \uc0ad\uc81c\ub41c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "\uae30\uc900 \ud14c\uc774\ube14(\uc67c\ucabd)\uc758 \ub370\uc774\ud130\ub294 \ub2e4 \ubcf4\uc5ec\uc8fc\ub418 \uc9dd\uc774 \uc5c6\uc73c\uba74 \ube48\uce78(NULL)\uc73c\ub85c \ub098\uc635\ub2c8\ub2e4.",
+      hint: "5\uc77c\ucc28 '\uad6c\ub9e4 \uc548 \ud55c \ud68c\uc6d0' \uc608\uc2dc\ub97c \ub5a0\uc62c\ub824\ubcf4\uc138\uc694."
+    },
+    {
+      id: 15,
+      category: "[PART 1] SQL \uae30\ubcf8 (DAY 1 ~ 5)",
+      question: "\ub2e4\uc74c \uc911 3\uac1c\uc758 \ud14c\uc774\ube14\uc744 \uc870\uc778\ud560 \ub54c \ud544\uc694\ud55c \ucd5c\uc18c \uc870\uc778 \uc870\uac74\uc758 \uac1c\uc218\ub294?",
+      options: [
+        { id: 1, text: "1\uac1c", isCorrect: false },
+        { id: 2, text: "2\uac1c", isCorrect: true },
+        { id: 3, text: "3\uac1c", isCorrect: false },
+        { id: 4, text: "\uc5c6\uc74c", isCorrect: false }
+      ],
+      rationale: "N\uac1c\uc758 \ud14c\uc774\ube14\uc744 \uc870\uc778\ud558\ub824\uba74 \ucd5c\uc18c N-1\uac1c\uc758 \uc870\uac74\uc774 \ud544\uc694\ud569\ub2c8\ub2e4.",
+      hint: "N-1\uc758 \ubc95\uce59\uc744 \uae30\uc5b5\ud558\uc138\uc694."
+    },
+    {
+      id: 16,
+      category: "[PART 2] SQL \ud65c\uc6a9 (DAY 8 ~ 11)",
+      question: "\ub2e4\uc74c \uc911 \uc11c\ube0c\ucffc\ub9ac\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \ubd80\uc801\uc808\ud55c \uac83\uc740?",
+      options: [
+        { id: 1, text: "\uc11c\ube0c\ucffc\ub9ac\ub294 \ud56d\uc0c1 \uad04\ud638\ub85c \uac10\uc2f8\uc57c \ud55c\ub2e4.", isCorrect: false },
+        { id: 2, text: "\ub2e8\uc77c \ud589 \uc11c\ube0c\ucffc\ub9ac\ub294 \uacb0\uacfc\uac00 2\uac74 \uc774\uc0c1\uc774\uc5b4\ub3c4 \uc0c1\uad00\uc5c6\ub2e4.", isCorrect: true },
+        { id: 3, text: "\uc11c\ube0c\ucffc\ub9ac \ub0b4\uc5d0\uc11c\ub294 ORDER BY \uc808\uc744 \uc4f8 \uc218 \uc5c6\ub2e4 (\uc778\ub77c\uc778 \ubdf0 \uc81c\uc678).", isCorrect: false },
+        { id: 4, text: "\uc11c\ube0c\ucffc\ub9ac\ub294 \uba54\uc778\ucffc\ub9ac\uc758 \uceec\ub7fc\uc744 \ucc38\uc870\ud560 \uc218 \uc788\ub2e4.", isCorrect: false }
+      ],
+      rationale: "\ub2e8\uc77c \ud589 \uc11c\ube0c\ucffc\ub9ac\uc5d0 \uacb0\uacfc\uac00 2\uac74 \uc774\uc0c1 \ub098\uc624\uba74 \uc5d0\ub7ec\uac00 \ubc1c\uc0dd\ud569\ub2c8\ub2e4.",
+      hint: "8\uc77c\ucc28 \ub2e8\uc77c \ud589 vs \ub2e4\uc911 \ud589 \uc5f0\uc0b0\uc790\ub97c \uad6c\ubd84\ud558\uc138\uc694."
+    },
+    {
+      id: 17,
+      category: "[PART 2] SQL \ud65c\uc6a9 (DAY 8 ~ 11)",
+      question: "\ub2e4\uc74c \uc911 \ub2e4\uc911 \ud589 \uc5f0\uc0b0\uc790\uac00 \uc544\ub2cc \uac83\uc740?",
+      options: [
+        { id: 1, text: "IN", isCorrect: false },
+        { id: 2, text: "ANY", isCorrect: false },
+        { id: 3, text: "<>", isCorrect: true },
+        { id: 4, text: "ALL", isCorrect: false }
+      ],
+      rationale: "`<>`\ub294 \ub2e8\uc77c \ud589 \ube44\uad50 \uc5f0\uc0b0\uc790\uc785\ub2c8\ub2e4.",
+      hint: "8\uc77c\ucc28 \ub2e4\uc911 \ud589 \ud544\uc218 \uc554\uae30 \uc5f0\uc0b0\uc790 \ud45c\ub97c \ud655\uc778\ud558\uc138\uc694."
+    },
+    {
+      id: 18,
+      category: "[PART 2] SQL \ud65c\uc6a9 (DAY 8 ~ 11)",
+      question: "\ubdf0(View)\ub97c \uc0ac\uc6a9\ud558\ub294 \uc7a5\uc810 \uc911 '\ubcf4\uc548\uc131'\uacfc \uad00\ub828 \uc788\ub294 \uac83\uc740?",
+      options: [
+        { id: 1, text: "\ubcf5\uc7a1\ud55c \ucffc\ub9ac\ub97c \ub2e8\uc21c\ud654\uc2dc\ud0a8\ub2e4.", isCorrect: false },
+        { id: 2, text: "\ud2b9\uc815 \uceec\ub7fc\uc744 \uc81c\uc678\ud558\uace0 \ubdf0\ub97c \uc0dd\uc131\ud558\uc5ec \uad8c\ud55c\uc744 \uc81c\uc5b4\ud560 \uc218 \uc788\ub2e4.", isCorrect: true },
+        { id: 3, text: "\uc6d0\ubcf8 \ud14c\uc774\ube14 \uad6c\uc870\uac00 \ubc14\ub00c\uc5b4\ub3c4 \uc601\ud5a5\uc744 \ubc1b\uc9c0 \uc54a\ub294\ub2e4.", isCorrect: false },
+        { id: 4, text: "\ub370\uc774\ud130 \uc800\uc7a5 \uacf5\uac04\uc744 \uc808\uc57d\ud560 \uc218 \uc788\ub2e4.", isCorrect: false }
+      ],
+      rationale: "\ubbfc\uac10\ud55c \uc815\ubcf4(\uae09\uc5ec \ub4f1)\ub97c \ube7c\uace0 \ubdf0\ub97c \ub9cc\ub4e4\uc5b4 \uacf5\uac1c\ud568\uc73c\ub85c\uc368 \ubcf4\uc548\uc744 \uc720\uc9c0\ud569\ub2c8\ub2e4.",
+      hint: "'\ub3c5\u00b7\ud3b8\u00b7\ubcf4'\uc758 \ubcf4\uc548\uc131\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 19,
+      category: "[PART 2] SQL \ud65c\uc6a9 (DAY 8 ~ 11)",
+      question: "\ub2e4\uc74c \uc911 \uc9d1\ud569 \uc5f0\uc0b0\uc790 `UNION`\uacfc `UNION ALL`\uc758 \uacb0\uc815\uc801 \ucc28\uc774\ub294?",
+      options: [
+        { id: 1, text: "\ud569\uce58\ub294 \ub370\uc774\ud130\uc758 \ud0c0\uc785", isCorrect: false },
+        { id: 2, text: "\uacb0\uacfc\uc758 \uc911\ubcf5 \uc81c\uac70 \uc5ec\ubd80 \ubc0f \uc815\ub82c \ubc1c\uc0dd \uc5ec\ubd80", isCorrect: true },
+        { id: 3, text: "\uceec\ub7fc\uc758 \uac1c\uc218 \uc77c\uce58 \uc5ec\ubd80", isCorrect: false },
+        { id: 4, text: "\uc0ac\uc6a9 \uac00\ub2a5\ud55c DBMS\uc758 \uc885\ub958", isCorrect: false }
+      ],
+      rationale: "UNION\uc740 \uc911\ubcf5\uc744 \uc81c\uac70\ud558\uace0 \uc815\ub82c\uc744 \uc218\ud589\ud558\uba70, UNION ALL\uc740 \uc911\ubcf5\uc744 \ud5c8\uc6a9\ud558\uace0 \uc815\ub82c\ud558\uc9c0 \uc54a\uc2b5\ub2c8\ub2e4.",
+      hint: "\uc815\ub82c(Sort)\uc740 \uc131\ub2a5\uc5d0 \uc601\ud5a5\uc744 \uc90d\ub2c8\ub2e4."
+    },
+    {
+      id: 20,
+      category: "[PART 2] SQL \ud65c\uc6a9 (DAY 8 ~ 11)",
+      question: "`ROLLUP(A, B)` \uc2e4\ud589 \uc2dc \uc9d1\uacc4\ub418\ub294 \uc870\ud569\uc73c\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "(A, B), (A), ()", isCorrect: true },
+        { id: 2, text: "(A, B), (B), ()", isCorrect: false },
+        { id: 3, text: "(A), (B), ()", isCorrect: false },
+        { id: 4, text: "(A, B), (A), (B), ()", isCorrect: false }
+      ],
+      rationale: "ROLLUP\uc740 \uacc4\uce35\uc801\uc73c\ub85c \uc624\ub978\ucabd \uceec\ub7fc\ubd80\ud130 \ud558\ub098\uc529 \ube7c\uba74\uc11c \uc9d1\uacc4\ud569\ub2c8\ub2e4.",
+      hint: "9\uc77c\ucc28 ROLLUP \uacf5\uc2dd (A+B -> A -> \ucd1d\uacc4)\uc744 \uae30\uc5b5\ud558\uc138\uc694."
+    },
+    {
+      id: 21,
+      category: "[PART 2] SQL \ud65c\uc6a9 (DAY 8 ~ 11)",
+      question: "\ub2e4\uc74c \uc911 \uc21c\uc704 \ud568\uc218 3\ub300\uc7a5\uc758 \uc124\uba85\uc73c\ub85c \ud2c0\ub9b0 \uac83\uc740?",
+      options: [
+        { id: 1, text: "`RANK`: 1, 1, 3 \uc21c\uc704 \ubd80\uc5ec (\uac74\ub108\ub700)", isCorrect: false },
+        { id: 2, text: "`DENSE_RANK`: 1, 1, 2 \uc21c\uc704 \ubd80\uc5ec (\ube7d\ube7d\ud568)", isCorrect: false },
+        { id: 3, text: "`ROW_NUMBER`: 1, 2, 3 \uc21c\uc704 \ubd80\uc5ec (\ubb34\uc870\uac74 \ub2e4\ub984)", isCorrect: false },
+        { id: 4, text: "`RANK`: \ubc18\ub4dc\uc2dc `PARTITION BY`\uac00 \uc788\uc5b4\uc57c \uc2e4\ud589\ub41c\ub2e4.", isCorrect: true }
+      ],
+      rationale: "PARTITION BY\ub294 \uc120\ud0dd \uc0ac\ud56d\uc774\uba70, \uc5c6\uc73c\uba74 \uc804\uccb4 \ub370\uc774\ud130 \uae30\uc900\uc785\ub2c8\ub2e4.",
+      hint: "10\uc77c\ucc28 \uc62c\ub9bc\ud53d \uba54\ub2ec \ube44\uc720\ub97c \ub5a0\uc62c\ub824\ubcf4\uc138\uc694."
+    },
+    {
+      id: 22,
+      category: "[PART 2] SQL \ud65c\uc6a9 (DAY 8 ~ 11)",
+      question: "`ROWS`\uc640 `RANGE`\uc758 \ucc28\uc774\uc810\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "`ROWS`\ub294 \uac12\uc758 \ud06c\uae30\ub97c \uae30\uc900\uc73c\ub85c \ubc94\uc704\ub97c \uc815\ud55c\ub2e4.", isCorrect: false },
+        { id: 2, text: "`RANGE`\ub294 \ubb3c\ub9ac\uc801\uc778 \ud589\uc758 \uc218\ub97c \uae30\uc900\uc73c\ub85c \ubc94\uc704\ub97c \uc815\ud55c\ub2e4.", isCorrect: false },
+        { id: 3, text: "`RANGE`\ub294 \ub3d9\uc77c\ud55c \uac12\uc774 \uc788\uc744 \uacbd\uc6b0 \ud55c\uaebc\ubc88\uc5d0 \ucc98\ub9ac\ud55c\ub2e4.", isCorrect: true },
+        { id: 4, text: "`ORDER BY`\uac00 \uc788\uc73c\uba74 \ubb34\uc870\uac74 `ROWS`\uac00 \uae30\ubcf8\uac12\uc774\ub2e4.", isCorrect: false }
+      ],
+      rationale: "RANGE\ub294 \ub17c\ub9ac\uc801 \uac12 \uae30\uc900\uc774\ubbc0\ub85c \uac12\uc774 \uac19\uc73c\uba74 \ub3d9\uc2dc\uc5d0 \ub204\uc801 \uc5f0\uc0b0\ub429\ub2c8\ub2e4.",
+      hint: "10\uc77c\ucc28 100\uc6d0, 100\uc6d0 \uc785\uae08 \uc0ac\ub840\ub97c \ud655\uc778\ud558\uc138\uc694."
+    },
+    {
+      id: 23,
+      category: "[PART 2] SQL \ud65c\uc6a9 (DAY 8 ~ 11)",
+      question: "\uc708\ub3c4\uc6b0 \ud568\uc218\uc5d0\uc11c \uc774\uc804 \ud589\uc758 \uac12\uc744 \uac00\uc838\uc624\ub294 \ud568\uc218\ub294?",
+      options: [
+        { id: 1, text: "LEAD", isCorrect: false },
+        { id: 2, text: "LAG", isCorrect: true },
+        { id: 3, text: "FIRST_VALUE", isCorrect: false },
+        { id: 4, text: "NTILE", isCorrect: false }
+      ],
+      rationale: "LAG\ub294 \uc774\uc804(\uacfc\uac70) \ud589, LEAD\ub294 \ub2e4\uc74c(\ubbf8\ub798) \ud589\uc758 \uac12\uc744 \uac00\uc838\uc635\ub2c8\ub2e4.",
+      hint: "Lagging(\ub4a4\ucc98\uc9d0)\uc740 \uacfc\uac70\ub97c \uc758\ubbf8\ud569\ub2c8\ub2e4."
+    },
+    {
+      id: 24,
+      category: "[PART 2] SQL \ud65c\uc6a9 (DAY 8 ~ 11)",
+      question: "Oracle\uc5d0\uc11c \uc0c1\uc704 5\uac1c\uc758 \ub370\uc774\ud130\ub97c \ucd94\ucd9c\ud558\uae30 \uc704\ud574 \uac00\uc7a5 \uc801\uc808\ud55c \ubc29\ubc95\uc740?",
+      code: "-- (A)\nSELECT * FROM EMP WHERE ROWNUM <= 5 ORDER BY SAL DESC;\n-- (B)\nSELECT * FROM (SELECT * FROM EMP ORDER BY SAL DESC) WHERE ROWNUM <= 5;",
+      options: [
+        { id: 1, text: "(A)\uac00 \ub9de\ub2e4.", isCorrect: false },
+        { id: 2, text: "(B)\uac00 \ub9de\ub2e4.", isCorrect: true },
+        { id: 3, text: "\ub458 \ub2e4 \uacb0\uacfc\uac00 \uac19\ub2e4.", isCorrect: false },
+        { id: 4, text: "\ub458 \ub2e4 \ud2c0\ub838\ub2e4.", isCorrect: false }
+      ],
+      rationale: "ROWNUM\uc740 \ud589 \ucd94\ucd9c \uc2dc \ubc88\ud638\uac00 \ub9e4\uaca8\uc9c0\ubbc0\ub85c, \uc815\ub82c\uc744 \uba3c\uc800 \uc218\ud589\ud55c \uc11c\ube0c\ucffc\ub9ac \uacb0\uacfc\ub97c \ub300\uc0c1\uc73c\ub85c \uc798\ub77c\uc57c \ud569\ub2c8\ub2e4.",
+      hint: "11\uc77c\ucc28 ROWNUM '\ubb38 \uc55e \ubc88\ud638\ud45c' \ube44\uc720\ub97c \ud655\uc778\ud558\uc138\uc694."
+    },
+    {
+      id: 25,
+      category: "[PART 2] SQL \ud65c\uc6a9 (DAY 8 ~ 11)",
+      question: "\ub2e4\uc74c \uacc4\uce35\ud615 \uc9c8\uc758\uc5d0\uc11c \uc21c\ubc29\ud5a5 \uc804\uac1c(\ubd80\ubaa8->\uc790\uc2dd)\ub97c \uc758\ubbf8\ud558\ub294 \uac83\uc740?",
+      options: [
+        { id: 1, text: "`CONNECT BY PRIOR EMPNO = MGR`", isCorrect: true },
+        { id: 2, text: "`CONNECT BY EMPNO = PRIOR MGR`", isCorrect: false },
+        { id: 3, text: "`START WITH MGR IS NULL`", isCorrect: false },
+        { id: 4, text: "`ORDER SIBLINGS BY ENAME`", isCorrect: false }
+      ],
+      rationale: "`PRIOR \uc0ac\ubc88 = \uad00\ub9ac\uc790\uc0ac\ubc88`\uc740 \ubc29\uae08 \uc77d\uc740 \uc0ac\ub78c(\ubd80\ubaa8)\uc774 \ub204\uad70\uac00\uc758 \uad00\ub9ac\uc790\uc778 \uacbd\uc6b0\ub97c \ucc3e\ub294 \uc21c\ubc29\ud5a5\uc785\ub2c8\ub2e4.",
+      hint: "PRIOR\ub294 '\uc9c1\uc804\uc5d0 \uc77d\uc740 \ub370\uc774\ud130'\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 26,
+      category: "[PART 2] SQL \ud65c\uc6a9 (DAY 8 ~ 11)",
+      question: "\uacc4\uce35\ud615 \uc9c8\uc758\uc758 \uac00\uc0c1 \uceec\ub7fc \uc911 \ub8e8\ud2b8 \ub178\ub4dc(\ucd5c\uc0c1\uc704)\uba74 1, \uadf8 \ud558\uc704\uba74 2... \uc2dd\uc73c\ub85c \uae4a\uc774\ub97c \ub098\ud0c0\ub0b4\ub294 \uac83\uc740?",
+      options: [
+        { id: 1, text: "LEVEL", isCorrect: true },
+        { id: 2, text: "CONNECT_BY_ISLEAF", isCorrect: false },
+        { id: 3, text: "SYS_CONNECT_BY_PATH", isCorrect: false },
+        { id: 4, text: "CONNECT_BY_ROOT", isCorrect: false }
+      ],
+      rationale: "LEVEL\uc740 \ud2b8\ub9ac\uc758 \uae4a\uc774\ub97c \ub098\ud0c0\ub0b4\ub294 \uac00\uc0c1 \uceec\ub7fc\uc785\ub2c8\ub2e4.",
+      hint: "11\uc77c\ucc28 \uac00\uc0c1 \uceec\ub7fc \ud45c\ub97c \ud655\uc778\ud558\uc138\uc694."
+    },
+    {
+      id: 27,
+      category: "[PART 2] SQL \ud65c\uc6a9 (DAY 8 ~ 11)",
+      question: "\ub2e4\uc74c \uc911 \uc140\ud504 \uc870\uc778(Self Join)\uc774 \ubc18\ub4dc\uc2dc \ud544\uc694\ud55c \uc0c1\ud669\uc740?",
+      options: [
+        { id: 1, text: "\uc0ac\uc6d0 \uc815\ubcf4\uc640 \ubd80\uc11c \uc815\ubcf4\ub97c \ud569\uce60 \ub54c", isCorrect: false },
+        { id: 2, text: "\ud55c \ud14c\uc774\ube14 \ub0b4\uc5d0\uc11c \uc0ac\uc6d0\uacfc \uadf8 \uc0ac\uc6d0\uc758 \ub9e4\ub2c8\uc800 \uc815\ubcf4\ub97c \ud568\uaed8 \ubcf4\uace0 \uc2f6\uc744 \ub54c", isCorrect: true },
+        { id: 3, text: "\ub450 \ud14c\uc774\ube14\uc758 \uad50\uc9d1\ud569\uc744 \uad6c\ud560 \ub54c", isCorrect: false },
+        { id: 4, text: "\uc911\ubcf5 \ub370\uc774\ud130\ub97c \uc81c\uac70\ud558\uace0 \uc2f6\uc744 \ub54c", isCorrect: false }
+      ],
+      rationale: "\ub9e4\ub2c8\uc800 \uc815\ubcf4\ub3c4 \uc0ac\uc6d0 \ud14c\uc774\ube14 \uc548\uc5d0 \uc788\uc73c\ubbc0\ub85c \ub098 \uc790\uc2e0\uacfc \uc870\uc778\ud574\uc57c \ud569\ub2c8\ub2e4.",
+      hint: "11\uc77c\ucc28 \ucd5c\ub300\ub9ac(301)\uc640 \uc774\ubd80\uc7a5(201) \uc0ac\ub840\ub97c \ub5a0\uc62c\ub824\ubcf4\uc138\uc694."
+    },
+    {
+      id: 28,
+      category: "[PART 2] SQL \ud65c\uc6a9 (DAY 8 ~ 11)",
+      question: "`LAST_VALUE` \ud568\uc218 \uc0ac\uc6a9 \uc2dc \ubc94\uc704\ub97c `UNBOUNDED FOLLOWING`\uae4c\uc9c0 \uc9c0\uc815\ud558\uc9c0 \uc54a\uc73c\uba74 \ubc1c\uc0dd\ud558\ub294 \ud604\uc0c1\uc740?",
+      options: [
+        { id: 1, text: "\uc5d0\ub7ec\uac00 \ubc1c\uc0dd\ud55c\ub2e4.", isCorrect: false },
+        { id: 2, text: "\ud56d\uc0c1 \uc804\uccb4\uc758 \ub9c8\uc9c0\ub9c9 \uac12\uc774 \ucd9c\ub825\ub41c\ub2e4.", isCorrect: false },
+        { id: 3, text: "'\ud604\uc7ac \ud589'\uc774 \ub9c8\uc9c0\ub9c9 \uac12\uc73c\ub85c \uac04\uc8fc\ub418\uc5b4 \ucd9c\ub825\ub41c\ub2e4.", isCorrect: true },
+        { id: 4, text: "NULL\uc774 \ucd9c\ub825\ub41c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "\uc708\ub3c4\uc6b0 \uae30\ubcf8 \ubc94\uc704\uac00 '\ud604\uc7ac \ud589'\uae4c\uc9c0\uc774\ubbc0\ub85c LAST_VALUE\ub294 \ubc94\uc704\ub97c \ub05d\uae4c\uc9c0 \uc5f4\uc5b4\uc8fc\uc9c0 \uc54a\uc73c\uba74 \ubb34\uc758\ubbf8\ud574\uc9d1\ub2c8\ub2e4.",
+      hint: "10\uc77c\ucc28 \ud83d\udea8 LAST_VALUE\uc758 \ubc30\uc2e0 \ud30c\ud2b8\ub97c \ucc38\uace0\ud558\uc138\uc694."
+    },
+    {
+      id: 29,
+      category: "[PART 2] SQL \ud65c\uc6a9 (DAY 8 ~ 11)",
+      question: "`NTILE(4)` \ud568\uc218\ub97c 10\uac1c\uc758 \ub370\uc774\ud130\uc5d0 \uc801\uc6a9\ud588\uc744 \ub54c 1\uadf8\ub8f9\uc5d0 \ubc30\uc815\ub418\ub294 \ud589\uc758 \uc218\ub294?",
+      options: [
+        { id: 1, text: "2\uac1c", isCorrect: false },
+        { id: 2, text: "3\uac1c", isCorrect: true },
+        { id: 3, text: "4\uac1c", isCorrect: false },
+        { id: 4, text: "1\uac1c", isCorrect: false }
+      ],
+      rationale: "10\uc744 4\ub85c \ub098\ub204\uba74 \ubaab\uc774 2, \ub098\uba38\uc9c0\uac00 2\uc774\ubbc0\ub85c \uc55e\uc758 1, 2\uadf8\ub8f9\uc5d0 \ud558\ub098\uc529 \ub354 \ubc30\uc815\ud569\ub2c8\ub2e4. (3, 3, 2, 2)",
+      hint: "\ub098\uba38\uc9c0\ub294 \uc55e \uc870\ubd80\ud130 \ud55c \uba85\uc529 \ub354 \ucc44\uc6c1\ub2c8\ub2e4."
+    },
+    {
+      id: 30,
+      category: "[PART 2] SQL \ud65c\uc6a9 (DAY 8 ~ 11)",
+      question: "\uacc4\uce35\ud615 \uc9c8\uc758\uc5d0\uc11c \ub3d9\uc77c \ub808\ubca8(\ud615\uc81c \ub178\ub4dc)\ub07c\ub9ac\ub9cc \uc815\ub82c\ud558\uae30 \uc704\ud574 \uc0ac\uc6a9\ud558\ub294 \uad6c\ubb38\uc740?",
+      options: [
+        { id: 1, text: "ORDER BY", isCorrect: false },
+        { id: 2, text: "GROUP BY", isCorrect: false },
+        { id: 3, text: "ORDER SIBLINGS BY", isCorrect: true },
+        { id: 4, text: "CONNECT BY PRIOR", isCorrect: false }
+      ],
+      rationale: "\uacc4\uce35 \uad6c\uc870\ub97c \uae68\uc9c0 \uc54a\uc73c\uba74\uc11c \ud615\uc81c\ub4e4\ub07c\ub9ac\ub9cc \uc815\ub82c\ud560 \ub54c \uc0ac\uc6a9\ud569\ub2c8\ub2e4.",
+      hint: "SIBLINGS\ub294 \ud615\uc81c\uc790\ub9e4\ub77c\ub294 \ub73b\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 31,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "`PIVOT` \ud568\uc218\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "\uc5f4\uc744 \ud589\uc73c\ub85c \ubcc0\ud658\ud55c\ub2e4.", isCorrect: false },
+        { id: 2, text: "\ud589 \ub370\uc774\ud130\ub97c \uc5f4\ub85c \ud68c\uc804\uc2dc\ucf1c \uc694\uc57d \ubcf4\uace0\uc11c\ub97c \ub9cc\ub4e0\ub2e4.", isCorrect: true },
+        { id: 3, text: "\uc911\ubcf5\ub41c \ud589\uc744 \uc81c\uac70\ud55c\ub2e4.", isCorrect: false },
+        { id: 4, text: "\ub370\uc774\ud130\ub97c \uc815\uaddc\ud654\ud560 \ub54c \uc8fc\ub85c \uc0ac\uc6a9\ud55c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "PIVOT\uc740 Long \ub370\uc774\ud130\ub97c Wide\ud558\uac8c \ubcc0\ud658\ud558\ub294 \ud589-\uc5f4 \uc804\ud658 \ud568\uc218\uc785\ub2c8\ub2e4.",
+      hint: "12\uc77c\ucc28 \uc5d1\uc140 \ud53c\ubc97 \ub9ac\ud3ec\ud2b8 \ube44\uc720\ub97c \ud655\uc778\ud558\uc138\uc694."
+    },
+    {
+      id: 32,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "\uc815\uaddc\ud45c\ud604\uc2dd \uba54\ud0c0 \ubb38\uc790 \uc911 '\uc784\uc758\uc758 \ud55c \ubb38\uc790'\ub97c \uc758\ubbf8\ud558\ub294 \uac83\uc740?",
+      options: [
+        { id: 1, text: "*", isCorrect: false },
+        { id: 2, text: "+", isCorrect: false },
+        { id: 3, text: ".", isCorrect: true },
+        { id: 4, text: "?", isCorrect: false }
+      ],
+      rationale: "\ub9c8\uce68\ud45c(.)\ub294 \uc5b4\ub5a4 \ubb38\uc790\ub4e0 \ub531 \ud55c \uae00\uc790\ub97c \uc758\ubbf8\ud569\ub2c8\ub2e4.",
+      hint: "12\uc77c\ucc28 \uba54\ud0c0 \ubb38\uc790 \uc554\uae30 \ud45c\ub97c \ud655\uc778\ud558\uc138\uc694."
+    },
+    {
+      id: 33,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "`REGEXP_LIKE(ENAME, '^A')`\uc758 \uc758\ubbf8\ub294?",
+      options: [
+        { id: 1, text: "\uc774\ub984\uc5d0 A\uac00 \ud3ec\ud568\ub41c \uc0ac\uc6d0", isCorrect: false },
+        { id: 2, text: "\uc774\ub984\uc774 A\ub85c \ub05d\ub098\ub294 \uc0ac\uc6d0", isCorrect: false },
+        { id: 3, text: "\uc774\ub984\uc774 A\ub85c \uc2dc\uc791\ud558\ub294 \uc0ac\uc6d0", isCorrect: true },
+        { id: 4, text: "\uc774\ub984\uc758 \ub450 \ubc88\uc9f8 \uae00\uc790\uac00 A\uc778 \uc0ac\uc6d0", isCorrect: false }
+      ],
+      rationale: "`^`\ub294 \ubb38\uc790\uc5f4\uc758 \uc2dc\uc791\uc744 \uc758\ubbf8\ud569\ub2c8\ub2e4.",
+      hint: "`$`\ub294 \ub05d, `^`\ub294 \uc2dc\uc791\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 34,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "\ub2e4\uc74c \uc911 DML(\ub370\uc774\ud130 \uc870\uc791\uc5b4)\uc5d0 \ud574\ub2f9\ud558\uc9c0 \uc54a\ub294 \uac83\uc740?",
+      options: [
+        { id: 1, text: "INSERT", isCorrect: false },
+        { id: 2, text: "UPDATE", isCorrect: false },
+        { id: 3, text: "TRUNCATE", isCorrect: true },
+        { id: 4, text: "DELETE", isCorrect: false }
+      ],
+      rationale: "TRUNCATE\ub294 DDL(\ub370\uc774\ud130 \uc815\uc758\uc5b4)\ub85c \ubd84\ub958\ub429\ub2c8\ub2e4.",
+      hint: "13\uc77c\ucc28 \uba85\ub839\uc5b4 \ubd84\ub958 \ud45c\ub97c \ud655\uc778\ud558\uc138\uc694."
+    },
+    {
+      id: 35,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "`DELETE`, `TRUNCATE`, `DROP`\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \ud2c0\ub9b0 \uac83\uc740?",
+      options: [
+        { id: 1, text: "`DELETE`\ub294 \ub85c\uadf8\ub97c \ub0a8\uae30\ubbc0\ub85c \uc18d\ub3c4\uac00 \uac00\uc7a5 \ub290\ub9ac\ub2e4.", isCorrect: false },
+        { id: 2, text: "`TRUNCATE`\ub294 \ubcf5\uad6c(ROLLBACK)\uac00 \ubd88\uac00\ub2a5\ud558\ub2e4.", isCorrect: false },
+        { id: 3, text: "`DROP`\uc740 \ud14c\uc774\ube14\uc758 \uad6c\uc870\uae4c\uc9c0 \uc644\uc804\ud788 \uc0ad\uc81c\ud55c\ub2e4.", isCorrect: false },
+        { id: 4, text: "`TRUNCATE`\ub294 `WHERE` \uc808\uc744 \uc0ac\uc6a9\ud558\uc5ec \uc77c\ubd80 \ub370\uc774\ud130\ub9cc \uc9c0\uc6b8 \uc218 \uc788\ub2e4.", isCorrect: true }
+      ],
+      rationale: "TRUNCATE\ub294 \ud14c\uc774\ube14 \uc804\uccb4\ub97c \ucd08\uae30\ud654\ud558\ub294 \uba85\ub839\uc5b4\ub85c \ubcc4\ub3c4\uc758 \uc870\uac74\uc744 \uac78 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.",
+      hint: "13\uc77c\ucc28 3\ub300 \uc0ad\uc81c \uba85\ub839\uc5b4 \ube44\uad50 \ud45c\ub97c \ud655\uc778\ud558\uc138\uc694."
+    },
+    {
+      id: 36,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "\ud2b8\ub79c\uc7ad\uc158\uc758 \ud2b9\uc131 \uc911 'All or Nothing'\uc744 \uc758\ubbf8\ud558\ub294 \uac83\uc740?",
+      options: [
+        { id: 1, text: "\uc6d0\uc790\uc131(Atomicity)", isCorrect: true },
+        { id: 2, text: "\uc77c\uad00\uc131(Consistency)", isCorrect: false },
+        { id: 3, text: "\uace0\ub9bd\uc131(Isolation)", isCorrect: false },
+        { id: 4, text: "\uc9c0\uc18d\uc131(Durability)", isCorrect: false }
+      ],
+      rationale: "\ud2b8\ub79c\uc7ad\uc158 \ub0b4 \uc5f0\uc0b0\uc740 \ubaa8\ub450 \uc131\uacf5\ud558\uac70\ub098 \uc804\ud600 \uc2e4\ud589\ub418\uc9c0 \uc54a\uc544\uc57c \ud569\ub2c8\ub2e4.",
+      hint: "\uc6d0\uc790\ub294 \ub354 \uc774\uc0c1 \ucabc\uac24 \uc218 \uc5c6\ub294 \ucd5c\uc18c \ub2e8\uc704\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 37,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "Oracle \ud658\uacbd\uc5d0\uc11c DML\uc744 \uc218\ud589\ud55c \uc9c1\ud6c4 `CREATE TABLE`\uc744 \uc2e4\ud589\ud558\uace0 `ROLLBACK`\uc744 \ud558\uba74 \uc5b4\ub5a4 \uacb0\uacfc\uac00 \ubc1c\uc0dd\ud558\ub294\uac00?",
+      options: [
+        { id: 1, text: "DML \uacb0\uacfc\uac00 \ucde8\uc18c\ub41c\ub2e4.", isCorrect: false },
+        { id: 2, text: "DDL \uc2e4\ud589 \uc2dc \uc790\ub3d9 \ucee4\ubc0b\uc774 \ubc1c\uc0dd\ud558\uc5ec DML \uacb0\uacfc\uac00 \ucde8\uc18c\ub418\uc9c0 \uc54a\ub294\ub2e4.", isCorrect: true },
+        { id: 3, text: "\uc5d0\ub7ec\uac00 \ubc1c\uc0dd\ud55c\ub2e4.", isCorrect: false },
+        { id: 4, text: "DDL\ub9cc \ucde8\uc18c\ub41c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "Oracle\uc5d0\uc11c DDL\uc740 \uc2e4\ud589 \uc804\ud6c4\ub85c \uc790\ub3d9 COMMIT\uc744 \ubc1c\uc0dd\uc2dc\ud0b5\ub2c8\ub2e4.",
+      hint: "13\uc77c\ucc28 \ud83d\udea8 \uc2e4\uc804 \uc624\ub2f5 \ud3ec\uc778\ud2b8 1\ubc88\uc744 \ud655\uc778\ud558\uc138\uc694."
+    },
+    {
+      id: 38,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "\ub2e4\uc74c \uc911 \uc81c\uc57d\uc870\uac74(Constraint)\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \ubd80\uc801\uc808\ud55c \uac83\uc740?",
+      options: [
+        { id: 1, text: "`PRIMARY KEY`\ub294 NULL\uc744 \ud5c8\uc6a9\ud558\uc9c0 \uc54a\ub294\ub2e4.", isCorrect: false },
+        { id: 2, text: "`UNIQUE KEY`\ub294 NULL \uac12\uc744 \ud5c8\uc6a9\ud55c\ub2e4.", isCorrect: false },
+        { id: 3, text: "`FOREIGN KEY`\ub294 \ucc38\uc870 \ubb34\uacb0\uc131\uc744 \uc9c0\ud0a4\uae30 \uc704\ud574 \uc0ac\uc6a9\ud55c\ub2e4.", isCorrect: false },
+        { id: 4, text: "\ud55c \ud14c\uc774\ube14\uc5d0 `PRIMARY KEY`\ub97c \uc5ec\ub7ec \uac1c \uc124\uc815\ud560 \uc218 \uc788\ub2e4.", isCorrect: true }
+      ],
+      rationale: "\uae30\ubcf8\ud0a4(PK)\ub294 \ud14c\uc774\ube14\ub2f9 \uc624\uc9c1 1\uac1c\ub9cc \uc124\uc815 \uac00\ub2a5\ud569\ub2c8\ub2e4.",
+      hint: "\uc2dd\ubcc4\uc790\ub294 \ub2e8 \ud558\ub098\uc5ec\uc57c \ud569\ub2c8\ub2e4."
+    },
+    {
+      id: 39,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "`MERGE` \ubb38\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "\ub370\uc774\ud130\ub97c \uc0ad\uc81c\ud558\ub294 \uc6a9\ub3c4\ub85c\ub9cc \uc0ac\uc6a9\ud55c\ub2e4.", isCorrect: false },
+        { id: 2, text: "\uc870\uac74\uc5d0 \ub530\ub77c `INSERT`\uc640 `UPDATE`\ub97c \ud55c \ubc88\uc5d0 \uc218\ud589\ud55c\ub2e4.", isCorrect: true },
+        { id: 3, text: "`ROLLBACK`\uc774 \ubd88\uac00\ub2a5\ud55c DDL \ubb38\uc7a5\uc774\ub2e4.", isCorrect: false },
+        { id: 4, text: "\uc624\uc9c1 \ud558\ub098\uc758 \ud14c\uc774\ube14\ub9cc \uc0ac\uc6a9\ud560 \uc218 \uc788\ub2e4.", isCorrect: false }
+      ],
+      rationale: "\ub450 \ud14c\uc774\ube14\uc744 \ube44\uad50\ud558\uc5ec \ub370\uc774\ud130\uac00 \uc788\uc73c\uba74 \uc218\uc815, \uc5c6\uc73c\uba74 \uc0bd\uc785\ud569\ub2c8\ub2e4.",
+      hint: "13\uc77c\ucc28 1.2 \uc2ec\ud654 DML \ud30c\ud2b8\ub97c \ud655\uc778\ud558\uc138\uc694."
+    },
+    {
+      id: 40,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "\uad8c\ud55c\uc744 \ubd80\uc5ec\ud558\ub294 DCL \uba85\ub839\uc5b4\ub294?",
+      options: [
+        { id: 1, text: "REVOKE", isCorrect: false },
+        { id: 2, text: "GRANT", isCorrect: true },
+        { id: 3, text: "COMMIT", isCorrect: false },
+        { id: 4, text: "ROLLBACK", isCorrect: false }
+      ],
+      rationale: "GRANT\ub294 \uad8c\ud55c \ubd80\uc5ec, REVOKE\ub294 \uad8c\ud55c \ud68c\uc218\uc785\ub2c8\ub2e4.",
+      hint: "Grant\ub294 '\uc8fc\ub2e4/\uc2b9\uc778\ud558\ub2e4'\ub294 \ub73b\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 41,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "`SAVEPOINT`\uc5d0 \ub300\ud55c \uc124\uba85\uc73c\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "\uc804\uccb4 \ud2b8\ub79c\uc7ad\uc158\uc744 \ud655\uc815 \uc9d3\ub294 \uc9c0\uc810\uc774\ub2e4.", isCorrect: false },
+        { id: 2, text: "`ROLLBACK TO \uc9c0\uc810\uba85`\uc744 \ud1b5\ud574 \ud2b9\uc815 \uc2dc\uc810\uae4c\uc9c0\ub9cc \ubcf5\uad6c\ud560 \uc218 \uc788\ub2e4.", isCorrect: true },
+        { id: 3, text: "`COMMIT` \ud6c4\uc5d0\ub3c4 `SAVEPOINT`\ub85c \ub3cc\uc544\uac08 \uc218 \uc788\ub2e4.", isCorrect: false },
+        { id: 4, text: "SQL Server\uc5d0\uc11c\ub9cc \uc9c0\uc6d0\ud558\ub294 \uae30\ub2a5\uc774\ub2e4.", isCorrect: false }
+      ],
+      rationale: "\ud2b8\ub79c\uc7ad\uc158\uc744 \uc791\uac8c \ucabc\uac1c\uc5b4 \ubd80\ubd84 \ubcf5\uad6c\ub97c \uac00\ub2a5\ud558\uac8c \ud569\ub2c8\ub2e4. COMMIT \ud6c4\uc5d0\ub294 \ud2b8\ub79c\uc7ad\uc158\uc774 \uc885\ub8cc\ub418\uc5b4 \ubcf5\uad6c\ud560 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.",
+      hint: "\uac8c\uc784\uc758 '\uc138\uc774\ube0c \ud3ec\uc778\ud2b8'\uc640 \uac19\uc2b5\ub2c8\ub2e4."
+    },
+    {
+      id: 42,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "\ub2e4\uc74c \uc911 \uace0\uc720\ud0a4(UNIQUE KEY)\uac00 \uac78\ub9b0 \uceec\ub7fc\uc5d0 `NULL, NULL`\uc744 \uc785\ub825\ud558\ub824\uace0 \ud560 \ub54c\uc758 \uacb0\uacfc\ub294? (Oracle \uae30\uc900)",
+      options: [
+        { id: 1, text: "\uc911\ubcf5 \uc5d0\ub7ec\uac00 \ubc1c\uc0dd\ud55c\ub2e4.", isCorrect: false },
+        { id: 2, text: "\uc5d0\ub7ec \uc5c6\uc774 \uc785\ub825\ub41c\ub2e4.", isCorrect: true },
+        { id: 3, text: "\ud558\ub098\uc758 NULL\ub9cc \uc785\ub825\ub418\uace0 \ub098\uba38\uc9c0\ub294 \uac70\ubd80\ub41c\ub2e4.", isCorrect: false },
+        { id: 4, text: "\uc790\ub3d9\uc73c\ub85c 0\uc73c\ub85c \ubcc0\ud658\ub418\uc5b4 \uc785\ub825\ub41c\ub2e4.", isCorrect: false }
+      ],
+      rationale: "NULL\uc740 \uac12\uc774 \uc5c6\ub294 \uc0c1\ud0dc\uc774\ubbc0\ub85c \uc911\ubcf5 \uccb4\ud06c \ub300\uc0c1\uc774 \uc544\ub2d9\ub2c8\ub2e4. \uc5ec\ub7ec \uac1c\uc758 NULL \uc785\ub825\uc774 \uac00\ub2a5\ud569\ub2c8\ub2e4.",
+      hint: "13\uc77c\ucc28 3.2 \uc81c\uc57d\uc870\uac74 \ud30c\ud2b8\ub97c \ud655\uc778\ud558\uc138\uc694."
+    },
+    {
+      id: 43,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "`DROP TABLE` \uc2dc \ub2e4\ub978 \ud14c\uc774\ube14\uc5d0\uc11c \ucc38\uc870 \uc911\uc778 \uc678\ub798\ud0a4 \uc81c\uc57d\uc870\uac74\uae4c\uc9c0 \ud568\uaed8 \uc0ad\uc81c\ud558\uba70 \ud14c\uc774\ube14\uc744 \uc9c0\uc6b0\ub294 \uc635\uc158\uc740?",
+      options: [
+        { id: 1, text: "CASCADE CONSTRAINTS", isCorrect: true },
+        { id: 2, text: "DELETE ALL", isCorrect: false },
+        { id: 3, text: "TRUNCATE", isCorrect: false },
+        { id: 4, text: "FORCE", isCorrect: false }
+      ],
+      rationale: "\ubd80\ubaa8 \ud14c\uc774\ube14 \uc0ad\uc81c \uc2dc \uc790\uc2dd\uc758 \uc678\ub798\ud0a4 \uc81c\uc57d\uc870\uac74\uc744 \ud568\uaed8 \ub0a0\ub824\ubc84\ub9ac\ub294 \uc635\uc158\uc785\ub2c8\ub2e4.",
+      hint: "\ud3ed\ud3ec\ucc98\ub7fc \uc5f0\uacb0\ub41c \uac83\uc744 \uc9c0\uc6b0\ub294 CASCADE\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 44,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "\ud6a8\uc728\uc801\uc778 \uad8c\ud55c \uad00\ub9ac\ub97c \uc704\ud574 \uc5ec\ub7ec \uad8c\ud55c\uc744 \ud558\ub098\ub85c \ubb36\uc5b4 \uad00\ub9ac\ud558\ub294 \uac1c\ub150\uc740?",
+      options: [
+        { id: 1, text: "GROUP", isCorrect: false },
+        { id: 2, text: "ROLE", isCorrect: true },
+        { id: 3, text: "PACKAGE", isCorrect: false },
+        { id: 4, text: "BUNDLE", isCorrect: false }
+      ],
+      rationale: "ROLE(\ub864)\uc744 \uc0dd\uc131\ud558\uc5ec \uad8c\ud55c\uc744 \ub2f4\uace0 \uc774\ub97c \uc0ac\uc6a9\uc790\uc5d0\uac8c \ubd80\uc5ec\ud569\ub2c8\ub2e4.",
+      hint: "13\uc77c\ucc28 4.2 ROLE \ud30c\ud2b8\ub97c \ud655\uc778\ud558\uc138\uc694."
+    },
+    {
+      id: 45,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "\ub2e4\uc74c \uc815\uaddc\ud45c\ud604\uc2dd\uc758 \uc758\ubbf8\ub85c \uc801\uc808\ud55c \uac83\uc740? \"^[0-9]+$\"",
+      options: [
+        { id: 1, text: "\uc22b\uc790\ub85c \uc2dc\uc791\ud558\uac70\ub098 \ub05d\ub098\ub294 \ubb38\uc790\uc5f4", isCorrect: false },
+        { id: 2, text: "\uc624\uc9c1 \uc22b\uc790\ub85c\ub9cc \uad6c\uc131\ub41c \ubb38\uc790\uc5f4", isCorrect: true },
+        { id: 3, text: "\uc22b\uc790\uac00 \ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \ubb38\uc790\uc5f4", isCorrect: false },
+        { id: 4, text: "\uccab \uae00\uc790\ub9cc \uc22b\uc790\uc778 \ubb38\uc790\uc5f4", isCorrect: false }
+      ],
+      rationale: "`^`(\uc2dc\uc791)\ubd80\ud130 `$`(\ub05d)\uae4c\uc9c0 `[0-9]`(\uc22b\uc790)\uac00 `+`(1\uac1c \uc774\uc0c1) \uc788\ub2e4\ub294 \ub73b\uc785\ub2c8\ub2e4.",
+      hint: "\uc804\uccb4\uac00 \uc22b\uc790\uc778\uc9c0 \uac80\uc0ac\ud558\ub294 \ud328\ud134\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 46,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "`UNPIVOT`\uc758 \uc8fc\ub41c \uc0ac\uc6a9 \ubaa9\uc801\uc740?",
+      options: [
+        { id: 1, text: "\uc694\uc57d \ubcf4\uace0\uc11c \uc791\uc131", isCorrect: false },
+        { id: 2, text: "Wide \ub370\uc774\ud130\ub97c Long \ub370\uc774\ud130\ub85c \uc815\uaddc\ud654", isCorrect: true },
+        { id: 3, text: "\uc911\ubcf5 \ub370\uc774\ud130 \uc81c\uac70", isCorrect: false },
+        { id: 4, text: "\ud14c\uc774\ube14 \uad6c\uc870 \ubcc0\uacbd(DDL)", isCorrect: false }
+      ],
+      rationale: "\uc5ec\ub7ec \uc5f4\ub85c \ub098\uc5f4\ub41c \ub370\uc774\ud130\ub97c \ud589\uc73c\ub85c \ub0b4\ub824\uc11c \uc815\uaddc\ud654\ub41c \ud615\ud0dc\ub97c \ub9cc\ub4ed\ub2c8\ub2e4.",
+      hint: "PIVOT\uc758 \ubc18\ub300\uc785\ub2c8\ub2e4."
+    },
+    {
+      id: 47,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "\ub2e4\uc74c \uc911 `NULLIF(A, B)`\uc758 \uacb0\uacfc\uac00 NULL\uc778 \uacbd\uc6b0\ub294?",
+      options: [
+        { id: 1, text: "A\uac00 NULL\uc77c \ub54c", isCorrect: false },
+        { id: 2, text: "B\uac00 NULL\uc77c \ub54c", isCorrect: false },
+        { id: 3, text: "A\uc640 B\uac00 \uac19\uc744 \ub54c", isCorrect: true },
+        { id: 4, text: "A\uc640 B\uac00 \ub2e4\ub97c \ub54c", isCorrect: false }
+      ],
+      rationale: "\ub450 \uac12\uc774 \uac19\uc73c\uba74 NULL\uc744, \ub2e4\ub974\uba74 \uccab \ubc88\uc9f8 \uac12(A)\uc744 \ubc18\ud658\ud569\ub2c8\ub2e4.",
+      hint: "3\uc77c\ucc28 NULL \ucc98\ub9ac \ud568\uc218 \ud45c\ub97c \ud655\uc778\ud558\uc138\uc694."
+    },
+    {
+      id: 48,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "SQL Server\uc5d0\uc11c \uc790\ub3d9 \ucee4\ubc0b(Auto-Commit)\uc744 \ubc29\uc9c0\ud558\uace0 \uba85\uc2dc\uc801 \ud2b8\ub79c\uc7ad\uc158\uc744 \uc2dc\uc791\ud558\ub294 \uba85\ub839\uc5b4\ub294?",
+      options: [
+        { id: 1, text: "START TRANSACTION", isCorrect: false },
+        { id: 2, text: "BEGIN TRAN", isCorrect: true },
+        { id: 3, text: "SET COMMIT OFF", isCorrect: false },
+        { id: 4, text: "COMMIT", isCorrect: false }
+      ],
+      rationale: "SQL Server\ub294 \uae30\ubcf8\uc774 \uc790\ub3d9 \ucee4\ubc0b\uc774\ubbc0\ub85c BEGIN TRAN\uc73c\ub85c \uba85\uc2dc\uc801 \uc2dc\uc791\uc744 \uc54c\ub9bd\ub2c8\ub2e4.",
+      hint: "13\uc77c\ucc28 DBMS\ubcc4 \ucc28\uc774\uc810\uc744 \ud655\uc778\ud558\uc138\uc694."
+    },
+    {
+      id: 49,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "\ub2e4\uc74c \uc911 `DELETE FROM EMP;` \uc2e4\ud589 \ud6c4\uc758 \uc0c1\ud0dc\ub85c \uc633\uc740 \uac83\uc740?",
+      options: [
+        { id: 1, text: "\ud14c\uc774\ube14 \uad6c\uc870\uac00 \uc0ac\ub77c\uc9c4\ub2e4.", isCorrect: false },
+        { id: 2, text: "\uc800\uc7a5 \uacf5\uac04\uc774 \uc989\uc2dc \ubc18\ud658\ub41c\ub2e4.", isCorrect: false },
+        { id: 3, text: "`ROLLBACK`\uc744 \ud1b5\ud574 \ub370\uc774\ud130\ub97c \ubcf5\uad6c\ud560 \uc218 \uc788\ub2e4.", isCorrect: true },
+        { id: 4, text: "`COMMIT`\uc744 \ud558\uc9c0 \uc54a\uc544\ub3c4 \uc989\uc2dc \uc601\uad6c \ubc18\uc601\ub41c\ub2e4(Oracle \uae30\uc900).", isCorrect: false }
+      ],
+      rationale: "DELETE\ub294 DML\uc774\ubbc0\ub85c \uc0ac\uc6a9\uc790\uac00 \ud655\uc815 \uc9d3\uae30 \uc804\uae4c\uc9c0\ub294 \ub864\ubc31\uc774 \uac00\ub2a5\ud569\ub2c8\ub2e4.",
+      hint: "DML\uc740 \uc2e0\uc911\ud558\uac8c, \ud558\uc9c0\ub9cc \ucde8\uc18c\ub294 \uac00\ub2a5\ud569\ub2c8\ub2e4."
+    },
+    {
+      id: 50,
+      category: "[PART 3] \uace0\uae09 SQL & \uad00\ub9ac \uad6c\ubb38 (DAY 12 ~ 13)",
+      question: "\ub2e4\uc74c \uc911 SQL \uc2e4\ud589 \uc21c\uc11c\uac00 \uac00\uc7a5 \ub9c8\uc9c0\ub9c9\uc778 \uac83\uc740?",
+      options: [
+        { id: 1, text: "WHERE", isCorrect: false },
+        { id: 2, text: "SELECT", isCorrect: false },
+        { id: 3, text: "ORDER BY", isCorrect: true },
+        { id: 4, text: "HAVING", isCorrect: false }
+      ],
+      rationale: "\uc815\ub82c(ORDER BY)\uc740 \ubaa8\ub4e0 \uacb0\uacfc\ub97c \ubf51\uc544\ub0b8 \ud6c4 \uac00\uc7a5 \ub9c8\uc9c0\ub9c9\uc5d0 \uc218\ud589\ub429\ub2c8\ub2e4.",
+      hint: "\ud504-\uc6e8-\uadf8-\ud558-\uc140-\uc624!"
+    }
+  ],
 };
