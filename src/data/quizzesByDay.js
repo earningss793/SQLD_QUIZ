@@ -18,10 +18,273 @@ export const dayInfo = {
   12: { title: "PIVOT & 정규표현식" },
   13: { title: "SQL 관리 구문 실전 퀴즈 20선" },
   14: { title: "SQLD DAY 8~13 실전 대비 40문항 퀴즈" },
+  15: { title: "데이터 모델링 실전 암기 퀴즈 20선" },
   142: { title: "SQLD 합격 대비 실전 모의고사 (50문항)" },
 };
 
 export const quizzesByDay = {
+  15: [
+    {
+      id: 1,
+      category: "데이터 모델링 기초",
+      question: "데이터 모델링의 3대 특징으로 올바르지 않은 것은?",
+      options: [
+        { id: 1, text: "추상화 (Abstraction)", isCorrect: false },
+        { id: 2, text: "복제성 (Duplication)", isCorrect: true },
+        { id: 3, text: "단순화 (Simplification)", isCorrect: false },
+        { id: 4, text: "명확화 (Clarity)", isCorrect: false }
+      ],
+      rationale: "모델링은 현실 세계를 그대로 복제하는 것이 아닙니다. 불필요한 것을 버리는 '추상화' 과정이 필수입니다.",
+      hint: "3대 특징의 앞글자는 '추.단.명'입니다."
+    },
+    {
+      id: 2,
+      category: "데이터 모델링 기초",
+      question: "데이터 모델링의 특징 중 '현실의 불필요한 디테일을 버리고 공통점만 뽑아내는 것'을 의미하는 것은?",
+      options: [
+        { id: 1, text: "추상화", isCorrect: true },
+        { id: 2, text: "단순화", isCorrect: false },
+        { id: 3, text: "명확화", isCorrect: false },
+        { id: 4, text: "정규화", isCorrect: false }
+      ],
+      rationale: "추상화는 복잡한 현실에서 아이디어와 포괄적인 공통점을 추출하는 작업입니다.",
+      hint: "'포괄적', '아이디어'라는 키워드와 짝꿍입니다."
+    },
+    {
+      id: 3,
+      category: "데이터 모델링 단계",
+      question: "데이터베이스 설계 시 진행되는 데이터 모델링의 순서로 알맞은 것은?",
+      options: [
+        { id: 1, text: "논리적 모델링 ➔ 개념적 모델링 ➔ 물리적 모델링", isCorrect: false },
+        { id: 2, text: "물리적 모델링 ➔ 논리적 모델링 ➔ 개념적 모델링", isCorrect: false },
+        { id: 3, text: "개념적 모델링 ➔ 논리적 모델링 ➔ 물리적 모델링", isCorrect: true },
+        { id: 4, text: "개념적 모델링 ➔ 물리적 모델링 ➔ 논리적 모델링", isCorrect: false }
+      ],
+      rationale: "거시적(숲)에서 미시적(나무) 순서로 진행됩니다.",
+      hint: "\"개논물 난다\" 암기 팁을 떠올려보세요!"
+    },
+    {
+      id: 4,
+      category: "데이터 모델링 단계",
+      question: "다음 중 '개념적 데이터 모델링' 단계에 대한 설명으로 가장 적절한 것은?",
+      options: [
+        { id: 1, text: "물리적인 저장 구조를 설계한다.", isCorrect: false },
+        { id: 2, text: "핵심 산출물로 ERD(E-R 다이어그램)를 작성한다.", isCorrect: true },
+        { id: 3, text: "데이터의 중복을 제거하는 정규화를 수행한다.", isCorrect: false },
+        { id: 4, text: "특정 DBMS(Oracle 등)의 특성을 고려한다.", isCorrect: false }
+      ],
+      rationale: "개념적 모델링은 가장 추상적인 단계로, 큰 그림을 그리기 위해 주제 영역과 핵심 엔터티를 도출하고 ERD를 작성합니다.",
+      hint: "1단계는 고객과 소통하며 '큰 그림(도면)'을 그리는 단계입니다."
+    },
+    {
+      id: 5,
+      category: "데이터 모델링 단계",
+      question: "다음 중 '논리적 데이터 모델링' 단계의 핵심 특징으로 옳은 것은?",
+      options: [
+        { id: 1, text: "하드웨어의 저장 공간과 인덱스를 설계한다.", isCorrect: false },
+        { id: 2, text: "데이터 모델링 중 재사용성이 가장 낮다.", isCorrect: false },
+        { id: 3, text: "비즈니스 규칙을 구체화하며, 정규화를 수행하여 중복을 제거한다.", isCorrect: true },
+        { id: 4, text: "구체적인 데이터베이스 관리 시스템(DBMS)에 종속적이다.", isCorrect: false }
+      ],
+      rationale: "논리적 모델링은 식별자, 속성, 관계를 정의하고 중복 배제를 위한 정규화(Normalization)를 수행하는 가장 중요한 단계입니다. 재사용성도 가장 높습니다.",
+      hint: "정규화 = 논리적 모델링!"
+    },
+    {
+      id: 6,
+      category: "데이터 모델링 단계",
+      question: "'물리적 데이터 모델링' 단계에서 수행하는 작업으로 올바른 것은?",
+      options: [
+        { id: 1, text: "엔터티(Entity) 도출", isCorrect: false },
+        { id: 2, text: "정규화(Normalization) 수행", isCorrect: false },
+        { id: 3, text: "성능(Performance)을 고려한 인덱스 및 파티셔닝 설계", isCorrect: true },
+        { id: 4, text: "비즈니스 룰 정의", isCorrect: false }
+      ],
+      rationale: "3단계인 물리적 모델링은 실제 하드웨어에 데이터를 어떻게 넣을지, 어떻게 하면 성능이 빠를지를 결정합니다.",
+      hint: "'성능', '저장 공간', '특정 DBMS'가 핵심 키워드입니다."
+    },
+    {
+      id: 7,
+      category: "데이터 모델링 관점",
+      question: "모델링의 3가지 관점 중 '업무가 어떻게 흘러가는가(How)'를 분석하는 관점은?",
+      options: [
+        { id: 1, text: "데이터 관점", isCorrect: false },
+        { id: 2, text: "프로세스 관점", isCorrect: true },
+        { id: 3, text: "상관 관점", isCorrect: false },
+        { id: 4, text: "시간 관점", isCorrect: false }
+      ],
+      rationale: "실제 업무의 흐름(Work flow)과 처리 방법을 보는 것은 프로세스(Process) 관점입니다.",
+      hint: "How = 프로세스!"
+    },
+    {
+      id: 8,
+      category: "데이터 모델링 관점",
+      question: "모델링 관점 중 '주문이 발생하면 재고가 줄어든다'와 같이 데이터와 프로세스의 상호작용을 파악하고 CRUD 매트릭스로 검증하는 관점은?",
+      options: [
+        { id: 1, text: "데이터 관점", isCorrect: false },
+        { id: 2, text: "프로세스 관점", isCorrect: false },
+        { id: 3, text: "상관관계 (Correlation) 관점", isCorrect: true },
+        { id: 4, text: "구조 관점", isCorrect: false }
+      ],
+      rationale: "데이터와 프로세스가 서로 어떤 영향을 주고받는지 검증하는 것은 상관관계 관점입니다.",
+      hint: "상호작용 = 상관관계."
+    },
+    {
+      id: 9,
+      category: "데이터베이스 스키마와 독립성",
+      question: "데이터베이스의 스키마 구조 중, '조직 전체의 관점'을 통합하여 DBA(관리자)가 관리하며, 하나의 데이터베이스에 오직 1개만 존재하는 스키마는?",
+      options: [
+        { id: 1, text: "외부 스키마", isCorrect: false },
+        { id: 2, text: "개념 스키마", isCorrect: true },
+        { id: 3, text: "내부 스키마", isCorrect: false },
+        { id: 4, text: "전체 스키마", isCorrect: false }
+      ],
+      rationale: "모든 사용자 관점을 통합한 총괄 데이터베이스 설계도가 바로 개념 스키마입니다.",
+      hint: "스키마 구조 3단계의 핵심 키워드는 [외·개·내]입니다. 중간을 담당하는 녀석을 찾으세요."
+    },
+    {
+      id: 10,
+      category: "데이터베이스 스키마와 독립성",
+      question: "사용자나 개별 응용 프로그램 관점에서 바라보는 스키마로, 쇼핑몰의 '마이페이지'처럼 전체 DB 중 일부분만 정의하며 여러 개가 존재할 수 있는 것은?",
+      options: [
+        { id: 1, text: "내부 스키마", isCorrect: false },
+        { id: 2, text: "논리 스키마", isCorrect: false },
+        { id: 3, text: "개념 스키마", isCorrect: false },
+        { id: 4, text: "외부 스키마", isCorrect: true }
+      ],
+      rationale: "개별 사용자가 보는 뷰(View)의 집합이 외부 스키마입니다.",
+      hint: "'사용자 눈에 띄는 껍데기(외부)'라고 생각하세요."
+    },
+    {
+      id: 11,
+      category: "데이터베이스 스키마와 독립성",
+      question: "다음 중 '물리적 데이터 독립성'에 대한 설명으로 알맞은 것은?",
+      options: [
+        { id: 1, text: "개념 스키마가 변경되어도 외부 스키마에 영향을 주지 않는다.", isCorrect: false },
+        { id: 2, text: "응용 프로그램 코드가 변경되어도 사용자는 이를 알지 못한다.", isCorrect: false },
+        { id: 3, text: "내부 스키마(저장 장치, 인덱스 등)가 변경되어도 개념 스키마나 외부 스키마에 영향을 주지 않는다.", isCorrect: true },
+        { id: 4, text: "외부 스키마가 변경되어도 개념 스키마에 영향을 주지 않는다.", isCorrect: false }
+      ],
+      rationale: "하드디스크 교체나 인덱스 추가 등 물리적인 내부 스키마의 변경이 상위 논리 구조에 영향을 주지 않는 성질입니다.",
+      hint: "내부 스키마 ➔ 물리적 독립성."
+    },
+    {
+      id: 12,
+      category: "데이터베이스 스키마와 독립성",
+      question: "'관리자가 고객 등급 테이블을 새로 추가(개념 스키마 변경)하더라도, 기존 사용자의 마이페이지 화면 코드(외부 스키마)는 수정할 필요가 없다'는 현상은 무엇을 보장하기 때문인가?",
+      options: [
+        { id: 1, text: "물리적 데이터 독립성", isCorrect: false },
+        { id: 2, text: "논리적 데이터 독립성", isCorrect: true },
+        { id: 3, text: "외부 매핑", isCorrect: false },
+        { id: 4, text: "무결성 제약조건", isCorrect: false }
+      ],
+      rationale: "개념 스키마가 변경되어도 외부 스키마에 영향이 없는 것을 논리적 데이터 독립성이라고 합니다.",
+      hint: "테이블 구조의 변경 ➔ 논리적 변경."
+    },
+    {
+      id: 13,
+      category: "데이터베이스 스키마와 독립성",
+      question: "데이터 독립성을 유지하기 위해 각 단계 사이를 연결해 주는 '통역사'를 무엇이라 하는가?",
+      options: [
+        { id: 1, text: "스키마 (Schema)", isCorrect: false },
+        { id: 2, text: "매핑 / 사상 (Mapping)", isCorrect: true },
+        { id: 3, text: "인덱스 (Index)", isCorrect: false },
+        { id: 4, text: "뷰 (View)", isCorrect: false }
+      ],
+      rationale: "외부-개념 사이, 개념-내부 사이를 이어주는 다리 역할을 사상(Mapping)이라고 합니다.",
+      hint: "5.2. 사상(Mapping) 파트를 확인하세요."
+    },
+    {
+      id: 14,
+      category: "데이터베이스 스키마와 독립성",
+      question: "외부 스키마와 개념 스키마 사이를 연결해 주며, 논리적 데이터 독립성을 보장하는 사상(Mapping)은?",
+      options: [
+        { id: 1, text: "외부/내부 사상", isCorrect: false },
+        { id: 2, text: "물리적 사상", isCorrect: false },
+        { id: 3, text: "개념/내부 사상", isCorrect: false },
+        { id: 4, text: "외부/개념 사상 (논리적 사상)", isCorrect: true }
+      ],
+      rationale: "외부와 개념을 이어주므로 '외부/개념 사상'이며, 이는 논리적 데이터 독립성을 보장합니다.",
+      hint: "이름 그대로 외부와 개념을 연결합니다."
+    },
+    {
+      id: 15,
+      category: "ERD (Entity Relationship Diagram)",
+      question: "ERD(Entity Relationship Diagram)를 구성하는 기본 3요소에 해당하지 않는 것은?",
+      options: [
+        { id: 1, text: "프로세스 (Process)", isCorrect: true },
+        { id: 2, text: "엔터티 (Entity)", isCorrect: false },
+        { id: 3, text: "속성 (Attribute)", isCorrect: false },
+        { id: 4, text: "관계 (Relationship)", isCorrect: false }
+      ],
+      rationale: "ERD의 3요소는 엔터티(박스), 속성(글씨), 관계(선)입니다. 프로세스는 모델링의 '관점' 중 하나입니다.",
+      hint: "E(Entity) R(Relationship) D. 속성도 포함됩니다."
+    },
+    {
+      id: 16,
+      category: "ERD (Entity Relationship Diagram)",
+      question: "ERD 작성 시 가장 우선적으로 수행해야 하는 단계는?",
+      options: [
+        { id: 1, text: "관계의 필수 여부 기술", isCorrect: false },
+        { id: 2, text: "엔터티 간 관계 설정", isCorrect: false },
+        { id: 3, text: "엔터티(주인공) 도출 및 그리기", isCorrect: true },
+        { id: 4, text: "관계명 기술", isCorrect: false }
+      ],
+      rationale: "설계도를 그릴 때는 주인공인 엔터티(Entity)를 가장 먼저 파악하고 그려야 합니다.",
+      hint: "6.1 ERD 작성 순서의 1번을 확인하세요."
+    },
+    {
+      id: 17,
+      category: "ERD (Entity Relationship Diagram)",
+      question: "ERD 작성 순서 중 가장 마지막에 수행하는 작업은 보통 무엇인가?",
+      options: [
+        { id: 1, text: "엔터티 도출", isCorrect: false },
+        { id: 2, text: "엔터티 배치", isCorrect: false },
+        { id: 3, text: "관계의 참여도(1:1, 1:N) 및 필수/선택 여부 기술", isCorrect: true },
+        { id: 4, text: "관계 설정", isCorrect: false }
+      ],
+      rationale: "엔터티 배치 ➔ 관계선 연결 ➔ 관계명 ➔ 참여도 ➔ 필수 여부 순으로 구체화됩니다.",
+      hint: "선을 그리고 나서 그 선의 디테일(선택사양 등)을 기술합니다."
+    },
+    {
+      id: 18,
+      category: "좋은 데이터 모델의 요건",
+      question: "좋은 데이터 모델의 요건 중 '업무에 필요한 데이터가 모델에 빠짐없이 정의되어야 한다'는 것을 의미하는 것은?",
+      options: [
+        { id: 1, text: "중복 배제", isCorrect: false },
+        { id: 2, text: "데이터 재사용", isCorrect: false },
+        { id: 3, text: "업무 규칙", isCorrect: false },
+        { id: 4, text: "완전성", isCorrect: true }
+      ],
+      rationale: "모든 필요 데이터가 다 들어있어야 한다는 것은 완전성(Completeness)을 뜻합니다.",
+      hint: "완벽하게 다 있다 = 완전성."
+    },
+    {
+      id: 19,
+      category: "좋은 데이터 모델의 요건",
+      question: "좋은 데이터 모델의 요건 중 '동일한 데이터가 여러 곳에 저장되지 않도록 정규화를 통해 해소하는 것'을 의미하는 것은?",
+      options: [
+        { id: 1, text: "완전성", isCorrect: false },
+        { id: 2, text: "중복 배제", isCorrect: true },
+        { id: 3, text: "데이터 재사용", isCorrect: false },
+        { id: 4, text: "무결성", isCorrect: false }
+      ],
+      rationale: "같은 데이터가 여러 군데 있으면 수정 시 데이터 불일치가 일어날 수 있으므로 중복을 배제해야 합니다.",
+      hint: "정규화의 핵심 목적입니다."
+    },
+    {
+      id: 20,
+      category: "데이터 모델링 종합",
+      question: "다음 중 데이터 모델링에 대한 설명으로 틀린 것은?",
+      options: [
+        { id: 1, text: "데이터베이스를 구축하기 위한 설계도를 그리는 과정이다.", isCorrect: false },
+        { id: 2, text: "약속된 규약(기호)을 통해 복잡한 현실을 단순하게 표현한다.", isCorrect: false },
+        { id: 3, text: "한 가지 의미로 통일되게 기술하여 애매모호함을 제거해야 한다.", isCorrect: false },
+        { id: 4, text: "개념적 모델링은 특정 DBMS(오라클 등)의 특징을 반영하여 세밀하게 설계한다.", isCorrect: true }
+      ],
+      rationale: "특정 DBMS에 종속적으로 세밀하게 설계하는 것은 '물리적 모델링(3단계)'입니다. 개념적 모델링은 가장 추상적인 큰 그림입니다.",
+      hint: "개념적 모델링은 숲을 보는 단계라 구체적인 DB 종류는 신경 쓰지 않습니다."
+    }
+  ],
   5: [
     { id: 1, category: "개념 및 기본 원리", question: "관계형 데이터베이스(RDB)에서 테이블을 쪼개는 '정규화(Normalization)'의 목적으로 가장 적절하지 않은 것은?", options: [{ id: 1, text: "데이터의 중복을 최소화하여 저장 공간을 효율적으로 사용하기 위함이다.", isCorrect: false }, { id: 2, text: "데이터 삽입, 수정, 삭제 시 발생할 수 있는 이상(Anomaly) 현상을 방지하기 위함이다.", isCorrect: false }, { id: 3, text: "데이터의 무결성(Integrity)을 유지하기 위함이다.", isCorrect: false }, { id: 4, text: "JOIN 연산을 제거하여 무조건적인 조회 속도 향상을 꾀하기 위함이다.", isCorrect: true }], rationale: "정규화는 데이터의 정확성과 일관성을 위해 수행합니다. 테이블이 쪼개지면 조회가 필요할 때 JOIN 연산을 수행해야 하므로, 단순 조회 속도는 정규화 전보다 느려질 수도 있습니다. (속도만을 위한다면 반정규화를 하기도 합니다.)", hint: "테이블을 쪼개면 조회 시 필연적으로 JOIN이 발생합니다." },
     { id: 2, category: "개념 및 기본 원리", question: "다음 중 JOIN에 대한 설명으로 옳은 것은?", options: [{ id: 1, text: "JOIN을 수행하기 위해서는 두 테이블의 연결 컬럼명이 반드시 동일해야 한다.", isCorrect: false }, { id: 2, text: "두 테이블 간에 PK(Primary Key)와 FK(Foreign Key) 관계가 설정되어 있지 않으면 JOIN할 수 없다.", isCorrect: false }, { id: 3, text: "일반적으로 N개의 테이블을 JOIN 하려면 최소 N-1개의 JOIN 조건이 필요하다.", isCorrect: true }, { id: 4, text: "ANSI 표준 문법에서는 JOIN 조건을 WHERE 절에 기술한다.", isCorrect: false }], rationale: "① 컬럼명이 달라도 데이터 타입과 값이 호환되면 가능합니다. ② 논리적인 연관성만 있다면 FK가 없어도 JOIN 가능합니다. ④ ANSI 표준은 ON 절에 기술합니다.", hint: "기차(테이블) 3량을 연결하려면 연결고리는 몇 개가 필요할까요?" },
@@ -1934,7 +2197,7 @@ export const quizzesByDay = {
   ],
   13: [],
   14: [],
-  15: [],
+
   16: [],
   17: [],
   18: [],
