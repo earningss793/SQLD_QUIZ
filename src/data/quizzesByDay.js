@@ -3029,7 +3029,7 @@ export const quizzesByDay = {
       options: [
         { id: 1, text: "APPLE", isCorrect: false },
         { id: 2, text: "BANANA", isCorrect: true },
-        { id: 3, text: "CAT", isCorrect: false },
+        { id: 3, text: "COAT", isCorrect: false },
         { id: 4, text: "ALARM", isCorrect: false },
       ],
       rationale:

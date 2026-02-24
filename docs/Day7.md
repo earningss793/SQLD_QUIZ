@@ -65,7 +65,7 @@
 * 2. BANANA
 
 
-* 3. CAT
+* 3. COAT
 
 
 * 4. ALARM
