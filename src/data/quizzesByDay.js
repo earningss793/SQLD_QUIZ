@@ -2441,7 +2441,7 @@ export const quizzesByDay = {
       options: [
         { id: 1, text: "WHERE DEPTNO = 10 OR DEPTNO = 20", isCorrect: false },
         { id: 2, text: "WHERE DEPTNO IN (10, 20)", isCorrect: false },
-        { id: 3, text: "WHERE DEPTNO ANY (10, 20)", isCorrect: false },
+        { id: 3, text: "WHERE DEPTNO = ANY (10, 20)", isCorrect: false },
         { id: 4, text: "WHERE DEPTNO BETWEEN 10 AND 20", isCorrect: true },
       ],
       rationale:
@@ -5603,7 +5603,7 @@ export const quizzesByDay = {
         },
       ],
       rationale:
-        "PRIOR는 '=' 연산자의 어느 쪽에 와도 상관없습니다. 어느 컬럼에 붙느냐가 중요할 뿐입니다. (예: MGR = PRIOR EMPNO 가능)",
+        "PRIOR 키워드는 비교 대상 컬럼 중 어느 쪽에 붙느냐가 전개 방향을 결정할 뿐, 연산자(=)를 기준으로 좌/우 위치는 상관없다",
       hint: "문법적 위치보다는 '누구의 데이터인가'라는 논리가 중요합니다.",
     },
   ],
@@ -5892,7 +5892,7 @@ export const quizzesByDay = {
       id: 14,
       category: "정규표현식",
       question: "다음 쿼리의 실행 결과로 출력될 데이터는 무엇인가?",
-      code: "SELECT REGEXP_SUBSTR('가나다라1234마바사', '\\d+') AS RESULT\nFROM DUAL;",
+      code: "SELECT REGEXP_SUBSTR('가나다라1234마바사', '\d+') AS RESULT\nFROM DUAL;",
       options: [
         { id: 1, text: "가나다라", isCorrect: false },
         { id: 2, text: "1234", isCorrect: true },
