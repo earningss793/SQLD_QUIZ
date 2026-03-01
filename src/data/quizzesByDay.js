@@ -12764,7 +12764,7 @@ COMMIT;
       id: 1,
       category: `[유형 1] 계층형 질의: PRIOR의 방향성 및 동작 원리`,
       question: `다음 EMP 테이블을 대상으로 계층형 질의를 수행하고자 한다. 말단 사원(자식)에서부터 사장(부모) 방향으로 거슬러 올라가는 역방향(Bottom-Up) 전개를 수행하기 위한 올바른 \`CONNECT BY\` 조건은 무엇인가?`,
-      code: `**[EMP 테이블 구조]**
+      code: `[EMP 테이블 구조]
 EMPNO(사원번호, PK), ENAME(사원명), MGR(관리자사번, FK)
 `,
       options: [
@@ -12813,27 +12813,56 @@ ORDER SIBLINGS BY ENAME DESC;
       id: 4,
       category: `[유형 2] 표를 토대로 한 SQL 쿼리문 추론`,
       question: `다음 [부서별_매출] 테이블을 조회하여, 매출이 부서의 평균 매출보다 높은 부서와 매출액을 추출하고자 한다. 이를 달성하기 위한 가장 적절한 SQL 쿼리는 무엇인가?`,
-      code: `**[부서별_매출]**
-DEPT_ID(부서ID), REVENUE(매출액)
-SELECT DEPT_ID, REVENUE
-FROM 부서별_매출 A
-WHERE REVENUE > (SELECT AVG(REVENUE) FROM 부서별_매출 B WHERE A.DEPT_ID = B.DEPT_ID);
-
-SELECT DEPT_ID, REVENUE
-FROM 부서별_매출
-WHERE REVENUE > AVG(REVENUE)
-GROUP BY DEPT_ID;
-
-SELECT DEPT_ID, REVENUE
-FROM 부서별_매출 A
-HAVING REVENUE > (SELECT AVG(REVENUE) FROM 부서별_매출 B GROUP BY DEPT_ID);
-
-SELECT DEPT_ID, REVENUE
-FROM 부서별_매출
-WHERE REVENUE > (SELECT AVG(REVENUE) FROM 부서별_매출);
-
-`,
+      tables: [
+        {
+          name: `[부서별_매출]`,
+          headers: ["DEPT_ID(부서ID)", "REVENUE(매출액)"],
+          rows: [],
+        },
+      ],
       options: [
+        {
+          id: 1,
+          text: `\`\`\`sql
+SELECT DEPT_ID, REVENUE 
+FROM 부서별_매출 A 
+WHERE REVENUE > (SELECT AVG(REVENUE) 
+                 FROM 부서별_매출 B 
+                 WHERE A.DEPT_ID = B.DEPT_ID);
+\`\`\``,
+          isCorrect: true
+        },
+        {
+          id: 2,
+          text: `\`\`\`sql
+SELECT DEPT_ID, REVENUE 
+FROM 부서별_매출 
+WHERE REVENUE > AVG(REVENUE) 
+GROUP BY DEPT_ID;
+\`\`\``,
+          isCorrect: false
+        },
+        {
+          id: 3,
+          text: `\`\`\`sql
+SELECT DEPT_ID, REVENUE 
+FROM 부서별_매출 A 
+HAVING REVENUE > (SELECT AVG(REVENUE) 
+                  FROM 부서별_매출 B 
+                  GROUP BY DEPT_ID);
+\`\`\``,
+          isCorrect: false
+        },
+        {
+          id: 4,
+          text: `\`\`\`sql
+SELECT DEPT_ID, REVENUE 
+FROM 부서별_매출 
+WHERE REVENUE > (SELECT AVG(REVENUE) 
+                 FROM 부서별_매출);
+\`\`\``,
+          isCorrect: false
+        },
       ],
       rationale: `각 부서의 매출액이 **'해당 부서'**의 평균 매출액보다 높은지를 비교해야 하므로, 메인 쿼리의 \`DEPT_ID\`를 서브쿼리로 전달하여 조건에 맞는 평균을 구하는 연관 서브쿼리(①번)를 작성해야 합니다. ②번은 WHERE 절에서 집계 함수를 사용할 수 없어 문법 오류가 발생합니다.`,
       hint: `메인 쿼리의 특정 행을 서브쿼리로 전달하여 비교하는 '연관 서브쿼리(Correlated Subquery)'의 개념을 적용해야 합니다.`,
@@ -12842,7 +12871,7 @@ WHERE REVENUE > (SELECT AVG(REVENUE) FROM 부서별_매출);
       id: 5,
       category: `[유형 2] 표를 토대로 한 SQL 쿼리문 추론`,
       question: `아래 [주문] 테이블에서 \`CUSTOMER_ID\`별로 가장 높은 \`AMOUNT\`를 기록한 주문 데이터를 추출하고자 한다. 조건에 맞는 올바른 SQL 구문은?`,
-      code: `**[주문]**
+      code: `[주문]
 ORDER_ID(주문번호), CUSTOMER_ID(고객ID), AMOUNT(주문금액)
 `,
       options: [
@@ -12857,23 +12886,27 @@ ORDER_ID(주문번호), CUSTOMER_ID(고객ID), AMOUNT(주문금액)
     {
       id: 6,
       category: `[유형 2] 표를 토대로 한 SQL 쿼리문 추론`,
-      question: `다음 [SALES] 테이블을 대상으로 집계 쿼리를 수행한 결과가 아래의 [결과 표]와 같았다. 이때 빈칸에 들어갈 알맞은 그룹 함수는 무엇인가?`,
-      code: `**[SALES]**
-REGION(지역), PRODUCT(상품), AMT(매출)
-**[결과 표]**
-| REGION | PRODUCT | SUM(AMT) |
-|---|---|---|
-| 서울 | 노트북 | 100 |
-| 서울 | 마우스 | 50 |
-| 서울 | (NULL) | 150 |
-| 부산 | 노트북 | 200 |
-| 부산 | (NULL) | 200 |
-| (NULL) | (NULL) | 350 |
-SELECT REGION, PRODUCT, SUM(AMT)
-FROM SALES
-GROUP BY ( 빈칸 );
+      question: `다음 [SALES] 테이블을 대상으로 집계 쿼리를 수행한 결과가 아래의 [결과 표]와 같았다. 이때 빈칸에 들어갈 알맞은 그룹 함수는 무엇인가?
 
-`,
+[SALES]
+REGION(지역), PRODUCT(상품), AMT(매출)`,
+      tables: [
+        {
+          name: `[결과 표]`,
+          headers: ["REGION", "PRODUCT", "SUM(AMT)"],
+          rows: [
+            ["서울", "노트북", "100"],
+            ["서울", "마우스", "50"],
+            ["서울", "(NULL)", "150"],
+            ["부산", "노트북", "200"],
+            ["부산", "(NULL)", "200"],
+            ["(NULL)", "(NULL)", "350"]
+          ],
+        }
+      ],
+      code: `SELECT REGION, PRODUCT, SUM(AMT)
+FROM SALES
+GROUP BY ( 빈칸 );`,
       options: [
         { id: 1, text: `\`CUBE(REGION, PRODUCT)\``, isCorrect: false },
         { id: 2, text: `\`ROLLUP(REGION, PRODUCT)\``, isCorrect: true },
@@ -12972,17 +13005,20 @@ GROUP BY ROLLUP(JOB, MGR);
     },
     {
       id: 12,
-      category: `[유형 4] 다음 SQL문의 실행 결과 예측 (오류 및 함정 포함)`,
+      category: `[유형 4] 다음 SQL문의 실행 결과 예측`,
       question: `다음 [TB_NUM] 테이블을 대상으로 쿼리를 실행했을 때, 출력되는 최종 결과값(행의 수 아님)은 무엇인가?`,
-      code: `**[TB_NUM]**
-| VAL1 | VAL2 |
-|---|---|
-| 10 | 20 |
-| NULL | 30 |
-| 40 | NULL |
-SELECT SUM(VAL1 + VAL2) AS RESULT FROM TB_NUM;
-
-`,
+      tables: [
+        {
+          name: `[TB_NUM]`,
+          headers: ["VAL1", "VAL2"],
+          rows: [
+            ["10", "20"],
+            ["NULL", "30"],
+            ["40", "NULL"]
+          ]
+        }
+      ],
+      code: `SELECT SUM(VAL1 + VAL2) AS RESULT FROM TB_NUM;`,
       options: [
         { id: 1, text: `100`, isCorrect: false },
         { id: 2, text: `30`, isCorrect: true },
@@ -12994,7 +13030,7 @@ SELECT SUM(VAL1 + VAL2) AS RESULT FROM TB_NUM;
     },
     {
       id: 13,
-      category: `[유형 4] 다음 SQL문의 실행 결과 예측 (오류 및 함정 포함)`,
+      category: `[유형 4] 다음 SQL문의 실행 결과 예측`,
       question: `아래의 \`NOT IN\` 조건문을 실행했을 때 출력되는 행의 건수로 올바른 것은?`,
       code: `**[EMP]** 테이블에 총 14건의 데이터가 존재한다.
 **[DEPT_TEMP]** 테이블에는 \`DEPTNO\` 값이 각각 \`10, 20, NULL\` 인 3건의 데이터가 존재한다.
@@ -13013,7 +13049,7 @@ WHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT_TEMP);
     },
     {
       id: 14,
-      category: `[유형 4] 다음 SQL문의 실행 결과 예측 (오류 및 함정 포함)`,
+      category: `[유형 4] 다음 SQL문의 실행 결과 예측`,
       question: `윈도우 함수의 프레임 지정과 관련하여, 다음 쿼리의 실행 결과로 2번째 행(금액 100)의 누적_합계 열에 출력될 값은 무엇인가?`,
       code: `**[매출]** 테이블 (금액 오름차순 정렬 상태)
 1행: 금액 100 (A사)
@@ -13036,7 +13072,7 @@ FROM 매출;
     },
     {
       id: 15,
-      category: `[유형 4] 다음 SQL문의 실행 결과 예측 (오류 및 함정 포함)`,
+      category: `[유형 4] 다음 SQL문의 실행 결과 예측`,
       question: `아래의 \`CASE\` 표현식을 포함한 SQL문이 실행되었을 때, 급여(SAL)가 2500인 사원이 반환받게 될 등급(GRADE)은 무엇인가?`,
       code: `SELECT ENAME, SAL,
 CASE
@@ -13059,7 +13095,7 @@ FROM EMP;
     },
     {
       id: 16,
-      category: `[유형 4] 다음 SQL문의 실행 결과 예측 (오류 및 함정 포함)`,
+      category: `[유형 4] 다음 SQL문의 실행 결과 예측`,
       question: `테이블을 대상으로 \`SELECT * FROM TABLE_A, TABLE_B;\` 구문을 실행했을 때 데이터베이스 내부에서 처리되는 조인 연산의 정식 명칭과 그 결과로 올바른 것은? (단, A는 5행, B는 10행이다.)`,
       options: [
         { id: 1, text: `INNER JOIN / 5행 출력`, isCorrect: false },
@@ -13130,7 +13166,7 @@ FOR REGION IN ('SEOUL' AS 서울, 'BUSAN' AS 부산)
       rationale: `\`PIVOT\` 구문은 데이터를 재배치하여 열로 확장하는 과정에서 교차점에 해당하는 다수의 데이터 행들을 단일 값으로 압축해야 하므로, (A) 위치에 \`SUM\`, \`MAX\`, \`COUNT\` 등과 같은 **집계 함수**가 필수적으로 포함되어야 합니다.`,
       hint: `행(Row) 데이터를 열(Column)로 변환할 때, 기존의 세로축과 새로운 가로축이 교차하는 지점(Cell)에 들어갈 값을 '어떻게' 산출할지 지시해야 합니다.`,
     },
-  ],  232: [
+  ], 232: [
     {
       id: 1,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
@@ -13138,8 +13174,8 @@ FOR REGION IN ('SEOUL' AS 서울, 'BUSAN' AS 부산)
       tables: [
         {
           name: `[TB_NUM]`,
-          headers: ["ID","VAL1","VAL2"],
-          rows: [["1","10","20"],["2","NULL","30"],["3","40","NULL"]],
+          headers: ["ID", "VAL1", "VAL2"],
+          rows: [["1", "10", "20"], ["2", "NULL", "30"], ["3", "40", "NULL"]],
         },
       ],
       code: `SELECT SUM(VAL1 + VAL2) AS RESULT_A,
@@ -13167,7 +13203,7 @@ DEPTNO 컬럼의 값: 10, 10, 20, 20, 30, 30 ... 등 (NULL 없음)`,
         {
           name: `[DEPT_TEMP] (총 3건의 데이터 존재)`,
           headers: ["DEPTNO"],
-          rows: [["10"],["20"],["NULL"]],
+          rows: [["10"], ["20"], ["NULL"]],
         },
       ],
       code: `SELECT COUNT(*) FROM EMP
@@ -13190,8 +13226,8 @@ WHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT_TEMP);
       tables: [
         {
           name: `[매출] (매출액 오름차순 정렬 상태)`,
-          headers: ["회사명","매출액"],
-          rows: [["A사","100"],["B사","100"],["C사","200"]],
+          headers: ["회사명", "매출액"],
+          rows: [["A사", "100"], ["B사", "100"], ["C사", "200"]],
         },
       ],
       code: `SELECT 회사명, 매출액,
@@ -13216,8 +13252,8 @@ FROM 매출;
       tables: [
         {
           name: `[SALARY]`,
-          headers: ["EMP_ID","SAL"],
-          rows: [["1","500"],["2","400"],["3","300"]],
+          headers: ["EMP_ID", "SAL"],
+          rows: [["1", "500"], ["2", "400"], ["3", "300"]],
         },
       ],
       code: `SELECT EMP_ID, SAL
@@ -13242,8 +13278,8 @@ ORDER BY SAL DESC;
       tables: [
         {
           name: `[조직도]`,
-          headers: ["사번(EMPNO)","관리자(MGR)","이름(ENAME)"],
-          rows: [["100","NULL","사장"],["200","100","부장"],["300","200","과장"]],
+          headers: ["사번(EMPNO)", "관리자(MGR)", "이름(ENAME)"],
+          rows: [["100", "NULL", "사장"], ["200", "100", "부장"], ["300", "200", "과장"]],
         },
       ],
       code: `SELECT ENAME
@@ -13298,8 +13334,8 @@ FROM EMP;
       tables: [
         {
           name: `[NULL_TEST]`,
-          headers: ["COL1","COL2","COL3"],
-          rows: [["100","100","NULL"]],
+          headers: ["COL1", "COL2", "COL3"],
+          rows: [["100", "100", "NULL"]],
         },
       ],
       code: `SELECT COALESCE(NULLIF(COL1, COL2), COL3, 200) AS RESULT
@@ -13323,12 +13359,12 @@ FROM NULL_TEST;
         {
           name: `[T1]`,
           headers: ["VAL"],
-          rows: [["A"],["NULL"]],
+          rows: [["A"], ["NULL"]],
         },
         {
           name: `[T2]`,
           headers: ["VAL"],
-          rows: [["A"],["NULL"]],
+          rows: [["A"], ["NULL"]],
         },
       ],
       code: `SELECT VAL FROM T1
@@ -13352,8 +13388,8 @@ SELECT VAL FROM T2;
       tables: [
         {
           name: `[매출] (총 4건)`,
-          headers: ["연도","분기","금액"],
-          rows: [["2023","1Q","100"],["2023","2Q","200"],["2024","1Q","150"],["2024","2Q","250"]],
+          headers: ["연도", "분기", "금액"],
+          rows: [["2023", "1Q", "100"], ["2023", "2Q", "200"], ["2024", "1Q", "150"], ["2024", "2Q", "250"]],
         },
       ],
       code: `SELECT 연도, 분기, SUM(금액)
@@ -13397,8 +13433,8 @@ WHERE E.DEPTNO = D.DEPTNO(+);
       tables: [
         {
           name: `[EMP]`,
-          headers: ["DEPTNO","SAL"],
-          rows: [["10","1000"]],
+          headers: ["DEPTNO", "SAL"],
+          rows: [["10", "1000"]],
         },
       ],
       code: `SELECT DEPTNO AS 부서, SUM(SAL)
@@ -13426,7 +13462,7 @@ GROUP BY 부서;
         {
           name: `[DATA]`,
           headers: ["COL"],
-          rows: [["A"],["B"],["NULL"]],
+          rows: [["A"], ["B"], ["NULL"]],
         },
       ],
       options: [
@@ -13445,8 +13481,8 @@ GROUP BY 부서;
       tables: [
         {
           name: `[사원] (1행 존재)`,
-          headers: ["COMM","SAL"],
-          rows: [["NULL","5000"]],
+          headers: ["COMM", "SAL"],
+          rows: [["NULL", "5000"]],
         },
       ],
       code: `SELECT NVL2(COMM, SAL * 1.1, SAL) AS FINAL_SAL
@@ -13469,8 +13505,8 @@ FROM 사원;
       tables: [
         {
           name: `[SALES]`,
-          headers: ["REGION","MONTH","AMT"],
-          rows: [["SEOUL","1","100"],["BUSAN","2","200"]],
+          headers: ["REGION", "MONTH", "AMT"],
+          rows: [["SEOUL", "1", "100"], ["BUSAN", "2", "200"]],
         },
       ],
       code: `SELECT *
@@ -13497,8 +13533,8 @@ FOR MONTH IN (1 AS M1, 2 AS M2)
       tables: [
         {
           name: `[SCORE]`,
-          headers: ["ID","JUMSU"],
-          rows: [["S1","90"],["S2","90"],["S3","80"],["S4","80"]],
+          headers: ["ID", "JUMSU"],
+          rows: [["S1", "90"], ["S2", "90"], ["S3", "80"], ["S4", "80"]],
         },
       ],
       code: `SELECT ID,
@@ -13538,8 +13574,8 @@ FROM SCORE;
       tables: [
         {
           name: `[DATA] (ID 오름차순 정렬 상태)`,
-          headers: ["ID","VAL"],
-          rows: [["1","100"],["2","200"]],
+          headers: ["ID", "VAL"],
+          rows: [["1", "100"], ["2", "200"]],
         },
       ],
       code: `SELECT ID, VAL,
@@ -13601,8 +13637,8 @@ GROUP BY ROLLUP(DEPTNO);
       tables: [
         {
           name: `[EMP] (총 4명의 데이터)`,
-          headers: ["ENAME","SAL"],
-          rows: [["김씨","5000"],["이씨","5000"],["박씨","4000"],["최씨","3000"]],
+          headers: ["ENAME", "SAL"],
+          rows: [["김씨", "5000"], ["이씨", "5000"], ["박씨", "4000"], ["최씨", "3000"]],
         },
       ],
       code: `SELECT TOP(1) WITH TIES ENAME, SAL
