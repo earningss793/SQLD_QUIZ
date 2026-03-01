@@ -13135,14 +13135,14 @@ FOR REGION IN ('SEOUL' AS 서울, 'BUSAN' AS 부산)
       id: 1,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
       question: `다음 [TB_NUM] 테이블을 대상으로 아래의 쿼리를 실행했을 때, 출력되는 최종 결과값은 무엇인가?`,
-      code: `**[TB_NUM]**
-| ID | VAL1 | VAL2 |
-|---|---|---|
-| 1 | 10 | 20 |
-| 2 | NULL | 30 |
-| 3 | 40 | NULL |
-
-SELECT SUM(VAL1 + VAL2) AS RESULT_A,
+      tables: [
+        {
+          name: `[TB_NUM]`,
+          headers: ["ID","VAL1","VAL2"],
+          rows: [["1","10","20"],["2","NULL","30"],["3","40","NULL"]],
+        },
+      ],
+      code: `SELECT SUM(VAL1 + VAL2) AS RESULT_A,
 SUM(VAL1) + SUM(VAL2) AS RESULT_B
 FROM TB_NUM;
 
@@ -13159,17 +13159,18 @@ FROM TB_NUM;
     {
       id: 2,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
-      question: `다음 [EMP] 테이블과 [DEPT_TEMP] 테이블이 주어졌을 때, 아래 쿼리의 실행 결과(출력되는 행의 수)로 올바른 것은?`,
-      code: `**[EMP]** (총 10건의 데이터 존재)
-DEPTNO 컬럼의 값: 10, 10, 20, 20, 30, 30 ... 등 (NULL 없음)
-**[DEPT_TEMP]** (총 3건의 데이터 존재)
-| DEPTNO |
-|---|
-| 10 |
-| 20 |
-| NULL |
+      question: `다음 [EMP] 테이블과 [DEPT_TEMP] 테이블이 주어졌을 때, 아래 쿼리의 실행 결과(출력되는 행의 수)로 올바른 것은?
 
-SELECT COUNT(*) FROM EMP
+**[EMP]** (총 10건의 데이터 존재)
+DEPTNO 컬럼의 값: 10, 10, 20, 20, 30, 30 ... 등 (NULL 없음)`,
+      tables: [
+        {
+          name: `[DEPT_TEMP] (총 3건의 데이터 존재)`,
+          headers: ["DEPTNO"],
+          rows: [["10"],["20"],["NULL"]],
+        },
+      ],
+      code: `SELECT COUNT(*) FROM EMP
 WHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT_TEMP);
 
 `,
@@ -13186,14 +13187,14 @@ WHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT_TEMP);
       id: 3,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
       question: `다음 [매출] 테이블에 대해 윈도우 함수를 실행했을 때, 'B사' 행에 출력될 [누적_매출] 값은 무엇인가?`,
-      code: `**[매출]** (매출액 오름차순 정렬 상태)
-| 회사명 | 매출액 |
-|---|---|
-| A사 | 100 |
-| B사 | 100 |
-| C사 | 200 |
-
-SELECT 회사명, 매출액,
+      tables: [
+        {
+          name: `[매출] (매출액 오름차순 정렬 상태)`,
+          headers: ["회사명","매출액"],
+          rows: [["A사","100"],["B사","100"],["C사","200"]],
+        },
+      ],
+      code: `SELECT 회사명, 매출액,
 SUM(매출액) OVER (ORDER BY 매출액
 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 누적_매출
 FROM 매출;
@@ -13212,14 +13213,14 @@ FROM 매출;
       id: 4,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
       question: `오라클(Oracle) 환경에서 다음 [SALARY] 테이블을 조회할 때, 아래 쿼리의 실행 결과로 올바른 것은?`,
-      code: `**[SALARY]**
-| EMP_ID | SAL |
-|---|---|
-| 1 | 500 |
-| 2 | 400 |
-| 3 | 300 |
-
-SELECT EMP_ID, SAL
+      tables: [
+        {
+          name: `[SALARY]`,
+          headers: ["EMP_ID","SAL"],
+          rows: [["1","500"],["2","400"],["3","300"]],
+        },
+      ],
+      code: `SELECT EMP_ID, SAL
 FROM SALARY
 WHERE ROWNUM = 2
 ORDER BY SAL DESC;
@@ -13238,14 +13239,14 @@ ORDER BY SAL DESC;
       id: 5,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
       question: `다음 [조직도] 테이블을 대상으로 한 계층형 질의의 실행 결과, 데이터의 전개 방향 및 포함되는 사원으로 가장 올바른 것은?`,
-      code: `**[조직도]**
-| 사번(EMPNO) | 관리자(MGR) | 이름(ENAME) |
-|---|---|---|
-| 100 | NULL | 사장 |
-| 200 | 100 | 부장 |
-| 300 | 200 | 과장 |
-
-SELECT ENAME
+      tables: [
+        {
+          name: `[조직도]`,
+          headers: ["사번(EMPNO)","관리자(MGR)","이름(ENAME)"],
+          rows: [["100","NULL","사장"],["200","100","부장"],["300","200","과장"]],
+        },
+      ],
+      code: `SELECT ENAME
 FROM 조직도
 START WITH ENAME = '과장'
 CONNECT BY MGR = PRIOR EMPNO;
@@ -13264,12 +13265,14 @@ CONNECT BY MGR = PRIOR EMPNO;
       id: 6,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
       question: `다음 [EMP] 테이블에 대해 아래의 \`CASE\` 표현식이 포함된 SQL이 실행되었을 때, \`GRADE\` 컬럼에 반환될 값은 무엇인가?`,
-      code: `**[EMP]** (단 1건의 데이터)
-| SAL |
-|---|
-| 2500 |
-
-SELECT
+      tables: [
+        {
+          name: `[EMP] (단 1건의 데이터)`,
+          headers: ["SAL"],
+          rows: [["2500"]],
+        },
+      ],
+      code: `SELECT
 CASE
 WHEN SAL >= 1000 THEN 'A'
 WHEN SAL >= 2000 THEN 'B'
@@ -13292,12 +13295,14 @@ FROM EMP;
       id: 7,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
       question: `다음 [NULL_TEST] 테이블에 대한 질의 결과로 올바른 것은?`,
-      code: `**[NULL_TEST]**
-| COL1 | COL2 | COL3 |
-|---|---|---|
-| 100 | 100 | NULL |
-
-SELECT COALESCE(NULLIF(COL1, COL2), COL3, 200) AS RESULT
+      tables: [
+        {
+          name: `[NULL_TEST]`,
+          headers: ["COL1","COL2","COL3"],
+          rows: [["100","100","NULL"]],
+        },
+      ],
+      code: `SELECT COALESCE(NULLIF(COL1, COL2), COL3, 200) AS RESULT
 FROM NULL_TEST;
 
 `,
@@ -13314,18 +13319,19 @@ FROM NULL_TEST;
       id: 8,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
       question: `다음 두 테이블을 집합 연산자로 결합했을 때, 출력되는 최종 결과 행의 수는?`,
-      code: `**[T1]**
-| VAL |
-|---|
-| A |
-| NULL |
-**[T2]**
-| VAL |
-|---|
-| A |
-| NULL |
-
-SELECT VAL FROM T1
+      tables: [
+        {
+          name: `[T1]`,
+          headers: ["VAL"],
+          rows: [["A"],["NULL"]],
+        },
+        {
+          name: `[T2]`,
+          headers: ["VAL"],
+          rows: [["A"],["NULL"]],
+        },
+      ],
+      code: `SELECT VAL FROM T1
 UNION
 SELECT VAL FROM T2;
 
@@ -13343,15 +13349,14 @@ SELECT VAL FROM T2;
       id: 9,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
       question: `다음 [매출] 테이블에 대하여 그룹 함수 쿼리를 실행했을 때, 결과 집합으로 출력되는 행(Row)의 수는 총 몇 개인가?`,
-      code: `**[매출]** (총 4건)
-| 연도 | 분기 | 금액 |
-|---|---|---|
-| 2023 | 1Q | 100 |
-| 2023 | 2Q | 200 |
-| 2024 | 1Q | 150 |
-| 2024 | 2Q | 250 |
-
-SELECT 연도, 분기, SUM(금액)
+      tables: [
+        {
+          name: `[매출] (총 4건)`,
+          headers: ["연도","분기","금액"],
+          rows: [["2023","1Q","100"],["2023","2Q","200"],["2024","1Q","150"],["2024","2Q","250"]],
+        },
+      ],
+      code: `SELECT 연도, 분기, SUM(금액)
 FROM 매출
 GROUP BY ROLLUP(연도, 분기);
 
@@ -13368,10 +13373,10 @@ GROUP BY ROLLUP(연도, 분기);
     {
       id: 10,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
-      question: `오라클 전용 외부 조인 기호가 포함된 다음 쿼리와 논리적으로 완벽하게 동일한 결과를 반환하는 ANSI 표준 구문은?`,
-      code: `**[EMP]** (사원 테이블), **[DEPT]** (부서 테이블)
+      question: `오라클 전용 외부 조인 기호가 포함된 다음 쿼리와 논리적으로 완벽하게 동일한 결과를 반환하는 ANSI 표준 구문은?
 
-SELECT E.ENAME, D.DNAME
+**[EMP]** (사원 테이블), **[DEPT]** (부서 테이블)`,
+      code: `SELECT E.ENAME, D.DNAME
 FROM EMP E, DEPT D
 WHERE E.DEPTNO = D.DEPTNO(+);
 
@@ -13389,12 +13394,14 @@ WHERE E.DEPTNO = D.DEPTNO(+);
       id: 11,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
       question: `아래 쿼리를 실행했을 때 데이터베이스 옵티마이저가 에러(Syntax Error)를 반환하는 논리적 이유는 무엇인가?`,
-      code: `**[EMP]**
-| DEPTNO | SAL |
-|---|---|
-| 10 | 1000 |
-
-SELECT DEPTNO AS 부서, SUM(SAL)
+      tables: [
+        {
+          name: `[EMP]`,
+          headers: ["DEPTNO","SAL"],
+          rows: [["10","1000"]],
+        },
+      ],
+      code: `SELECT DEPTNO AS 부서, SUM(SAL)
 FROM EMP
 GROUP BY 부서;
 
@@ -13411,16 +13418,17 @@ GROUP BY 부서;
     {
       id: 12,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
-      question: `아래 [DATA] 테이블에서 각 쿼리 결과의 차이를 올바르게 설명한 것은?`,
-      code: `**[DATA]**
-| COL |
-|---|
-| A |
-| B |
-| NULL |
+      question: `아래 [DATA] 테이블에서 각 쿼리 결과의 차이를 올바르게 설명한 것은?
+
 * 쿼리 1: \`SELECT COUNT(*) FROM DATA;\`
-* 쿼리 2: \`SELECT COUNT(COL) FROM DATA;\`
-`,
+* 쿼리 2: \`SELECT COUNT(COL) FROM DATA;\``,
+      tables: [
+        {
+          name: `[DATA]`,
+          headers: ["COL"],
+          rows: [["A"],["B"],["NULL"]],
+        },
+      ],
       options: [
         { id: 1, text: `두 쿼리 모두 3을 반환한다.`, isCorrect: false },
         { id: 2, text: `쿼리 1은 3, 쿼리 2는 2를 반환한다.`, isCorrect: true },
@@ -13434,12 +13442,14 @@ GROUP BY 부서;
       id: 13,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
       question: `다음 [사원] 테이블에 대해 \`NVL2\` 함수를 실행했을 때의 결과값은?`,
-      code: `**[사원]** (1행 존재)
-| COMM | SAL |
-|---|---|
-| NULL | 5000 |
-
-SELECT NVL2(COMM, SAL * 1.1, SAL) AS FINAL_SAL
+      tables: [
+        {
+          name: `[사원] (1행 존재)`,
+          headers: ["COMM","SAL"],
+          rows: [["NULL","5000"]],
+        },
+      ],
+      code: `SELECT NVL2(COMM, SAL * 1.1, SAL) AS FINAL_SAL
 FROM 사원;
 
 `,
@@ -13456,13 +13466,14 @@ FROM 사원;
       id: 14,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
       question: `다음 \`PIVOT\` 쿼리가 실행되었을 때, 산출되는 가로로 넓은(Wide) 결과 집합의 열(Column) 개수는 총 몇 개인가?`,
-      code: `**[SALES]**
-| REGION | MONTH | AMT |
-|---|---|---|
-| SEOUL | 1 | 100 |
-| BUSAN | 2 | 200 |
-
-SELECT *
+      tables: [
+        {
+          name: `[SALES]`,
+          headers: ["REGION","MONTH","AMT"],
+          rows: [["SEOUL","1","100"],["BUSAN","2","200"]],
+        },
+      ],
+      code: `SELECT *
 FROM SALES
 PIVOT (
 SUM(AMT)
@@ -13483,15 +13494,14 @@ FOR MONTH IN (1 AS M1, 2 AS M2)
       id: 15,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
       question: `아래 [SCORE] 테이블에 대해 윈도우 함수를 수행했을 때, 점수가 80점인 학생들에게 부여될 \`RK\` 값은 각각 무엇인가?`,
-      code: `**[SCORE]**
-| ID | JUMSU |
-|---|---|
-| S1 | 90 |
-| S2 | 90 |
-| S3 | 80 |
-| S4 | 80 |
-
-SELECT ID,
+      tables: [
+        {
+          name: `[SCORE]`,
+          headers: ["ID","JUMSU"],
+          rows: [["S1","90"],["S2","90"],["S3","80"],["S4","80"]],
+        },
+      ],
+      code: `SELECT ID,
 DENSE_RANK() OVER (ORDER BY JUMSU DESC) AS RK
 FROM SCORE;
 
@@ -13525,13 +13535,14 @@ FROM SCORE;
       id: 17,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
       question: `윈도우 함수 \`LAG\`가 포함된 아래 쿼리의 실행 결과로, 1월(ID=1) 행의 \`PREV_VAL\` 열에 출력될 값은 무엇인가?`,
-      code: `**[DATA]** (ID 오름차순 정렬 상태)
-| ID | VAL |
-|---|---|
-| 1 | 100 |
-| 2 | 200 |
-
-SELECT ID, VAL,
+      tables: [
+        {
+          name: `[DATA] (ID 오름차순 정렬 상태)`,
+          headers: ["ID","VAL"],
+          rows: [["1","100"],["2","200"]],
+        },
+      ],
+      code: `SELECT ID, VAL,
 LAG(VAL, 1, 0) OVER (ORDER BY ID) AS PREV_VAL
 FROM DATA;
 
@@ -13548,10 +13559,10 @@ FROM DATA;
     {
       id: 18,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
-      question: `다음 \`ROLLUP\` 그룹 함수가 적용된 쿼리에서, 산출된 결과 집합 중 '전체 총계(Grand Total)' 행의 \`GRP_FLAG\` 열에 출력될 값은 무엇인가?`,
-      code: `**[EMP]** 테이블에 대해 조회를 수행함.
+      question: `다음 \`ROLLUP\` 그룹 함수가 적용된 쿼리에서, 산출된 결과 집합 중 '전체 총계(Grand Total)' 행의 \`GRP_FLAG\` 열에 출력될 값은 무엇인가?
 
-SELECT DEPTNO,
+**[EMP]** 테이블에 대해 조회를 수행함.`,
+      code: `SELECT DEPTNO,
 SUM(SAL),
 GROUPING(DEPTNO) AS GRP_FLAG
 FROM EMP
@@ -13587,15 +13598,14 @@ GROUP BY ROLLUP(DEPTNO);
       id: 20,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
       question: `SQL Server 환경에서 다음 [EMP] 테이블에 대해 \`TOP\` 구문 쿼리를 실행했을 때, 최종적으로 반환되는 행(Row)의 수는 총 몇 개인가?`,
-      code: `**[EMP]** (총 4명의 데이터)
-| ENAME | SAL |
-|---|---|
-| 김씨 | 5000 |
-| 이씨 | 5000 |
-| 박씨 | 4000 |
-| 최씨 | 3000 |
-
-SELECT TOP(1) WITH TIES ENAME, SAL
+      tables: [
+        {
+          name: `[EMP] (총 4명의 데이터)`,
+          headers: ["ENAME","SAL"],
+          rows: [["김씨","5000"],["이씨","5000"],["박씨","4000"],["최씨","3000"]],
+        },
+      ],
+      code: `SELECT TOP(1) WITH TIES ENAME, SAL
 FROM EMP
 ORDER BY SAL DESC;
 
