@@ -13130,8 +13130,7 @@ FOR REGION IN ('SEOUL' AS 서울, 'BUSAN' AS 부산)
       rationale: `\`PIVOT\` 구문은 데이터를 재배치하여 열로 확장하는 과정에서 교차점에 해당하는 다수의 데이터 행들을 단일 값으로 압축해야 하므로, (A) 위치에 \`SUM\`, \`MAX\`, \`COUNT\` 등과 같은 **집계 함수**가 필수적으로 포함되어야 합니다.`,
       hint: `행(Row) 데이터를 열(Column)로 변환할 때, 기존의 세로축과 새로운 가로축이 교차하는 지점(Cell)에 들어갈 값을 '어떻게' 산출할지 지시해야 합니다.`,
     },
-  ],
-  232: [
+  ],  232: [
     {
       id: 1,
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
@@ -13142,6 +13141,7 @@ FOR REGION IN ('SEOUL' AS 서울, 'BUSAN' AS 부산)
 | 1 | 10 | 20 |
 | 2 | NULL | 30 |
 | 3 | 40 | NULL |
+
 SELECT SUM(VAL1 + VAL2) AS RESULT_A,
 SUM(VAL1) + SUM(VAL2) AS RESULT_B
 FROM TB_NUM;
@@ -13168,6 +13168,7 @@ DEPTNO 컬럼의 값: 10, 10, 20, 20, 30, 30 ... 등 (NULL 없음)
 | 10 |
 | 20 |
 | NULL |
+
 SELECT COUNT(*) FROM EMP
 WHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT_TEMP);
 
@@ -13191,6 +13192,7 @@ WHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT_TEMP);
 | A사 | 100 |
 | B사 | 100 |
 | C사 | 200 |
+
 SELECT 회사명, 매출액,
 SUM(매출액) OVER (ORDER BY 매출액
 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 누적_매출
@@ -13216,6 +13218,7 @@ FROM 매출;
 | 1 | 500 |
 | 2 | 400 |
 | 3 | 300 |
+
 SELECT EMP_ID, SAL
 FROM SALARY
 WHERE ROWNUM = 2
@@ -13241,6 +13244,7 @@ ORDER BY SAL DESC;
 | 100 | NULL | 사장 |
 | 200 | 100 | 부장 |
 | 300 | 200 | 과장 |
+
 SELECT ENAME
 FROM 조직도
 START WITH ENAME = '과장'
@@ -13264,6 +13268,7 @@ CONNECT BY MGR = PRIOR EMPNO;
 | SAL |
 |---|
 | 2500 |
+
 SELECT
 CASE
 WHEN SAL >= 1000 THEN 'A'
@@ -13291,6 +13296,7 @@ FROM EMP;
 | COL1 | COL2 | COL3 |
 |---|---|---|
 | 100 | 100 | NULL |
+
 SELECT COALESCE(NULLIF(COL1, COL2), COL3, 200) AS RESULT
 FROM NULL_TEST;
 
@@ -13318,6 +13324,7 @@ FROM NULL_TEST;
 |---|
 | A |
 | NULL |
+
 SELECT VAL FROM T1
 UNION
 SELECT VAL FROM T2;
@@ -13343,6 +13350,7 @@ SELECT VAL FROM T2;
 | 2023 | 2Q | 200 |
 | 2024 | 1Q | 150 |
 | 2024 | 2Q | 250 |
+
 SELECT 연도, 분기, SUM(금액)
 FROM 매출
 GROUP BY ROLLUP(연도, 분기);
@@ -13362,6 +13370,7 @@ GROUP BY ROLLUP(연도, 분기);
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
       question: `오라클 전용 외부 조인 기호가 포함된 다음 쿼리와 논리적으로 완벽하게 동일한 결과를 반환하는 ANSI 표준 구문은?`,
       code: `**[EMP]** (사원 테이블), **[DEPT]** (부서 테이블)
+
 SELECT E.ENAME, D.DNAME
 FROM EMP E, DEPT D
 WHERE E.DEPTNO = D.DEPTNO(+);
@@ -13384,6 +13393,7 @@ WHERE E.DEPTNO = D.DEPTNO(+);
 | DEPTNO | SAL |
 |---|---|
 | 10 | 1000 |
+
 SELECT DEPTNO AS 부서, SUM(SAL)
 FROM EMP
 GROUP BY 부서;
@@ -13428,6 +13438,7 @@ GROUP BY 부서;
 | COMM | SAL |
 |---|---|
 | NULL | 5000 |
+
 SELECT NVL2(COMM, SAL * 1.1, SAL) AS FINAL_SAL
 FROM 사원;
 
@@ -13450,6 +13461,7 @@ FROM 사원;
 |---|---|---|
 | SEOUL | 1 | 100 |
 | BUSAN | 2 | 200 |
+
 SELECT *
 FROM SALES
 PIVOT (
@@ -13478,6 +13490,7 @@ FOR MONTH IN (1 AS M1, 2 AS M2)
 | S2 | 90 |
 | S3 | 80 |
 | S4 | 80 |
+
 SELECT ID,
 DENSE_RANK() OVER (ORDER BY JUMSU DESC) AS RK
 FROM SCORE;
@@ -13517,6 +13530,7 @@ FROM SCORE;
 |---|---|
 | 1 | 100 |
 | 2 | 200 |
+
 SELECT ID, VAL,
 LAG(VAL, 1, 0) OVER (ORDER BY ID) AS PREV_VAL
 FROM DATA;
@@ -13536,6 +13550,7 @@ FROM DATA;
       category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
       question: `다음 \`ROLLUP\` 그룹 함수가 적용된 쿼리에서, 산출된 결과 집합 중 '전체 총계(Grand Total)' 행의 \`GRP_FLAG\` 열에 출력될 값은 무엇인가?`,
       code: `**[EMP]** 테이블에 대해 조회를 수행함.
+
 SELECT DEPTNO,
 SUM(SAL),
 GROUPING(DEPTNO) AS GRP_FLAG
@@ -13579,6 +13594,7 @@ GROUP BY ROLLUP(DEPTNO);
 | 이씨 | 5000 |
 | 박씨 | 4000 |
 | 최씨 | 3000 |
+
 SELECT TOP(1) WITH TIES ENAME, SAL
 FROM EMP
 ORDER BY SAL DESC;
