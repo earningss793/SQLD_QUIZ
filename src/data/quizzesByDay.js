@@ -13131,4 +13131,467 @@ FOR REGION IN ('SEOUL' AS 서울, 'BUSAN' AS 부산)
       hint: `행(Row) 데이터를 열(Column)로 변환할 때, 기존의 세로축과 새로운 가로축이 교차하는 지점(Cell)에 들어갈 값을 '어떻게' 산출할지 지시해야 합니다.`,
     },
   ],
+  232: [
+    {
+      id: 1,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `다음 [TB_NUM] 테이블을 대상으로 아래의 쿼리를 실행했을 때, 출력되는 최종 결과값은 무엇인가?`,
+      code: `**[TB_NUM]**
+| ID | VAL1 | VAL2 |
+|---|---|---|
+| 1 | 10 | 20 |
+| 2 | NULL | 30 |
+| 3 | 40 | NULL |
+SELECT SUM(VAL1 + VAL2) AS RESULT_A,
+SUM(VAL1) + SUM(VAL2) AS RESULT_B
+FROM TB_NUM;
+
+`,
+      options: [
+        { id: 1, text: `RESULT_A: 100, RESULT_B: 100`, isCorrect: false },
+        { id: 2, text: `RESULT_A: 30, RESULT_B: 100`, isCorrect: true },
+        { id: 3, text: `RESULT_A: NULL, RESULT_B: 100`, isCorrect: false },
+        { id: 4, text: `RESULT_A: 30, RESULT_B: NULL`, isCorrect: false },
+      ],
+      rationale: `행 단위 연산에서 NULL과의 산술 연산은 무조건 NULL을 반환합니다. 따라서 2행(NULL+30=NULL)과 3행(40+NULL=NULL)은 NULL이 되며, \`SUM(30, NULL, NULL)\`을 평가할 때 집계 함수는 NULL을 무시하므로 RESULT_A는 30입니다. 반면 집계 함수를 먼저 수행하는 RESULT_B는 \`SUM(VAL1)=50\`, \`SUM(VAL2)=50\`이 산출된 후 더해지므로 100이 됩니다.`,
+      hint: `행(Row) 단위의 산술 연산(\`+\`)과 열(Column) 단위의 집계 함수(\`SUM\`)가 NULL을 처리하는 방식이 다릅니다.`,
+    },
+    {
+      id: 2,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `다음 [EMP] 테이블과 [DEPT_TEMP] 테이블이 주어졌을 때, 아래 쿼리의 실행 결과(출력되는 행의 수)로 올바른 것은?`,
+      code: `**[EMP]** (총 10건의 데이터 존재)
+DEPTNO 컬럼의 값: 10, 10, 20, 20, 30, 30 ... 등 (NULL 없음)
+**[DEPT_TEMP]** (총 3건의 데이터 존재)
+| DEPTNO |
+|---|
+| 10 |
+| 20 |
+| NULL |
+SELECT COUNT(*) FROM EMP
+WHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT_TEMP);
+
+`,
+      options: [
+        { id: 1, text: `0`, isCorrect: true },
+        { id: 2, text: `10`, isCorrect: false },
+        { id: 3, text: `6 (10, 20 부서를 제외한 건수)`, isCorrect: false },
+        { id: 4, text: `에러 발생`, isCorrect: false },
+      ],
+      rationale: `\`NOT IN\` 연산은 내부적으로 \`AND\` 조건으로 전개됩니다. 즉, \`DEPTNO != 10 AND DEPTNO != 20 AND DEPTNO != NULL\`이 됩니다. 데이터베이스 논리 연산에서 \`!= NULL\`은 항상 \`UNKNOWN(False)\`으로 평가되므로, 전체 \`AND\` 조건식이 거짓이 되어 출력되는 데이터는 0건이 됩니다.`,
+      hint: `\`NOT IN\` 연산자가 서브쿼리 결과 집합 내의 \`NULL\`과 논리적 비교를 수행할 때 발생하는 특수한 평가 규칙을 고려하십시오.`,
+    },
+    {
+      id: 3,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `다음 [매출] 테이블에 대해 윈도우 함수를 실행했을 때, 'B사' 행에 출력될 [누적_매출] 값은 무엇인가?`,
+      code: `**[매출]** (매출액 오름차순 정렬 상태)
+| 회사명 | 매출액 |
+|---|---|
+| A사 | 100 |
+| B사 | 100 |
+| C사 | 200 |
+SELECT 회사명, 매출액,
+SUM(매출액) OVER (ORDER BY 매출액
+RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 누적_매출
+FROM 매출;
+
+`,
+      options: [
+        { id: 1, text: `100`, isCorrect: false },
+        { id: 2, text: `200`, isCorrect: true },
+        { id: 3, text: `300`, isCorrect: false },
+        { id: 4, text: `400`, isCorrect: false },
+      ],
+      rationale: `프레임을 \`RANGE\`로 지정하면 물리적 행의 위치가 아닌 '논리적 값의 크기'를 기준으로 범위를 묶습니다. 매출액이 100으로 동일한 A사와 B사는 하나의 논리적 단위로 취급되므로, 두 행 모두 A사와 B사의 값을 합산한 200이 동일하게 출력됩니다. (만약 \`ROWS\`였다면 B사는 200, A사는 100이 됩니다.)`,
+      hint: `윈도우 프레임 지정 시 \`ROWS\` 구문과 \`RANGE\` 구문이 동일한 값(Tie)을 처리하는 논리적 차이에 주목하십시오.`,
+    },
+    {
+      id: 4,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `오라클(Oracle) 환경에서 다음 [SALARY] 테이블을 조회할 때, 아래 쿼리의 실행 결과로 올바른 것은?`,
+      code: `**[SALARY]**
+| EMP_ID | SAL |
+|---|---|
+| 1 | 500 |
+| 2 | 400 |
+| 3 | 300 |
+SELECT EMP_ID, SAL
+FROM SALARY
+WHERE ROWNUM = 2
+ORDER BY SAL DESC;
+
+`,
+      options: [
+        { id: 1, text: `EMP_ID: 2, SAL: 400 (1건 출력)`, isCorrect: false },
+        { id: 2, text: `EMP_ID: 1, SAL: 500 (1건 출력)`, isCorrect: false },
+        { id: 3, text: `출력되는 데이터가 없다. (0건 출력)`, isCorrect: true },
+        { id: 4, text: `문법 에러가 발생한다.`, isCorrect: false },
+      ],
+      rationale: `시스템은 첫 번째 행을 추출하여 \`ROWNUM\` 1을 부여한 뒤 \`WHERE\` 조건을 평가합니다. 조건이 \`ROWNUM = 2\`이므로 1은 버려집니다. 1번이 버려졌으므로 다음 추출되는 행 역시 다시 \`ROWNUM\` 1을 부여받게 되며, 이 과정이 반복되어 결국 어떠한 행도 조건을 만족하지 못해 0건이 반환됩니다.`,
+      hint: `의사 컬럼(Pseudo Column)인 \`ROWNUM\`은 1번이 할당되어야만 비로소 2번이 생성될 수 있는 논리적 특성을 가집니다.`,
+    },
+    {
+      id: 5,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `다음 [조직도] 테이블을 대상으로 한 계층형 질의의 실행 결과, 데이터의 전개 방향 및 포함되는 사원으로 가장 올바른 것은?`,
+      code: `**[조직도]**
+| 사번(EMPNO) | 관리자(MGR) | 이름(ENAME) |
+|---|---|---|
+| 100 | NULL | 사장 |
+| 200 | 100 | 부장 |
+| 300 | 200 | 과장 |
+SELECT ENAME
+FROM 조직도
+START WITH ENAME = '과장'
+CONNECT BY MGR = PRIOR EMPNO;
+
+`,
+      options: [
+        { id: 1, text: `과장 ➔ 부장 ➔ 사장 (역방향 전개)`, isCorrect: false },
+        { id: 2, text: `과장 (단일 행 출력)`, isCorrect: true },
+        { id: 3, text: `사장 ➔ 부장 ➔ 과장 (순방향 전개)`, isCorrect: false },
+        { id: 4, text: `에러 발생`, isCorrect: false },
+      ],
+      rationale: `\`MGR = PRIOR EMPNO\` 구문은 방금 읽은 노드의 사번(EMPNO)을 관리자(MGR)로 두고 있는 하위 직원을 찾겠다는 의미로, 위에서 아래로 내려가는 **순방향(Top-Down) 전개**입니다. 시작점(\`START WITH\`)이 '과장'인데, 과장 아래에는 부하 직원이 없으므로 '과장' 한 명만 출력되고 쿼리가 종료됩니다.`,
+      hint: `\`PRIOR\` 키워드가 가리키는 대상이 '방금 읽은 현재 노드(부모/자식)' 중 어느 것인지 식별하십시오.`,
+    },
+    {
+      id: 6,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `다음 [EMP] 테이블에 대해 아래의 \`CASE\` 표현식이 포함된 SQL이 실행되었을 때, \`GRADE\` 컬럼에 반환될 값은 무엇인가?`,
+      code: `**[EMP]** (단 1건의 데이터)
+| SAL |
+|---|
+| 2500 |
+SELECT
+CASE
+WHEN SAL >= 1000 THEN 'A'
+WHEN SAL >= 2000 THEN 'B'
+WHEN SAL >= 3000 THEN 'C'
+ELSE 'D'
+END AS GRADE
+FROM EMP;
+
+`,
+      options: [
+        { id: 1, text: `A`, isCorrect: true },
+        { id: 2, text: `B`, isCorrect: false },
+        { id: 3, text: `C`, isCorrect: false },
+        { id: 4, text: `D`, isCorrect: false },
+      ],
+      rationale: `급여가 2500인 데이터는 첫 번째 평가식인 \`WHEN SAL >= 1000\`을 명백히 충족합니다. 조건이 True이므로 데이터베이스 엔진은 하위의 조건을 무시하고 즉시 'A'를 반환합니다. 의도대로 'B'를 출력하려면 범위가 좁은(더 큰 숫자) 조건부터 우선 기술해야 합니다.`,
+      hint: `\`CASE\` 표현식은 내부 조건을 상단에서부터 하단으로 순차 평가하며, 단일 진실(True)을 마주하면 즉시 평가를 종료합니다.`,
+    },
+    {
+      id: 7,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `다음 [NULL_TEST] 테이블에 대한 질의 결과로 올바른 것은?`,
+      code: `**[NULL_TEST]**
+| COL1 | COL2 | COL3 |
+|---|---|---|
+| 100 | 100 | NULL |
+SELECT COALESCE(NULLIF(COL1, COL2), COL3, 200) AS RESULT
+FROM NULL_TEST;
+
+`,
+      options: [
+        { id: 1, text: `100`, isCorrect: false },
+        { id: 2, text: `200`, isCorrect: true },
+        { id: 3, text: `NULL`, isCorrect: false },
+        { id: 4, text: `에러 발생`, isCorrect: false },
+      ],
+      rationale: `내부 함수 \`NULLIF(100, 100)\`은 두 인자가 동일하므로 \`NULL\`을 반환합니다. 따라서 외부 함수는 \`COALESCE(NULL, NULL, 200)\`으로 치환됩니다. \`COALESCE\` 함수는 인자 리스트 중 NULL이 아닌 최초의 값을 반환하므로 최종 결과는 200이 됩니다.`,
+      hint: `중첩된 함수의 내부 로직(\`NULLIF\`)부터 순차적으로 평가하십시오.`,
+    },
+    {
+      id: 8,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `다음 두 테이블을 집합 연산자로 결합했을 때, 출력되는 최종 결과 행의 수는?`,
+      code: `**[T1]**
+| VAL |
+|---|
+| A |
+| NULL |
+**[T2]**
+| VAL |
+|---|
+| A |
+| NULL |
+SELECT VAL FROM T1
+UNION
+SELECT VAL FROM T2;
+
+`,
+      options: [
+        { id: 1, text: `4행`, isCorrect: false },
+        { id: 2, text: `3행`, isCorrect: false },
+        { id: 3, text: `2행`, isCorrect: true },
+        { id: 4, text: `1행`, isCorrect: false },
+      ],
+      rationale: `관계 연산자(\`=\`)와 달리, 집합 연산자(\`UNION\`, \`INTERSECT\`, \`MINUS\`) 세계에서는 \`NULL\`을 서로 동일한 값으로 간주합니다. 따라서 'A' 중복 제거 1행, 'NULL' 중복 제거 1행으로 총 2행이 반환됩니다.`,
+      hint: `\`UNION\` 연산자가 중복을 제거할 때 \`NULL\`과 \`NULL\`을 상호 동일한 값으로 취급하는지 여부를 판단하십시오.`,
+    },
+    {
+      id: 9,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `다음 [매출] 테이블에 대하여 그룹 함수 쿼리를 실행했을 때, 결과 집합으로 출력되는 행(Row)의 수는 총 몇 개인가?`,
+      code: `**[매출]** (총 4건)
+| 연도 | 분기 | 금액 |
+|---|---|---|
+| 2023 | 1Q | 100 |
+| 2023 | 2Q | 200 |
+| 2024 | 1Q | 150 |
+| 2024 | 2Q | 250 |
+SELECT 연도, 분기, SUM(금액)
+FROM 매출
+GROUP BY ROLLUP(연도, 분기);
+
+`,
+      options: [
+        { id: 1, text: `4행`, isCorrect: false },
+        { id: 2, text: `5행`, isCorrect: false },
+        { id: 3, text: `7행`, isCorrect: true },
+        { id: 4, text: `9행`, isCorrect: false },
+      ],
+      rationale: `\`ROLLUP(연도, 분기)\`는 다음 3가지 레벨을 생성합니다.`,
+      hint: `\`ROLLUP\`은 명시된 그룹핑 컬럼에 대하여 계층적으로 우측부터 요소를 하나씩 제거하며 소계를 산출합니다.`,
+    },
+    {
+      id: 10,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `오라클 전용 외부 조인 기호가 포함된 다음 쿼리와 논리적으로 완벽하게 동일한 결과를 반환하는 ANSI 표준 구문은?`,
+      code: `**[EMP]** (사원 테이블), **[DEPT]** (부서 테이블)
+SELECT E.ENAME, D.DNAME
+FROM EMP E, DEPT D
+WHERE E.DEPTNO = D.DEPTNO(+);
+
+`,
+      options: [
+        { id: 1, text: `\`SELECT E.ENAME, D.DNAME FROM EMP E LEFT OUTER JOIN DEPT D ON E.DEPTNO = D.DEPTNO;\``, isCorrect: true },
+        { id: 2, text: `\`SELECT E.ENAME, D.DNAME FROM EMP E RIGHT OUTER JOIN DEPT D ON E.DEPTNO = D.DEPTNO;\``, isCorrect: false },
+        { id: 3, text: `\`SELECT E.ENAME, D.DNAME FROM EMP E FULL OUTER JOIN DEPT D ON E.DEPTNO = D.DEPTNO;\``, isCorrect: false },
+        { id: 4, text: `\`SELECT E.ENAME, D.DNAME FROM EMP E INNER JOIN DEPT D ON E.DEPTNO = D.DEPTNO;\``, isCorrect: false },
+      ],
+      rationale: `\`D.DEPTNO(+)\`는 정보가 부족한 쪽이 DEPT 테이블임을 명시합니다. 즉, 기준이 되는 주인은 EMP 테이블이며, EMP 테이블의 데이터를 누락 없이 모두 출력하라는 의미이므로 \`LEFT OUTER JOIN\`과 동치입니다.`,
+      hint: `\`(+)\` 기호는 조인할 데이터가 존재하지 않아 빈 공간(NULL)으로 보충되어야 할 반대편 테이블 측에 위치합니다.`,
+    },
+    {
+      id: 11,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `아래 쿼리를 실행했을 때 데이터베이스 옵티마이저가 에러(Syntax Error)를 반환하는 논리적 이유는 무엇인가?`,
+      code: `**[EMP]**
+| DEPTNO | SAL |
+|---|---|
+| 10 | 1000 |
+SELECT DEPTNO AS 부서, SUM(SAL)
+FROM EMP
+GROUP BY 부서;
+
+`,
+      options: [
+        { id: 1, text: `\`GROUP BY\` 절에는 집계 함수가 포함될 수 없기 때문이다.`, isCorrect: false },
+        { id: 2, text: `\`SELECT\` 절보다 \`GROUP BY\` 절이 논리적 실행 순서상 먼저 평가되기 때문이다.`, isCorrect: true },
+        { id: 3, text: `\`AS\` 키워드는 오라클 환경에서 식별자로 인식되지 않기 때문이다.`, isCorrect: false },
+        { id: 4, text: `\`SUM(SAL)\`에 대한 별칭(Alias)이 부여되지 않았기 때문이다.`, isCorrect: false },
+      ],
+      rationale: `논리적 실행 순서상 \`GROUP BY\` 구문이 먼저 해석됩니다. 이때 \`SELECT\` 절에서 선언된 별칭(Alias)인 '부서'는 아직 시스템 메모리에 할당되지 않은 미식별 상태이므로 "부적합한 식별자" 오류를 발생시킵니다.`,
+      hint: `옵티마이저의 내부 평가 순서(FROM ➔ WHERE ➔ GROUP BY ➔ HAVING ➔ SELECT ➔ ORDER BY)를 상기하십시오.`,
+    },
+    {
+      id: 12,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `아래 [DATA] 테이블에서 각 쿼리 결과의 차이를 올바르게 설명한 것은?`,
+      code: `**[DATA]**
+| COL |
+|---|
+| A |
+| B |
+| NULL |
+* 쿼리 1: \`SELECT COUNT(*) FROM DATA;\`
+* 쿼리 2: \`SELECT COUNT(COL) FROM DATA;\`
+`,
+      options: [
+        { id: 1, text: `두 쿼리 모두 3을 반환한다.`, isCorrect: false },
+        { id: 2, text: `쿼리 1은 3, 쿼리 2는 2를 반환한다.`, isCorrect: true },
+        { id: 3, text: `쿼리 1은 2, 쿼리 2는 3을 반환한다.`, isCorrect: false },
+        { id: 4, text: `두 쿼리 모두 2를 반환한다.`, isCorrect: false },
+      ],
+      rationale: `\`COUNT(*)\`는 튜플(행) 자체의 존재 여부를 평가하므로 NULL이 포함된 행도 계산에 포함하여 전체 건수(3)를 반환합니다. 반면 \`COUNT(컬럼명)\`은 명시된 컬럼 내에 유효한 값(Not Null)이 존재하는 행만을 산출하므로 NULL을 제외한 건수(2)를 반환합니다.`,
+      hint: `와일드카드(\`*\`)가 지칭하는 대상과 명시적 컬럼명을 지칭할 때의 집계 함수 동작 원리 차이입니다.`,
+    },
+    {
+      id: 13,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `다음 [사원] 테이블에 대해 \`NVL2\` 함수를 실행했을 때의 결과값은?`,
+      code: `**[사원]** (1행 존재)
+| COMM | SAL |
+|---|---|
+| NULL | 5000 |
+SELECT NVL2(COMM, SAL * 1.1, SAL) AS FINAL_SAL
+FROM 사원;
+
+`,
+      options: [
+        { id: 1, text: `5500`, isCorrect: false },
+        { id: 2, text: `5000`, isCorrect: true },
+        { id: 3, text: `NULL`, isCorrect: false },
+        { id: 4, text: `에러 발생`, isCorrect: false },
+      ],
+      rationale: `\`NVL2(대상, NotNull_결과, Null_결과)\` 구문입니다. 첫 번째 인자인 \`COMM\`이 \`NULL\`이므로, 세 번째 인자인 \`SAL\`(5000)을 최종적으로 반환합니다.`,
+      hint: `\`NVL2\` 함수의 3가지 매개변수가 평가되는 순서와 조건을 파악하십시오.`,
+    },
+    {
+      id: 14,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `다음 \`PIVOT\` 쿼리가 실행되었을 때, 산출되는 가로로 넓은(Wide) 결과 집합의 열(Column) 개수는 총 몇 개인가?`,
+      code: `**[SALES]**
+| REGION | MONTH | AMT |
+|---|---|---|
+| SEOUL | 1 | 100 |
+| BUSAN | 2 | 200 |
+SELECT *
+FROM SALES
+PIVOT (
+SUM(AMT)
+FOR MONTH IN (1 AS M1, 2 AS M2)
+);
+
+`,
+      options: [
+        { id: 1, text: `2개`, isCorrect: false },
+        { id: 2, text: `3개`, isCorrect: true },
+        { id: 3, text: `4개`, isCorrect: false },
+        { id: 4, text: `에러 발생`, isCorrect: false },
+      ],
+      rationale: `\`MONTH\` 컬럼의 값(1, 2)이 2개의 새로운 열(M1, M2)로 회전하여 확장됩니다. 집계에 사용된 \`AMT\`와 열로 변환된 \`MONTH\`를 제외하고 남은 \`REGION\` 컬럼은 그룹화 기준(행 식별자)으로 그대로 유지됩니다. 따라서 최종 열은 \`REGION\`, \`M1\`, \`M2\` 총 3개가 됩니다.`,
+      hint: `\`PIVOT\` 절에 참여하지 않고 그룹화 기준으로 남는 컬럼과, 새롭게 가로로 전개되는 컬럼을 합산하십시오.`,
+    },
+    {
+      id: 15,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `아래 [SCORE] 테이블에 대해 윈도우 함수를 수행했을 때, 점수가 80점인 학생들에게 부여될 \`RK\` 값은 각각 무엇인가?`,
+      code: `**[SCORE]**
+| ID | JUMSU |
+|---|---|
+| S1 | 90 |
+| S2 | 90 |
+| S3 | 80 |
+| S4 | 80 |
+SELECT ID,
+DENSE_RANK() OVER (ORDER BY JUMSU DESC) AS RK
+FROM SCORE;
+
+`,
+      options: [
+        { id: 1, text: `둘 다 3`, isCorrect: false },
+        { id: 2, text: `둘 다 2`, isCorrect: true },
+        { id: 3, text: `3, 4`, isCorrect: false },
+        { id: 4, text: `2, 3`, isCorrect: false },
+      ],
+      rationale: `\`DENSE_RANK\` 함수는 동점자에게 동일한 순위를 부여하고, 그 다음 순위 값을 건너뛰지 않고 빽빽하게(연속적으로) 이어나갑니다. 90점이 공동 1위이므로, 80점은 3위가 아닌 2위로 산정됩니다.`,
+      hint: `공동 순위 발생 시 시퀀스 갭(Sequence Gap)을 어떻게 처리하는지 묻는 함수의 특성입니다.`,
+    },
+    {
+      id: 16,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `오라클(Oracle) 환경에서 다음 쿼리의 실행 결과로 반환되는 문자열은 무엇인가?`,
+      code: `SELECT 'SQLD' || NULL || 'PASS' AS STR FROM DUAL;
+
+`,
+      options: [
+        { id: 1, text: `SQLDPASS`, isCorrect: true },
+        { id: 2, text: `NULL`, isCorrect: false },
+        { id: 3, text: `SQLDNULLPASS`, isCorrect: false },
+        { id: 4, text: `에러 발생`, isCorrect: false },
+      ],
+      rationale: `오라클 환경에서 문자열 결합 연산자(\`||\`)를 사용할 때 \`NULL\`은 빈 문자열(길이가 0인 문자)처럼 취급됩니다. 따라서 문자열 결합 결과 전체가 NULL로 오염되지 않고 'SQLDPASS'가 정상 출력됩니다. (주의: SQL Server의 \`+\` 연산자는 하나라도 NULL이면 전체가 NULL이 됩니다.)`,
+      hint: `상이한 데이터베이스 엔진(Oracle vs SQL Server) 간의 문자열 결합 연산자 특성 차이를 인지하십시오.`,
+    },
+    {
+      id: 17,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `윈도우 함수 \`LAG\`가 포함된 아래 쿼리의 실행 결과로, 1월(ID=1) 행의 \`PREV_VAL\` 열에 출력될 값은 무엇인가?`,
+      code: `**[DATA]** (ID 오름차순 정렬 상태)
+| ID | VAL |
+|---|---|
+| 1 | 100 |
+| 2 | 200 |
+SELECT ID, VAL,
+LAG(VAL, 1, 0) OVER (ORDER BY ID) AS PREV_VAL
+FROM DATA;
+
+`,
+      options: [
+        { id: 1, text: `NULL`, isCorrect: false },
+        { id: 2, text: `0`, isCorrect: true },
+        { id: 3, text: `100`, isCorrect: false },
+        { id: 4, text: `200`, isCorrect: false },
+      ],
+      rationale: `\`LAG\` 함수는 지정된 오프셋(1)만큼 이전 행의 값을 조회합니다. 1월(ID=1)의 경우 이전 행이 존재하지 않아 본래 \`NULL\`이 도출되어야 하나, 세 번째 인자로 0이 지정되었으므로 \`NULL\` 대신 기본값인 0이 반환됩니다.`,
+      hint: `\`LAG\` 함수의 세 번째 매개변수가 수행하는 Default Value 치환 역할을 파악하십시오.`,
+    },
+    {
+      id: 18,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `다음 \`ROLLUP\` 그룹 함수가 적용된 쿼리에서, 산출된 결과 집합 중 '전체 총계(Grand Total)' 행의 \`GRP_FLAG\` 열에 출력될 값은 무엇인가?`,
+      code: `**[EMP]** 테이블에 대해 조회를 수행함.
+SELECT DEPTNO,
+SUM(SAL),
+GROUPING(DEPTNO) AS GRP_FLAG
+FROM EMP
+GROUP BY ROLLUP(DEPTNO);
+
+`,
+      options: [
+        { id: 1, text: `0`, isCorrect: false },
+        { id: 2, text: `1`, isCorrect: true },
+        { id: 3, text: `NULL`, isCorrect: false },
+        { id: 4, text: `DEPTNO`, isCorrect: false },
+      ],
+      rationale: `전체 총계 행은 \`DEPTNO\` 정보와 무관하게 모든 데이터를 합산하기 위해 시스템이 임의로 \`DEPTNO\`를 \`NULL\`로 처리하여 생성한 집계 행입니다. 따라서 \`GROUPING(DEPTNO)\` 함수는 이 행이 집계 행임을 인지하고 1(True)을 반환합니다.`,
+      hint: `\`GROUPING\` 함수가 해당 컬럼을 '집계 목적으로 임의로 비워둔 상태(NULL)'인지 판별하는 플래그 역할을 수행함을 기억하십시오.`,
+    },
+    {
+      id: 19,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `다음 \`REGEXP_SUBSTR\` 정규표현식 함수를 포함한 SQL 쿼리의 반환 값으로 올바른 것은?`,
+      code: `SELECT REGEXP_SUBSTR('ABC123DEF456', '\d+') AS EXTRACTED_STR FROM DUAL;
+
+`,
+      options: [
+        { id: 1, text: `ABC`, isCorrect: false },
+        { id: 2, text: `123`, isCorrect: true },
+        { id: 3, text: `DEF`, isCorrect: false },
+        { id: 4, text: `123456`, isCorrect: false },
+      ],
+      rationale: `메타 문자 \`\d\`는 숫자(Digit)를 의미하고, \`+\`는 앞선 문자가 1회 이상 연속됨을 의미합니다. \`REGEXP_SUBSTR\` 함수는 대상 문자열에서 해당 정규식 패턴과 매칭되는 가장 첫 번째 부분 문자열 덩어리만을 추출하므로, '123'이 반환됩니다.`,
+      hint: `정규식 메타문자 \`\d\`와 \`+\`의 조합이 지시하는 패턴 매칭 규칙과 추출 대상 지정 원리를 조합하십시오.`,
+    },
+    {
+      id: 20,
+      category: `🏆 [SQLD 실전 대비] 고난도 SQL 실행 결과 추론`,
+      question: `SQL Server 환경에서 다음 [EMP] 테이블에 대해 \`TOP\` 구문 쿼리를 실행했을 때, 최종적으로 반환되는 행(Row)의 수는 총 몇 개인가?`,
+      code: `**[EMP]** (총 4명의 데이터)
+| ENAME | SAL |
+|---|---|
+| 김씨 | 5000 |
+| 이씨 | 5000 |
+| 박씨 | 4000 |
+| 최씨 | 3000 |
+SELECT TOP(1) WITH TIES ENAME, SAL
+FROM EMP
+ORDER BY SAL DESC;
+
+`,
+      options: [
+        { id: 1, text: `1행`, isCorrect: false },
+        { id: 2, text: `2행`, isCorrect: true },
+        { id: 3, text: `3행`, isCorrect: false },
+        { id: 4, text: `4행`, isCorrect: false },
+      ],
+      rationale: `구문상 상위 1개의 행을 요구하였으나, \`WITH TIES\` 옵션이 지정되었으므로 1위에 랭크된 '김씨(5000)'와 완전히 동일한 정렬 키 값을 가진 동점자 '이씨(5000)'까지 논리적 예외를 허용하여 함께 반환합니다. 따라서 총 2행이 출력됩니다.`,
+      hint: `\`WITH TIES\` 옵션이 마지막 반환 순위와 동일한 값을 가진 동점자(Tie) 데이터를 어떻게 처리하는지 분석하십시오.`,
+    },
+  ],
 };
