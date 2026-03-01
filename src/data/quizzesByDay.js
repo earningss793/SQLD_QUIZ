@@ -12232,4 +12232,903 @@ COMMIT;
       hint: `\`100 + NULL\`의 결과가 무엇인지 먼저 계산하세요.`,
     },
   ],
+  222: [
+    {
+      id: 1,
+      category: `[제1과목: 데이터 모델링의 이해]`,
+      question: `데이터 모델링의 3단계 진행 순서와 특징에 대한 설명으로 가장 적절한 것은?`,
+      options: [
+        { id: 1, text: `논리적 모델링은 특정 DBMS(Oracle, SQL Server 등)의 특성 및 성능을 고려하여 물리적 저장 구조를 설계하는 단계이다.`, isCorrect: false },
+        { id: 2, text: `데이터 모델링은 물리적 모델링 ➔ 논리적 모델링 ➔ 개념적 모델링 순으로 진행된다.`, isCorrect: false },
+        { id: 3, text: `개념적 모델링 단계에서는 전사적 관점에서 엔터티와 속성을 도출하고 ERD(Entity-Relationship Diagram)를 작성한다.`, isCorrect: true },
+        { id: 4, text: `물리적 모델링 단계에서 데이터의 중복을 배제하기 위한 정규화(Normalization)를 집중적으로 수행한다.`, isCorrect: false },
+      ],
+      rationale: `데이터 모델링은 개념적 ➔ 논리적 ➔ 물리적 모델링 순으로 진행됩니다. 정규화는 논리적 모델링의 핵심 산출 작업이며, 특정 DBMS의 성능과 저장 구조를 설계하는 것은 물리적 모델링입니다.`,
+      hint: `모델링은 추상화 수준이 높은 곳에서 낮은 곳(구체적)으로 진행됩니다.`,
+    },
+    {
+      id: 2,
+      category: `[제1과목: 데이터 모델링의 이해]`,
+      question: `다음 중 엔터티(Entity)가 성립하기 위한 필수 조건으로 올바르지 않은 것은?`,
+      options: [
+        { id: 1, text: `해당 업무에서 반드시 필요하고 관리하고자 하는 정보이어야 한다.`, isCorrect: false },
+        { id: 2, text: `모든 엔터티는 반드시 1개 이상의 인스턴스(Instance)를 가져야 한다.`, isCorrect: true },
+        { id: 3, text: `유일한 식별자(Identifier)에 의해 각 인스턴스가 완벽하게 구분되어야 한다.`, isCorrect: false },
+        { id: 4, text: `원칙적으로 다른 엔터티와 최소 1개 이상의 관계(Relationship)를 맺어야 한다.`, isCorrect: false },
+      ],
+      rationale: `엔터티는 집합의 개념이므로 반드시 '2개 이상'의 인스턴스를 가져야 성립합니다.`,
+      hint: `데이터가 단 한 건뿐인 집합을 굳이 테이블로 관리할 필요가 있는지 생각해보세요.`,
+    },
+    {
+      id: 3,
+      category: `[제1과목: 데이터 모델링의 이해]`,
+      question: `식별자의 4가지 핵심 특징(유일성, 최소성, 불변성, 존재성) 중 다음 설명에 해당하는 것은?`,
+      code: `"식별자를 구성하는 속성의 수는 인스턴스를 유일하게 식별할 수 있는 최소한의 개수여야 한다."
+`,
+      options: [
+        { id: 1, text: `유일성`, isCorrect: false },
+        { id: 2, text: `최소성`, isCorrect: true },
+        { id: 3, text: `불변성`, isCorrect: false },
+        { id: 4, text: `존재성`, isCorrect: false },
+      ],
+      rationale: `복합 식별자를 구성할 때, 유일성을 보장하는 범위 내에서 가장 적은 수의 속성으로 식별자를 구성해야 한다는 원칙이 '최소성'입니다.`,
+      hint: `속성을 하나라도 제외하면 유일성이 깨지는 상태를 의미합니다.`,
+    },
+    {
+      id: 4,
+      category: `[제1과목: 데이터 모델링의 이해]`,
+      question: `ERD 표기법에서 식별자 관계(Identifying Relationship)와 비식별자 관계(Non-Identifying Relationship)에 대한 설명으로 옳은 것은?`,
+      options: [
+        { id: 1, text: `식별자 관계는 부모 엔터티의 주식별자가 자식 엔터티의 일반 속성으로 상속되는 관계이다.`, isCorrect: false },
+        { id: 2, text: `비식별자 관계는 ERD 상에서 실선(Solid Line)으로 표기한다.`, isCorrect: false },
+        { id: 3, text: `식별자 관계가 계층적으로 지속되면 자식 엔터티의 주식별자 속성 개수가 누적되어 증가하는 단점이 있다.`, isCorrect: true },
+        { id: 4, text: `부모 엔터티가 존재하지 않아도 자식 엔터티가 생성될 수 있는 강한 종속 관계를 식별자 관계라고 한다.`, isCorrect: false },
+      ],
+      rationale: `식별자 관계는 부모의 주식별자를 자식의 주식별자로 상속받으므로, 조인 경로가 깊어질수록 자식의 기본키(PK)를 구성하는 속성의 수가 지속적으로 증가하여 SQL 구문이 복잡해집니다. 비식별자 관계는 점선(Dashed Line)으로 표기합니다.`,
+      hint: `식별자 관계는 부모의 PK를 자신의 PK로 포함시키는 구조입니다.`,
+    },
+    {
+      id: 5,
+      category: `[제1과목: 데이터 모델링의 이해]`,
+      question: `속성(Attribute)에 대한 설명으로 가장 부적절한 것은?`,
+      options: [
+        { id: 1, text: `업무상 원래부터 존재하는 속성을 기본 속성(Basic Attribute)이라 한다.`, isCorrect: false },
+        { id: 2, text: `총합계, 평균 등 다른 속성으로부터 계산되어 도출된 속성을 파생 속성(Derived Attribute)이라 한다.`, isCorrect: false },
+        { id: 3, text: `사원번호, 주문번호 등 식별을 위해 시스템적으로 인위적으로 생성한 속성을 설계 속성(Designed Attribute)이라 한다.`, isCorrect: false },
+        { id: 4, text: `데이터 정합성을 유지하기 위해 파생 속성은 가능한 한 많이 설계하여 조회 성능을 극대화해야 한다.`, isCorrect: true },
+      ],
+      rationale: `파생 속성은 계산된 값이므로, 원본 데이터가 갱신될 때 데이터 정합성(Consistency)이 훼손될 위험이 큽니다. 따라서 반드시 필요한 경우에만 최소한으로 정의해야 합니다.`,
+      hint: `파생 속성은 원본 데이터가 변경될 때 동기화되지 않으면 치명적인 오류를 발생시킵니다.`,
+    },
+    {
+      id: 6,
+      category: `[제1과목: 데이터 모델링의 이해]`,
+      question: `제1정규화(1NF)를 수행하는 주요 목적은 무엇인가?`,
+      options: [
+        { id: 1, text: `일반 속성 간의 이행적 함수 종속성을 제거하기 위해`, isCorrect: false },
+        { id: 2, text: `복합 주식별자의 일부 속성에만 종속되는 부분 함수 종속성을 제거하기 위해`, isCorrect: false },
+        { id: 3, text: `하나의 속성이 다중 값(Multi-Value)을 가지는 것을 방지하고 도메인의 원자성을 확보하기 위해`, isCorrect: true },
+        { id: 4, text: `모든 결정자가 후보키가 되도록 릴레이션을 분해하기 위해`, isCorrect: false },
+      ],
+      rationale: `제1정규화(1NF)는 릴레이션의 모든 속성 값이 원자값(Atomic Value)을 갖도록 다중 값 속성이나 반복되는 그룹 속성을 분리하는 과정입니다.`,
+      hint: `관계형 데이터베이스의 각 교차점(셀)에는 단 하나의 값만 허용됩니다.`,
+    },
+    {
+      id: 7,
+      category: `[제1과목: 데이터 모델링의 이해]`,
+      question: `주식별자가 복합키(A, B)로 구성된 릴레이션에서, 일반 속성 C가 복합키 전체(A, B)가 아닌 속성 A에 의해서만 결정되는 종속성을 무엇이라 하는가?`,
+      options: [
+        { id: 1, text: `완전 함수 종속`, isCorrect: false },
+        { id: 2, text: `부분 함수 종속`, isCorrect: true },
+        { id: 3, text: `이행적 함수 종속`, isCorrect: false },
+        { id: 4, text: `다치 종속`, isCorrect: false },
+      ],
+      rationale: `일반 속성이 주식별자를 구성하는 속성 집합의 일부에만 함수적으로 종속되는 현상을 부분 함수 종속(Partial Functional Dependency)이라 하며, 이를 제거하는 과정이 제2정규화(2NF)입니다.`,
+      hint: `결정자가 주식별자의 '일부'에 불과할 때 발생하는 종속성입니다.`,
+    },
+    {
+      id: 8,
+      category: `[제1과목: 데이터 모델링의 이해]`,
+      question: `다음 중 제3정규화(3NF)에 대한 설명으로 올바른 것은?`,
+      options: [
+        { id: 1, text: `제1정규형을 만족하는 상태에서 다치 종속을 제거하는 과정이다.`, isCorrect: false },
+        { id: 2, text: `주식별자가 단일키로 구성된 테이블에서는 절대 3NF 위반이 발생하지 않는다.`, isCorrect: false },
+        { id: 3, text: `주식별자가 아닌 일반 속성들 간에 존재하는 종속성(X → Y → Z)을 제거하는 과정이다.`, isCorrect: true },
+        { id: 4, text: `결정자이면서 후보키가 아닌 속성을 분리하는 과정이다.`, isCorrect: false },
+      ],
+      rationale: `제3정규화는 제2정규형을 만족하는 릴레이션에서 일반 속성 간의 이행적 함수 종속(Transitive Functional Dependency)을 분해하여 독립적인 엔터티로 분리하는 과정입니다.`,
+      hint: `꼬리에 꼬리를 무는 종속성을 끊어내는 과정입니다.`,
+    },
+    {
+      id: 9,
+      category: `[제1과목: 데이터 모델링의 이해]`,
+      question: `다음 빈칸에 들어갈 알맞은 용어는?`,
+      code: `(   A   )은(는) 데이터의 중복을 제거하여 이상현상(Anomaly)을 방지하지만 조회 시 조인(Join)을 유발하여 성능 저하를 일으킬 수 있다. 반면, (   B   )은(는) 성능 향상과 개발 단순화를 위해 데이터 중복을 의도적으로 허용하는 기법이다.
+`,
+      options: [
+        { id: 1, text: `A: 반정규화, B: 정규화`, isCorrect: false },
+        { id: 2, text: `A: 인덱싱, B: 파티셔닝`, isCorrect: false },
+        { id: 3, text: `A: 정규화, B: 반정규화`, isCorrect: true },
+        { id: 4, text: `A: 논리 모델링, B: 물리 모델링`, isCorrect: false },
+      ],
+      rationale: `정규화(Normalization)는 중복을 최소화하는 반면, 반정규화(De-Normalization)는 성능을 위해 정규화 원칙을 의도적으로 위배하여 테이블 병합/분할 및 중복 컬럼을 추가하는 작업입니다.`,
+      hint: `데이터 무결성을 위한 원칙과 성능을 위한 예외 적용의 관계입니다.`,
+    },
+    {
+      id: 10,
+      category: `[제1과목: 데이터 모델링의 이해]`,
+      question: `이상현상(Anomaly)에 대한 설명으로 부적절한 것은?`,
+      options: [
+        { id: 1, text: `삽입 이상: 특정 데이터를 삽입할 때 불필요한 데이터까지 반드시 입력해야 하는 현상`, isCorrect: false },
+        { id: 2, text: `삭제 이상: 릴레이션에서 특정 튜플을 삭제할 때, 유지되어야 할 유용한 정보까지 연쇄적으로 삭제되는 현상`, isCorrect: false },
+        { id: 3, text: `갱신 이상: 중복된 데이터 중 일부만 수정되어 데이터의 불일치(모순)가 발생하는 현상`, isCorrect: false },
+        { id: 4, text: `검색 이상: 조인(Join) 연산이 과도하게 발생하여 시스템 성능이 급격히 저하되는 현상`, isCorrect: true },
+      ],
+      rationale: `이상현상(Anomaly)은 정규화를 수행하지 않아 발생하는 삽입(Insertion), 갱신(Update), 삭제(Deletion) 이상 3가지를 의미합니다. '검색 이상'이라는 학술적 용어는 존재하지 않습니다.`,
+      hint: `정규화 이론에서 정의하는 이상현상은 데이터 DML(입력, 수정, 삭제) 시 발생하는 무결성 훼손 문제입니다.`,
+    },
+    {
+      id: 11,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `SQL 문장의 논리적 실행 순서(Logical Execution Order)를 올바르게 나열한 것은?`,
+      options: [
+        { id: 1, text: `SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY`, isCorrect: false },
+        { id: 2, text: `FROM → SELECT → WHERE → GROUP BY → HAVING → ORDER BY`, isCorrect: false },
+        { id: 3, text: `FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY`, isCorrect: true },
+        { id: 4, text: `FROM → WHERE → GROUP BY → SELECT → HAVING → ORDER BY`, isCorrect: false },
+      ],
+      rationale: `옵티마이저는 FROM ➔ WHERE ➔ GROUP BY ➔ HAVING ➔ SELECT ➔ ORDER BY 순서로 논리적 처리를 수행합니다. SELECT 절에서 부여한 별칭(Alias)을 WHERE 절이나 GROUP BY 절에서 사용할 수 없는 이유가 이 때문입니다.`,
+      hint: `데이터를 식별하고(FROM) ➔ 거르고(WHERE) ➔ 묶고(GROUP) ➔ 출력항목을 정한 뒤(SELECT) ➔ 마지막으로 줄을 세웁니다(ORDER BY).`,
+    },
+    {
+      id: 12,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `다음 중 NULL 처리와 관련된 설명으로 가장 적절한 것은?`,
+      options: [
+        { id: 1, text: `특정 컬럼이 NULL인지 비교하기 위해 \`컬럼명 = NULL\` 연산자를 사용할 수 있다.`, isCorrect: false },
+        { id: 2, text: `NULL 값과 어떠한 숫자를 산술 연산(+, -, *, /)하더라도 결과는 0이 된다.`, isCorrect: false },
+        { id: 3, text: `집계 함수 중 \`COUNT(*)\`는 NULL 값을 포함한 전체 행의 개수를 반환한다.`, isCorrect: true },
+        { id: 4, text: `오라클(Oracle) 데이터베이스는 데이터를 오름차순(ASC)으로 정렬할 때 NULL을 가장 작은 값으로 취급하여 맨 처음에 출력한다.`, isCorrect: false },
+      ],
+      rationale: `\`COUNT(*)\`는 NULL 여부와 무관하게 튜플(행) 자체의 존재를 세므로 NULL을 포함합니다. 오라클은 NULL을 가장 큰 값으로 취급하여 오름차순 시 맨 마지막에 출력하며, NULL과의 산술 연산 결과는 항상 NULL입니다. 비교는 반드시 \`IS NULL\`을 사용해야 합니다.`,
+      hint: `집계 함수 중 유일하게 아스테리스크(*)를 사용하는 함수의 특성을 고려하세요.`,
+    },
+    {
+      id: 13,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `다음 함수 중 결과값이 성격이 다른 하나는 무엇인가?`,
+      options: [
+        { id: 1, text: `\`NVL(NULL, 100)\``, isCorrect: false },
+        { id: 2, text: `\`NULLIF(100, 100)\``, isCorrect: true },
+        { id: 3, text: `\`COALESCE(NULL, 100, 200)\``, isCorrect: false },
+        { id: 4, text: `\`NVL2(NULL, 200, 100)\``, isCorrect: false },
+      ],
+      rationale: `\`NULLIF(A, B)\`는 A와 B가 같으면 NULL을 반환합니다. 1, 3, 4번 보기의 결과는 모두 100을 반환하지만, 2번은 100과 100이 동일하므로 NULL을 반환합니다.`,
+      hint: `입력된 두 인자가 서로 동일할 때 특정 상태를 반환하는 함수입니다.`,
+    },
+    {
+      id: 14,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `다음 구문을 실행했을 때 전혀 데이터가 출력되지 않는(0건) 가장 전형적인 원인은 무엇인가?
+\`SELECT * FROM EMP WHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT);\``,
+      options: [
+        { id: 1, text: `서브쿼리 결과에 중복된 DEPTNO 값이 존재할 때`, isCorrect: false },
+        { id: 2, text: `서브쿼리의 반환 결과 중 단 하나라도 NULL 값이 포함되어 있을 때`, isCorrect: true },
+        { id: 3, text: `EMP 테이블에 외부 조인(OUTER JOIN) 구문을 명시하지 않았을 때`, isCorrect: false },
+        { id: 4, text: `두 테이블의 컬럼 데이터 타입이 서로 다를 때`, isCorrect: false },
+      ],
+      rationale: `\`NOT IN\` 연산 수행 시, 서브쿼리의 결과 집합에 NULL 값이 포함되어 있으면 \`NOT (A = 10 OR A = NULL)\` 형태가 되어 결과적으로 전체 식이 UNKNOWN으로 평가됩니다. 따라서 어떠한 행도 반환되지 않습니다. (시험 빈출 함정)`,
+      hint: `NOT IN 연산자는 하나라도 거짓(UNKNOWN)이면 전체 논리를 거짓으로 붕괴시킵니다.`,
+    },
+    {
+      id: 15,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `DDL(데이터 정의어) 명령어에 대한 특성으로 올바르지 않은 것은?`,
+      options: [
+        { id: 1, text: `\`TRUNCATE TABLE\`은 테이블의 구조는 보존하면서 저장된 모든 데이터를 즉시 삭제한다.`, isCorrect: false },
+        { id: 2, text: `오라클(Oracle) 환경에서 DDL 문장이 수행되면 이전까지의 DML 작업 내역이 자동으로 COMMIT 처리된다.`, isCorrect: false },
+        { id: 3, text: `\`DELETE\` 명령어는 DDL에 속하므로 테이블의 데이터를 삭제한 후에는 ROLLBACK을 통해 복구할 수 없다.`, isCorrect: true },
+        { id: 4, text: `\`DROP TABLE\`은 테이블의 데이터와 스키마 구조 자체를 데이터베이스에서 완전히 제거한다.`, isCorrect: false },
+      ],
+      rationale: `\`DELETE\`는 데이터 조작어(DML)에 속하므로 연산 수행 후 명시적인 COMMIT 전까지 ROLLBACK을 통해 트랜잭션을 취소하고 데이터를 복구할 수 있습니다.`,
+      hint: `데이터를 선택적으로 지울 수 있는 명령어의 소속을 확인하세요.`,
+    },
+    {
+      id: 16,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `\`MERGE\` 문에 대한 설명으로 가장 적절한 것은?`,
+      options: [
+        { id: 1, text: `데이터를 병합할 때 삽입(INSERT) 작업만 가능하며 갱신(UPDATE) 작업은 별도로 수행해야 한다.`, isCorrect: false },
+        { id: 2, text: `\`WHEN MATCHED THEN\` 절 내부에서 \`DELETE WHERE\` 구문을 사용하여, 갱신(UPDATE) 조건에 부합한 행들 중 특정 조건을 만족하는 데이터를 삭제할 수 있다.`, isCorrect: true },
+        { id: 3, text: `\`ON\` 절에 명시된 조인 조건에 일치하지 않을 때만 \`UPDATE\`가 수행된다.`, isCorrect: false },
+        { id: 4, text: `\`MERGE\` 문은 반드시 타겟 테이블의 전체 데이터를 덮어쓰기 위해 사용된다.`, isCorrect: false },
+      ],
+      rationale: `\`MERGE\` 문 내의 \`DELETE\` 구문은 대상 테이블 전체가 아니라, 오직 \`UPDATE\` 작업에 의해 값이 갱신된 행(Matched) 내에서만 평가되어 조건에 맞는 행을 삭제하는 고유한 동작 방식을 가집니다.`,
+      hint: `일치할 때는 UPDATE, 불일치할 때는 INSERT를 동시에 수행할 수 있는 구문입니다.`,
+    },
+    {
+      id: 17,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `조인(JOIN) 연산 수행 시 발생하는 카티션 곱(Cartesian Product)에 대한 설명으로 옳은 것은?`,
+      options: [
+        { id: 1, text: `양쪽 테이블 간에 반드시 조인 조건(ON 또는 WHERE)이 명시되어야만 발생한다.`, isCorrect: false },
+        { id: 2, text: `두 테이블의 데이터가 수직으로 병합되는 집합 연산의 일종이다.`, isCorrect: false },
+        { id: 3, text: `조인 조건이 생략되거나 잘못 부여되었을 때, 두 테이블의 모든 행이 가능한 모든 조합으로 연결되어 반환되는 현상이다.`, isCorrect: true },
+        { id: 4, text: `테이블 간의 교집합을 추출하여 데이터 건수를 최소화하는 기능이다.`, isCorrect: false },
+      ],
+      rationale: `조인 조건이 없는 경우 시스템은 모든 튜플 간의 조합을 생성하며 이를 카티션 곱(CROSS JOIN)이라고 합니다.`,
+      hint: `M개의 행과 N개의 행이 만나 M × N 개의 무수한 결과를 생성합니다.`,
+    },
+    {
+      id: 18,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `ANSI 표준 \`NATURAL JOIN\` 구문에 대한 설명으로 가장 적절하지 않은 것은?`,
+      options: [
+        { id: 1, text: `두 테이블 간에 이름과 데이터 타입이 동일한 모든 컬럼을 기준으로 자동으로 EQUI JOIN을 수행한다.`, isCorrect: false },
+        { id: 2, text: `식별의 모호성을 제거하기 위해 SELECT 절에서 조인 컬럼명 앞에 반드시 테이블 별칭(Alias)을 접두어로 사용해야 한다.`, isCorrect: true },
+        { id: 3, text: `\`USING\` 조건절이나 \`ON\` 조건절을 \`NATURAL JOIN\` 구문과 함께 사용할 수 없다.`, isCorrect: false },
+        { id: 4, text: `조인에 사용된 기준 컬럼은 결과 집합의 가장 첫 번째에 단 한 번만 출력된다.`, isCorrect: false },
+      ],
+      rationale: `\`NATURAL JOIN\`이나 \`USING\` 절에 사용된 공통 조인 컬럼에 테이블명이나 별칭(Alias)을 접두어로 명시하면 문법적 오류(Syntax Error)가 발생합니다.`,
+      hint: `시스템이 자동으로 공통 컬럼을 식별하여 합쳤으므로 소유권을 따지지 않습니다.`,
+    },
+    {
+      id: 19,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `외부 조인(OUTER JOIN)에 대한 설명으로 옳은 것은?`,
+      options: [
+        { id: 1, text: `오라클 전용 문법인 \`WHERE A.DEPTNO = B.DEPTNO(+)\`는 B 테이블의 모든 데이터를 출력하는 RIGHT OUTER JOIN을 의미한다.`, isCorrect: false },
+        { id: 2, text: `\`LEFT OUTER JOIN\` 수행 시 우측 테이블에 매칭되는 데이터가 존재하지 않으면, 조인 자체를 취소하고 에러를 반환한다.`, isCorrect: false },
+        { id: 3, text: `외부 조인은 반드시 등가 조인(EQUI JOIN)의 형태로만 수행할 수 있다.`, isCorrect: false },
+        { id: 4, text: `조인 조건에 일치하지 않더라도 기준이 되는 한쪽 테이블의 데이터를 모두 보존하여 출력하기 위해 사용된다.`, isCorrect: true },
+      ],
+      rationale: `오라클 외부 조인에서 \`(+)\` 기호는 정보가 부족하여 NULL이 보충될 쪽(기준이 아닌 쪽)에 기술합니다. 따라서 \`B.DEPTNO(+)\`는 A 테이블 기준인 \`LEFT OUTER JOIN\`입니다.`,
+      hint: `짝이 없는 데이터도 누락시키지 않고 포함(NULL로 채움)시키는 조인 방식입니다.`,
+    },
+    {
+      id: 20,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `서브쿼리(Subquery)의 위치별 명칭과 특징에 대한 설명으로 틀린 것은?`,
+      options: [
+        { id: 1, text: `SELECT 절에 위치하는 스칼라 서브쿼리(Scalar Subquery)는 반드시 단일 행, 단일 컬럼을 반환해야 한다.`, isCorrect: false },
+        { id: 2, text: `FROM 절에 위치하는 인라인 뷰(Inline View)는 SQL 쿼리가 실행되는 동안만 임시적으로 생성되는 동적 뷰이다.`, isCorrect: false },
+        { id: 3, text: `메인 쿼리는 서브쿼리 내부에서 정의된 컬럼을 메인 쿼리의 SELECT 절로 자유롭게 가져와 출력할 수 있다.`, isCorrect: true },
+        { id: 4, text: `연관 서브쿼리(Correlated Subquery)는 메인 쿼리의 컬럼을 서브쿼리 내에서 참조하여, 메인 쿼리의 각 행마다 서브쿼리가 반복 수행되는 형태이다.`, isCorrect: false },
+      ],
+      rationale: `서브쿼리는 메인 쿼리의 컬럼을 참조(상속)할 수 있으나, 메인 쿼리는 서브쿼리 내부에서 명시적으로 반환하지 않은 항목에 접근할 수 없습니다.`,
+      hint: `서브쿼리는 메인 쿼리의 변수를 참조할 수 있지만, 메인 쿼리는 서브쿼리 내부의 로직을 알 수 없습니다.`,
+    },
+    {
+      id: 21,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `다음 중 집합 연산자 \`UNION\`과 \`UNION ALL\`의 특성 비교로 올바른 것은?`,
+      options: [
+        { id: 1, text: `\`UNION\`은 두 집합의 합집합을 구하면서 중복된 데이터를 그대로 출력한다.`, isCorrect: false },
+        { id: 2, text: `성능 관점에서 볼 때, 중복 제거를 위한 정렬(Sort) 작업이 발생하지 않는 \`UNION ALL\`이 \`UNION\`보다 훨씬 유리하다.`, isCorrect: true },
+        { id: 3, text: `두 연산자를 사용하기 위해서는 각 SELECT 문의 컬럼 개수는 달라도 되나 데이터 타입은 일치해야 한다.`, isCorrect: false },
+        { id: 4, text: `\`UNION ALL\`은 교집합을 반환할 때 주로 사용된다.`, isCorrect: false },
+      ],
+      rationale: `\`UNION\`은 중복 제거를 위해 암묵적인 정렬 연산이 동반되므로 대용량 데이터 처리 시 성능 저하를 유발합니다. 중복 데이터가 없거나 중복이 허용되는 경우 반드시 \`UNION ALL\`을 사용해야 합니다.`,
+      hint: `"모두(ALL) 이어 붙여라!"는 검사 과정이 없으므로 데이터베이스의 부하를 줄입니다.`,
+    },
+    {
+      id: 22,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `그룹 함수 \`ROLLUP\`과 \`CUBE\`의 차이점에 대한 설명으로 가장 적절한 것은?`,
+      options: [
+        { id: 1, text: `\`ROLLUP\`은 명시된 컬럼의 순서와 무관하게 동일한 소계를 출력한다.`, isCorrect: false },
+        { id: 2, text: `\`CUBE\`는 명시된 컬럼들로 생성 가능한 모든 경우의 수(다차원 집계)에 대해 소계와 총계를 산출한다.`, isCorrect: true },
+        { id: 3, text: `\`ROLLUP\`은 항상 전체 총계(Grand Total)를 생략하고 부서별 소계만 반환한다.`, isCorrect: false },
+        { id: 4, text: `시스템 부하 측면에서 볼 때 \`CUBE\`가 \`ROLLUP\`보다 연산 비용이 훨씬 적게 든다.`, isCorrect: false },
+      ],
+      rationale: `\`ROLLUP(A, B)\`는 (A, B) ➔ (A) ➔ ()의 계층적 소계를 산출하며 인자의 순서가 중요합니다. 반면 \`CUBE(A, B)\`는 (A, B) ➔ (A) ➔ (B) ➔ ()의 모든 조합을 산출하므로 시스템 부하가 매우 큽니다.`,
+      hint: `N개의 인자가 주어졌을 때 2^N 개의 모든 조합을 산출하는 함수입니다.`,
+    },
+    {
+      id: 23,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `\`GROUPING\` 함수가 결과값으로 '1'을 반환했을 때, 이 데이터가 의미하는 바는 무엇인가?`,
+      options: [
+        { id: 1, text: `그룹화 연산 대상 컬럼에 실제 1이라는 값이 저장되어 있음을 의미한다.`, isCorrect: false },
+        { id: 2, text: `집계 연산 중 산술 오류가 발생하였음을 시스템이 알리는 플래그 값이다.`, isCorrect: false },
+        { id: 3, text: `해당 행이 \`ROLLUP\`이나 \`CUBE\` 등의 그룹 연산에 의해 시스템이 임의로 생성한 소계/총계 집계 행임을 의미한다.`, isCorrect: true },
+        { id: 4, text: `데이터베이스 테이블의 원본 데이터 자체가 NULL로 비어있음을 증명하는 값이다.`, isCorrect: false },
+      ],
+      rationale: `\`GROUPING\` 함수는 해당 속성이 소계나 총계를 계산하기 위해 NULL로 처리된 집계용 데이터인지 여부를 1(True)과 0(False)으로 식별하여 반환합니다.`,
+      hint: `시스템이 "내가 요약을 위해 임시로 만든 빈칸(NULL)이야!"라고 알려주는 식별자입니다.`,
+    },
+    {
+      id: 24,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `윈도우 함수에서 순위를 부여할 때, 공동 순위가 발생하더라도 다음 순위 값을 건너뛰지 않고 연속된 값(예: 1위, 1위, 2위)을 반환하는 함수는?`,
+      options: [
+        { id: 1, text: `RANK`, isCorrect: false },
+        { id: 2, text: `DENSE_RANK`, isCorrect: true },
+        { id: 3, text: `ROW_NUMBER`, isCorrect: false },
+        { id: 4, text: `NTILE`, isCorrect: false },
+      ],
+      rationale: `\`DENSE_RANK\`는 공동 순위 이후에도 연속된 번호를 부여합니다. 반면 \`RANK\`는 공동 순위만큼 값을 건너뛰며(1위, 1위, 3위), \`ROW_NUMBER\`는 동일 값이라도 고유한 일련번호(1위, 2위, 3위)를 강제 부여합니다.`,
+      hint: `공백 없이 '빽빽하게(Dense)' 순위를 채웁니다.`,
+    },
+    {
+      id: 25,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `윈도우 함수에서 파티션별 누적 합계를 구하고자 할 때, "파티션의 첫 번째 행부터 현재 행까지"를 의미하는 프레임(Window Frame) 지정 구문은?`,
+      options: [
+        { id: 1, text: `ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING`, isCorrect: false },
+        { id: 2, text: `ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING`, isCorrect: false },
+        { id: 3, text: `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`, isCorrect: true },
+        { id: 4, text: `PARTITION BY UNBOUNDED PRECEDING`, isCorrect: false },
+      ],
+      rationale: `\`UNBOUNDED PRECEDING\`은 파티션 내의 가장 첫 행을 지칭하며, 누적 값을 연산할 때 시작점을 고정하는 필수 키워드입니다.`,
+      hint: `한계가 없는(Unbounded) 이전(Preceding)부터 지금(Current)까지 범위를 지정합니다.`,
+    },
+    {
+      id: 26,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `윈도우 함수의 논리적 처리 및 실행 시점에 대한 설명으로 올바른 것은?`,
+      options: [
+        { id: 1, text: `윈도우 함수는 데이터베이스 연산 중 가장 먼저 실행되어 WHERE 절의 필터링 조건으로 직접 사용할 수 있다.`, isCorrect: false },
+        { id: 2, text: `윈도우 함수는 FROM 절에서 대상 테이블을 스캔함과 동시에 실행된다.`, isCorrect: false },
+        { id: 3, text: `윈도우 함수는 데이터의 그룹화 및 집계 처리가 완료된 후 SELECT 절이 평가되는 시점에 실행된다.`, isCorrect: true },
+        { id: 4, text: `윈도우 함수는 GROUP BY 절을 완전히 대체하므로 항상 GROUP BY 절과 함께 명시되어야 한다.`, isCorrect: false },
+      ],
+      rationale: `윈도우 함수는 WHERE, GROUP BY, HAVING 절의 수행이 모두 완료된 최종 결과 집합을 대상으로 연산하므로, WHERE 절에서 조건으로 직접 참조할 수 없습니다. (순위로 필터링하려면 인라인 뷰를 사용해야 함)`,
+      hint: `모든 필터링 작업이 끝난 후 최종 출력 직전에 포스트잇처럼 값을 붙이는 연산입니다.`,
+    },
+    {
+      id: 27,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `오라클의 계층형 질의(Hierarchical Query)에서 트리의 역방향 전개(자식에서 부모 방향)를 수행하도록 지정하는 논리적 구문은?`,
+      options: [
+        { id: 1, text: `\`START WITH 부모ID IS NULL\``, isCorrect: false },
+        { id: 2, text: `\`CONNECT BY PRIOR 부모ID = 자식ID\``, isCorrect: false },
+        { id: 3, text: `\`CONNECT BY PRIOR 자식ID = 부모ID\``, isCorrect: true },
+        { id: 4, text: `\`ORDER SIBLINGS BY 부모ID\``, isCorrect: false },
+      ],
+      rationale: `\`CONNECT BY PRIOR 자식 = 부모\`는 현재 읽은 노드(자식)의 부모 값을 다음 검색 조건으로 삼아 위로 거슬러 올라가는 역방향(Bottom-Up) 전개 방식입니다. 반대로 \`PRIOR 부모 = 자식\`은 순방향(Top-Down) 전개입니다.`,
+      hint: `\`PRIOR\`(직전에 읽은 데이터)가 자식에 붙어 있으면, 자식을 기준으로 부모를 찾아 올라갑니다.`,
+    },
+    {
+      id: 28,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `계층형 질의에서 트리(Tree)의 계층 구조를 훼손하지 않고, 동일한 계층(레벨) 내에 존재하는 형제 노드들끼리만 정렬을 수행하는 구문은?`,
+      options: [
+        { id: 1, text: `ORDER BY`, isCorrect: false },
+        { id: 2, text: `GROUP BY SIBLINGS`, isCorrect: false },
+        { id: 3, text: `ORDER SIBLINGS BY`, isCorrect: true },
+        { id: 4, text: `CONNECT BY ORDER`, isCorrect: false },
+      ],
+      rationale: `일반 \`ORDER BY\`를 사용하면 트리 구조 전체가 무너지며 값이 섞입니다. 계층 구조를 유지한 채 동일 부모를 가진 노드 간의 정렬은 반드시 \`ORDER SIBLINGS BY\`를 사용해야 합니다.`,
+      hint: `형제(Siblings)들 사이의 서열만 정리합니다.`,
+    },
+    {
+      id: 29,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `오라클 환경에서 사원 급여(SAL) 기준 상위 3명의 사원 정보를 추출하기 위해 가장 올바르게 작성된 쿼리는?`,
+      options: [
+        { id: 1, text: `\`SELECT * FROM EMP WHERE ROWNUM <= 3 ORDER BY SAL DESC;\``, isCorrect: false },
+        { id: 2, text: `\`SELECT TOP(3) * FROM EMP ORDER BY SAL DESC;\``, isCorrect: false },
+        { id: 3, text: `\`SELECT * FROM (SELECT * FROM EMP ORDER BY SAL DESC) WHERE ROWNUM <= 3;\``, isCorrect: true },
+        { id: 4, text: `\`SELECT * FROM EMP FETCH FIRST 3 ROWS ORDER BY SAL DESC;\``, isCorrect: false },
+      ],
+      rationale: `오라클에서 \`ROWNUM\`은 \`ORDER BY\`보다 먼저 실행됩니다. 따라서 인라인 뷰(서브쿼리)를 활용하여 데이터를 먼저 내림차순 정렬한 결과 집합을 만든 후, 메인 쿼리에서 ROWNUM 조건을 적용하여 자르는 방식을 사용해야 합니다.`,
+      hint: `\`ROWNUM\`은 데이터가 추출되는 순간 번호를 부여하므로, 정렬(ORDER BY) 작업 전에 이미 고정됩니다.`,
+    },
+    {
+      id: 30,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `셀프 조인(Self Join)을 구현할 때 반드시 준수해야 하는 SQL 작성 규칙은?`,
+      options: [
+        { id: 1, text: `서로 다른 시스템의 데이터를 결합하기 위해 DATABASE LINK를 명시해야 한다.`, isCorrect: false },
+        { id: 2, text: `FROM 절에 동일한 테이블이 여러 번 명시되므로, 객체의 모호성을 해소하기 위해 테이블 별칭(Alias)을 각각 다르게 부여해야 한다.`, isCorrect: true },
+        { id: 3, text: `무한 루프를 방지하기 위해 \`NOCYCLE\` 키워드를 조인 조건에 삽입해야 한다.`, isCorrect: false },
+        { id: 4, text: `조인 수행 전 데이터 정렬을 위해 서브쿼리 내부에 \`ROWNUM\`을 강제 할당해야 한다.`, isCorrect: false },
+      ],
+      rationale: `셀프 조인은 하나의 테이블을 논리적으로 두 개의 별개 테이블처럼 취급하므로, \`FROM EMP E1 JOIN EMP E2\`와 같이 반드시 서로 다른 테이블 별칭을 선언하여 컬럼의 소유격을 명확히 해야 합니다.`,
+      hint: `옵티마이저가 동일한 테이블의 두 인스턴스를 논리적으로 구분할 수 있는 이름표가 필요합니다.`,
+    },
+    {
+      id: 31,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `다음 중 조건식 평가 시 결과가 TRUE가 되는 구문은 어느 것인가? (단, COMM 컬럼의 값은 NULL이다)`,
+      options: [
+        { id: 1, text: `\`WHERE COMM = NULL\``, isCorrect: false },
+        { id: 2, text: `\`WHERE COMM <> NULL\``, isCorrect: false },
+        { id: 3, text: `\`WHERE COMM IS NULL\``, isCorrect: true },
+        { id: 4, text: `\`WHERE COMM > 0 OR COMM < 0\``, isCorrect: false },
+      ],
+      rationale: `NULL 값의 존재 여부를 판별할 때는 관계 연산자(=, <>)가 아닌 \`IS NULL\` 또는 \`IS NOT NULL\` 키워드만을 사용해야 정상적인 TRUE/FALSE 평가가 가능합니다.`,
+      hint: `NULL은 '알 수 없는 값'이므로 비교 연산자를 사용하면 무조건 UNKNOWN 논리를 반환합니다.`,
+    },
+    {
+      id: 32,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `뷰(View) 객체의 특징 및 활용 목적에 대한 설명으로 가장 부적절한 것은?`,
+      options: [
+        { id: 1, text: `뷰는 물리적인 저장 공간을 할당받아 원본 데이터를 영구적으로 복사해 두는 객체이다.`, isCorrect: true },
+        { id: 2, text: `사용자에게 민감한 특정 컬럼을 제외하고 뷰를 생성하여 데이터베이스 보안성을 제고할 수 있다.`, isCorrect: false },
+        { id: 3, text: `복잡한 다중 테이블 JOIN 쿼리를 뷰로 캡슐화하여 SQL 질의 작성을 단순화할 수 있다.`, isCorrect: false },
+        { id: 4, text: `원본 테이블의 스키마 구조가 변경되더라도 뷰의 정의를 적절히 수정하면 응용 프로그램 로직의 수정을 최소화할 수 있다(논리적 데이터 독립성).`, isCorrect: false },
+      ],
+      rationale: `뷰는 실질적인 데이터가 저장되지 않는 가상 테이블(Virtual Table)입니다. 데이터를 조회할 때마다 뷰에 저장된 SQL 쿼리가 런타임에 실행되어 결과를 동적으로 생성합니다.`,
+      hint: `뷰는 데이터베이스 내부에 저장된 '질의문(SQL 텍스트)' 자체입니다.`,
+    },
+    {
+      id: 33,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `정규표현식(Regular Expression) 메타 문자 중에서 문자열 패턴의 '시작'과 '끝'을 명시하기 위해 사용되는 앵커(Anchor) 기호로 바르게 짝지어진 것은?`,
+      options: [
+        { id: 1, text: `\`*\` 와 \`+\``, isCorrect: false },
+        { id: 2, text: `\`^\` 와 \`$\``, isCorrect: true },
+        { id: 3, text: `\`?\` 와 \`.\``, isCorrect: false },
+        { id: 4, text: `\`\\\\ \` 와 \`/\``, isCorrect: false },
+      ],
+      rationale: `정규표현식에서 \`^\` 기호는 라인 또는 문자열의 시작 위치를, \`$\` 기호는 종료 위치를 지정하는 필수 메타 문자입니다.`,
+      hint: `꺽쇠는 패턴의 도입부를 지시하고, 달러 기호는 패턴의 종결부를 지시합니다.`,
+    },
+    {
+      id: 34,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `타 테이블의 기본키를 외래키(FK)로 참조하고 있는 부모 테이블을 데이터베이스 스키마에서 강제로 완전 삭제하고자 할 때 사용하는 DDL 옵션은?`,
+      options: [
+        { id: 1, text: `\`DROP TABLE 부모테이블명 FORCE;\``, isCorrect: false },
+        { id: 2, text: `\`DELETE FROM 부모테이블명 CASCADE;\``, isCorrect: false },
+        { id: 3, text: `\`DROP TABLE 부모테이블명 CASCADE CONSTRAINTS;\``, isCorrect: true },
+        { id: 4, text: `\`TRUNCATE TABLE 부모테이블명 ALL;\``, isCorrect: false },
+      ],
+      rationale: `자식 테이블이 외래키로 참조하고 있어 삭제가 제한되는 부모 테이블을 제거하려면, 연결된 제약조건(Constraints)까지 함께 삭제하도록 \`CASCADE CONSTRAINTS\` 옵션을 명시해야 합니다.`,
+      hint: `자식 테이블과의 연결 고리인 참조 무결성 제약조건을 연쇄적으로 파기하는 키워드가 필요합니다.`,
+    },
+    {
+      id: 35,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `데이터 제어어(DCL) 명령어 중 다수의 시스템 권한이나 객체 권한들을 하나의 논리적인 집합으로 묶어 사용자에게 일괄 부여하기 위해 사용하는 데이터베이스 객체는?`,
+      options: [
+        { id: 1, text: `PROFILE`, isCorrect: false },
+        { id: 2, text: `SYNONYM`, isCorrect: false },
+        { id: 3, text: `SEQUENCE`, isCorrect: false },
+        { id: 4, text: `ROLE`, isCorrect: true },
+      ],
+      rationale: `\`ROLE\`은 여러 권한을 묶어놓은 컨테이너와 같습니다. 사용자 개개인에게 수십 개의 권한을 일일이 부여하는 대신, ROLE을 생성하여 일괄적으로 할당 및 회수함으로써 데이터베이스 보안 관리를 효율화합니다.`,
+      hint: `권한 관리를 간소화하기 위해 부여하는 직무/역할 단위의 집합체입니다.`,
+    },
+    {
+      id: 36,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `조건 분기 로직을 처리하는 \`CASE\` 표현식에 대한 설명으로 올바르지 않은 것은?`,
+      options: [
+        { id: 1, text: `\`CASE\` 표현식은 내부 조건 판별 중 조건이 TRUE인 첫 번째 \`WHEN\` 절을 만나면 이후의 평가는 중단하고 결과를 반환한다.`, isCorrect: false },
+        { id: 2, text: `모든 \`WHEN\` 조건에 부합하지 않을 경우 \`ELSE\` 절의 값을 반환하며, \`ELSE\` 절이 생략된 경우 NULL을 반환한다.`, isCorrect: false },
+        { id: 3, text: `\`Searched CASE\` 방식은 \`WHEN\` 절 내부에 산술 비교 연산자나 다중 복합 조건을 자유롭게 기술할 수 있다.`, isCorrect: false },
+        { id: 4, text: `\`CASE\` 표현식은 오직 \`SELECT\` 절의 출력 컬럼 포맷팅을 위해서만 사용할 수 있으며 \`ORDER BY\` 절에는 사용할 수 없다.`, isCorrect: true },
+      ],
+      rationale: `\`CASE\` 표현식은 \`SELECT\` 절뿐만 아니라 \`WHERE\` 절, \`ORDER BY\` 절, \`HAVING\` 절 등 SQL 문장 전반에서 조건 분기 로직이 필요한 곳에 자유롭게 사용할 수 있습니다.`,
+      hint: `\`CASE\` 표현식은 동적인 값을 반환하므로 조건부 정렬 등 다양한 용도로 활용 가능합니다.`,
+    },
+    {
+      id: 37,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `다음 중 \`NULL\` 연산의 특성을 고려할 때 가장 올바른 결과 값을 도출하는 연산식은? (단, COL_A의 값은 100, COL_B의 값은 NULL이다.)`,
+      options: [
+        { id: 1, text: `\`COL_A + COL_B\` 의 결과는 100이다.`, isCorrect: false },
+        { id: 2, text: `\`NVL(COL_A + COL_B, 50)\` 의 결과는 50이다.`, isCorrect: true },
+        { id: 3, text: `\`NULLIF(COL_A, 100)\` 의 결과는 100이다.`, isCorrect: false },
+        { id: 4, text: `\`COALESCE(COL_B, NULL, NULL)\` 의 결과는 0이다.`, isCorrect: false },
+      ],
+      rationale: `100 + NULL 연산의 결과는 NULL입니다. 따라서 수식은 \`NVL(NULL, 50)\`으로 치환되며, NVL 함수는 첫 번째 인자가 NULL이므로 두 번째 인자인 50을 최종 반환합니다.`,
+      hint: `산술 연산 수식의 내부를 먼저 평가한 후 NULL 처리 함수의 결과를 도출하세요.`,
+    },
+    {
+      id: 38,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `조인 연산 수행 시 성능 저하를 방지하기 위해 작성하는 비등가 조인(Non-EQUI JOIN)의 특징으로 알맞은 것은?`,
+      options: [
+        { id: 1, text: `두 테이블 간의 공통 속성 이름이 완전히 동일할 때만 시스템이 자동으로 수행하는 조인 방식이다.`, isCorrect: false },
+        { id: 2, text: `주로 조인 조건이 정확한 동등(\`=\`) 일치가 아닌 데이터의 범위(\`BETWEEN\`, \`>\`, \`<\`) 연산자로 매핑될 때 사용하는 조인 방식이다.`, isCorrect: true },
+        { id: 3, text: `조인 대상 컬럼에 복합 인덱스가 걸려있어야만 연산이 가능한 조인 방식이다.`, isCorrect: false },
+        { id: 4, text: `두 테이블의 데이터 간에 교차 집합을 구하기 위해 무조건 \`UNION\` 연산자와 결합하여 수행한다.`, isCorrect: false },
+      ],
+      rationale: `등가 조인(EQUI JOIN)이 \`=\` 연산자를 사용하여 정확히 일치하는 값을 찾는다면, 비등가 조인은 특정한 범위 내에 데이터가 위치하는지를 부등호나 \`BETWEEN A AND B\` 연산자를 활용하여 결합하는 기법입니다.`,
+      hint: `급여 데이터가 속한 등급(Grade)의 최소/최대 구간을 매핑하는 시나리오를 떠올려보세요.`,
+    },
+    {
+      id: 39,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `다음 SQL 실행 시 데이터베이스 옵티마이저가 데이터를 그룹화하기 전 원본 집합 레벨에서 필터링을 수행하도록 지시하는 논리적 구문은?`,
+      options: [
+        { id: 1, text: `WHERE 절`, isCorrect: true },
+        { id: 2, text: `HAVING 절`, isCorrect: false },
+        { id: 3, text: `GROUPING 절`, isCorrect: false },
+        { id: 4, text: `ORDER BY 절`, isCorrect: false },
+      ],
+      rationale: `\`WHERE\` 절은 원천 테이블 데이터를 스캔하는 단계에서 개별 행(Row)을 필터링합니다. 반면 \`HAVING\` 절은 데이터가 \`GROUP BY\`를 통해 그룹 집계된 이후 생성된 산출 값(예: SUM, AVG)을 기준으로 사후 필터링을 수행합니다.`,
+      hint: `불필요한 데이터를 그룹 연산(메모리 작업)에 진입하기 전에 사전 차단하는 역할입니다.`,
+    },
+    {
+      id: 40,
+      category: `[제2과목: SQL 기본 및 활용]`,
+      question: `관계형 데이터베이스에서 트랜잭션 진행 중 시스템에 치명적 장애가 발생하여 롤백(Rollback)이 트리거 될 때, 복원 작업을 위해 데이터의 변경 이전 상태(Old Value)를 보관하고 있는 논리적 메모리 영역은?`,
+      options: [
+        { id: 1, text: `Redo Log`, isCorrect: false },
+        { id: 2, text: `Undo Log (Rollback Segment)`, isCorrect: true },
+        { id: 3, text: `Buffer Cache`, isCorrect: false },
+        { id: 4, text: `Shared Pool`, isCorrect: false },
+      ],
+      rationale: `트랜잭션이 취소(Rollback)되거나 데이터의 읽기 일관성(Read Consistency)을 보장하기 위해 DML 수행 이전의 데이터 값을 임시로 저장해 두는 공간을 언두 로그(Undo Log) 또는 롤백 세그먼트라고 합니다.`,
+      hint: `과거 시점의 데이터를 보존하여 데이터 일관성을 지키는 영역입니다.`,
+    },
+  ],
+  23: [
+    {
+      id: 1,
+      category: `[유형 1] 계층형 질의: PRIOR의 방향성 및 동작 원리`,
+      question: `다음 EMP 테이블을 대상으로 계층형 질의를 수행하고자 한다. 말단 사원(자식)에서부터 사장(부모) 방향으로 거슬러 올라가는 역방향(Bottom-Up) 전개를 수행하기 위한 올바른 \`CONNECT BY\` 조건은 무엇인가?`,
+      code: `**[EMP 테이블 구조]**
+EMPNO(사원번호, PK), ENAME(사원명), MGR(관리자사번, FK)
+`,
+      options: [
+        { id: 1, text: `\`CONNECT BY EMPNO = MGR\``, isCorrect: false },
+        { id: 2, text: `\`CONNECT BY PRIOR EMPNO = MGR\``, isCorrect: false },
+        { id: 3, text: `\`CONNECT BY PRIOR MGR = EMPNO\``, isCorrect: true },
+        { id: 4, text: `\`CONNECT BY MGR = PRIOR EMPNO\``, isCorrect: false },
+      ],
+      rationale: `역방향 전개는 현재 읽은 노드(자식)의 관리자사번(MGR)을 다음 검색 대상의 사원번호(EMPNO)로 삼아 부모를 찾아가는 방식입니다. 따라서 방금 읽은 자식 노드의 MGR에 \`PRIOR\`를 붙여 \`CONNECT BY PRIOR MGR = EMPNO\` (또는 \`EMPNO = PRIOR MGR\`)로 작성해야 합니다.`,
+      hint: `\`PRIOR\` 키워드가 가리키는 대상이 '방금 읽은 현재 노드'임을 기억하십시오.`,
+    },
+    {
+      id: 2,
+      category: `[유형 1] 계층형 질의: PRIOR의 방향성 및 동작 원리`,
+      question: `아래의 계층형 쿼리를 실행했을 때, 데이터가 출력되는 순서와 정렬 기준에 대한 설명으로 가장 적절한 것은?`,
+      code: `SELECT EMPNO, ENAME, LEVEL
+FROM EMP
+START WITH MGR IS NULL
+CONNECT BY PRIOR EMPNO = MGR
+ORDER SIBLINGS BY ENAME DESC;
+
+`,
+      options: [
+        { id: 1, text: `전체 데이터를 먼저 ENAME의 내림차순으로 정렬한 후 계층 구조를 생성한다.`, isCorrect: false },
+        { id: 2, text: `루트 노드부터 시작하여 순방향(Top-Down)으로 전개하며, 동일한 부모를 가진 형제 노드들 사이에서만 ENAME을 기준으로 내림차순 정렬한다.`, isCorrect: true },
+        { id: 3, text: `역방향(Bottom-Up)으로 전개하며, 최하위 레벨부터 최상위 레벨 순으로 출력한다.`, isCorrect: false },
+        { id: 4, text: `\`ORDER SIBLINGS BY\` 절로 인해 계층 구조가 무너지고 ENAME 내림차순으로 단순 출력된다.`, isCorrect: false },
+      ],
+      rationale: `\`PRIOR EMPNO = MGR\`은 순방향 전개를 의미합니다. \`ORDER SIBLINGS BY\`는 계층 구조를 훼손하지 않고, 같은 레벨(Level)에 속한 형제(Siblings) 노드들 간의 정렬만을 수행합니다.`,
+      hint: `\`ORDER SIBLINGS BY\`는 계층 구조(Tree)의 무결성을 유지하기 위한 전용 정렬 구문입니다.`,
+    },
+    {
+      id: 3,
+      category: `[유형 1] 계층형 질의: PRIOR의 방향성 및 동작 원리`,
+      question: `다음 중 계층형 질의의 가상 컬럼 및 함수에 대한 설명으로 올바르지 않은 것은?`,
+      options: [
+        { id: 1, text: `\`LEVEL\`은 루트 데이터를 1로 시작하여 리프(Leaf) 데이터까지 하위로 내려갈수록 1씩 증가하는 가상 컬럼이다.`, isCorrect: false },
+        { id: 2, text: `\`CONNECT_BY_ISLEAF\`는 해당 노드가 트리의 최하단(자식이 없는 노드)일 경우 1을, 그렇지 않을 경우 0을 반환한다.`, isCorrect: false },
+        { id: 3, text: `\`SYS_CONNECT_BY_PATH(컬럼명, 구분자)\`는 루트 노드부터 현재 노드까지의 경로를 지정된 구분자로 연결하여 문자열로 반환한다.`, isCorrect: false },
+        { id: 4, text: `\`CONNECT BY\` 절에 \`NOCYCLE\` 옵션을 추가하면 순환(Cycle) 구조 발생 시 에러를 반환하고 쿼리 실행을 강제 중단한다.`, isCorrect: true },
+      ],
+      rationale: `\`NOCYCLE\` 옵션을 사용하면, 자식이 부모가 되고 부모가 다시 자식이 되는 무한 루프(Cycle) 데이터가 존재하더라도 런타임 에러를 발생시키지 않고 순환이 발생한 지점까지만 전개한 후 실행을 정상적으로 이어갑니다.`,
+      hint: `\`NOCYCLE\` 옵션의 목적은 에러에 의한 중단이 아니라, 예외 처리를 통한 실행 유지에 있습니다.`,
+    },
+    {
+      id: 4,
+      category: `[유형 2] 표를 토대로 한 SQL 쿼리문 추론`,
+      question: `다음 [부서별_매출] 테이블을 조회하여, 매출이 부서의 평균 매출보다 높은 부서와 매출액을 추출하고자 한다. 이를 달성하기 위한 가장 적절한 SQL 쿼리는 무엇인가?`,
+      code: `**[부서별_매출]**
+DEPT_ID(부서ID), REVENUE(매출액)
+SELECT DEPT_ID, REVENUE
+FROM 부서별_매출 A
+WHERE REVENUE > (SELECT AVG(REVENUE) FROM 부서별_매출 B WHERE A.DEPT_ID = B.DEPT_ID);
+
+SELECT DEPT_ID, REVENUE
+FROM 부서별_매출
+WHERE REVENUE > AVG(REVENUE)
+GROUP BY DEPT_ID;
+
+SELECT DEPT_ID, REVENUE
+FROM 부서별_매출 A
+HAVING REVENUE > (SELECT AVG(REVENUE) FROM 부서별_매출 B GROUP BY DEPT_ID);
+
+SELECT DEPT_ID, REVENUE
+FROM 부서별_매출
+WHERE REVENUE > (SELECT AVG(REVENUE) FROM 부서별_매출);
+
+`,
+      options: [
+      ],
+      rationale: `각 부서의 매출액이 **'해당 부서'**의 평균 매출액보다 높은지를 비교해야 하므로, 메인 쿼리의 \`DEPT_ID\`를 서브쿼리로 전달하여 조건에 맞는 평균을 구하는 연관 서브쿼리(①번)를 작성해야 합니다. ②번은 WHERE 절에서 집계 함수를 사용할 수 없어 문법 오류가 발생합니다.`,
+      hint: `메인 쿼리의 특정 행을 서브쿼리로 전달하여 비교하는 '연관 서브쿼리(Correlated Subquery)'의 개념을 적용해야 합니다.`,
+    },
+    {
+      id: 5,
+      category: `[유형 2] 표를 토대로 한 SQL 쿼리문 추론`,
+      question: `아래 [주문] 테이블에서 \`CUSTOMER_ID\`별로 가장 높은 \`AMOUNT\`를 기록한 주문 데이터를 추출하고자 한다. 조건에 맞는 올바른 SQL 구문은?`,
+      code: `**[주문]**
+ORDER_ID(주문번호), CUSTOMER_ID(고객ID), AMOUNT(주문금액)
+`,
+      options: [
+        { id: 1, text: `\`SELECT * FROM 주문 WHERE AMOUNT IN (SELECT MAX(AMOUNT) FROM 주문 GROUP BY ORDER_ID);\``, isCorrect: false },
+        { id: 2, text: `\`SELECT * FROM 주문 O1 WHERE AMOUNT = (SELECT MAX(AMOUNT) FROM 주문 O2 WHERE O1.CUSTOMER_ID = O2.CUSTOMER_ID);\``, isCorrect: true },
+        { id: 3, text: `\`SELECT CUSTOMER_ID, MAX(AMOUNT) FROM 주문 GROUP BY CUSTOMER_ID HAVING AMOUNT = MAX(AMOUNT);\``, isCorrect: false },
+        { id: 4, text: `\`SELECT * FROM 주문 WHERE AMOUNT >= ALL (SELECT AMOUNT FROM 주문 GROUP BY CUSTOMER_ID);\``, isCorrect: false },
+      ],
+      rationale: `고객별 최댓값을 구한 후 해당 최댓값을 가진 원본 행을 추출해야 합니다. 연관 서브쿼리를 사용하여 현재 행의 \`CUSTOMER_ID\`에 해당하는 최대 \`AMOUNT\`를 구하고, 현재 행의 \`AMOUNT\`가 그 최댓값과 일치하는지 비교하는 ②번이 올바른 쿼리입니다.`,
+      hint: `그룹화된 최댓값 정보만으로는 전체 원본 데이터(ORDER_ID 등)를 함께 출력할 수 없으므로 서브쿼리와 메인 쿼리의 조인 형태가 필요합니다.`,
+    },
+    {
+      id: 6,
+      category: `[유형 2] 표를 토대로 한 SQL 쿼리문 추론`,
+      question: `다음 [SALES] 테이블을 대상으로 집계 쿼리를 수행한 결과가 아래의 [결과 표]와 같았다. 이때 빈칸에 들어갈 알맞은 그룹 함수는 무엇인가?`,
+      code: `**[SALES]**
+REGION(지역), PRODUCT(상품), AMT(매출)
+**[결과 표]**
+| REGION | PRODUCT | SUM(AMT) |
+|---|---|---|
+| 서울 | 노트북 | 100 |
+| 서울 | 마우스 | 50 |
+| 서울 | (NULL) | 150 |
+| 부산 | 노트북 | 200 |
+| 부산 | (NULL) | 200 |
+| (NULL) | (NULL) | 350 |
+SELECT REGION, PRODUCT, SUM(AMT)
+FROM SALES
+GROUP BY ( 빈칸 );
+
+`,
+      options: [
+        { id: 1, text: `\`CUBE(REGION, PRODUCT)\``, isCorrect: false },
+        { id: 2, text: `\`ROLLUP(REGION, PRODUCT)\``, isCorrect: true },
+        { id: 3, text: `\`GROUPING SETS(REGION, PRODUCT)\``, isCorrect: false },
+        { id: 4, text: `\`ROLLUP(PRODUCT, REGION)\``, isCorrect: false },
+      ],
+      rationale: `결과 집합을 보면 (지역, 상품) 그룹화, (지역) 소계, () 전체 총계가 산출되었습니다. 이는 우측부터 요소를 하나씩 제거하며 계층적으로 집계하는 \`ROLLUP(REGION, PRODUCT)\`의 전형적인 결과입니다. 만약 \`CUBE\`였다면 (상품별) 소계 행도 존재해야 합니다.`,
+      hint: `(지역별+상품별) 상세 ➔ (지역별) 소계 ➔ (전체) 총계 순으로 계층적 집계가 이루어졌습니다.`,
+    },
+    {
+      id: 7,
+      category: `[유형 2] 표를 토대로 한 SQL 쿼리문 추론`,
+      question: `아래 [사원] 테이블을 조회할 때, 보너스(COMM)가 NULL인 사원은 급여(SAL)의 10%를, 보너스가 있는 사원은 급여의 20%를 '예상_수당'으로 출력하고자 한다. 빈칸 ( A )에 들어갈 가장 알맞은 단일행 함수는 무엇인가?`,
+      code: `SELECT EMPNO,
+( A )(COMM, SAL * 0.2, SAL * 0.1) AS 예상_수당
+FROM 사원;
+
+`,
+      options: [
+        { id: 1, text: `\`NVL\``, isCorrect: false },
+        { id: 2, text: `\`NULLIF\``, isCorrect: false },
+        { id: 3, text: `\`COALESCE\``, isCorrect: false },
+        { id: 4, text: `\`NVL2\``, isCorrect: true },
+      ],
+      rationale: `\`NVL2(expr1, expr2, expr3)\` 함수는 expr1이 NULL이 아니면 expr2를 반환하고, NULL이면 expr3를 반환합니다.`,
+      hint: `특정 속성의 값이 NULL인지 아닌지에 따라 두 가지 다른 수식을 분기 처리하는 함수입니다.`,
+    },
+    {
+      id: 8,
+      category: `[유형 3] 동일한 결과를 반환하는 SQL문 추론 (동치성)`,
+      question: `다음 중 아래의 비연관 다중 행 서브쿼리 문장과 동일한 실행 결과를 반환하는 SQL 문장은 어느 것인가?`,
+      code: `SELECT ENAME FROM EMP
+WHERE DEPTNO IN (SELECT DEPTNO FROM DEPT WHERE LOC = 'SEOUL');
+
+`,
+      options: [
+        { id: 1, text: `\`SELECT ENAME FROM EMP E WHERE EXISTS (SELECT 1 FROM DEPT D WHERE E.DEPTNO = D.DEPTNO AND LOC = 'SEOUL');\``, isCorrect: true },
+        { id: 2, text: `\`SELECT ENAME FROM EMP E WHERE DEPTNO = (SELECT DEPTNO FROM DEPT WHERE LOC = 'SEOUL');\``, isCorrect: false },
+        { id: 3, text: `\`SELECT ENAME FROM EMP E JOIN DEPT D ON E.EMPNO = D.DEPTNO WHERE D.LOC = 'SEOUL';\``, isCorrect: false },
+        { id: 4, text: `\`SELECT ENAME FROM EMP E WHERE DEPTNO = ANY (SELECT LOC FROM DEPT WHERE LOC = 'SEOUL');\``, isCorrect: false },
+      ],
+      rationale: `\`IN\` 구문은 메인 쿼리의 속성 값이 서브쿼리 결과 집합에 존재하는지 확인합니다. 이는 연관 서브쿼리를 활용한 \`EXISTS\` 연산자와 논리적으로 완벽하게 동일한 결과를 도출합니다. ②번은 서브쿼리가 다중 행을 반환할 경우 에러가 발생합니다.`,
+      hint: `\`IN\` 연산자는 내부 서브쿼리에 해당하는 값이 존재하는지를 판별하므로, 상관 서브쿼리를 활용한 특정 존재 판별 연산자와 치환될 수 있습니다.`,
+    },
+    {
+      id: 9,
+      category: `[유형 3] 동일한 결과를 반환하는 SQL문 추론 (동치성)`,
+      question: `오라클(Oracle) 전용 외부 조인 문법으로 작성된 아래 쿼리를 ANSI 표준 SQL 문법으로 바르게 변환한 것은?`,
+      code: `SELECT E.ENAME, D.DNAME
+FROM EMP E, DEPT D
+WHERE E.DEPTNO(+) = D.DEPTNO;
+
+`,
+      options: [
+        { id: 1, text: `\`SELECT E.ENAME, D.DNAME FROM EMP E LEFT OUTER JOIN DEPT D ON E.DEPTNO = D.DEPTNO;\``, isCorrect: false },
+        { id: 2, text: `\`SELECT E.ENAME, D.DNAME FROM EMP E RIGHT OUTER JOIN DEPT D ON E.DEPTNO = D.DEPTNO;\``, isCorrect: true },
+        { id: 3, text: `\`SELECT E.ENAME, D.DNAME FROM EMP E FULL OUTER JOIN DEPT D ON E.DEPTNO = D.DEPTNO;\``, isCorrect: false },
+        { id: 4, text: `\`SELECT E.ENAME, D.DNAME FROM EMP E INNER JOIN DEPT D ON E.DEPTNO = D.DEPTNO;\``, isCorrect: false },
+      ],
+      rationale: `\`E.DEPTNO(+) = D.DEPTNO\`는 EMP(E) 테이블에 데이터가 부족하더라도 DEPT(D) 테이블의 모든 데이터를 보존하여 출력하라는 의미입니다. 즉, 기준이 되는 테이블이 오른쪽에 위치한 DEPT이므로 \`RIGHT OUTER JOIN\`과 동일합니다.`,
+      hint: `오라클 외부 조인 기호 \`(+)\`는 데이터가 부족하여 NULL 값으로 보충되어야 할 측에 위치합니다.`,
+    },
+    {
+      id: 10,
+      category: `[유형 3] 동일한 결과를 반환하는 SQL문 추론 (동치성)`,
+      question: `다음 두 집합 연산자 쿼리 (가)와 (나)에 대한 논리적 평가로 가장 올바른 것은?`,
+      code: `(가) \`SELECT A, B FROM T1 UNION SELECT A, B FROM T2;\`
+(나) \`SELECT A, B FROM T1 UNION ALL SELECT A, B FROM T2;\`
+`,
+      options: [
+        { id: 1, text: `두 쿼리의 결과 집합 행(Row)의 수는 항상 동일하다.`, isCorrect: false },
+        { id: 2, text: `(가)는 중복된 튜플을 제거하기 위해 내부적으로 정렬 연산을 동반하지만, (나)는 단순 병합만 수행한다.`, isCorrect: true },
+        { id: 3, text: `(나) 연산을 수행할 경우 두 테이블 간의 교집합에 해당하는 데이터만 중복 출력된다.`, isCorrect: false },
+        { id: 4, text: `실행 속도 및 성능적 관점에서 데이터베이스 옵티마이저는 항상 (가) 방식을 선호한다.`, isCorrect: false },
+      ],
+      rationale: `\`UNION\`은 중복 데이터를 제거하기 위해 암묵적인 \`SORT UNIQUE\` 연산을 수행하므로 시스템 부하가 높습니다. 반면 \`UNION ALL\`은 정렬 및 중복 검사 없이 결과를 그대로 수직 병합하므로 성능적으로 훨씬 유리합니다.`,
+      hint: `\`UNION\`은 수학적 합집합(중복 배제)을 구현하기 위한 추가 연산 비용이 발생합니다.`,
+    },
+    {
+      id: 11,
+      category: `[유형 3] 동일한 결과를 반환하는 SQL문 추론 (동치성)`,
+      question: `다음 쿼리와 완벽하게 동일한 결과 집합(소계 포함)을 반환하는 대체 쿼리는 무엇인가?`,
+      code: `SELECT JOB, MGR, SUM(SAL)
+FROM EMP
+GROUP BY ROLLUP(JOB, MGR);
+
+`,
+      options: [
+        { id: 1, text: `\`SELECT JOB, MGR, SUM(SAL) FROM EMP GROUP BY GROUPING SETS ((JOB, MGR), (JOB), (MGR), ());\``, isCorrect: false },
+        { id: 2, text: `\`SELECT JOB, MGR, SUM(SAL) FROM EMP GROUP BY GROUPING SETS ((JOB, MGR), (MGR), ());\``, isCorrect: false },
+        { id: 3, text: `\`SELECT JOB, MGR, SUM(SAL) FROM EMP GROUP BY GROUPING SETS ((JOB, MGR), (JOB), ());\``, isCorrect: true },
+        { id: 4, text: `\`SELECT JOB, MGR, SUM(SAL) FROM EMP GROUP BY CUBE(JOB, MGR);\``, isCorrect: false },
+      ],
+      rationale: `\`ROLLUP(JOB, MGR)\`은 명시된 순서에 따라 1) \`(JOB, MGR)\` 그룹화, 2) \`(JOB)\` 기준 소계, 3) \`()\` 전체 총계의 3가지 레벨을 생성합니다. 이는 \`GROUPING SETS ((JOB, MGR), (JOB), ())\`와 논리적으로 완전히 동일합니다.`,
+      hint: `\`ROLLUP(A, B)\`는 계층적 방향성을 가지며 (A, B) ➔ (A) ➔ () 의 단계로 소계를 산출합니다.`,
+    },
+    {
+      id: 12,
+      category: `[유형 4] 다음 SQL문의 실행 결과 예측 (오류 및 함정 포함)`,
+      question: `다음 [TB_NUM] 테이블을 대상으로 쿼리를 실행했을 때, 출력되는 최종 결과값(행의 수 아님)은 무엇인가?`,
+      code: `**[TB_NUM]**
+| VAL1 | VAL2 |
+|---|---|
+| 10 | 20 |
+| NULL | 30 |
+| 40 | NULL |
+SELECT SUM(VAL1 + VAL2) AS RESULT FROM TB_NUM;
+
+`,
+      options: [
+        { id: 1, text: `100`, isCorrect: false },
+        { id: 2, text: `30`, isCorrect: true },
+        { id: 3, text: `70`, isCorrect: false },
+        { id: 4, text: `NULL`, isCorrect: false },
+      ],
+      rationale: `행 단위 연산 시, NULL과의 산술 연산 결과는 무조건 NULL입니다.`,
+      hint: `행(Row) 단위의 산술 연산(\`+\`)이 우선 수행된 후, 컬럼 단위의 집계 함수(\`SUM\`)가 처리됩니다.`,
+    },
+    {
+      id: 13,
+      category: `[유형 4] 다음 SQL문의 실행 결과 예측 (오류 및 함정 포함)`,
+      question: `아래의 \`NOT IN\` 조건문을 실행했을 때 출력되는 행의 건수로 올바른 것은?`,
+      code: `**[EMP]** 테이블에 총 14건의 데이터가 존재한다.
+**[DEPT_TEMP]** 테이블에는 \`DEPTNO\` 값이 각각 \`10, 20, NULL\` 인 3건의 데이터가 존재한다.
+SELECT COUNT(*) FROM EMP
+WHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT_TEMP);
+
+`,
+      options: [
+        { id: 1, text: `0건`, isCorrect: true },
+        { id: 2, text: `14건`, isCorrect: false },
+        { id: 3, text: `11건 (10, 20번 부서를 제외한 건수)`, isCorrect: false },
+        { id: 4, text: `에러 발생`, isCorrect: false },
+      ],
+      rationale: `\`NOT IN\` 연산은 내부적으로 \`AND\` 조건으로 전개됩니다. 즉, \`DEPTNO != 10 AND DEPTNO != 20 AND DEPTNO != NULL\`이 됩니다. 여기서 \`DEPTNO != NULL\`의 논리적 평가는 항상 \`UNKNOWN\`(False)이므로, 전체 AND 조건식이 거짓이 되어 출력되는 데이터는 0건이 됩니다.`,
+      hint: `\`NOT IN\` 연산자가 \`NULL\`과 논리적 비교(\`!=\`)를 수행할 때 발생하는 특수한 평가 규칙을 떠올리십시오.`,
+    },
+    {
+      id: 14,
+      category: `[유형 4] 다음 SQL문의 실행 결과 예측 (오류 및 함정 포함)`,
+      question: `윈도우 함수의 프레임 지정과 관련하여, 다음 쿼리의 실행 결과로 2번째 행(금액 100)의 누적_합계 열에 출력될 값은 무엇인가?`,
+      code: `**[매출]** 테이블 (금액 오름차순 정렬 상태)
+1행: 금액 100 (A사)
+2행: 금액 100 (B사)
+3행: 금액 200 (C사)
+SELECT 금액,
+SUM(금액) OVER (ORDER BY 금액
+RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 누적_합계
+FROM 매출;
+
+`,
+      options: [
+        { id: 1, text: `100`, isCorrect: false },
+        { id: 2, text: `200`, isCorrect: true },
+        { id: 3, text: `300`, isCorrect: false },
+        { id: 4, text: `400`, isCorrect: false },
+      ],
+      rationale: `윈도우 프레임을 \`RANGE\`로 지정하면, 행의 물리적 위치가 아닌 논리적 값 자체를 기준으로 범위를 묶습니다. 금액이 100으로 동일한 1행과 2행은 하나의 논리적 단위로 취급되므로, 1행과 2행의 누적_합계는 모두 두 값을 합산한 200으로 동일하게 출력됩니다.`,
+      hint: `\`ROWS\` 옵션과 \`RANGE\` 옵션이 동일한 값(Tie)을 처리하는 방식의 차이에 주목하십시오.`,
+    },
+    {
+      id: 15,
+      category: `[유형 4] 다음 SQL문의 실행 결과 예측 (오류 및 함정 포함)`,
+      question: `아래의 \`CASE\` 표현식을 포함한 SQL문이 실행되었을 때, 급여(SAL)가 2500인 사원이 반환받게 될 등급(GRADE)은 무엇인가?`,
+      code: `SELECT ENAME, SAL,
+CASE
+WHEN SAL >= 1000 THEN 'C'
+WHEN SAL >= 2000 THEN 'B'
+WHEN SAL >= 3000 THEN 'A'
+ELSE 'D'
+END AS GRADE
+FROM EMP;
+
+`,
+      options: [
+        { id: 1, text: `A`, isCorrect: false },
+        { id: 2, text: `B`, isCorrect: false },
+        { id: 3, text: `C`, isCorrect: true },
+        { id: 4, text: `D`, isCorrect: false },
+      ],
+      rationale: `SAL이 2500인 데이터는 위에서부터 평가됩니다. 가장 첫 번째 조건인 \`WHEN SAL >= 1000\`을 명백히 충족하므로, 시스템은 그 이하의 조건을 평가하지 않고 즉시 'C'를 반환합니다. 의도대로 'B'를 출력하려면 큰 숫자(>=3000) 조건부터 먼저 기술해야 합니다.`,
+      hint: `\`CASE\` 표현식은 내부 조건을 위에서부터 아래로 순차적으로 평가하며, 단 하나라도 True에 도달하면 즉시 평가를 종료합니다.`,
+    },
+    {
+      id: 16,
+      category: `[유형 4] 다음 SQL문의 실행 결과 예측 (오류 및 함정 포함)`,
+      question: `테이블을 대상으로 \`SELECT * FROM TABLE_A, TABLE_B;\` 구문을 실행했을 때 데이터베이스 내부에서 처리되는 조인 연산의 정식 명칭과 그 결과로 올바른 것은? (단, A는 5행, B는 10행이다.)`,
+      options: [
+        { id: 1, text: `INNER JOIN / 5행 출력`, isCorrect: false },
+        { id: 2, text: `FULL OUTER JOIN / 15행 출력`, isCorrect: false },
+        { id: 3, text: `CROSS JOIN / 50행 출력`, isCorrect: true },
+        { id: 4, text: `NATURAL JOIN / 5행 출력`, isCorrect: false },
+      ],
+      rationale: `조인 조건이 기술되지 않은 경우, 데이터베이스 옵티마이저는 첫 번째 테이블의 각 행에 두 번째 테이블의 모든 행을 결합하는 카티션 곱(Cartesian Product)을 생성합니다. 이는 ANSI 표준의 \`CROSS JOIN\`과 동일하며, 출력 건수는 5 × 10 = 50행이 됩니다.`,
+      hint: `\`WHERE\` 조건이나 \`ON\` 조인 조건이 완전히 누락된 다중 테이블 질의의 처리 결과입니다.`,
+    },
+    {
+      id: 17,
+      category: `[유형 5] 고난도 윈도우 함수 및 실행 계획 추론`,
+      question: `윈도우 함수 중 누적 백분율(Cumulative Distribution)을 구하는 함수로, "전체 파티션의 행 수 대비 현재 행보다 작거나 같은 값을 가진 행의 수"를 계산하여 0 초과 1 이하의 범위로 반환하는 함수는 무엇인가?`,
+      options: [
+        { id: 1, text: `\`PERCENT_RANK\``, isCorrect: false },
+        { id: 2, text: `\`CUME_DIST\``, isCorrect: true },
+        { id: 3, text: `\`RATIO_TO_REPORT\``, isCorrect: false },
+        { id: 4, text: `\`NTILE\``, isCorrect: false },
+      ],
+      rationale: `\`CUME_DIST\`는 파티션 내의 누적 분포를 구하는 함수입니다. \`PERCENT_RANK\`는 순위를 백분율로(0~1 사이) 나타내지만 수식(\`(순위-1)/(전체행수-1)\`)이 다릅니다. \`RATIO_TO_REPORT\`는 파티션 총합 대비 해당 행 값의 비중을 구합니다.`,
+      hint: `현재 행이 전체 분포에서 상위 몇 퍼센트 구간에 누적되어 위치하는지를 확인하는 통계 함수입니다.`,
+    },
+    {
+      id: 18,
+      category: `[유형 5] 고난도 윈도우 함수 및 실행 계획 추론`,
+      question: `동일한 데이터가 중복해서 존재하는 상황에서, 1위부터 순차적으로 고유한 순위를 부여하되 동점자에 대해서도 1위, 2위, 3위와 같이 서로 다른 일련번호를 무조건 강제 할당하는 윈도우 함수는 무엇인가?`,
+      options: [
+        { id: 1, text: `\`RANK\``, isCorrect: false },
+        { id: 2, text: `\`DENSE_RANK\``, isCorrect: false },
+        { id: 3, text: `\`ROW_NUMBER\``, isCorrect: true },
+        { id: 4, text: `\`NTILE\``, isCorrect: false },
+      ],
+      rationale: `\`ROW_NUMBER\` 함수는 정렬 기준 값이 동일(Tie)하더라도 시스템 내부의 처리 순서에 따라 무조건 고유하고 연속적인 일련번호(1, 2, 3...)를 순차적으로 부여합니다.`,
+      hint: `데이터베이스에서 페이징(Paging) 처리를 할 때 가장 고유한 행 식별자로 활용하기 좋은 함수입니다.`,
+    },
+    {
+      id: 19,
+      category: `[유형 5] 고난도 윈도우 함수 및 실행 계획 추론`,
+      question: `다음 중 실행 시점의 문제로 인하여 문법 에러(Syntax Error)를 유발하는 SQL 문장은 어느 것인가?`,
+      options: [
+        { id: 1, text: `\`SELECT DEPTNO, SUM(SAL) AS TOT_SAL FROM EMP GROUP BY DEPTNO HAVING SUM(SAL) > 5000;\``, isCorrect: false },
+        { id: 2, text: `\`SELECT DEPTNO AS 부서, SUM(SAL) FROM EMP GROUP BY DEPTNO ORDER BY 부서;\``, isCorrect: false },
+        { id: 3, text: `\`SELECT DEPTNO AS 부서, SUM(SAL) FROM EMP GROUP BY 부서;\``, isCorrect: true },
+        { id: 4, text: `\`SELECT * FROM (SELECT ENAME, SAL FROM EMP ORDER BY SAL DESC) WHERE ROWNUM <= 5;\``, isCorrect: false },
+      ],
+      rationale: `논리적 실행 순서상 \`GROUP BY\` 절은 \`SELECT\` 절보다 먼저 파싱되고 실행됩니다. 따라서 \`SELECT\` 절에서 정의된 별칭(Alias)인 '부서'는 \`GROUP BY\` 단계에서 시스템이 인식하지 못하여 "부적합한 식별자" 에러를 발생시킵니다. (별칭은 ORDER BY 절에서만 사용 가능합니다.)`,
+      hint: `옵티마이저의 논리적 실행 순서를 상기해 보십시오. \`GROUP BY\` 절이 먼저 실행됩니까, \`SELECT\` 절이 먼저 실행됩니까?`,
+    },
+    {
+      id: 20,
+      category: `[유형 5] 고난도 윈도우 함수 및 실행 계획 추론`,
+      question: `아래의 \`PIVOT\` 함수를 포함한 SQL 쿼리에서 논리적 연산의 필수 구성 요소로 가장 적절한 것은?`,
+      code: `SELECT *
+FROM SALES
+PIVOT (
+( A )
+FOR REGION IN ('SEOUL' AS 서울, 'BUSAN' AS 부산)
+);
+
+`,
+      options: [
+        { id: 1, text: `\`WHERE AMT > 1000\``, isCorrect: false },
+        { id: 2, text: `\`SUM(AMT)\``, isCorrect: true },
+        { id: 3, text: `\`ORDER BY REGION\``, isCorrect: false },
+        { id: 4, text: `\`GROUP BY REGION\``, isCorrect: false },
+      ],
+      rationale: `\`PIVOT\` 구문은 데이터를 재배치하여 열로 확장하는 과정에서 교차점에 해당하는 다수의 데이터 행들을 단일 값으로 압축해야 하므로, (A) 위치에 \`SUM\`, \`MAX\`, \`COUNT\` 등과 같은 **집계 함수**가 필수적으로 포함되어야 합니다.`,
+      hint: `행(Row) 데이터를 열(Column)로 변환할 때, 기존의 세로축과 새로운 가로축이 교차하는 지점(Cell)에 들어갈 값을 '어떻게' 산출할지 지시해야 합니다.`,
+    },
+  ],
 };
