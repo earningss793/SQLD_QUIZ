@@ -27,9 +27,1500 @@ export const dayInfo = {
   21: { title: "SQLD 1과목+2과목 40문항" },
   24: { title: "SQLD 실전 대비 모의고사 종합 (50문항)" },
   142: { title: "SQLD 합격 대비 실전 모의고사 (50문항)" },
+  25: { title: "SQLD 25일차 모의고사 종합" },
 };
 
 export const quizzesByDay = {
+  25: [
+      {
+            "id": 1,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "다음 중 식별자의 4대 특징에 대한 설명으로 가장 부적절한 것은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "유일성: 주식별자에 의해 엔터티 내의 모든 인스턴스들이 유일하게 구분되어야 한다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "최소성: 주식별자를 구성하는 속성의 수는 유일성을 만족하는 최소의 수가 되어야 한다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "불변성: 주식별자가 한 번 특정 엔터티에 지정되면 그 식별자의 값은 변하지 않아야 한다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "존재성: 주식별자가 지정되면 특정 인스턴스에 대해 주식별자 값은 NULL을 허용하나, 가급적 값을 입력해야 한다.",
+                        "isCorrect": true
+                  }
+            ],
+            "rationale": "존재성(Existence)은 주식별자가 지정되면 반드시 데이터 값이 존재(NOT NULL)해야 한다는 특징입니다. NULL 값은 절대 허용되지 않습니다.",
+            "hint": "주식별자(PK)는 데이터베이스 무결성의 핵심입니다. 비어있을 수 있을까요?"
+      },
+      {
+            "id": 2,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "다음 중 엔터티(Entity)의 특징으로 가장 알맞은 것은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "엔터티는 반드시 1개의 인스턴스로만 존재해야 시스템 성능에 유리하다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "비즈니스 프로세스(업무)에 의해 이용되지 않더라도 향후를 위해 미리 생성해 두는 것이 원칙이다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "엔터티는 다른 엔터티와 최소 1개 이상의 관계(Relationship)를 가져야 한다.",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 4,
+                        "text": "엔터티를 구성하는 속성(Attribute)은 파생 속성으로만 이루어지는 것이 정규화에 부합한다.",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "엔터티는 관계형 데이터베이스에서 다른 엔터티와 최소 1개 이상의 관계를 맺어야 합니다. (단, 통계성 엔터티나 코드성 엔터티는 예외적으로 관계를 생략할 수 있습니다.)",
+            "hint": "고립된 섬처럼 존재하는 데이터 집합은 관계형 모델에서 의미가 없습니다."
+      },
+      {
+            "id": 3,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "반정규화(De-Normalization) 절차 중 가장 먼저 수행해야 하는 단계는 무엇인가?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "반정규화 기법(테이블 병합, 분할 등) 결정",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "반정규화 대상 조사 및 식별",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 3,
+                        "text": "데이터베이스 뷰(View) 생성",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "다른 방법(인덱스 조정, 응용 프로그램 변경 등) 유도 검토",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "반정규화 절차는 1) 반정규화 대상 조사 -> 2) 다른 방법 유도 검토(인덱스, 뷰, 파티셔닝 등) -> 3) 반정규화 적용 순으로 진행됩니다.",
+            "hint": "병을 고치려면 먼저 어디가 아픈지(대상) 진단해야 합니다."
+      },
+      {
+            "id": 4,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "다음 중 데이터 모델링의 3단계 진행 과정을 추상화 수준이 높은 것부터 낮은 순서로 바르게 나열한 것은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "개념적 모델링 -> 물리적 모델링 -> 논리적 모델링",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "논리적 모델링 -> 개념적 모델링 -> 물리적 모델링",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "개념적 모델링 -> 논리적 모델링 -> 물리적 모델링",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 4,
+                        "text": "물리적 모델링 -> 논리적 모델링 -> 개념적 모델링",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "데이터 모델링은 추상화 수준이 가장 높고 업무 중심적인 개념적 모델링, 정규화를 수행하는 논리적 모델링, 특정 DBMS의 성능과 저장 구조를 설계하는 물리적 모델링 순으로 진행됩니다.",
+            "hint": "숲을 먼저 보고(개념), 뼈대를 잡은 뒤(논리), 실제 건물을 짓습니다(물리)."
+      },
+      {
+            "id": 5,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "제2정규화(2NF)의 대상이 되는 엔터티의 구조적 특징은 무엇인가?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "주식별자가 단일 속성으로 이루어져 있는 경우",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "모든 속성이 다중 값(Multi-Value)을 가지는 경우",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "주식별자가 2개 이상의 복합 속성(Composite Key)으로 구성된 경우",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 4,
+                        "text": "일반 속성 간에 함수적 종속성이 존재하는 경우",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "제2정규화는 복합 주식별자의 일부 속성에만 종속되는 '부분 함수 종속성'을 분리하는 과정이므로, 주식별자가 복합키일 때만 대상이 됩니다.",
+            "hint": "제2정규화는 '부분' 함수 종속을 제거합니다. '부분'이 성립하려면 키가 여러 개여야 합니다."
+      },
+      {
+            "id": 6,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "수퍼/서브 타입(Super/Sub Type) 모델을 물리적 데이터 모델로 변환할 때, 조인(JOIN) 연산을 최소화하여 다량의 데이터를 일괄 처리하는 성능을 극대화하기 위한 변환 방식은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "개별 테이블 유지 (OneToOne Type)",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "수퍼+서브 타입 테이블 (Plus Type)",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "단일 테이블 병합 (Single Type / Rollup)",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 4,
+                        "text": "클러스터링 인덱스 구성",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "Single Type(하나의 테이블로 통합)은 수퍼타입과 서브타입의 모든 컬럼을 하나의 테이블에 합치는 방식으로, 조인이 발생하지 않아 일괄 쿼리 성능이 매우 우수합니다.",
+            "hint": "쪼개져 있는 것을 하나로 합치면 조인할 필요가 없어집니다."
+      },
+      {
+            "id": 7,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "다음 속성의 특성에 따른 분류 중, '데이터의 정합성 유지'를 위해 가급적 데이터 모델링에서 정의를 최소화해야 하는 속성은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "기본 속성 (Basic Attribute)",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "설계 속성 (Designed Attribute)",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "파생 속성 (Derived Attribute)",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 4,
+                        "text": "복합 속성 (Composite Attribute)",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "파생 속성(예: 총합계, 이자율)은 다른 속성의 영향을 받아 값이 산출되므로, 원본 데이터 갱신 시 동기화 누락으로 인한 정합성 오류가 발생할 위험이 높습니다.",
+            "hint": "원본이 바뀌면 알아서 함께 바뀌어야 하는 계산된 속성입니다."
+      },
+      {
+            "id": 8,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "데이터 독립성(Data Independence) 모델에서, 사용자나 응용 프로그램이 접근하는 데이터베이스의 논리적 구조가 변경되어도 내부의 물리적 저장 구조에 영향을 주지 않는 것을 무엇이라 하는가?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "논리적 데이터 독립성",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "물리적 데이터 독립성",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 3,
+                        "text": "외부 데이터 독립성",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "개념 데이터 독립성",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "데이터베이스의 논리적 구조(개념 스키마)가 변경되어도 물리적 저장 구조(내부 스키마)에 영향을 주지 않고, 반대로 물리적 구조가 변경되어도 논리적 구조에 영향을 주지 않는 것을 물리적 데이터 독립성이라고 합니다.",
+            "hint": "개념 스키마와 내부 스키마 사이의 독립성입니다. 저장 장치의 변경이 영향을 주지 않습니다."
+      },
+      {
+            "id": 9,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "비식별자 관계(Non-Identifying Relationship)의 특징으로 알맞은 것은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "부모 엔터티의 주식별자가 자식 엔터티의 주식별자로 상속된다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "ERD(Entity-Relationship Diagram)에서 실선(Solid Line)으로 표기된다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "자식 엔터티는 부모 엔터티가 반드시 존재해야만 생성될 수 있는 강한 종속성을 띤다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "부모 엔터티의 주식별자를 자식 엔터티의 일반 속성(외래키)으로만 상속받는다.",
+                        "isCorrect": true
+                  }
+            ],
+            "rationale": "비식별자 관계는 부모의 주식별자를 자식의 일반 속성으로 상속하며, 점선(Dashed Line)으로 표기됩니다. 자식은 독자적인 주식별자를 가집니다.",
+            "hint": "자식이 부모의 성(주식별자)을 물려받아 자신의 정체성(주식별자)으로 쓰지 않고, 단순한 정보(일반 속성)로만 간직합니다."
+      },
+      {
+            "id": 10,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "데이터 모델링에서 식별자를 도출할 때, 본질 식별자(업무상 의미가 있는 식별자) 대신 인조 식별자(일련번호 등)를 도입하는 것이 적절한 경우는?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "본질 식별자가 단일 속성으로 구성되어 있을 때",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "복합 본질 식별자를 구성하는 속성들의 길이가 너무 길고 복잡하여 조인 시 성능 저하가 우려될 때",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 3,
+                        "text": "데이터의 보안을 극대화하기 위해 암호화가 필요할 때",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "다른 엔터티와의 관계(Relationship)를 단절시키고자 할 때",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "복합 주식별자의 속성 수가 너무 많거나 길이가 길면, 자식 엔터티로 상속될 때 데이터 구조가 비대해지고 조인 성능이 저하되므로 인위적인 단일 속성의 인조 식별자(Surrogate Key) 생성을 고려합니다.",
+            "hint": "의미는 뚜렷하지만 너무 길고 무거워서 다루기 힘들 때 가벼운 번호표로 대체합니다."
+      },
+      {
+            "id": 11,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "다음 중 SQL 문장의 논리적 평가 순서(옵티마이저 실행 순서)로 올바른 것은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "SELECT -> FROM -> WHERE -> GROUP BY -> HAVING -> ORDER BY",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "FROM -> WHERE -> GROUP BY -> HAVING -> SELECT -> ORDER BY",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 3,
+                        "text": "FROM -> SELECT -> WHERE -> GROUP BY -> HAVING -> ORDER BY",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "FROM -> WHERE -> GROUP BY -> SELECT -> HAVING -> ORDER BY",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "이 순서 때문에 SELECT 절에서 정의한 별칭(Alias)을 WHERE나 GROUP BY 절에서 사용할 수 없고, 오직 ORDER BY 절에서만 사용할 수 있습니다.",
+            "hint": "데이터를 먼저 찾고(FROM, WHERE), 묶고(GROUP BY, HAVING), 보여줄 항목을 고른 뒤(SELECT), 정렬(ORDER BY)합니다."
+      },
+      {
+            "id": 12,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "아래 [EMP] 테이블을 대상으로 쿼리를 실행했을 때 반환되는 결과값은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "6400",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "5400",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 3,
+                        "text": "NULL",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "4400",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "행 단위 연산 시 2번 사원의 `SAL(2000) + COMM(NULL)`은 NULL이 됩니다. 1번은 1100, 3번은 3300입니다. 이후 `SUM(1100, NULL, 3300)`을 수행할 때 집계 함수는 NULL을 무시하므로 최종 결과는 4400이 됩니다.",
+            "hint": "튜플 단위의 산술 연산(`+`)이 먼저 수행된 후 집계 함수(`SUM`)가 적용됩니다. NULL과의 산술 연산 결과는 무엇일까요?",
+            "tables": [
+                  {
+                        "name": "EMP 테이블",
+                        "headers": [
+                              "EMPNO",
+                              "SAL",
+                              "COMM"
+                        ],
+                        "rows": [
+                              [
+                                    "1",
+                                    "1000",
+                                    "100"
+                              ],
+                              [
+                                    "2",
+                                    "2000",
+                                    "NULL"
+                              ],
+                              [
+                                    "3",
+                                    "3000",
+                                    "300"
+                              ]
+                        ]
+                  }
+            ],
+            "code": "SELECT SUM(SAL + COMM) AS TOT FROM EMP;"
+      },
+      {
+            "id": 13,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "아래 쿼리의 실행 결과(출력되는 행의 수)로 가장 적절한 것은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "0행",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 2,
+                        "text": "2행 (30, 40)",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "4행",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "문법 에러",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "`NOT IN`은 내부적으로 `AND` 연산으로 풀립니다. `DEPTNO != 10 AND DEPTNO != 20 AND DEPTNO != NULL`. 여기서 `!= NULL` 평가는 항상 UNKNOWN(False)이 되므로 조건 전체가 거짓이 되어 0건이 반환됩니다.",
+            "hint": "`NOT IN` 연산자 뒤에 오는 집합에 `NULL`이 하나라도 포함되어 있으면 어떤 일이 발생할까요?",
+            "code": "**[DEPT]** (총 4행: 부서코드 10, 20, 30, 40)\n**[DEPT_TEMP]** (총 3행: 부서코드 10, 20, NULL)\nSELECT * FROM DEPT\nWHERE DEPTNO NOT IN (SELECT DEPTNO FROM DEPT_TEMP);"
+      },
+      {
+            "id": 14,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "다음 중 조인(JOIN)에 대한 설명으로 올바르지 않은 것은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "동등 조인(EQUI JOIN)은 두 테이블 간의 일치하는 컬럼 값을 기준으로 데이터를 결합한다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "카티션 곱(CROSS JOIN)은 조인 조건이 생략되었을 때 발생하며, 두 테이블 행의 모든 조합을 반환한다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "비등가 조인(Non-EQUI JOIN)은 조인 조건이 `=` 연산자가 아닌 `BETWEEN`, `>`, `<` 등으로 구성될 때 사용된다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "자연 조인(NATURAL JOIN)을 사용할 때는 조인 기준 컬럼을 명확히 하기 위해 `ON` 절을 반드시 기술해야 한다.",
+                        "isCorrect": true
+                  }
+            ],
+            "rationale": "`NATURAL JOIN`은 이름과 데이터 타입이 동일한 컬럼을 시스템이 자동으로 찾아 조인하므로, `ON` 절이나 `USING` 절을 함께 명시하면 문법 오류가 발생합니다.",
+            "hint": "자연 조인은 데이터베이스가 '알아서 자연스럽게' 공통 컬럼을 찾아줍니다."
+      },
+      {
+            "id": 15,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "오라클(Oracle) 문법의 외부 조인을 ANSI 표준 구문으로 바르게 변환한 것은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "`SELECT * FROM A LEFT OUTER JOIN B ON A.ID = B.ID;`",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 2,
+                        "text": "`SELECT * FROM A RIGHT OUTER JOIN B ON A.ID = B.ID;`",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "`SELECT * FROM A FULL OUTER JOIN B ON A.ID = B.ID;`",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "`SELECT * FROM A CROSS JOIN B;`",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "`B.ID(+)`는 B 테이블에 데이터가 부족하다는 뜻이므로, 모든 데이터를 보존해야 하는 주인(기준)은 A 테이블입니다. 따라서 A 테이블을 기준으로 하는 `LEFT OUTER JOIN`이 정답입니다.",
+            "hint": "오라클 외부 조인에서 `(+)` 기호는 데이터가 부족하여 억지로 NULL을 채워 넣어야 할 '피해자(기준이 아닌 쪽)'에 붙입니다.",
+            "code": "[오라클 구문] `SELECT * FROM A, B WHERE A.ID = B.ID(+);`"
+      },
+      {
+            "id": 16,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "윈도우 함수에서 순위를 부여할 때, 공동 순위가 발생하더라도 다음 순위를 건너뛰지 않고 빽빽하게 연속된 번호(예: 1위, 1위, 2위)를 부여하는 함수는?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "RANK()",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "ROW_NUMBER()",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "NTILE()",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "DENSE_RANK()",
+                        "isCorrect": true
+                  }
+            ],
+            "rationale": "`DENSE_RANK()`는 동점자 누적으로 인한 순위 단절 없이 연속적인 일련번호를 부여합니다. `RANK()`는 1위, 1위, 3위로 건너뜁니다.",
+            "hint": "밀도가 높다는 뜻의 영어 단어를 떠올려보세요."
+      },
+      {
+            "id": 17,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "다음 [매출] 테이블에 대하여 아래 쿼리를 실행했을 때 반환되는 총 행(Row)의 수는?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "4행",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "5행",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "7행",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "8행",
+                        "isCorrect": true
+                  }
+            ],
+            "rationale": "(연도, 월)의 조합은 다음과 같습니다.",
+            "hint": "`CUBE`는 명시된 인자로 만들 수 있는 '모든 경우의 수(조합)'에 대한 소계와 총계를 산출합니다.",
+            "code": "**[매출]** 테이블 데이터 (4건)\n(연도: 2024, 월: 1, 2, 3, 4)\nSELECT 연도, 월, SUM(매출액)\nFROM 매출\nGROUP BY CUBE(연도, 월);"
+      },
+      {
+            "id": 18,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "아래 계층형 질의에서 트리의 역방향(자식->부모) 전개를 지시하는 구문은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "`START WITH MGR IS NULL`",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "`CONNECT BY PRIOR MGR = EMPNO`",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 3,
+                        "text": "`CONNECT BY PRIOR EMPNO = MGR`",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "`ORDER SIBLINGS BY ENAME`",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "방금 읽은 노드의 부모 사번(`PRIOR MGR`)을 다음에 찾아갈 사원의 사번(`EMPNO`)으로 매칭하므로, 밑에서 위로 올라가는 역방향(Bottom-Up) 전개입니다.",
+            "hint": "`PRIOR`(방금 읽은 데이터) 키워드가 '부모' 속성에 붙었는지 '자식' 속성에 붙었는지 확인하세요."
+      },
+      {
+            "id": 19,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "다음 중 DDL(데이터 정의어) 연산이 트랜잭션에 미치는 영향으로 가장 올바른 것은? (Oracle 기준)",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "`TRUNCATE TABLE`을 실행하면 이전에 실행된 `DELETE` 명령어들이 자동으로 ROLLBACK 된다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "`CREATE`, `ALTER`, `DROP` 등 DDL 명령어가 실행되면 그 즉시 암묵적(Implicit) COMMIT이 발생하여 이전 DML 내역이 영구 저장된다.",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 3,
+                        "text": "DDL 연산은 DML과 달리 데이터베이스의 메모리 구조에만 영향을 주므로 트랜잭션과 무관하다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "`DROP TABLE` 수행 중 에러가 발생하면, 시스템은 전체 데이터베이스를 복구 모드로 전환한다.",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "오라클 환경에서 DDL 문장이 수행되면 Auto-Commit이 발생하여 현재 트랜잭션 내의 모든 `INSERT`, `UPDATE`, `DELETE` 작업이 영구 저장되며, 이후 롤백할 수 없습니다.",
+            "hint": "오라클은 구조를 바꾸는 막중한 작업(DDL)을 할 때, 찜찜하게 남아있는 과거 작업(DML)들을 묻지도 따지지도 않고 확정(Commit)지어 버립니다."
+      },
+      {
+            "id": 20,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "테이블 [A]와 [B]를 `UNION ALL` 연산자로 결합하기 위한 필수 전제 조건은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "두 쿼리의 SELECT 절에 선언된 컬럼의 개수와 데이터 타입이 순서대로 동일해야 한다.",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 2,
+                        "text": "두 테이블의 기본키(PK)가 서로 조인 가능하도록 구성되어 있어야 한다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "두 쿼리 중 하나에 반드시 `ORDER BY` 절이 포함되어야 한다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "반환되는 데이터의 행 수가 정확히 일치해야 한다.",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "집합 연산자(`UNION`, `UNION ALL`, `INTERSECT`, `MINUS`)를 사용하려면 각 쿼리의 SELECT 절 컬럼 개수가 같아야 하고, 대응되는 순서의 컬럼 데이터 타입이 서로 호환되어야 합니다.",
+            "hint": "데이터를 위아래로 이어 붙이려면 좌우 폭(컬럼 수)과 내용물의 성격(데이터 타입)이 맞아야 합니다."
+      },
+      {
+            "id": 21,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "서브쿼리에 대한 설명 중 논리적으로 모순이 없는 것은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "인라인 뷰(Inline View)는 FROM 절에 사용되며 데이터베이스에 물리적으로 생성된 후 영구 저장된다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "연관 서브쿼리(Correlated Subquery)는 서브쿼리 내부에서 메인 쿼리의 컬럼을 참조하여 수행된다.",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 3,
+                        "text": "스칼라 서브쿼리(Scalar Subquery)는 조건에 따라 여러 개의 컬럼과 여러 개의 행을 동시에 반환할 수 있다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "서브쿼리 내에서는 어떠한 경우에도 `ORDER BY` 절을 사용할 수 없다.",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "연관 서브쿼리는 메인 쿼리의 행이 추출될 때마다 서브쿼리가 해당 행의 값을 참조하여 반복적으로 실행되는 구조입니다. (인라인 뷰는 동적/임시이며, 스칼라 서브쿼리는 단일행/단일컬럼만 반환 가능합니다.)",
+            "hint": "서로 연관되어 있다는 것은 밖(메인)의 변수를 안(서브)에서 가져다 쓴다는 의미입니다."
+      },
+      {
+            "id": 22,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "아래 두 쿼리가 완벽하게 동일한 실행 결과를 반환할 때, (나) 쿼리의 빈칸에 들어갈 연산자는?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "IN",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 2,
+                        "text": "EXISTS",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "=",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "ALL",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "`= ANY` 연산자는 서브쿼리 결과 집합 내의 값 중 하나와 같으면 True가 되므로, 다중 행 비교 연산자인 `IN`과 논리적으로 완벽히 동일하게 동작합니다.",
+            "hint": "`ANY`는 여러 결과 중 '어느 하나라도' 일치하면 된다는 뜻입니다.",
+            "code": "(가) `SELECT * FROM EMP WHERE DEPTNO = ANY (SELECT DEPTNO FROM DEPT WHERE LOC = 'SEOUL');`\n(나) `SELECT * FROM EMP WHERE DEPTNO ( 빈칸 ) (SELECT DEPTNO FROM DEPT WHERE LOC = 'SEOUL');`"
+      },
+      {
+            "id": 23,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "정규표현식 메타 문자 중, 문자열 패턴의 '시작'을 나타내는 앵커(Anchor) 기호는?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "$",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "*",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "^",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 4,
+                        "text": "\\",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "`^` 기호는 문자열의 시작 지점을 매칭하며, 반대로 `$` 기호는 문자열의 끝 지점을 매칭합니다.",
+            "hint": "시작은 위로 솟아오르는 화살표 모양입니다."
+      },
+      {
+            "id": 24,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "`GROUPING` 함수가 결과값으로 1을 반환하는 상황은 언제인가?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "그룹화된 결과 집합의 행 개수가 1개일 때",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "대상 컬럼에 실제 저장된 데이터 값이 1일 때",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "해당 컬럼이 `ROLLUP`이나 `CUBE` 등의 그룹 연산 과정에서 소계/총계를 위해 시스템에 의해 NULL로 처리되었을 때",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 4,
+                        "text": "해당 컬럼에 `NOT NULL` 제약조건이 위배되었을 때",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "`GROUPING(컬럼)` 함수는 인자로 주어진 컬럼이 그룹 집계(소계, 총계)를 목적으로 생성된 행이어서 NULL 값을 가질 경우 1(True)을, 실제 원본 데이터에 존재하는 일반 행일 경우 0(False)을 반환합니다.",
+            "hint": "시스템이 소계/총계를 계산하기 위해 임의로 생성한 빈칸(NULL)임을 알려주는 깃발(Flag)입니다."
+      },
+      {
+            "id": 25,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "`MERGE` 문을 사용하여 조건 분기(INSERT/UPDATE)를 수행할 때 발생하는 특징으로 부적절한 것은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "`ON` 절의 조건에 일치하면 `WHEN MATCHED THEN UPDATE` 절이 수행된다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "타겟 테이블에 데이터를 갱신(UPDATE)함과 동시에 조건에 따라 매치된 원본 데이터를 삭제(`DELETE`)할 수 있는 부가 기능이 있다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "`ON` 절에 기술되어 조인 기준이 되는 컬럼의 값은 `UPDATE` 절 내에서 `SET`을 통해 변경할 수 없다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "일치하지 않을 때(`NOT MATCHED`) 반드시 `INSERT`를 수행해야 하며 생략할 수 없다.",
+                        "isCorrect": true
+                  }
+            ],
+            "rationale": "오라클 데이터베이스 10g 이후부터는 `MERGE` 문에서 필요에 따라 `INSERT` 부분이나 `UPDATE` 부분 중 하나를 생략하여 단독 구문으로 사용할 수 있습니다.",
+            "hint": "오라클 최신 버전에서는 병합 로직의 유연성을 위해 구문 생략이 허용됩니다."
+      },
+      {
+            "id": 26,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "조인(JOIN) 성능 저하의 주원인 중 하나인 카티션 곱(Cartesian Product)이 발생하는 원인은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "조인 조건(`ON` 또는 `WHERE` 절)이 생략되거나 잘못되어 두 테이블의 모든 행이 교차 곱합으로 연결될 때",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 2,
+                        "text": "두 테이블의 데이터 타입이 상이하여 암시적 형변환이 대량으로 발생할 때",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "인덱스가 없는 컬럼을 조인 기준으로 설정하여 Full Table Scan이 일어날 때",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "데이터의 분포도가 고르지 않아 한쪽 테이블에 조인이 몰릴 때",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "조인 조건이 누락되면 첫 번째 테이블의 1개 행마다 두 번째 테이블의 전체 행이 곱해지는 크로스 조인(CROSS JOIN)이 수행됩니다. (N행 * M행)",
+            "hint": "연결 고리(조건)를 지정해주지 않으면, 시스템은 가능한 '모든 경우의 수'를 다 만들어버립니다."
+      },
+      {
+            "id": 27,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "윈도우 함수에서 현재 행부터 파티션의 첫 번째 행까지의 누적 합계를 구하기 위한 프레임(Frame) 지정 구문은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "`ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 2,
+                        "text": "`ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING`",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "`ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING`",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "`ROWS UNBOUNDED PRECEDING`",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "`UNBOUNDED PRECEDING`은 파티션의 첫 번째 행을 의미합니다. 누적 값을 산출할 때 시작 고정점으로 필수적으로 사용됩니다.",
+            "hint": "한계가 없는(Unbounded) 과거(Preceding)부터 현재 행(Current Row)까지의 범위를 지정합니다."
+      },
+      {
+            "id": 28,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "다음 쿼리를 실행했을 때 반환되는 결과값은? (Oracle 기준)",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "100",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "0",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 3,
+                        "text": "NULL",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "에러 발생",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "숫자와 NULL 간의 산술 연산(+, -, *, /) 결과는 무조건 NULL입니다. 따라서 `NVL(NULL, 0)`이 실행되어 최종적으로 0이 반환됩니다. 에러(Zero Divide)가 발생하지 않음에 유의하십시오.",
+            "hint": "`100 / NULL`의 산술 연산 결과가 무엇인지 먼저 평가해야 합니다.",
+            "code": "SELECT NVL(100 / NULL, 0) FROM DUAL;"
+      },
+      {
+            "id": 29,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "뷰(View)의 특징에 대한 설명으로 올바르지 않은 것은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "뷰는 논리적인 가상 테이블로, 물리적인 데이터를 저장 공간에 직접 보관하지 않는다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "보안을 강화하기 위해 사용자에게 테이블의 특정 컬럼만 선별하여 노출할 수 있다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "뷰를 정의하는 원본 기본 테이블(Base Table)이 삭제되어도 뷰는 독립적으로 정상 작동한다.",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 4,
+                        "text": "복잡한 조인 및 서브쿼리를 뷰로 생성하여 사용자 질의를 단순화할 수 있다.",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "뷰는 내부에 질의문(SQL)만을 저장하고 런타임에 원본 테이블을 스캔합니다. 기반이 되는 원본 테이블이 삭제되거나 구조가 변경되면 뷰는 유효성을 잃고 접근 시 에러가 발생합니다.",
+            "hint": "뷰는 원본을 비추는 '거울'일 뿐입니다. 실체가 사라지면 거울에는 아무것도 비치지 않습니다."
+      },
+      {
+            "id": 30,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "`PIVOT` 절을 사용하여 행(Row) 데이터를 열(Column) 데이터로 전환할 때 괄호 안에 반드시 포함되어야 하는 요소는?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "그룹화 기준 컬럼명",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "ORDER BY 절",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "SUM, COUNT 등과 같은 집계 함수",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 4,
+                        "text": "ROLLUP 함수",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "`PIVOT`은 데이터를 2차원 크로스탭 형태로 재배치합니다. 이때 기존 다수의 행 데이터들이 가로축과 세로축이 만나는 단일 칸에 들어가야 하므로, 반드시 집계 함수(`SUM`, `MAX` 등)를 통해 값을 단일화해야 합니다.",
+            "hint": "여러 행의 데이터를 새로운 컬럼의 단일 교차점(Cell)에 넣으려면 '압축(요약)' 과정이 필수적입니다."
+      },
+      {
+            "id": 31,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "다음 중 집합 연산자 `MINUS` (또는 `EXCEPT`)의 논리적 기능은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "두 집합의 합집합에서 중복을 허용하여 출력한다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "두 집합의 공통된 교집합 데이터를 출력한다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "첫 번째 집합에는 존재하지만 두 번째 집합에는 존재하지 않는 차집합 데이터를 출력한다.",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 4,
+                        "text": "두 집합의 카티션 곱을 산출한다.",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "`MINUS`(오라클) 또는 `EXCEPT`(SQL Server) 연산자는 선행 질의 결과 집합에서 후행 질의 결과 집합을 뺀 차집합(Difference)을 반환합니다.",
+            "hint": "수학의 빼기(-) 연산과 동일한 기능입니다."
+      },
+      {
+            "id": 32,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "`DELETE FROM 테이블명;` 명령과 `TRUNCATE TABLE 테이블명;` 명령의 결정적인 차이점은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "`DELETE`는 DDL이고 `TRUNCATE`는 DML이다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "`DELETE`는 트랜잭션 로그를 기록하므로 ROLLBACK이 가능하지만, `TRUNCATE`는 즉시 커밋되어 ROLLBACK이 불가능하다.",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 3,
+                        "text": "`DELETE`는 테이블 구조 자체를 삭제하고, `TRUNCATE`는 데이터만 삭제한다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "`TRUNCATE` 수행 시에는 WHERE 조건을 통해 특정 행만 선별하여 삭제할 수 단.",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "`TRUNCATE`는 DDL 명령어로 데이터베이스 딕셔너리의 세그먼트 할당 단위 자체를 초기화하므로 매우 빠르지만 롤백이 불가합니다. 반면 `DELETE`는 DML로서 버퍼를 거쳐 로그를 남기므로 롤백이 가능합니다.",
+            "hint": "속도가 빠르다는 것은 그만큼 뒤를 돌아보지(복구 대비 로그 작성) 않는다는 뜻입니다."
+      },
+      {
+            "id": 33,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "다음 중 테이블에 적용 가능한 제약조건(Constraints)의 특성으로 틀린 것은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "`PRIMARY KEY`는 하나의 테이블에 단 1개만 설정 가능하며, NOT NULL과 UNIQUE 특성을 동시에 만족해야 한다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "`UNIQUE` 제약이 걸린 컬럼에는 NULL 값을 입력할 수 없다.",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 3,
+                        "text": "`FOREIGN KEY`는 다른 테이블의 기본키(PK)나 유니크키(UK)를 참조해야만 생성할 수 있다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "`CHECK` 제약조건은 데이터 입력 시 정해진 도메인(범위, 조건)을 위배하는지 검사한다.",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "`UNIQUE` 제약조건은 데이터의 유일성을 보장하지만, NULL 값에 대해서는 특성상 상호 비교가 불가능하므로 예외적으로 중복 입력을 여러 번 허용합니다.",
+            "hint": "알 수 없는 값(NULL)은 서로 비교할 수 없기 때문에 유일성 검사의 대상에서 제외됩니다."
+      },
+      {
+            "id": 34,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "윈도우 함수에서 현재 행의 값을 기준으로 오프셋(Offset) 이전 또는 이후 행의 값을 가져오기 위해 사용하는 함수 조합은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "FIRST_VALUE, LAST_VALUE",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "LEAD, LAG",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 3,
+                        "text": "ROW_NUMBER, NTILE",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "CUME_DIST, PERCENT_RANK",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "`LAG` 함수는 지정된 오프셋만큼 앞선(이전) 행의 값을 참조하며, `LEAD` 함수는 하단(이후)에 위치한 행의 값을 참조합니다. 데이터의 시계열 추이 비교에 주로 쓰입니다.",
+            "hint": "뒤처지다(Lag)와 이끌다(Lead)의 의미를 가진 함수입니다."
+      },
+      {
+            "id": 35,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "다음 [EMP] 테이블 쿼리 실행 시 논리적 에러를 유발하는 것은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "`SELECT ENAME, SAL FROM EMP ORDER BY 2;`",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "`SELECT ENAME, SUM(SAL) FROM EMP GROUP BY ENAME;`",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "`SELECT DEPTNO, SUM(SAL) AS TOT FROM EMP GROUP BY DEPTNO HAVING TOT > 5000;`",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 4,
+                        "text": "`SELECT ENAME, SAL FROM EMP WHERE SAL > (SELECT AVG(SAL) FROM EMP);`",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "쿼리 실행 순서(FROM -> WHERE -> GROUP BY -> HAVING -> SELECT -> ORDER BY)에 따라, `HAVING` 절이 평가될 때는 아직 `SELECT` 절이 처리되기 전이므로 별칭 'TOT'를 인식하지 못해 식별자 에러가 발생합니다.",
+            "hint": "`HAVING` 절이 실행되는 시점에 `SELECT` 절의 별칭(TOT)이 존재할까요?"
+      },
+      {
+            "id": 36,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "아래 쿼리의 서브쿼리 형태를 지칭하는 명칭과 특징은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "스칼라 서브쿼리 (반드시 단일 행, 단일 컬럼을 반환해야 함)",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 2,
+                        "text": "인라인 뷰 (가상의 동적 테이블로 작동함)",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "비연관 서브쿼리 (메인 쿼리와 독립적으로 1회만 실행됨)",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "다중 행 서브쿼리 (IN, ANY 연산자 등과 결합됨)",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "SELECT 절에 사용된 서브쿼리를 '스칼라 서브쿼리'라고 하며, 메인 쿼리의 1개 행에 대해 반드시 1개의 단일 값(스칼라 값)만을 반환해야 정상 작동합니다.",
+            "hint": "SELECT 절에 마치 하나의 컬럼처럼 끼어 있는 서브쿼리입니다.",
+            "code": "SELECT E.ENAME, E.SAL,\n       (SELECT D.DNAME FROM DEPT D WHERE E.DEPTNO = D.DEPTNO) AS DNAME\nFROM EMP E;"
+      },
+      {
+            "id": 37,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "데이터베이스 옵티마이저가 인덱스를 정상적으로 스캔하지 못하고 테이블 전체를 읽는(Full Table Scan) 경우로 볼 수 없는 것은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "`WHERE SUBSTR(ENAME, 1, 1) = 'A'` 처럼 인덱스 컬럼을 외부 함수로 가공한 경우",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "`WHERE SAL * 1.5 > 3000` 처럼 인덱스 컬럼에 산술 연산을 가한 경우",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "`WHERE EMPNO = 10` 처럼 문자형 인덱스 컬럼에 숫자 리터럴을 비교하여 암시적 형변환이 일어난 경우",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "`WHERE ENAME LIKE 'A%'` 처럼 와일드카드를 조건문 끝에 사용하여 검색하는 경우",
+                        "isCorrect": true
+                  }
+            ],
+            "rationale": "`LIKE 'A%'`는 문자열의 시작 패턴이 고정되어 있으므로 정상적인 인덱스 스캔(Range Scan)이 가능합니다. 반면 `LIKE '%A'` 처럼 앞에 와일드카드가 오면 시작점을 알 수 없어 인덱스를 사용할 수 없습니다.",
+            "hint": "검색어의 시작 부분('A')이 고정되어 있으면 사전에서 찾을 수 있을까요 없을까요?"
+      },
+      {
+            "id": 38,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "오라클에서 계층형 쿼리 결과를 시각적으로 들여쓰기(Indentation) 하기 위해 활용하는 가상 컬럼은 무엇인가?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "ROWNUM",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "ROWID",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "LEVEL",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 4,
+                        "text": "PRIOR",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "`LEVEL`은 계층형 질의에서 루트 노드를 1로 하여 하위 노드로 내려갈수록 1씩 증가하는 가상 컬럼입니다. `LPAD(' ', (LEVEL-1)*2)`와 같이 조합하여 트리 구조를 시각화합니다.",
+            "hint": "트리의 뿌리에서부터 얼마나 깊이 내려왔는지(계층 깊이)를 숫자로 알려줍니다."
+      },
+      {
+            "id": 39,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "`ORDER SIBLINGS BY` 구문의 주된 역할은 무엇인가?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "UNION 등 집합 연산 후 최종 결과 집합 전체를 정렬한다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "윈도우 함수 내부에서 파티션별 정렬 기준을 정의한다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "계층형 쿼리에서 트리 구조(계층)가 무너지지 않도록, 동일한 부모를 가진 형제(Siblings) 노드들 사이에서만 국소적 정렬을 수행한다.",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 4,
+                        "text": "그룹 함수 사용 시 ROLLUP에 의해 생성된 소계 집단 간의 순서를 지정한다.",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "계층형 쿼리 전개 시 일반적인 `ORDER BY`를 사용하면 트리 계층이 완전히 무너집니다. 트리의 뼈대를 유지한 채 동일 계층(레벨) 내에서만 정렬을 지시하는 구문이 `ORDER SIBLINGS BY`입니다.",
+            "hint": "Sibling(형제, 자매)들끼리 줄을 세우라는 전용 명령어입니다."
+      },
+      {
+            "id": 40,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "DCL(데이터 제어어) 명령어 중 사용자에게 부여된 객체 권한을 회수할 때 사용하는 명령어는?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "GRANT",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "REVOKE",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 3,
+                        "text": "DENY",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "ROLLBACK",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "권한을 부여할 때는 `GRANT` 명령어를, 부여했던 권한을 다시 회수할 때는 `REVOKE` 명령어를 사용합니다.",
+            "hint": "\"줬던 것을 다시 뺏는다\"는 의미를 가진 키워드입니다."
+      },
+      {
+            "id": 41,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "테이블 A에 10행, 테이블 B에 5행이 존재할 때 `SELECT * FROM A CROSS JOIN B;` 쿼리의 반환 행 수는?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "5행",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "10행",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "15행",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "50행",
+                        "isCorrect": true
+                  }
+            ],
+            "rationale": "조인 조건이 없는 크로스 조인은 `M행 * N행`의 조합을 생성하므로 10 * 5 = 50행이 반환됩니다.",
+            "hint": "크로스 조인(카티션 곱)은 두 테이블 행들의 모든 결합 경우의 수를 반환합니다."
+      },
+      {
+            "id": 42,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "오라클의 `ROWNUM` 의사 컬럼에 대한 설명으로 알맞은 것은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "데이터베이스에 물리적으로 저장되어 있는 고유 식별 주소값이다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "쿼리문 내에서 `ORDER BY` 정렬 연산이 수행된 이후에 순차적으로 번호가 매겨진다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "데이터를 추출(Fetch)하여 메모리에 적재하는 시점마다 1부터 순차적으로 임시 할당되는 논리적 번호이다.",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 4,
+                        "text": "`WHERE ROWNUM = 2` 조건은 정상적으로 데이터를 추출하여 두 번째 행을 반환한다.",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "`ROWNUM`은 데이터가 `WHERE` 조건 등을 통과하여 추출될 때 임시 할당됩니다. 따라서 `ROWNUM = 2`를 검색하면, 최초 추출 시 1번이 할당되나 조건(2)에 맞지 않아 버려지고, 다음 행이 다시 1번을 할당받는 과정이 반복되어 결국 0건이 도출됩니다. (반드시 ROWNUM <= N 형태를 띄어야 합니다.)",
+            "hint": "번호표는 줄을 서는 순간(추출) 발급되며, 1번이 발급되어야만 2번이 발급될 수 있습니다."
+      },
+      {
+            "id": 43,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "`EXISTS` 연산자의 특성 및 활용에 대한 설명으로 틀린 것은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "서브쿼리 내에 조건을 만족하는 행이 1건이라도 발견되면 더 이상 검색하지 않고 즉시 TRUE를 반환한다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "주로 메인 쿼리와 연관된(Correlated) 형태의 서브쿼리와 결합하여 사용된다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "서브쿼리의 SELECT 절에 반환되는 실제 데이터(컬럼) 값이 무엇인지에 따라 EXISTS의 평가 결과(True/False)가 달라진다.",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 4,
+                        "text": "조인(Join)과 달리 메인 쿼리의 데이터 건수를 증가시키지 않고 존재 유무만 필터링한다.",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "`EXISTS`는 조건을 만족하는 튜플의 '존재 여부(True/False)'만 평가할 뿐, 내부 `SELECT` 절이 `SELECT 1`이든 `SELECT *`이든 반환되는 데이터의 값 자체는 철저히 무시합니다.",
+            "hint": "\"그 방에 사람이 있어?\"라는 질문에 방 안에 있는 사람의 이름(데이터 값)은 알 필요가 없습니다."
+      },
+      {
+            "id": 44,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "아래 쿼리와 같이 윈도우 프레임을 지정하지 않았을 때 적용되는 데이터베이스의 디폴트 프레임(Default Frame) 범위는?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "전체 파티션 (UNBOUNDED PRECEDING ~ UNBOUNDED FOLLOWING)",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "첫 행부터 현재 행까지 (UNBOUNDED PRECEDING ~ CURRENT ROW)",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 3,
+                        "text": "현재 행부터 끝까지 (CURRENT ROW ~ UNBOUNDED FOLLOWING)",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "오직 현재 행만 (CURRENT ROW ~ CURRENT ROW)",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "윈도우 함수에 `ORDER BY` 절을 명시하고 범위를 생략하면, 디폴트로 `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`(첫 행부터 현재 값까지 누적)가 적용됩니다. `ORDER BY`조차 없으면 전체 파티션이 대상이 됩니다.",
+            "hint": "`ORDER BY`가 명시되면 시스템은 데이터를 순차적으로 누적해 나가려는 의도로 해석합니다.",
+            "code": "SELECT SUM(SAL) OVER(ORDER BY SAL DESC) FROM EMP;"
+      },
+      {
+            "id": 45,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "`COALESCE` 함수와 동일한 논리적 처리를 수행하는 오라클 전용 구문은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "`NULLIF(A, B)`",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "`NVL(A, B)`",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "`NVL2(A, B, C)`",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "중첩된 `NVL(A, NVL(B, C))`",
+                        "isCorrect": true
+                  }
+            ],
+            "rationale": "ANSI 표준인 `COALESCE`는 가변 인자를 받아 최초의 비널(Non-Null) 값을 반환합니다. 이를 오라클의 `NVL`로 구현하려면 인자가 여러 개일 때 `NVL(A, NVL(B, C))` 형태로 중첩해서 써야 동일한 효과를 냅니다.",
+            "hint": "`COALESCE(A, B, C)`는 나열된 인자 중 NULL이 아닌 첫 번째 값을 찾을 때까지 계속 탐색합니다."
+      },
+      {
+            "id": 46,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "다음 쿼리를 실행했을 때 반환될 가능성이 있는 결과는?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "HELLOWORLD",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 2,
+                        "text": "NULL",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "에러 발생",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "HELLONULLWORLD",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "오라클 환경에서 연결 연산자(`||`) 수행 시 `NULL`은 길이가 0인 문자열로 취급되어 연산 결과가 오염되지 않고 정상적으로 결합('HELLOWORLD')됩니다. (단, SQL Server의 `+` 연산은 하나라도 NULL이면 전체가 NULL이 됩니다.)",
+            "hint": "오라클에서 문자열과 결합되는 `NULL`은 무의미한 빈칸(길이 0) 취급을 받습니다.",
+            "code": "SELECT 'HELLO' || NULL || 'WORLD' FROM DUAL;"
+      },
+      {
+            "id": 47,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "다음 [SCORE] 테이블에 대해 윈도우 함수를 수행했을 때 반환되는 NTILE(3)의 의미는?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "점수가 높은 상위 3등까지만 추출한다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "각 파티션 내에서 현재 행 바로 3번째 앞의 행 값을 가져온다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "전체 데이터를 정렬한 후 균등한 행의 개수를 가지는 3개의 그룹(버킷)으로 할당하여 번호(1, 2, 3)를 매긴다.",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 4,
+                        "text": "점수 데이터를 3의 배수로 올림 연산한다.",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "`NTILE(N)` 함수는 정렬된 결과 집합을 지정된 N개의 버킷(조)으로 최대한 균등하게 나누어 각 행이 속한 조 번호(1~N)를 반환합니다.",
+            "hint": "데이터 집단을 N개의 조(Tiers)로 쪼개어 등급을 매기는 함수입니다.",
+            "code": "**[SCORE]** 데이터 9건 (점수 오름차순 정렬됨)\nSELECT ID, NTILE(3) OVER (ORDER BY JUMSU DESC) AS NT\nFROM SCORE;"
+      },
+      {
+            "id": 48,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "`MERGE` 문을 구성할 때 데이터의 매치 여부(Matched / Not Matched)를 판별하는 기준이 되는 논리적 구문은 무엇인가?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "WHERE 절",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "ON 절",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 3,
+                        "text": "HAVING 절",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "JOIN 절",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "`MERGE INTO 타겟 USING 소스 ON (조인조건)` 구문에서, `ON` 절의 조건식이 참(True)인지 거짓(False)인지에 따라 각각 `WHEN MATCHED THEN` 및 `WHEN NOT MATCHED THEN` 분기가 실행됩니다.",
+            "hint": "소스 테이블과 타겟 테이블이 만나는(조인) 조건을 기술하는 곳입니다."
+      },
+      {
+            "id": 49,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "오라클의 다중 행 서브쿼리 연산자 중 메인 쿼리의 비교 조건이 서브쿼리의 반환 결과 집합의 '모든 값'을 만족해야만 참(True)이 되는 연산자는?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "IN",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "ANY",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 3,
+                        "text": "SOME",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "ALL",
+                        "isCorrect": true
+                  }
+            ],
+            "rationale": "`> ALL` 연산자는 서브쿼리가 반환하는 전체 결과 값들 정 최대값보다 더 커야 조건을 만족하며, `< ALL`은 최소값보다 작아야 조건을 만족합니다. (전부 다 만족해야 함)",
+            "hint": "\"반에서 가장 키 큰 사람보다 내가 더 커야 해!\"라는 조건을 생각해보세요."
+      },
+      {
+            "id": 50,
+            "category": "SQLD 25일차 모의고사 종합",
+            "question": "데이터 그룹화에서 `GROUPING SETS`의 동작 특성을 가장 올바르게 설명한 것은?",
+            "options": [
+                  {
+                        "id": 1,
+                        "text": "(A, B)를 인자로 주면 내부적으로 (A, B) -> (A) -> () 의 계층적 소계를 생성한다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 2,
+                        "text": "인자로 나열된 개별 항목들에 대해 각각 독립적인 별개의 `GROUP BY`를 수행한 후 결과를 `UNION ALL`로 합친 것과 동일하다.",
+                        "isCorrect": true
+                  },
+                  {
+                        "id": 3,
+                        "text": "3차원 다차원 분석을 위해 인자들 간의 모든 가능한 순열 조합을 생성한다.",
+                        "isCorrect": false
+                  },
+                  {
+                        "id": 4,
+                        "text": "반드시 윈도우 함수의 `OVER` 절과 함께 사용되어야만 동작한다.",
+                        "isCorrect": false
+                  }
+            ],
+            "rationale": "`GROUPING SETS (A, B, ())` 구문은 A 기준 소계, B 기준 소계, () 전체 총계라는 3가지의 독립된 집계 결과를 개별 산출하여 병합합니다. `ROLLUP`이나 `CUBE`와 달리 원치 않는 불필요한 조합을 생성하지 않아 효율적입니다.",
+            "hint": "세트(Sets) 메뉴처럼 괄호 안에 담긴 항목들만 딱딱 뽑아서 합쳐주는 명확한 함수입니다."
+      }
+],
+
   24:   [
       {
           "id": 1,
